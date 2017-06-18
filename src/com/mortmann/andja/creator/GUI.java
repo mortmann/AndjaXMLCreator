@@ -11,9 +11,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.EnumSet;
+
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.convert.AnnotationStrategy;
+import org.simpleframework.xml.core.Persister;
 
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.other.Fertility.Climate;
@@ -30,6 +35,21 @@ public class GUI {
 		mainLayout = new BorderPane();
         mainGrid = new GridPane();
 
+        Serializer serializer = new Persister(new AnnotationStrategy());
+        
+        File source = new File("items.xml");
+        try {
+			Items example = serializer.read(Items.class, source);
+			if(example != null){
+	        	for (ItemXML itemXML : example.items) {
+					System.out.println(itemXML.EN_Name);
+				}
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        
         Mine m = new Mine();
         Field fld[] = m.getClass().getFields();
         

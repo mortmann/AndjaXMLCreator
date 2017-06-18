@@ -7,7 +7,7 @@ public class Item {
 
 	@Attribute
 	public int ID;
-	@Element
+	@Element(required=false)
 	public int count;
 
  }
