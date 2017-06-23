@@ -43,7 +43,7 @@ public class NumberTextField extends TextField {
 	@Override
 	public void replaceText(int start, int end, String text) {
 		if (validate(text)) {
-		 if (this.getMaxLength() <= 0) {
+		 if (this.getMaxLength() <= 0 || getMaxLength() ==-1) {
 	            // Default behavior, in case of no max length
 
 	            super.replaceText(start, end, text);
@@ -90,7 +90,7 @@ public class NumberTextField extends TextField {
 	}
 	
 	public int GetIntValue(){
-		return Integer.parseInt(this.getText());
+		return Integer.parseInt(this.getPromptText());
 	}
 	
 	public float GetFloatValue(){

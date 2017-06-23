@@ -16,6 +16,8 @@ import com.mortmann.andja.creator.structures.Structure.Direction;
 import com.mortmann.andja.creator.util.NumberTextField;
 import com.mortmann.andja.creator.util.Tabable;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -297,15 +299,17 @@ public class MyTab {
 	public GridPane CreateBooleanSetter(String name, Field field, Tabable m){
 		GridPane grid = new  GridPane();
 		CheckBox box = new CheckBox(name);
-		box.setOnAction(x-> {
-				try {
+		
+		box.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	        	try {
 					field.setBoolean(m, box.isSelected());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		);
-		
+	        }
+	        });
 		grid.add(box, 0, 0);	
 		
 		return grid;
@@ -345,6 +349,7 @@ public class MyTab {
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
 		box.setOnAction(x-> {
+			System.out.println(box.GetIntValue());
 			try {
 				field.setInt(str, box.GetIntValue());
 			} catch (Exception e) {
@@ -365,8 +370,17 @@ public class MyTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		TextField box = new TextField();
+		box.setOnInputMethodTextChanged(x-> {
+				try {
+					System.out.println(box.getText());
+					field.set(m, box.getText());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}	
+		});
 		box.setOnAction(x-> {
 			try {
+				System.out.println(box.getText());
 				field.set(m, box.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -404,11 +418,13 @@ public class MyTab {
 		box.setOnAction(x-> {
 				try {
 					field.set(m, box.getValue());
+					System.out.println(field.get(m));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		);
+		
 		return grid;
 	}
 	

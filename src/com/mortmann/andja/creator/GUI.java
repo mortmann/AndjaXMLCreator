@@ -18,7 +18,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import org.simpleframework.xml.Serializer;
@@ -38,6 +40,7 @@ public class GUI {
 	private BorderPane mainLayout;
 	private Scene scene;
 	TabPane tabs;
+	
 	ArrayList<ItemXML> items;
 	
 	HashMap<Integer,Structure> idToStructures;
@@ -57,6 +60,7 @@ public class GUI {
 		mainLayout = new BorderPane();
 		SetUpMenuBar();
         Serializer serializer = new Persister(new AnnotationStrategy());
+        
         idToStructures = new HashMap<>();
         idToFertility = new HashMap<>();
         idToItem = new HashMap<>();
@@ -179,11 +183,13 @@ public class GUI {
 		Tab curr = GetCurrentTab();
 		curr.setText(curr.getText().replaceAll("\\*", ""));
 		Object o = tabToObject.get(curr);
+		System.out.println(o);
 		if(o instanceof Structure){
 			if(((Structure)o).ID==-1){
 				return;
 			}
 			idToStructures.put(((Structure)o).ID, ((Structure)o));
+			SaveStructures();
 		}
 		else if(o instanceof Item){
 			if(((Item)o).ID==-1){
@@ -207,5 +213,19 @@ public class GUI {
 	private Tab GetCurrentTab(){
 		return tabs.getSelectionModel().getSelectedItem();
 	}
+	
+	public void SaveStructures(){
+        Serializer serializer = new Persister(new AnnotationStrategy());
+        System.out.println("save");
+        try {
+			serializer.write(Structures, new File("str.xml"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        
+	}
+	
+	
 	
 }
