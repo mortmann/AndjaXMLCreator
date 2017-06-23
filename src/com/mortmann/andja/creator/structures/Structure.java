@@ -1,6 +1,6 @@
 package com.mortmann.andja.creator.structures;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -9,20 +9,21 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Item;
+import com.mortmann.andja.creator.util.Tabable;
 
 @Root
-public abstract class Structure {
+public abstract class Structure implements Comparable<Structure>, Tabable {
 	public enum BuildTypes {Drag, Path, Single};
 	public enum BuildingTyp {Pathfinding, Blocking,Free};
 	public enum Direction {None, N, E, S, W};
 	
 	@Attribute
-	int ID;
+	public int ID = -1;
 	
-	@ElementList public ArrayList<String> Name;
-	@ElementList public ArrayList<String> Description;
-	@ElementList public ArrayList<String> HoverOver;
-	@ElementList public ArrayList<String> Short;
+	@ElementList public HashMap<String,String> Name;
+	@ElementList public HashMap<String,String> Description;
+	@ElementList public HashMap<String,String> HoverOver;
+	@ElementList public HashMap<String,String> Short;
 	
 	
 	@Element(required=false) public boolean isWalkable;
@@ -60,4 +61,11 @@ public abstract class Structure {
 
 	@Element(required=false) public String spriteBaseName;
 	
+	public int compareTo(Structure str) {
+		int val = Integer.compare(PopulationLevel, str.PopulationLevel); // first order after Level
+		if(val == 0){
+			return Integer.compare(PopulationCount, str.PopulationCount); // if its the same then order count
+		}
+		return val;
+	}	
 }

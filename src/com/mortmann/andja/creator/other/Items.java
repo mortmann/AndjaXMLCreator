@@ -9,5 +9,5 @@ import org.simpleframework.xml.Root;
 public class Items {
 	@ElementList(name="Items", inline=true)
 	public ArrayList<ItemXML> items;
-
+	
 }

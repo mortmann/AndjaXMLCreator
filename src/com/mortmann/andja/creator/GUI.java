@@ -1,188 +1,211 @@
 package com.mortmann.andja.creator;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.lang.reflect.*;
 import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Optional;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 
 import com.mortmann.andja.creator.other.*;
-import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.structures.*;
-import com.mortmann.andja.creator.structures.Structure.*;
+import com.mortmann.andja.creator.util.MyInputHandler;
+
+import javafx.event.EventType;
 
 public class GUI {
+	public enum Language {English, German}
+	public static GUI Instance;
 	private Stage mainWindow;
 	private BorderPane mainLayout;
 	private Scene scene;
-	GridPane mainGrid;
+	TabPane tabs;
+	ArrayList<ItemXML> items;
+	
+	HashMap<Integer,Structure> idToStructures;
+	HashMap<Integer,Fertility> idToFertility;
+	HashMap<Integer,Item> idToItem;
+
+	HashMap<Tab,Object> tabToObject;
+	
+	ArrayList<Structure> Structures;
+	
 	public void start(Stage primaryStage) {
+        Instance = this;
+        primaryStage.addEventHandler(EventType.ROOT,new MyInputHandler());
+        tabToObject = new HashMap<>();
+        scene = new Scene(new VBox(),1600,900);
 		mainWindow = primaryStage;
 		mainLayout = new BorderPane();
-        mainGrid = new GridPane();
-
+		SetUpMenuBar();
         Serializer serializer = new Persister(new AnnotationStrategy());
-        
+        idToStructures = new HashMap<>();
+        idToFertility = new HashMap<>();
+        idToItem = new HashMap<>();
+
         File source = new File("items.xml");
         try {
-			Items example = serializer.read(Items.class, source);
-			if(example != null){
-	        	for (ItemXML itemXML : example.items) {
-					System.out.println(itemXML.EN_Name);
-				}
-	        }
+			Items e = serializer.read(Items.class, source);
+			items = e.items;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        
-        Mine m = new Mine();
-        Field fld[] = m.getClass().getFields();
-        
-        for (int i = 0; i < fld.length; i++) {
-            if(fld[i].getType() == Boolean.TYPE){
-                mainGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],m), 0, i);
-            }
-            else if(fld[i].getType() == Float.TYPE) {
-                mainGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],m), 0, i);
-            }
-            else if(fld[i].getType() == Integer.TYPE) {
-                mainGrid.add(CreateIntSetter(fld[i].getName(),fld[i],m), 0, i);
-            }
-            else if(fld[i].getType() == int[].class) {
-            	System.out.println("int[].class");
-            }
-            else if(fld[i].getType() ==  String.class) {
-                mainGrid.add(CreateStringSetter(fld[i].getName(),fld[i],m), 0, i);
-            }
-            else if(fld[i].getType() ==  BuildTypes.class) {
-            	System.out.println("BuildTypes");
-                mainGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,BuildTypes.class), 0, i);
-            }
-            else if(fld[i].getType() == BuildingTyp.class) {
-            	System.out.println("BuildTypes");
-                mainGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,BuildingTyp.class), 0, i);
-            }
-            else if(fld[i].getType() == Direction.class) {
-            	System.out.println("BuildTypes");
-                mainGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,Direction.class), 0, i);
-            }
-            else if(fld[i].getType() == Climate.class) {
-            	System.out.println("BuildTypes");
-                mainGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,Climate.class), 0, i);
-            }
-            else if(fld[i].getType() == Item[].class) {
-            	System.out.println("Item[].class");
-//                mainGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,BuildTypes.class), 0, i);
-            }
-            else if(fld[i].getType() == ArrayList.class) { // we´re gonna take every arraylist as list of strings
-            	System.out.println("ArrayList");
-//                mainGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,BuildTypes.class), 0, i);
-            } else {
-                System.out.println("Variable Name is : " + fld[i].getName() +" : " + fld[i].getType() );
-
-            }
-        }                     
-        mainLayout.setCenter(mainGrid);
-        scene = new Scene(mainLayout,1024,720);
+        HBox hb = new HBox();
 		mainWindow.setScene(scene);
 		mainWindow.show();
+        mainLayout.setTop(hb);
+        
+		tabs = new TabPane();
+		tabs.setMaxHeight(Double.MAX_VALUE);
+		AddTab(null,mainLayout);
+		((VBox) scene.getRoot()).getChildren().addAll(tabs);
+		VBox.setVgrow(tabs, Priority.ALWAYS);
+	
+		
 	}
-
-	public GridPane CreateBooleanSetter(String name, Field field, Structure str){
-		GridPane grid = new  GridPane();
-		CheckBox box = new CheckBox(name);
-		box.setOnAction(x-> {
-				try {
-					field.setBoolean(str, box.isSelected());
-				} catch (Exception e) {
-					e.printStackTrace();
+	private void AddTab(Object c, Node content){
+		Tab t = new Tab("Empty");
+		if(c!=null){
+			t.setText("*"+c.getClass().getSimpleName());
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Warning!");
+			String s = "Any unsaved data will be lost!";
+			alert.setContentText(s);
+			alert.setOnCloseRequest(x->{
+				System.out.println("Close");
+			});
+			t.setOnCloseRequest(x->{
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.isPresent() && result.get() == ButtonType.OK) {
+					
+				} else {
+					x.consume();
+				}
+			});
+			if(tabs.getTabs().size()==1){
+				if(tabToObject.size()==0){
+					tabs.getTabs().remove(0);
 				}
 			}
-		);
-		
-		grid.add(box, 0, 0);	
-		
-		return grid;
-	}
-	public GridPane CreateFloatSetter(String name, Field field, Structure str){
-		GridPane grid = new  GridPane();
-		TextField box = new TextField();
-		grid.add(new Label(name), 0, 0);	
-		grid.add(box, 1, 0);	
-		try {
-			field.setFloat(str, 0.3f);
-		} catch (Exception e) {
-			e.printStackTrace();
+			tabToObject.put(t, c);
 		}
-		return grid;
-	}
-	public GridPane CreateIntSetter(String name, Field field, Structure str){
-		GridPane grid = new  GridPane();
-		TextField box = new TextField();
-		grid.add(new Label(name), 0, 0);	
-		grid.add(box, 1, 0);	
-		try {
-			field.setInt(str, 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return grid;
-	}
-
-	public GridPane CreateStringSetter(String name, Field field, Structure str){
-		GridPane grid = new  GridPane();
-		TextField box = new TextField();
-		box.setOnAction(x-> {
-			try {
-				field.set(str, box.getText());
-			} catch (Exception e) {
-				e.printStackTrace();
+		tabs.getTabs().add(t);
+		t.setContent(content);
+		t.setOnClosed(x->{
+			if(tabs.getTabs().size()==0){
+				AddTab(null,mainLayout);
 			}
-		}
-	);
-		grid.add(new Label(name), 0, 0);	
-		grid.add(box, 1, 0);	
-		try {
-			field.set(str, "test");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return grid;
+		});
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public<E extends Enum<E>> GridPane CreateEnumSetter(String name, Field field, Structure str, Class<E>  en){
-		ObservableList<Enum> names = FXCollections.observableArrayList();
-		for (Enum e : EnumSet.allOf(en)) {
-			  names.add(e);
-		}
-		GridPane grid = new  GridPane();
-		ComboBox<Enum> box = new ComboBox<Enum>(names);
-		grid.add(new Label(name), 0, 0);	
-		grid.add(box, 1, 0);	
-		box.setOnAction(x-> {
-				try {
-					field.set(str, box.getValue());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		);
-		return grid;
+	
+	private void SetUpMenuBar() {
+        MenuBar menuBar = new MenuBar();
+        Menu f = new Menu("File");
+        menuBar.getMenus().add(f);
+		MenuItem files = new MenuItem("Save Files");
+		files.setOnAction(x->{System.out.println("SAVE");});
+		f.getItems().addAll(files);
+
+        Menu mStructure = new Menu("New Structure");
+        menuBar.getMenus().add(mStructure);
+		
+		MenuItem production = new MenuItem("Production");
+		MenuItem needsBuilding = new MenuItem("NeedsBuilding");
+		MenuItem farm = new MenuItem("Farm");
+		MenuItem growable = new MenuItem("Growable");
+		MenuItem home = new MenuItem("Home");
+		MenuItem market = new MenuItem("Market");
+		MenuItem warehouse = new MenuItem("Warehouse");
+		MenuItem mine = new MenuItem("Mine");
+		MenuItem road = new MenuItem("Road");
+		mStructure.getItems().addAll(production,needsBuilding,farm,growable,home,market,warehouse,mine,road);
+		production.setOnAction(x->{ClassAction(Production.class);});
+		needsBuilding.setOnAction(x->{ClassAction(NeedsBuilding.class);});
+		farm.setOnAction(x->{ClassAction(Farm.class);});
+		growable.setOnAction(x->{ClassAction(Growable.class);});
+		home.setOnAction(x->{ClassAction(Home.class);});
+		market.setOnAction(x->{ClassAction(Market.class);});
+		warehouse.setOnAction(x->{ClassAction(Warehouse.class);});
+		mine.setOnAction(x->{ClassAction(Mine.class);});
+		road.setOnAction(x->{ClassAction(Road.class);});
+
+        Menu mOther = new Menu("New Other");
+        menuBar.getMenus().add(mOther);
+		MenuItem item = new MenuItem("Item");
+		MenuItem fertility = new MenuItem("Fertility");
+		fertility.setOnAction(x-> {
+        	ClassAction(Fertility.class);
+        });
+		item.setOnAction(x-> {
+        	ClassAction(ItemXML.class);
+        });
+		mOther.getItems().addAll(item,fertility);
+		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
+
+		
 	}
+	
+	private void ClassAction(@SuppressWarnings("rawtypes") Class c){
+		MyTab my = new MyTab(c);
+		AddTab(my.getObject(),my.getScrollPaneContent());
+	}
+	public ArrayList<ItemXML> getItems() {
+		return items;
+	}
+	public void setItems(ArrayList<ItemXML> items) {
+		this.items = items;
+	}
+	
+	public void SaveCurrentTab(){
+		Tab curr = GetCurrentTab();
+		curr.setText(curr.getText().replaceAll("\\*", ""));
+		Object o = tabToObject.get(curr);
+		if(o instanceof Structure){
+			if(((Structure)o).ID==-1){
+				return;
+			}
+			idToStructures.put(((Structure)o).ID, ((Structure)o));
+		}
+		else if(o instanceof Item){
+			if(((Item)o).ID==-1){
+				return;
+			}
+			idToItem.put(((Item)o).ID, ((Item)o));
+		}
+		else if(o instanceof Fertility){
+			if(((Fertility)o).ID==-1){
+				return;
+			}
+			idToFertility.put(((Fertility)o).ID, ((Fertility)o));
+		}
+	}
+	public void changedCurrentTab() {
+		if(GetCurrentTab().getText().contains("*")){
+			return;
+		}
+		GetCurrentTab().setText("*"+GetCurrentTab().getText());
+	}
+	private Tab GetCurrentTab(){
+		return tabs.getSelectionModel().getSelectedItem();
+	}
+	
 }

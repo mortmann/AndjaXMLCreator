@@ -9,5 +9,5 @@ public class Item {
 	public int ID;
 	@Element(required=false)
 	public int count;
-
+	
  }
