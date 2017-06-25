@@ -1,0 +1,63 @@
+<structures>
+   <Roads/>
+   <Farms/>
+   <Growables/>
+   <Markets/>
+   <Mines/>
+   <NeedsBuildings/>
+   <Productions>
+      <structure ID="13">
+         <Name>
+            <entry string="English">tets</entry>
+            <entry string="German">tets</entry>
+         </Name>
+         <Description>
+            <entry string="English">tets</entry>
+            <entry string="German">tets</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">tets</entry>
+            <entry string="German">tets</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>0</tileWidth>
+         <tileHeight>0</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <spriteBaseName>tets</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>0</maxOutputStorage>
+         <output length="1">
+            <Item ID="4">
+               <count>0</count>
+            </Item>
+         </output>
+         <intake length="1">
+            <Item ID="3">
+               <count>0</count>
+            </Item>
+         </intake>
+      </structure>
+   </Productions>
+   <Warehouses/>
+</structures>

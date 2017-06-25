@@ -90,17 +90,22 @@ public class NumberTextField extends TextField {
 	}
 	
 	public int GetIntValue(){
-		return Integer.parseInt(this.getPromptText());
+		if(this.getText()==null||this.getText()==""||this.getText().isEmpty()){
+			return 0;
+		}
+		return Integer.parseInt(this.getText());
 	}
 	
 	public float GetFloatValue(){
+		if(this.getText()==null||this.getText()==""||this.getText().isEmpty()){
+			return 0;
+		}
 		return Float.parseFloat(this.getText());
 	}
 	private int getMaxLength() {
 		return maxLength;
 	}
 	private boolean validate(String text) {
-		System.out.println(text);
 		if(isFloat){
 			if(text.matches("[.]")){
 				if(this.getText().contains(".")){

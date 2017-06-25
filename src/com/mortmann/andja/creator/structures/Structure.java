@@ -6,6 +6,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Item;
@@ -20,10 +21,10 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 	@Attribute
 	public int ID = -1;
 	
-	@ElementList public HashMap<String,String> Name;
-	@ElementList public HashMap<String,String> Description;
-	@ElementList public HashMap<String,String> HoverOver;
-	@ElementList public HashMap<String,String> Short;
+	@ElementMap(attribute=true) public HashMap<String,String> Name;
+	@ElementMap(attribute=true) public HashMap<String,String> Description;
+	@ElementMap(attribute=true) public HashMap<String,String> HoverOver;
+	@ElementList(required=false) public HashMap<String,String> Short;
 	
 	
 	@Element(required=false) public boolean isWalkable;
@@ -46,18 +47,18 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 	@Element(required=false) public boolean canTakeDamage = false;
 	@Element(required=false) public boolean showExtraUI = false;
 
-	@Element(required=false) public Direction mustFrontBuildDir= Direction.None; 
+	@Element(required=false) public Direction mustFrontBuildDir = Direction.None; 
 
-	@Element(required=false) public boolean canStartBurning;
+	@Element(required=false) public boolean canStartBurning = false;
 	@Element(required=false) public boolean mustBeBuildOnShore = false;
 	@Element(required=false) public boolean mustBeBuildOnMountain = false;
 
 	@Element(required=false) public int maintenancecost;
 	@Element(required=false) public int buildcost;
 
-	@Element(required=false) public BuildTypes BuildTyp;
+	@Element(required=false) public BuildTypes BuildTyp =  BuildTypes.Single ;
 	@Element(required=false) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
-	@ElementArray public Item[] buildingItems;
+	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
 
 	@Element(required=false) public String spriteBaseName;
 	
@@ -68,4 +69,8 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 		}
 		return val;
 	}	
+	@Override
+	public String toString() {
+		return ID+":"+(String) Name.values().toArray()[0];
+	}
 }

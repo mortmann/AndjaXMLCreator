@@ -16,6 +16,6 @@ public class EnumConverter implements Converter<ItemType>
 
 	@Override
 	public void write(OutputNode node, ItemType arg1) throws Exception {
-		node.setAttribute("Type", arg1.ordinal()+"");
+		node.setValue(arg1.ordinal()+"");
 	}
 }

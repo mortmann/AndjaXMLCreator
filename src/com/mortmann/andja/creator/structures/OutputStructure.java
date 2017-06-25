@@ -10,5 +10,5 @@ public abstract class OutputStructure extends Structure {
 	@Element public int maxNumberOfWorker = 1;
 	@Element public float produceTime;
 	@Element(required=false) public int maxOutputStorage;
-	@ElementArray public Item[] output;
+	@ElementArray(entry="Item") public Item[] output;
 }

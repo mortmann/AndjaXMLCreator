@@ -7,5 +7,16 @@ import com.mortmann.andja.creator.other.Item;
 public class Production extends OutputStructure {
 //	@ElementArray public int[] needIntake;
 //	@ElementArray public int[] maxIntake;
-	@ElementArray public Item[] intake;
+	@ElementArray(entry="Item") public Item[] intake;
+	
+	public Production(){
+		maxOutputStorage = 5; // hardcoded 5 ? need this to change?
+		hasHitbox = true;
+		myBuildingTyp = BuildingTyp.Blocking;
+		BuildTyp = BuildTypes.Single;
+		canTakeDamage = true;
+		maxNumberOfWorker = 1;
+	}
+	
+	
 }

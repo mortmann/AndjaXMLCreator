@@ -26,10 +26,11 @@ public class MyInputHandler implements EventHandler<Event> {
 				//make redo
 				return; //stop not save it as last 
 		    }
-			if (((KeyEvent)event).getCode() == KeyCode.S && ((KeyEvent)event).isControlDown()) { 
+			if (((KeyEvent)event).getCode() == KeyCode.S&& KeyEvent.KEY_PRESSED == ((KeyEvent)event).getEventType() && ((KeyEvent)event).isControlDown()) { 
 				GUI.Instance.SaveCurrentTab();
 				//reverse
 				//make redo
+				event.consume();
 				return; //stop not save it as last 
 		    }
 		}
@@ -37,7 +38,7 @@ public class MyInputHandler implements EventHandler<Event> {
 			return;//there is no target so no need to save event for reverse
 		}
 		if(event instanceof KeyEvent){
-			if(((KeyEvent)event).isControlDown()){
+			if(((KeyEvent)event).getCode() == KeyCode.S&&((KeyEvent)event).isControlDown() || KeyEvent.KEY_PRESSED != ((KeyEvent)event).getEventType() ){
 				return;
 			}
 			GUI.Instance.changedCurrentTab();

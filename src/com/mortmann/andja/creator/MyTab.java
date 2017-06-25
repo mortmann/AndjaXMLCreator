@@ -7,8 +7,9 @@ import java.util.HashMap;
 
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
-import com.mortmann.andja.creator.other.ItemXML;
+import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.other.Fertility.Climate;
+import com.mortmann.andja.creator.structures.Growable;
 import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.structures.Structure.BuildTypes;
 import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
@@ -44,9 +45,9 @@ public class MyTab {
 	GridPane languageGrid;
 	GridPane otherGrid;
 
-	Object obj;
+	Tabable obj;
 	
-	public MyTab(@SuppressWarnings("rawtypes") Class c){
+	public MyTab(Tabable t){
         mainGrid = new GridPane();
         booleanGrid = new GridPane();
         floatGrid = new GridPane();
@@ -82,7 +83,7 @@ public class MyTab {
         scrollPaneContent.setMaxHeight(Double.MAX_VALUE);
         scrollPaneContent.setMaxWidth(Double.MAX_VALUE);
         
-        ClassAction(c);
+        ClassAction(t);
 	}
 	
 	private TitledPane wrapPaneInTitledPane(String Name,Pane pane){
@@ -92,52 +93,51 @@ public class MyTab {
         btp.setMaxHeight(Double.MAX_VALUE);
         return btp;
 	}
-	@SuppressWarnings("unchecked")
-	private void ClassAction(@SuppressWarnings("rawtypes") Class c){
-        
+	@SuppressWarnings({ "rawtypes" })
+	private void ClassAction(Tabable t){
+        Class c = t.getClass();
 		Field fld[] = c.getFields();
-		Tabable m = null;
-		try {
-			m = (Tabable) c.getConstructor().newInstance();
-			obj = m;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		if(m == null){
-			return; //somehow it got passed a non structure
-		}
+		obj = t;
+		
         for (int i = 0; i < fld.length; i++) {
         	
             if(fld[i].getType() == Boolean.TYPE){
-            	booleanGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],m), 0, i);
+            	booleanGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(fld[i].getType() == Float.TYPE) {
-            	floatGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],m), 0, i);
+            	floatGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(fld[i].getType() == Integer.TYPE) {
-            	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],m), 0, i);
+            	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(fld[i].getType() ==  String.class) {
-            	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],m), 0, i);
+            	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(fld[i].getType() ==  BuildTypes.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,BuildTypes.class), 0, i);
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildTypes.class), 0, i);
             }
             else if(fld[i].getType() == BuildingTyp.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,BuildingTyp.class), 0, i);
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildingTyp.class), 0, i);
             }
             else if(fld[i].getType() == Direction.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,Direction.class), 0, i);
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,Direction.class), 0, i);
             }
             else if(fld[i].getType() == Climate.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],m,Climate.class), 0, i);
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
+            }
+            else if(fld[i].getType() == ItemType.class) {
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
             }
             else if(fld[i].getType() == Item[].class) {
-            	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],m), 0, i);
+            	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(fld[i].getType() == HashMap.class) { // we´re gonna take every HashMap as list of strings
-            	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],m), 0, i);
-            } else {
+            	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
+            }
+            else if(fld[i].getType() == Growable.class) { 
+            	otherGrid.add(CreateStructureSetter(fld[i].getName(),fld[i],obj,Growable.class), 0, i);
+            }
+            else {
                 System.out.println("Variable Name is : " + fld[i].getName() +" : " + fld[i].getType() );
 
             }
@@ -145,7 +145,44 @@ public class MyTab {
        
         
 	}
-	private Node CreateLanguageSetter(String name, Field field, Tabable m) {
+	
+	@SuppressWarnings("rawtypes")
+	private Node CreateStructureSetter(String name, Field field, Tabable m, Class str) {
+		GridPane grid = new  GridPane();
+		ObservableList<Structure> strs = FXCollections.observableArrayList(GUI.Instance.idToStructures);
+		strs.removeIf(x->x.getClass().equals(str.getClass()));
+		ComboBox<Structure> box = new ComboBox<Structure>(strs);
+		box.setMaxWidth(Double.MAX_VALUE);
+		grid.add(new Label(name), 0, 0);	
+		grid.add(box, 1, 0);	
+		ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMinWidth(75);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMinWidth(165);
+        
+        grid.getColumnConstraints().addAll(col1,col2);
+		try {
+			if(field.get(m)!=null){
+				box.getSelectionModel().select((Structure) field.get(m));
+			}
+		} catch (Exception e1) {
+		} 
+		
+		box.setOnAction(x-> {
+				try {
+					field.set(m, box.getValue());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		);
+
+		
+		return grid;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Node CreateLanguageSetter(String name, Field field, Tabable str) {
 		GridPane grid = new  GridPane();
 		
 		ColumnConstraints col1 = new ColumnConstraints();
@@ -164,19 +201,34 @@ public class MyTab {
 			grid.add(new Label(langes.get(i).toString()), 0, i+1);
 			TextField t = new TextField();
 			int num = i;
-			t.setOnAction(x-> {
-				try {
-					@SuppressWarnings("unchecked")
-					HashMap<String,String> h = (HashMap<String, String>) field.get(m);
-//					field.set(str, );
-					h.put(langes.get(num).toString(), t.getText());
-				} catch (Exception e) {
-					e.printStackTrace();
+			
+			try {
+				
+				HashMap<String, String> h = (HashMap<String, String>) field.get(str);
+				if(h != null){
+					t.setText(h.get(langes.get(i).toString()));
 				}
-			 }
-		    );
-			grid.add(t, 1, i+1);
+			} catch (Exception e1) {
 
+			} 
+			
+			t.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					try {
+						HashMap<String,String> h = (HashMap<String, String>) field.get(str);
+						if(h == null){
+							h = new HashMap<>();
+						}
+						h.put(langes.get(num).toString(), t.getText());
+						field.set(str,h);	
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			grid.add(t, 1, i+1);
+			
 		}
 
 		
@@ -184,7 +236,7 @@ public class MyTab {
 	}
 
 	private Node CreateItemArraySetter(String name, Field field, Tabable m) {
-		ObservableList<ItemXML> its = FXCollections.observableArrayList();
+		ObservableList<Item> its = FXCollections.observableArrayList();
 		its.addAll(GUI.Instance.getItems());
 		GridPane grid = new GridPane();
 		GridPane listpane = new  GridPane();
@@ -209,84 +261,21 @@ public class MyTab {
 		}
 		if(oldArray ==null){
 			oldArray = new Item[1];
+		} else {
+			for (Item item : oldArray) {
+				System.out.println(item.ID);
+				OnItemSelect(listpane,field,m,item,true);
+			}
 		}
 		
-		ComboBox<ItemXML> box = new ComboBox<ItemXML>(its);
+		ComboBox<Item> box = new ComboBox<Item>(its);
 		grid.add(new Label(name), 0, oldArray.length+1);	
 		grid.add(box, 1, oldArray.length+1);	
 		ScrollPane sp = new ScrollPane();
 		// Action on selection
 		box.setOnAction(x -> {
-			//get existing field if null or not
-			Item[] old = null;
-			try {
-				old = (Item[]) field.get(m); 
-			} catch (Exception e1) {
-//				System.out.println(e1);
-			}
-			if(old != null){
-				for (Item item : old) {
-					if(item.ID == box.getValue().ID){
-						return;
-					}
-				}
-			}
-			Item select = box.getValue();
-			//if null we start at pos 1 else insert at length+1
-			int pos = old == null? 1 : old.length+1;
-			// Name of Item
-			Label l = new Label(box.getValue().toString());
-			//Amount field
-			NumberTextField count = new NumberTextField(3);
-			count.setMaxWidth(35);
-			count.setOnAction(p->{
-				select.count = count.GetIntValue();
-			});
-			// Remove Button
-			Button b = new Button("X");
-			
-			try {
-				// Create newArray in Case old was null
-				Item[] newArray = new Item[1];
-				if(old != null){
-					//else create a array one bigger than old
-					newArray = new Item[old.length + 1];
-					//copy over variables
-					System.arraycopy(old,0,newArray,0,old.length);
-				}
-				//set the new place in array to selected variable 
-				newArray[pos-1] = box.getValue();
-				field.set(m, newArray);
-				// set the press button action
-				b.setOnAction(s -> {
-					try {
-						//get array
-						Item[] array = (Item[]) field.get(m);
-						//remove the label and button
-						listpane.getChildren().removeAll(l, b, count);
-						ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
-						listpane.getChildren().clear();
-						for (int i = 0; i < children.size(); i+=3) {
-							listpane.add(children.get(i), 0, i);
-							listpane.add(children.get(i+1), 1, i);
-							listpane.add(children.get(i+2), 2, i);
-						}
-						//remove this value and set the array in class
-						field.set(m, removeItemElement(array, pos-1));
-					} catch (Exception e1) {
-						System.out.println(e1);
-					}
-				});
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			listpane.add(l, 0, pos);
-			listpane.add(count, 1, pos);
-			listpane.add(b, 2, pos);
-		}
-
-		);
+			OnItemSelect(listpane,field,m,box.getSelectionModel().getSelectedItem(),false);
+		});
 	    sp.setStyle("-fx-background-color:transparent;");
 		sp.setContent(listpane);
 		sp.setFitToHeight(true);
@@ -295,11 +284,90 @@ public class MyTab {
 		
 		return grid;
 	}
+	private void OnItemSelect(GridPane listpane, Field field, Tabable m, Item select,boolean setup){
+		//get existing field if null or not
+		Item[] old = null;
+		try {
+			old = (Item[]) field.get(m); 
+		} catch (Exception e1) {
+//			System.out.println(e1);
+		}
+		if(old != null && setup== false){
+			for (Item item : old) {
+				if(item.ID == select.ID){
+					return;
+				}
+			}
+		}
+		//if null we start at pos 1 else insert at length+1
+		int pos = old == null? 1 : old.length+1;
+		// Name of Item
+		Label l = new Label(select.toString());
+		//Amount field
+		NumberTextField count = new NumberTextField(3);
+		count.setMaxWidth(35);
+		count.setText(select.count +"");
+		count.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				try {
+					select.count = count.GetIntValue();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		// Remove Button
+		Button b = new Button("X");
+		
+		try {
+			// Create newArray in Case old was null
+			Item[] newArray = new Item[1];
+			if(old != null){
+				//else create a array one bigger than old
+				newArray = new Item[old.length + 1];
+				//copy over variables
+				System.arraycopy(old,0,newArray,0,old.length);
+			}
+			//set the new place in array to selected variable 
+			newArray[pos-1] = select;
+			field.set(m, newArray);
+			// set the press button action
+			b.setOnAction(s -> {
+				try {
+					//get array
+					Item[] array = (Item[]) field.get(m);
+					//remove the label and button
+					listpane.getChildren().removeAll(l, b, count);
+					ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
+					listpane.getChildren().clear();
+					for (int i = 0; i < children.size(); i+=3) {
+						listpane.add(children.get(i), 0, i);
+						listpane.add(children.get(i+1), 1, i);
+						listpane.add(children.get(i+2), 2, i);
+					}
+					//remove this value and set the array in class
+					field.set(m, removeItemElement(array, pos-1));
+				} catch (Exception e1) {
+					System.out.println(e1);
+				}
+			});
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		listpane.add(l, 0, pos);
+		listpane.add(count, 1, pos);
+		listpane.add(b, 2, pos);
+	}
 
 	public GridPane CreateBooleanSetter(String name, Field field, Tabable m){
 		GridPane grid = new  GridPane();
 		CheckBox box = new CheckBox(name);
-		
+		try {
+			box.setSelected((boolean) field.get(m));
+		} catch (Exception e1) {
+		}
 		box.selectedProperty().addListener(new ChangeListener<Boolean>() {
 	        public void changed(ObservableValue<? extends Boolean> ov,
 	                Boolean old_val, Boolean new_val) {
@@ -326,14 +394,24 @@ public class MyTab {
 		NumberTextField box = new NumberTextField(true);
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
-		box.setOnAction(x-> {
+		try {
+			if(field.get(str)!=null){
+				box.setText((Float) field.get(str) +"");
+			}
+		} catch (Exception e1) {
+		} 
+		
+		
+		box.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				try {
 					field.setFloat(str, box.GetFloatValue());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		);
+		});
 		return grid;
 	}
 	public GridPane CreateIntSetter(String name, Field field, Tabable str){
@@ -346,21 +424,28 @@ public class MyTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		NumberTextField box = new NumberTextField();
+		try {
+			if(field.get(str)!=null){
+				box.setText((Integer) field.get(str)+"");
+			}
+		} catch (Exception e1) {
+		} 
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
-		box.setOnAction(x-> {
-			System.out.println(box.GetIntValue());
-			try {
-				field.setInt(str, box.GetIntValue());
-			} catch (Exception e) {
-				e.printStackTrace();
+		box.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				try {
+					field.setInt(str, box.GetIntValue());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		}
-	);
+		});
 		return grid;
 	}
 
-	public GridPane CreateStringSetter(String name, Field field, Tabable m){
+	public GridPane CreateStringSetter(String name, Field field, Tabable str){
 		GridPane grid = new  GridPane();
 		
 		ColumnConstraints col1 = new ColumnConstraints();
@@ -370,30 +455,25 @@ public class MyTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		TextField box = new TextField();
-		box.setOnInputMethodTextChanged(x-> {
+		try {
+			if(field.get(str)!=null){
+				box.setText((String) field.get(str));
+			}
+		} catch (Exception e1) {
+		} 
+		box.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				try {
-					System.out.println(box.getText());
-					field.set(m, box.getText());
+					field.set(str, box.getText());
 				} catch (Exception e) {
 					e.printStackTrace();
-				}	
-		});
-		box.setOnAction(x-> {
-			try {
-				System.out.println(box.getText());
-				field.set(m, box.getText());
-			} catch (Exception e) {
-				e.printStackTrace();
+				}
 			}
-		}
-	);
+		});
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
-		try {
-			field.set(m, "test");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		return grid;
 	}
 	
@@ -415,10 +495,17 @@ public class MyTab {
 		box.setMaxWidth(Double.MAX_VALUE);
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
+		
+		try {
+			if(field.get(m)!=null){
+				box.getSelectionModel().select((Enum) field.get(m));
+			}
+		} catch (Exception e1) {
+		} 
+		
 		box.setOnAction(x-> {
 				try {
 					field.set(m, box.getValue());
-					System.out.println(field.get(m));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
