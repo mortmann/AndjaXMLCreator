@@ -3,7 +3,7 @@ package com.mortmann.andja.creator.util;
 import javafx.scene.control.TextField;
 
 public class NumberTextField extends TextField {
-	int maxLength = -1;
+	int maxLength = 10;
 	int maxNumber = -1;
 	boolean isFloat = false;
 	

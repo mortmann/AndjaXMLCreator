@@ -10,6 +10,7 @@ import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Item;
+import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root
@@ -19,7 +20,8 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 	public enum Direction {None, N, E, S, W};
 	
 	@Attribute
-	public int ID = -1;
+	@FieldInfo(order=0,required=true)
+	public int ID =-1;
 	
 	@ElementMap(attribute=true) public HashMap<String,String> Name;
 	@ElementMap(attribute=true) public HashMap<String,String> Description;
@@ -60,7 +62,7 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 	@Element(required=false) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
 
-	@Element(required=false) public String spriteBaseName;
+	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	
 	public int compareTo(Structure str) {
 		int val = Integer.compare(PopulationLevel, str.PopulationLevel); // first order after Level

@@ -2,6 +2,7 @@ package com.mortmann.andja.creator;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 
@@ -14,7 +15,9 @@ import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.structures.Structure.BuildTypes;
 import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
 import com.mortmann.andja.creator.structures.Structure.Direction;
+import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.NumberTextField;
+import com.mortmann.andja.creator.util.OrderEr;
 import com.mortmann.andja.creator.util.Tabable;
 
 import javafx.beans.value.ChangeListener;
@@ -98,7 +101,7 @@ public class MyTab {
         Class c = t.getClass();
 		Field fld[] = c.getFields();
 		obj = t;
-		
+		Arrays.sort(fld,new OrderEr());
         for (int i = 0; i < fld.length; i++) {
         	
             if(fld[i].getType() == Boolean.TYPE){
@@ -200,6 +203,7 @@ public class MyTab {
 		for (int i = 0; i < langes.size(); i++) {
 			grid.add(new Label(langes.get(i).toString()), 0, i+1);
 			TextField t = new TextField();
+			CheckIfRequired(t, field);
 			int num = i;
 			
 			try {
@@ -263,7 +267,6 @@ public class MyTab {
 			oldArray = new Item[1];
 		} else {
 			for (Item item : oldArray) {
-				System.out.println(item.ID);
 				OnItemSelect(listpane,field,m,item,true);
 			}
 		}
@@ -305,6 +308,8 @@ public class MyTab {
 		Label l = new Label(select.toString());
 		//Amount field
 		NumberTextField count = new NumberTextField(3);
+		CheckIfRequired(count, field);
+
 		count.setMaxWidth(35);
 		count.setText(select.count +"");
 		count.textProperty().addListener(new ChangeListener<String>() {
@@ -392,6 +397,8 @@ public class MyTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		NumberTextField box = new NumberTextField(true);
+		CheckIfRequired(box, field);
+
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
 		try {
@@ -424,6 +431,8 @@ public class MyTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		NumberTextField box = new NumberTextField();
+		CheckIfRequired(box, field);
+
 		try {
 			if(field.get(str)!=null){
 				box.setText((Integer) field.get(str)+"");
@@ -455,6 +464,8 @@ public class MyTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		TextField box = new TextField();
+		CheckIfRequired(box, field);
+
 		try {
 			if(field.get(str)!=null){
 				box.setText((String) field.get(str));
@@ -548,7 +559,38 @@ public class MyTab {
 		}
 	    return newA;
 	 */
-
+	
+	private void CheckIfRequired(TextField text,Field field){
+        FieldInfo info = field.getAnnotation(FieldInfo.class);
+        if(info == null || info.required() == false){
+        	return;
+        }
+	    ObservableList<String> styleClass = text.getStyleClass();
+	    
+	    styleClass.add("text-field-error");
+		text.textProperty().addListener((arg0, oldValue, newValue) -> {		
+			System.out.println(text.getText());
+			
+			if(text.getText().isEmpty()){
+	    	    if(!styleClass.contains("text-field-error")) {
+	    	        styleClass.add("text-field-error");
+	    	    }
+	        } else
+			if(text instanceof NumberTextField){
+				if(((NumberTextField) text).GetIntValue()>0){
+					if(styleClass.contains("text-field-error")) {
+		    	        styleClass.remove("text-field-error");
+		    	    }
+				}
+			} else {
+	        	if(styleClass.contains("text-field-error")) {
+	    	        styleClass.remove("text-field-error");
+	    	    }
+			}
+	        
+        });
+		
+	}
 	public ScrollPane getScrollPaneContent() {
 		return scrollPaneContent;
 	}

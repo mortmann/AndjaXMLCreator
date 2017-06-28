@@ -77,6 +77,9 @@ public class GUI {
         primaryStage.addEventHandler(EventType.ROOT,new MyInputHandler());
         tabToObject = new HashMap<>();
         scene = new Scene(new VBox(),1600,900);
+        scene.getStylesheets().add("textfield.css");
+        scene.getStylesheets().add("bootstrap3.css");
+        
 		mainWindow = primaryStage;
 		mainLayout = new BorderPane();
 		SetUpMenuBar();
