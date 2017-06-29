@@ -3,7 +3,6 @@ package com.mortmann.andja.creator.other;
 import org.simpleframework.xml.*;
 
 import com.mortmann.andja.creator.GUI;
-import com.mortmann.andja.creator.structures.Structure;
 
 public class Item implements Comparable<Item>{
 	

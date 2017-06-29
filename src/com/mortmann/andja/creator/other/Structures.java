@@ -1,4 +1,4 @@
-package com.mortmann.andja.creator;
+package com.mortmann.andja.creator.other;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -16,11 +16,9 @@ public class Structures {
 	public ArrayList<NeedsBuilding> NeedsBuildings;
 	public ArrayList<Production> Productions;
 	public ArrayList<Warehouse> Warehouses;
-
 	public Structures(){
 		
 	}
-	
 	public Structures(Iterable<Structure> Structures){
 		Roads = new ArrayList<>();
 		Farms = new ArrayList<>();

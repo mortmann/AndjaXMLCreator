@@ -6,6 +6,10 @@ import com.mortmann.andja.creator.GUI;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventTarget;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -21,7 +25,7 @@ public class MyInputHandler implements EventHandler<Event> {
 	public void handle(Event event) {
 		if(event instanceof KeyEvent){
 			if (((KeyEvent)event).getCode() == KeyCode.Z && ((KeyEvent)event).isControlDown()) { 
-
+				ReverseEvent();
 				//reverse
 				//make redo
 				return; //stop not save it as last 
@@ -44,6 +48,26 @@ public class MyInputHandler implements EventHandler<Event> {
 			GUI.Instance.changedCurrentTab();
 		}
 		events.push(event);
+	}
+
+	private void ReverseEvent() {
+		System.out.println("REVERSE");
+		Event last = events.getLast();
+		if(last instanceof KeyEvent){
+			KeyEvent k = (KeyEvent) last;
+			EventTarget t = last.getTarget();
+			if(t instanceof TextField){
+				TextField tf = (TextField) t;
+				tf.setText(tf.getText().substring(0, tf.getText().length()-1));
+			}
+			else if(t instanceof CheckBox){
+				((CheckBox)t).setSelected(!((CheckBox)t).isSelected());
+			}
+			else if(t instanceof ComboBox){
+				//idk
+				
+			}
+		}
 	}
 
 }

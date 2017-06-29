@@ -8,10 +8,14 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
+import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.other.Item;
+import com.mortmann.andja.creator.util.BuildingTypConverter;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
+import com.mortmann.andja.creator.util.enumconvertes.BuildTypesConverter;
+import com.mortmann.andja.creator.util.enumconvertes.DirectionConverter;
 
 @Root
 public abstract class Structure implements Comparable<Structure>, Tabable {
@@ -49,17 +53,18 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 	@Element(required=false) public boolean canTakeDamage = false;
 	@Element(required=false) public boolean showExtraUI = false;
 
-	@Element(required=false) public Direction mustFrontBuildDir = Direction.None; 
+	@Element(required=false)@Convert(DirectionConverter.class) public Direction mustFrontBuildDir = Direction.None; 
 
 	@Element(required=false) public boolean canStartBurning = false;
 	@Element(required=false) public boolean mustBeBuildOnShore = false;
 	@Element(required=false) public boolean mustBeBuildOnMountain = false;
-
+ 
 	@Element(required=false) public int maintenancecost;
 	@Element(required=false) public int buildcost;
 
-	@Element(required=false) public BuildTypes BuildTyp =  BuildTypes.Single ;
-	@Element(required=false) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
+	@Element(required=false)@Convert(BuildTypesConverter.class) public BuildTypes BuildTyp =  BuildTypes.Single ;
+	@Element(required=false)@Convert(BuildingTypConverter.class) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
+	
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;

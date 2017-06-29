@@ -37,7 +37,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 
-public class MyTab {
+public class WorkTab {
 	ScrollPane scrollPaneContent;
 	GridPane mainGrid;
 	GridPane booleanGrid;
@@ -50,7 +50,7 @@ public class MyTab {
 
 	Tabable obj;
 	
-	public MyTab(Tabable t){
+	public WorkTab(Tabable t){
         mainGrid = new GridPane();
         booleanGrid = new GridPane();
         floatGrid = new GridPane();
@@ -61,8 +61,8 @@ public class MyTab {
         enumGrid = new GridPane();
 
         mainGrid.setGridLinesVisible(true);
-        mainGrid.add(wrapPaneInTitledPane("Boolean",booleanGrid), 0, 0);
-        mainGrid.add(wrapPaneInTitledPane("Integer",intGrid), 1, 0);
+        mainGrid.add(wrapPaneInTitledPane("Integer",intGrid), 0, 0);
+        mainGrid.add(wrapPaneInTitledPane("Boolean",booleanGrid), 1, 0);
         mainGrid.add(wrapPaneInTitledPane("Float",floatGrid), 2, 0);
         mainGrid.add(wrapPaneInTitledPane("Enum",enumGrid), 0, 1);
         mainGrid.add(wrapPaneInTitledPane("String",stringGrid), 1, 1);
@@ -131,6 +131,9 @@ public class MyTab {
             else if(fld[i].getType() == ItemType.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
             }
+            else if(fld[i].getType() == ArrayList.class) { // we´re gonna take it as list of climate if not check here what type
+            	enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
+            }
             else if(fld[i].getType() == Item[].class) {
             	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
@@ -149,10 +152,127 @@ public class MyTab {
         
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private<E extends Enum<E>> Node CreateEnumArraySetter(String name, Field field, Tabable tab, Class<E> class1) {
+		ObservableList<Enum> names = FXCollections.observableArrayList();
+		for (E e : EnumSet.allOf(class1)) {
+			  names.add(e);
+		}
+		GridPane grid = new GridPane();
+		GridPane listpane = new  GridPane();
+        ColumnConstraints gridcol1 = new ColumnConstraints();
+        gridcol1.setMinWidth(75);
+        ColumnConstraints gridcol2 = new ColumnConstraints();
+        gridcol2.setMinWidth(25);
+        grid.getColumnConstraints().addAll(gridcol1,gridcol2);
+        
+        ColumnConstraints listcol1 = new ColumnConstraints();
+        listcol1.setMinWidth(50);
+        ColumnConstraints listcol2 = new ColumnConstraints();
+        listcol2.setMinWidth(25);
+        ColumnConstraints listcol3 = new ColumnConstraints();
+        listcol3.setMinWidth(15);
+        listpane.getColumnConstraints().addAll(listcol1,listcol2,listcol3);
+        ArrayList<E> oldArray = null;
+		
+		try {
+			oldArray =(ArrayList<E>) field.get(tab);
+			System.out.println(oldArray.size());
+		} catch (Exception e1) {
+		}
+		if(oldArray ==null){
+			oldArray = new ArrayList<E>();
+		} else {
+			for(int i = 0; i<oldArray.size();i++){
+				OnEnumSelect(listpane,field,tab,oldArray.get(i),true);
+			}
+		}
+		
+		ComboBox<Enum> box = new ComboBox<Enum>(names);
+		grid.add(new Label(name), 0, oldArray.size()+1);	
+		grid.add(box, 1, oldArray.size()+1);	
+		ScrollPane sp = new ScrollPane();
+		// Action on selection
+		box.setOnAction(x -> {
+			OnEnumSelect(listpane,field,tab,box.getSelectionModel().getSelectedItem(),false);
+		});
+	    sp.setStyle("-fx-background-color:transparent;");
+		sp.setContent(listpane);
+		sp.setFitToHeight(true);
+		sp.setFitToWidth(true);
+		grid.add(sp, 3, oldArray.size()+1);
+		
+		return grid;
+
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	private<E extends Enum<E>> void OnEnumSelect(GridPane listpane, Field field, Tabable tab, E e, boolean setup) {
+        ArrayList<E> old = null;
+		try {
+			old = (ArrayList<E>) field.get(tab); 
+		} catch (Exception e1) {
+			old = new ArrayList<>();
+//			System.out.println(e1);
+		}
+		if(old != null && old.contains(e) && setup== false){
+			
+			return;
+		}
+		if(old == null){
+			old = new ArrayList<>();
+			try {
+				field.set(tab, old);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			} 
+		}
+
+		// Name of Item
+		Label l = new Label(e.toString());
+		//Amount field
+		// Remove Button
+		Button b = new Button("X");
+		
+		try {
+			if(setup==false){
+				old.add(e);
+			}
+			// set the press button action
+			b.setOnAction(s -> {
+				try {
+			        ArrayList<E> list = null;
+					try {
+						list = (ArrayList<E>) field.get(tab); 
+					} catch (Exception e1) {
+					}
+					list.remove(e);
+					//remove the label and button
+					listpane.getChildren().removeAll(l, b);
+					ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
+					listpane.getChildren().clear();
+					for (int i = 0; i < children.size(); i+=2) {
+						listpane.add(children.get(i), 0, i);
+						listpane.add(children.get(i+1), 1, i);
+					}
+					System.out.println("set");
+					field.set(tab, list);
+				} catch (Exception e1) {
+					System.out.println(e1);
+				}
+			});
+
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		listpane.add(l, 0, old.size());
+		listpane.add(b, 2, old.size());
+	}
+
 	@SuppressWarnings("rawtypes")
 	private Node CreateStructureSetter(String name, Field field, Tabable m, Class str) {
 		GridPane grid = new  GridPane();
-		ObservableList<Structure> strs = FXCollections.observableArrayList(GUI.Instance.idToStructures);
+		ObservableList<Structure> strs = FXCollections.observableArrayList(GUI.Instance.getStructureList());
 		strs.removeIf(x->x.getClass().equals(str.getClass()));
 		ComboBox<Structure> box = new ComboBox<Structure>(strs);
 		box.setMaxWidth(Double.MAX_VALUE);

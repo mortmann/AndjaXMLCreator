@@ -6,6 +6,7 @@ import org.simpleframework.xml.*;
 import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.util.Tabable;
+import com.mortmann.andja.creator.util.enumconvertes.ItemTypeConverter;
 
 
 @Root(name="Item",strict=false)
@@ -16,7 +17,7 @@ public class ItemXML extends Item implements Tabable {
 //	@Element public String DE_Name;
 
 	@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
-	@Element(required=false)@Convert(EnumConverter.class) public ItemType Type;
+	@Element(required=false)@Convert(ItemTypeConverter.class) public ItemType Type;
 	@Element public int Decays;
 	
 	@Override
@@ -29,5 +30,4 @@ public class ItemXML extends Item implements Tabable {
 	}
 	public ItemXML() {
 	}
-
 }
