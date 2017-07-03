@@ -93,7 +93,12 @@ public class NumberTextField extends TextField {
 		if(this.getText()==null||this.getText()==""||this.getText().isEmpty()){
 			return 0;
 		}
-		return Integer.parseInt(this.getText());
+		try {
+			return Integer.parseInt(this.getText());
+		} catch (Exception e) {
+			setText(0+"");
+			return 0;
+		}
 	}
 	
 	public float GetFloatValue(){

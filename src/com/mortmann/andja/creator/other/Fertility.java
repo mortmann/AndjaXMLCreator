@@ -7,20 +7,24 @@ import org.simpleframework.xml.*;
 import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.GUI.Language;
+import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
-import com.mortmann.andja.creator.util.enumconvertes.ClimateArrayListConverter;
+import com.mortmann.andja.creator.util.convertes.ClimateArrayListConverter;
 
 @Root(name="Fertility",strict=false)
-public class Fertility implements Tabable,Comparable<Fertility> {
+public class Fertility implements Tabable, Comparable<Fertility> {
 	public enum Climate {Cold,Middle,Warm};
 	@Attribute
+	@FieldInfo(order=0,required=true)
 	public int ID;
 	
-	@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
+	@FieldInfo(required=true)@ElementMap(key = "lang",attribute=true,required=false) 
+	public HashMap<String,String> Name;
 	//YOU Cannot create array of generic enum type 
 	//so to make my tab more generic changed to arraylist
 	//makes no difference for xml anyway
-	@Element(required=false)@Convert(ClimateArrayListConverter.class)public ArrayList<Climate> climates;
+	@FieldInfo(required=true)@Element(required=false)@Convert(ClimateArrayListConverter.class)
+	public ArrayList<Climate> climates;
 	
 	@Override
 	public int compareTo(Fertility arg0) {
@@ -29,5 +33,9 @@ public class Fertility implements Tabable,Comparable<Fertility> {
 	@Override
 	public String toString() {
 		return Name.get(Language.English.toString());
+	}
+	@Override
+	public int GetID() {
+		return ID;
 	}
 }

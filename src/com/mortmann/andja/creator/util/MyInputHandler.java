@@ -54,7 +54,7 @@ public class MyInputHandler implements EventHandler<Event> {
 		System.out.println("REVERSE");
 		Event last = events.getLast();
 		if(last instanceof KeyEvent){
-			KeyEvent k = (KeyEvent) last;
+//			KeyEvent k = (KeyEvent) last;
 			EventTarget t = last.getTarget();
 			if(t instanceof TextField){
 				TextField tf = (TextField) t;

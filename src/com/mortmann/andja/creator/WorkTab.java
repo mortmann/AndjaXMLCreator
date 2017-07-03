@@ -7,14 +7,17 @@ import java.util.EnumSet;
 import java.util.HashMap;
 
 import com.mortmann.andja.creator.GUI.Language;
+import com.mortmann.andja.creator.other.Fertility;
+import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.Item.ItemType;
-import com.mortmann.andja.creator.other.Fertility.Climate;
+import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.structures.Growable;
-import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.structures.Structure.BuildTypes;
 import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
 import com.mortmann.andja.creator.structures.Structure.Direction;
+import com.mortmann.andja.creator.unitthings.ArmorType;
+import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.NumberTextField;
 import com.mortmann.andja.creator.util.OrderEr;
@@ -23,7 +26,9 @@ import com.mortmann.andja.creator.util.Tabable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -85,12 +90,12 @@ public class WorkTab {
         scrollPaneContent.setContent(mainGrid);
         scrollPaneContent.setMaxHeight(Double.MAX_VALUE);
         scrollPaneContent.setMaxWidth(Double.MAX_VALUE);
-        
         ClassAction(t);
 	}
 	
 	private TitledPane wrapPaneInTitledPane(String Name,Pane pane){
         TitledPane btp = new TitledPane(Name,pane);
+       
         btp.setExpanded(true);
         btp.setCollapsible(false);
         btp.setMaxHeight(Double.MAX_VALUE);
@@ -103,48 +108,74 @@ public class WorkTab {
 		obj = t;
 		Arrays.sort(fld,new OrderEr());
         for (int i = 0; i < fld.length; i++) {
-        	
-            if(fld[i].getType() == Boolean.TYPE){
+            FieldInfo info = fld[i].getAnnotation(FieldInfo.class);
+        	Class compare = fld[i].getType();
+            if(info!=null&&info.type().equals(void.class)==false){
+        		compare = info.type();
+        	}
+            if(compare == Boolean.TYPE){
             	booleanGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
-            else if(fld[i].getType() == Float.TYPE) {
+            else if(compare == Float.TYPE) {
             	floatGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
-            else if(fld[i].getType() == Integer.TYPE) {
+            else if(compare == Integer.TYPE) {
             	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
-            else if(fld[i].getType() ==  String.class) {
+            else if(compare ==  String.class) {
             	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
-            else if(fld[i].getType() ==  BuildTypes.class) {
+            else if(compare ==  BuildTypes.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildTypes.class), 0, i);
             }
-            else if(fld[i].getType() == BuildingTyp.class) {
+            else if(compare == BuildingTyp.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildingTyp.class), 0, i);
             }
-            else if(fld[i].getType() == Direction.class) {
+            else if(compare == Direction.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,Direction.class), 0, i);
             }
-            else if(fld[i].getType() == Climate.class) {
+            else if(compare == Climate.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
             }
-            else if(fld[i].getType() == ItemType.class) {
+            else if(compare == ItemType.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
             }
-            else if(fld[i].getType() == ArrayList.class) { // we´re gonna take it as list of climate if not check here what type
+            else if(compare == ArrayList.class) { // we´re gonna take it as list of climate if not check here what type
             	enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
             }
-            else if(fld[i].getType() == Item[].class) {
+            else if(compare == Item[].class) {
             	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
-            else if(fld[i].getType() == HashMap.class) { // we´re gonna take every HashMap as list of strings
-            	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
+            else if(compare == HashMap.class) { 
+            	HashMap<String,String> stringToString = new HashMap<>();
+            	if(compare == stringToString.getClass()){
+                	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
+                	continue;
+            	} 
+            	//his is from armortype class
+            	if(fld[i].getName() == "damageMultiplier"){
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
+            		continue;
+            	} 
+//            	if(fld[i].getName() == "damageToFLoat"){
+//            		otherGrid.add(CreateClassToIntSetter(fld[i].getName(),fld[i],obj,DamageType.class), 0, i);
+//            		continue;
+//            	} 
             }
-            else if(fld[i].getType() == Growable.class) { 
-            	otherGrid.add(CreateStructureSetter(fld[i].getName(),fld[i],obj,Growable.class), 0, i);
+            else if(compare == Fertility.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Fertility.class,GUI.Instance.idToFertility), 0, i);
+            }
+            else if(compare == Growable.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Growable.class,GUI.Instance.idToStructures), 0, i);
+            }
+            else if(compare == DamageType.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,DamageType.class,GUI.Instance.idToDamageType), 0, i);
+            }
+            else if(compare == ArmorType.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,ArmorType.class,GUI.Instance.idToArmorType), 0, i);
             }
             else {
-                System.out.println("Variable Name is : " + fld[i].getName() +" : " + fld[i].getType() );
+                System.out.println("Variable Name is : " + fld[i].getName() +" : " + compare );
 
             }
         }         
@@ -152,6 +183,79 @@ public class WorkTab {
         
 	}
 	
+	@SuppressWarnings("unchecked")
+	private<T extends Tabable> Node CreateClassToFloatSetter(String name, Field field, Tabable t, ObservableMap<Integer,T> hash) {
+		GridPane grid = new GridPane();
+		int row=0;
+		try {
+			HashMap<Integer, Float> h = (HashMap<Integer, Float>) field.get(t);
+			if(h == null){
+				h = new HashMap<>();
+			}
+			hash.addListener(new MapChangeListener<Integer, T>(){
+				@Override
+				public void onChanged(
+						javafx.collections.MapChangeListener.Change<? extends Integer, ? extends T> change) {
+					if(change.getValueAdded()==null){
+						return; // doin nothin for removed for now
+					}
+					int row = grid.getChildren().size()/2; // this is gonna be fixed in java 9
+					//but for now there is no good way to get row index
+					Tabable tab = change.getValueAdded();
+					grid.add(new Label(tab.toString()), 0, row);
+					NumberTextField ntf = new NumberTextField(true);
+					CheckIfRequired(ntf, field);
+					ntf.textProperty().addListener(new ChangeListener<String>() {
+						@Override
+						public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+							try {
+								HashMap<Integer, Float> ha = (HashMap<Integer, Float>) field.get(t);
+								if(ha == null){
+									ha = new HashMap<>();
+								}
+								ha.put(tab.GetID(), ntf.GetFloatValue());
+								field.set(t,ha);	
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+					row++;
+				}
+				
+			});
+			for (Tabable tab : hash.values()) {
+				grid.add(new Label(tab.toString()), 0, row);
+				NumberTextField ntf = new NumberTextField(true);
+				try {
+					if(h.containsKey(tab.GetID()))
+					ntf.setText((Float) h.get(tab.GetID())+"");
+				} catch (Exception e1) {
+				} 
+				ntf.textProperty().addListener(new ChangeListener<String>() {
+					@Override
+					public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+						try {
+							HashMap<Integer, Float> ha = (HashMap<Integer, Float>) field.get(t);
+							if(ha == null){
+								ha = new HashMap<>();
+							}
+							ha.put(tab.GetID(), ntf.GetFloatValue());
+							field.set(t,ha);	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				row++;
+			}
+		} catch (IllegalArgumentException | IllegalAccessException e2) {
+			e2.printStackTrace();
+		}
+		
+		return grid;
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private<E extends Enum<E>> Node CreateEnumArraySetter(String name, Field field, Tabable tab, Class<E> class1) {
 		ObservableList<Enum> names = FXCollections.observableArrayList();
@@ -174,27 +278,38 @@ public class WorkTab {
         listcol3.setMinWidth(15);
         listpane.getColumnConstraints().addAll(listcol1,listcol2,listcol3);
         ArrayList<E> oldArray = null;
-		
+		ComboBox<Enum> box = new ComboBox<Enum>(names);
+
 		try {
 			oldArray =(ArrayList<E>) field.get(tab);
-			System.out.println(oldArray.size());
 		} catch (Exception e1) {
 		}
 		if(oldArray ==null){
 			oldArray = new ArrayList<E>();
 		} else {
 			for(int i = 0; i<oldArray.size();i++){
-				OnEnumSelect(listpane,field,tab,oldArray.get(i),true);
+				OnEnumSelect(box,listpane,field,tab,oldArray.get(i),true);
 			}
 		}
-		
-		ComboBox<Enum> box = new ComboBox<Enum>(names);
+		if(field.getAnnotation(FieldInfo.class)!=null){
+			if(field.getAnnotation(FieldInfo.class).required()){
+			    ObservableList<String> styleClass = box.getStyleClass();
+			    
+			    styleClass.add("combobox-error");
+				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
+		        	if(styleClass.contains("combobox-error")) {
+		        		styleClass.remove("combobox-error");
+	    	    	}
+				});
+
+			}
+		}
 		grid.add(new Label(name), 0, oldArray.size()+1);	
 		grid.add(box, 1, oldArray.size()+1);	
 		ScrollPane sp = new ScrollPane();
 		// Action on selection
 		box.setOnAction(x -> {
-			OnEnumSelect(listpane,field,tab,box.getSelectionModel().getSelectedItem(),false);
+			OnEnumSelect(box,listpane,field,tab,box.getSelectionModel().getSelectedItem(),false);
 		});
 	    sp.setStyle("-fx-background-color:transparent;");
 		sp.setContent(listpane);
@@ -206,8 +321,8 @@ public class WorkTab {
 
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	private<E extends Enum<E>> void OnEnumSelect(GridPane listpane, Field field, Tabable tab, E e, boolean setup) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private<E extends Enum<E>> void OnEnumSelect(ComboBox box,GridPane listpane, Field field, Tabable tab, E e, boolean setup) {
         ArrayList<E> old = null;
 		try {
 			old = (ArrayList<E>) field.get(tab); 
@@ -216,7 +331,6 @@ public class WorkTab {
 //			System.out.println(e1);
 		}
 		if(old != null && old.contains(e) && setup== false){
-			
 			return;
 		}
 		if(old == null){
@@ -255,10 +369,13 @@ public class WorkTab {
 						listpane.add(children.get(i), 0, i);
 						listpane.add(children.get(i+1), 1, i);
 					}
-					System.out.println("set");
+					if(list.size()==0){
+						if(box.getStyle().contains("combobox-error")==false){
+							box.getStyleClass().add("combobox-error");
+						}
+					}
 					field.set(tab, list);
 				} catch (Exception e1) {
-					System.out.println(e1);
 				}
 			});
 
@@ -269,15 +386,57 @@ public class WorkTab {
 		listpane.add(b, 2, old.size());
 	}
 
-	@SuppressWarnings("rawtypes")
-	private Node CreateStructureSetter(String name, Field field, Tabable m, Class str) {
+	@SuppressWarnings({ "rawtypes" })
+	private<T extends Tabable> Node CreateTabableSetter(String name, Field field, Tabable m, Class str, ObservableMap<Integer, T> obsMapTabable) {
 		GridPane grid = new  GridPane();
-		ObservableList<Structure> strs = FXCollections.observableArrayList(GUI.Instance.getStructureList());
-		strs.removeIf(x->x.getClass().equals(str.getClass()));
-		ComboBox<Structure> box = new ComboBox<Structure>(strs);
+		ObservableList<Tabable> strs = FXCollections.observableArrayList(obsMapTabable.values());
+		obsMapTabable.addListener(new MapChangeListener<Integer, T>(){
+
+			@Override
+			public void onChanged(javafx.collections.MapChangeListener.Change<? extends Integer, ? extends T> change) {
+				if(change.getValueAdded()!=null)
+					strs.add(change.getValueAdded());
+				if(change.getValueRemoved()!=null)
+					strs.remove(change.getValueRemoved());
+			}
+			
+		});
+		strs.removeIf(x->x.getClass().equals(str)==false);
+		ComboBox<Tabable> box = new ComboBox<Tabable>(strs);
+		
+		if(field.getAnnotation(FieldInfo.class)!=null){
+			if(field.getAnnotation(FieldInfo.class).required()){
+			    ObservableList<String> styleClass = box.getStyleClass();
+			    
+			    styleClass.add("combobox-error");
+				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
+					Tabable i = null;
+					try {
+						i =  (Tabable) field.get(m);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(i==null){
+			    	    if(!styleClass.contains("combobox-error")) {
+			    	        styleClass.add("combobox-error");
+			    	    }
+			        } else {
+			        	if(styleClass.contains("combobox-error")) {
+			    	        styleClass.remove("combobox-error");
+			    	    }
+			        }
+				});
+
+			}
+		}
 		box.setMaxWidth(Double.MAX_VALUE);
 		grid.add(new Label(name), 0, 0);	
-		grid.add(box, 1, 0);	
+		grid.add(box, 1, 0);
+		Button b =new Button("X");
+		b.setOnAction(x->{
+			box.getSelectionModel().clearSelection();
+		});
+		grid.add(b, 2, 0);	
 		ColumnConstraints col1 = new ColumnConstraints();
         col1.setMinWidth(75);
         ColumnConstraints col2 = new ColumnConstraints();
@@ -286,14 +445,17 @@ public class WorkTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		try {
 			if(field.get(m)!=null){
-				box.getSelectionModel().select((Structure) field.get(m));
+				box.getSelectionModel().select(obsMapTabable.get(field.get(m)));
 			}
 		} catch (Exception e1) {
 		} 
 		
 		box.setOnAction(x-> {
 				try {
-					field.set(m, box.getValue());
+					if(box.getValue()==null){
+						return;
+					}
+					field.set(m, box.getValue().GetID());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -362,6 +524,18 @@ public class WorkTab {
 	private Node CreateItemArraySetter(String name, Field field, Tabable m) {
 		ObservableList<Item> its = FXCollections.observableArrayList();
 		its.addAll(GUI.Instance.getItems());
+		GUI.Instance.idToItem.addListener(new MapChangeListener<Integer,ItemXML>(){
+			@Override
+			public void onChanged(
+					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends ItemXML> change) {
+				if(change.getValueAdded()==null){
+					return;
+				}
+				Item i = new Item(change.getValueAdded());
+				its.add(i);
+			}
+		});
+		
 		GridPane grid = new GridPane();
 		GridPane listpane = new  GridPane();
         ColumnConstraints gridcol1 = new ColumnConstraints();
@@ -392,6 +566,31 @@ public class WorkTab {
 		}
 		
 		ComboBox<Item> box = new ComboBox<Item>(its);
+		if(field.getAnnotation(FieldInfo.class)!=null){
+			if(field.getAnnotation(FieldInfo.class).required()){
+			    ObservableList<String> styleClass = box.getStyleClass();
+			    
+			    styleClass.add("combobox-error");
+				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
+					Item[] i = null;
+					try {
+						i = (Item[]) field.get(m);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(i==null||i.length==0){
+			    	    if(!styleClass.contains("combobox-error")) {
+			    	        styleClass.add("combobox-error");
+			    	    }
+			        } else {
+			        	if(styleClass.contains("combobox-error")) {
+			    	        styleClass.remove("combobox-error");
+			    	    }
+			        }
+				});
+
+			}
+		}
 		grid.add(new Label(name), 0, oldArray.length+1);	
 		grid.add(box, 1, oldArray.length+1);	
 		ScrollPane sp = new ScrollPane();
@@ -689,7 +888,6 @@ public class WorkTab {
 	    
 	    styleClass.add("text-field-error");
 		text.textProperty().addListener((arg0, oldValue, newValue) -> {		
-			System.out.println(text.getText());
 			
 			if(text.getText().isEmpty()){
 	    	    if(!styleClass.contains("text-field-error")) {
@@ -697,7 +895,7 @@ public class WorkTab {
 	    	    }
 	        } else
 			if(text instanceof NumberTextField){
-				if(((NumberTextField) text).GetIntValue()>0){
+				if(((NumberTextField) text).GetIntValue()>=0){
 					if(styleClass.contains("text-field-error")) {
 		    	        styleClass.remove("text-field-error");
 		    	    }
@@ -719,7 +917,7 @@ public class WorkTab {
 		this.scrollPaneContent = scrollPaneContent;
 	}
 
-	public Object getObject() {
+	public Tabable getTabable() {
 		return obj;
 	}
 

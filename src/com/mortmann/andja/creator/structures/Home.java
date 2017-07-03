@@ -2,11 +2,12 @@ package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.Element;
 
+import com.mortmann.andja.creator.util.FieldInfo;
+
 public class Home extends Structure {
-	@Element public int maxLivingSpaces;
-	@Element public float increaseSpeed;
-	@Element public float decreaseSpeed;
-	
+	@FieldInfo(required=true) @Element public int maxLivingSpaces;
+	@FieldInfo(required=true) @Element public float increaseSpeed;
+	@FieldInfo(required=true) @Element public float decreaseSpeed;
 	public Home(){
 		tileWidth = 2;
 		tileHeight = 2;
@@ -16,5 +17,9 @@ public class Home extends Structure {
 		hasHitbox = true;
 		canTakeDamage = true;
 		maintenancecost = 0;
+	}
+	@Override
+	public int GetID() {
+		return ID;
 	}
 }

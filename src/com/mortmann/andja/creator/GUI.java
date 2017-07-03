@@ -4,51 +4,46 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.OverrunStyle;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
-
 import com.mortmann.andja.creator.other.*;
+import com.mortmann.andja.creator.saveclasses.CombatTypes;
+import com.mortmann.andja.creator.saveclasses.Fertilities;
+import com.mortmann.andja.creator.saveclasses.Items;
+import com.mortmann.andja.creator.saveclasses.Structures;
+import com.mortmann.andja.creator.saveclasses.Units;
 import com.mortmann.andja.creator.structures.*;
+import com.mortmann.andja.creator.unitthings.ArmorType;
+import com.mortmann.andja.creator.unitthings.DamageType;
+import com.mortmann.andja.creator.unitthings.Ship;
+import com.mortmann.andja.creator.unitthings.Unit;
+import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.MyInputHandler;
-import com.mortmann.andja.creator.util.NotClosableTab;
 import com.mortmann.andja.creator.util.Tabable;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.EventType;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 
 public class GUI {
 	public enum Language {English, German}
@@ -61,23 +56,79 @@ public class GUI {
 
 	Tab emptyTab;
 	
-	HashMap<Integer,Structure> idToStructures;
-	HashMap<Integer,Fertility> idToFertility;
-	public HashMap<Integer,ItemXML> idToItem;
+	ObservableMap<Integer,Structure> idToStructures;
+	ObservableMap<Integer,Fertility> idToFertility;
+	public ObservableMap<Integer,ItemXML> idToItem;
+	public ObservableMap<Integer,DamageType> idToDamageType;
+	public ObservableMap<Integer,ArmorType> idToArmorType;
+	public ObservableMap<Integer,Unit> idToUnit;
 
-	HashMap<Tab,Object> tabToObject;
+	
+	HashMap<Tab,Tabable> tabToTabable;
+	
+	@SuppressWarnings("rawtypes")
+	HashMap<Class,DataTab> classToDataTab;
+	
 	
 	public void start(Stage primaryStage) {
         Instance = this;
         primaryStage.addEventHandler(EventType.ROOT,new MyInputHandler());
-        tabToObject = new HashMap<>();
         scene = new Scene(new VBox(),1600,900);
         scene.getStylesheets().add("bootstrap3.css");
-        
 		mainWindow = primaryStage;
 		mainLayout = new BorderPane();
 		SetUpMenuBar();
-        Serializer serializer = new Persister(new AnnotationStrategy());
+
+        tabToTabable = new HashMap<>();
+
+        idToStructures = FXCollections.observableHashMap();
+        idToArmorType = FXCollections.observableHashMap();
+        idToDamageType = FXCollections.observableHashMap();
+        idToUnit = FXCollections.observableHashMap();
+        idToFertility = FXCollections.observableHashMap();
+        idToItem = FXCollections.observableHashMap();
+        
+        LoadData();
+        
+        classToDataTab = new HashMap<>();
+        dataTabs = new TabPane();
+        DataTab<Structure> d1 = new DataTab<>("Structures",idToStructures, dataTabs);
+        classToDataTab.put(Structures.class, d1);
+        DataTab<ItemXML> d2 = new DataTab<>("Items",idToItem, dataTabs);
+        classToDataTab.put(ItemXML.class, d2);
+        DataTab<Fertility> d3 = new DataTab<>("Fertilities",idToFertility, dataTabs);
+        classToDataTab.put(Fertility.class, d3);
+        DataTab<Unit> d4 = new DataTab<>("Unit",idToUnit, dataTabs);
+        classToDataTab.put(Unit.class, d4);
+        DataTab<DamageType> d5 = new DataTab<>("DamageType",idToDamageType, dataTabs);
+        classToDataTab.put(DamageType.class, d5);
+        DataTab<ArmorType> d6 = new DataTab<>("ArmorType",idToArmorType, dataTabs);
+        classToDataTab.put(ArmorType.class, d6);
+
+		workTabs = new TabPane();
+		workTabs.setMaxHeight(Double.MAX_VALUE);
+		AddTab(null,mainLayout);
+		
+        GridPane hb = new GridPane();
+        hb.add(dataTabs,0,0);
+        hb.add(workTabs,1,0);
+        ColumnConstraints col1 = new ColumnConstraints();
+        int percentage = 28;
+        col1.setPercentWidth(percentage);
+        col1.setHgrow(Priority.ALWAYS);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(100-percentage);
+        col2.setHgrow(Priority.ALWAYS);
+        hb.getColumnConstraints().addAll(col1,col2);
+
+        mainWindow.setScene(scene);
+		mainWindow.show();
+		((VBox) scene.getRoot()).getChildren().addAll(hb);
+		VBox.setVgrow(workTabs, Priority.ALWAYS);
+	}
+
+	private void LoadData(){
+		Serializer serializer = new Persister(new AnnotationStrategy());
         Structures s = new Structures();
 		try {
 			serializer.read(s, new File("structures.xml"));
@@ -85,12 +136,9 @@ public class GUI {
 				idToStructures.put(i.ID, i);
 			}
 		} catch (Exception e1) {
-			//e1.printStackTrace();
-			idToStructures = new HashMap<>();
-		}
-        
-        idToFertility = new HashMap<>();
-        idToItem = new HashMap<>();
+			e1.printStackTrace();
+			idToStructures = FXCollections.observableHashMap();
+		}        
         try {
 			Items e = serializer.read(Items.class, new File("items.xml"));
 			for (ItemXML i : e.items) {
@@ -99,6 +147,27 @@ public class GUI {
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+        try {
+			Units e = serializer.read(Units.class, new File("units.xml"));
+			for (Unit u : e.units) {
+				idToUnit.put(u.ID, u);
+			}
+//			serializer.write(e,new File( "items.xml" ));
+		} catch (Exception e) {
+//			e.printStackTrace();
+		}
+        try {
+			CombatTypes e = serializer.read(CombatTypes.class, new File("combat.xml"));
+			for (DamageType u : e.damageTypes) {
+				idToDamageType.put(u.ID, u);
+			}
+			for (ArmorType u : e.armorTypes) {
+				idToArmorType.put(u.ID, u);
+			}
+//			serializer.write(e,new File( "items.xml" ));
+		} catch (Exception e) {
+//			e.printStackTrace();
 		}
         try {
 			Fertilities e = serializer.read(Fertilities.class, new File("fertilities.xml"));
@@ -120,42 +189,12 @@ public class GUI {
 			}
         } catch (Exception e) {
 			e.printStackTrace();
-        	idToFertility = new HashMap<>();
+        	idToFertility = FXCollections.observableHashMap();
 		}
-        
-		mainWindow.setScene(scene);
-		mainWindow.show();
-        
-        dataTabs = new TabPane();
-        new DataTab("Structures",idToStructures, dataTabs);
-        new DataTab("Items",idToItem, dataTabs);
-        new DataTab("Fertilities",idToFertility, dataTabs);
-
-        
-        
-        
-		workTabs = new TabPane();
-		workTabs.setMaxHeight(Double.MAX_VALUE);
-		AddTab(null,mainLayout);
-		
-        GridPane hb = new GridPane();
-        hb.add(dataTabs,0,0);
-        hb.add(workTabs,1,0);
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(21);
-        col1.setHgrow(Priority.ALWAYS);
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(79);
-        col2.setHgrow(Priority.ALWAYS);
-        hb.getColumnConstraints().addAll(col1,col2);
-        
-		((VBox) scene.getRoot()).getChildren().addAll(hb);
-		VBox.setVgrow(workTabs, Priority.ALWAYS);
-	
-		
 	}
-
-	public void AddTab(Object c, Node content){
+	
+	
+	public void AddTab(Tabable c, Node content){
 		Tab t = new Tab("Empty");
 		if(c!=null){
 			t.setText("*"+c.getClass().getSimpleName());
@@ -163,9 +202,7 @@ public class GUI {
 			alert.setTitle("Warning!");
 			String s = "Any unsaved data will be lost!";
 			alert.setContentText(s);
-			alert.setOnCloseRequest(x->{
-				System.out.println("Close");
-			});
+			
 			t.setOnCloseRequest(x->{
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -177,11 +214,12 @@ public class GUI {
 			if(workTabs.getTabs().contains(emptyTab)){
 				workTabs.getTabs().remove(emptyTab);
 			}
-			tabToObject.put(t, c);
+			tabToTabable.put(t, c);
 		} else {
 			emptyTab = t;
 		}
 		workTabs.getTabs().add(t);
+		workTabs.getSelectionModel().select(t);
 		t.setContent(content);
 		t.setOnClosed(x->{
 			if(workTabs.getTabs().contains(emptyTab) == false){
@@ -225,6 +263,26 @@ public class GUI {
 		mine.setOnAction(x->{ClassAction(Mine.class);});
 		road.setOnAction(x->{ClassAction(Road.class);});
 
+        Menu mUnit = new Menu("New Unit-Things");
+        menuBar.getMenus().add(mUnit);
+        MenuItem unit = new MenuItem("Unit");
+		MenuItem armorType = new MenuItem("ArmorType");
+		MenuItem damageType = new MenuItem("DamageType");
+        MenuItem ship = new MenuItem("Ship");
+
+		armorType.setOnAction(x-> {
+        	ClassAction(ArmorType.class);
+        });
+		unit.setOnAction(x-> {
+        	ClassAction(Unit.class);
+        });
+		damageType.setOnAction(x-> {
+        	ClassAction(DamageType.class);
+        });
+		ship.setOnAction(x-> {
+        	ClassAction(Ship.class);
+        });
+		mUnit.getItems().addAll(unit,ship,damageType,armorType);
         Menu mOther = new Menu("New Other");
         menuBar.getMenus().add(mOther);
 		MenuItem item = new MenuItem("Item");
@@ -251,22 +309,50 @@ public class GUI {
 	private void ClassAction(@SuppressWarnings("rawtypes") Class c){
 		try {
 			WorkTab my = new WorkTab((Tabable) c.getConstructor().newInstance());
-			AddTab(my.getObject(),my.getScrollPaneContent());
+			AddTab(my.getTabable(),my.getScrollPaneContent());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 	}
 	public ArrayList<Item> getItems() {
-		return new ArrayList<Item>(idToItem.values());
+		ArrayList<Item> al = new ArrayList<>();
+		for (ItemXML i : idToItem.values()) {
+			al.add(new Item(i));
+		}
+		return al;
 	}
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
-		Object o = tabToObject.get(curr);
+		Tabable o = tabToTabable.get(curr);
+		
+		//check if its filled out all required
+		Field f = CheckForMissingFields(o);
+		if(f!=null){
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out!\n" + f.getName() +" is not filled out!");
+			a.show();
+			//its missing smth return error
+			return;
+		}
+		if(doesIDexistForTabable(o.GetID(),o)){
+			Alert a = new Alert(AlertType.CONFIRMATION);
+			a.setTitle("ID already exists!");
+			a.setContentText("Overwrite existing Data?");
+			Optional<ButtonType> result = a.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				//you want to overwrite data so dont do anything
+			} else {
+				//doesnt want to overwrite
+				return;
+			}
+		}
 		boolean saved=false;
 		if(o instanceof Structure){
 			if(((Structure)o).ID==-1){
 				return;
 			}
+			
 			idToStructures.put(((Structure)o).ID,((Structure)o));
 			saved = SaveStructures();
 			
@@ -285,10 +371,60 @@ public class GUI {
 			idToFertility.put(((Fertility)o).ID, ((Fertility)o));
 			saved = SaveFertilities();
 		}
+		else if(o instanceof Unit){
+			if(((Unit)o).ID==-1){
+				return;
+			}
+			idToUnit.put(((Unit)o).ID, ((Unit)o));
+			saved = SaveUnits();
+		}
+		else if(o instanceof DamageType){
+			if(((DamageType)o).ID==-1){
+				return;
+			}
+			idToDamageType.put(((DamageType)o).ID, ((DamageType)o));
+			saved = SaveCombat();
+		}
+		else if(o instanceof Unit){
+			if(((Unit)o).ID==-1){
+				return;
+			}
+			idToArmorType.put(((ArmorType)o).ID, ((ArmorType)o));
+			saved = SaveCombat();
+		}
 		if(saved){
 			curr.setText(curr.getText().replaceAll("\\*", ""));
 		}
 	}
+	
+
+	private Field CheckForMissingFields(Tabable t) {
+		Field[] fs = t.getClass().getFields();
+		for (Field field : fs) {
+			if(field.isAnnotationPresent(FieldInfo.class)==false){
+				continue;
+			}
+			FieldInfo fi = field.getAnnotation(FieldInfo.class);
+			if(fi.required()==false){
+				continue;
+			}
+			try {
+				Object o = field.get(t);
+				if(o == null){
+					return field;
+				}
+				if(field.getType()==Integer.class){
+					if((int)o==-1){
+						return field;
+					}
+				}
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 	public void changedCurrentTab() {
 		if(GetCurrentTab().getText().contains("*")){
 			return;
@@ -307,6 +443,7 @@ public class GUI {
         ArrayList<Structure> s = new ArrayList<>(idToStructures.values());
         Structures st = new Structures(s);
         try {
+        	BackUPFile("structures.xml");
 			serializer.write(st, new File("structures.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -323,6 +460,7 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Items it = new Items(idToItem.values());
         try {
+        	BackUPFile("items.xml");
 			serializer.write(it, new File("items.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -339,6 +477,7 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Fertilities ft = new Fertilities(idToFertility.values());
         try {
+        	BackUPFile("fertilities.xml");
 			serializer.write(ft, new File("fertilities.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -350,7 +489,86 @@ public class GUI {
 		}
 		return true;
 	}
-	public ArrayList<Structure> getStructureList() {
-		return new ArrayList<Structure>(idToStructures.values());
+	private boolean SaveCombat() {
+		Serializer serializer = new Persister(new AnnotationStrategy());
+        Units ft = new Units(idToUnit.values());
+        try {
+        	BackUPFile("units.xml");
+			serializer.write(ft, new File("units.xml"));
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out! " + e.getMessage());
+			e.printStackTrace();
+			a.show();
+			return false;
+		}
+		return true;
 	}
+
+	private boolean SaveUnits() {
+		Serializer serializer = new Persister(new AnnotationStrategy());
+        CombatTypes ft = new CombatTypes(idToArmorType.values(),idToDamageType.values());
+        try {
+        	BackUPFile("combat.xml");
+			serializer.write(ft, new File("combat.xml"));
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out! " + e.getMessage());
+			e.printStackTrace();
+			a.show();
+			return false;
+		}
+		return true;
+	}
+	@SuppressWarnings({ "rawtypes" })
+	public ArrayList<Tabable> getStructureList(Class class1) {
+		ArrayList<Tabable> list = new ArrayList<>();
+		list.addAll( idToStructures.values());
+		list.removeIf(x->x.getClass()!=class1);
+		return list;
+	}
+
+	public Collection<Tabable> getDamageTyps() {
+		return new ArrayList<Tabable>(idToDamageType.values());
+	}
+
+	public Collection<Tabable> getArmorTypes() {
+		return new ArrayList<Tabable>(idToArmorType.values());
+	}
+
+	private void BackUPFile(String name){
+		if(new File(name).exists()){
+    		if(new File("old_"+name).exists()){
+    			new File("old_"+name).delete();
+    		}
+    		new File(name).renameTo(new File("old_"+name));
+    	}
+	}
+	
+	public boolean doesIDexistForTabable(int id, Tabable tab){
+		if(Structure.class.isAssignableFrom(tab.getClass())){
+			return idToStructures.containsKey(id)&&idToStructures.get(id)!=tab;
+		}
+		if(tab.getClass()==ItemXML.class){
+			return idToItem.containsKey(id)&&idToItem.get(id)!=tab;
+		}
+		if(tab.getClass().isAssignableFrom(Unit.class)){
+			return idToUnit.containsKey(id)&&idToUnit.get(id)!=tab;
+		}
+		if(tab.getClass()==DamageType.class){
+			return idToDamageType.containsKey(id)&&idToDamageType.get(id)!=tab;
+		}
+		if(tab.getClass()==ArmorType.class){
+			return idToArmorType.containsKey(id)&&idToArmorType.get(id)!=tab;
+		}
+		if(tab.getClass()==Fertility.class){
+			return idToFertility.containsKey(id)&&idToFertility.get(id)!=tab;
+		}
+		System.out.println("CLASS doesnt have any map assigned!");
+		return false;
+	}
+	
+	
 }

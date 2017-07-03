@@ -1,0 +1,217 @@
+<structures>
+   <Roads/>
+   <Farms>
+      <structure ID="1">
+         <Name>
+            <entry string="English">farm</entry>
+            <entry string="German">farm</entry>
+         </Name>
+         <Description>
+            <entry string="English">ml</entry>
+            <entry string="German">lm</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">ml</entry>
+            <entry string="German">m</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>0</tileWidth>
+         <tileHeight>0</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <spriteBaseName>farmy</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>0</maxOutputStorage>
+         <growable>0</growable>
+      </structure>
+   </Farms>
+   <Growables>
+      <structure ID="0">
+         <Name>
+            <entry string="English">test</entry>
+            <entry string="German">test</entry>
+         </Name>
+         <Description>
+            <entry string="English">teste</entry>
+            <entry string="German">tesetes</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">jdsj</entry>
+            <entry string="German">kk</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>2</myBuildingTyp>
+         <spriteBaseName>bla</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <output length="2">
+            <Item class="com.mortmann.andja.creator.other.ItemXML" ID="1">
+               <count>1</count>
+               <Name>
+                  <entry lang="English">Wood</entry>
+                  <entry lang="German">Holz</entry>
+               </Name>
+               <Type>0</Type>
+               <Decays>-1</Decays>
+            </Item>
+            <Item class="com.mortmann.andja.creator.other.ItemXML" ID="1">
+               <count>1</count>
+               <Name>
+                  <entry lang="English">Wood</entry>
+                  <entry lang="German">Holz</entry>
+               </Name>
+               <Type>0</Type>
+               <Decays>-1</Decays>
+            </Item>
+         </output>
+         <growTime>5.0</growTime>
+         <fertility>-1</fertility>
+         <ageStages>2</ageStages>
+      </structure>
+      <structure ID="2">
+         <Name>
+            <entry string="English">jijij</entry>
+            <entry string="German">huhu</entry>
+         </Name>
+         <Description>
+            <entry string="English">drdr</entry>
+            <entry string="German">awaw</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">awaw</entry>
+            <entry string="German">cfcf</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>1</PopulationLevel>
+         <PopulationCount>1</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>2</myBuildingTyp>
+         <buildingItems length="1">
+            <Item ID="21">
+               <count>0</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>kokok</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <output length="1">
+            <Item ID="3">
+               <count>0</count>
+            </Item>
+         </output>
+         <growTime>5.0</growTime>
+         <fertility>6</fertility>
+         <ageStages>2</ageStages>
+      </structure>
+   </Growables>
+   <Markets/>
+   <Mines/>
+   <NeedsBuildings>
+      <structure ID="3">
+         <Name>
+            <entry string="English">wqe</entry>
+            <entry string="German">qwe</entry>
+         </Name>
+         <Description>
+            <entry string="English">wqe</entry>
+            <entry string="German">eq</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">ewqeqw</entry>
+            <entry string="German">weqew</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>0</tileWidth>
+         <tileHeight>0</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <spriteBaseName>KKPPKk</spriteBaseName>
+      </structure>
+   </NeedsBuildings>
+   <Productions/>
+   <Warehouses/>
+</structures>

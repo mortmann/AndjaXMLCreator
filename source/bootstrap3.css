@@ -424,6 +424,11 @@ VBox > .split-menu-button.last > .arrow-button {
     -fx-background-color: #FFF0F0;
     -fx-border-color: #DBB1B1;
 }
+.combobox-error {
+	-fx-color: #FFF0F0;
+    -fx-background-color: #FFF0F0;
+    -fx-border-color: #DBB1B1;
+}
 .text-field:focused, .text-area:focused {
 	-fx-border-color: #66afe9;
 	-fx-effect: dropshadow(gaussian, #66afe9, 10, 0, 0, 0);
@@ -495,7 +500,8 @@ VBox > .split-menu-button.last > .arrow-button {
 .scroll-bar {
 	-fx-background-color: #fafafa;
 	-fx-background-radius: 0;
-	-fx-block-increment: 50;
+	-fx-block-increment: 75;
+	-fx-unit-increment: 10 ;
 }
 
 .corner {

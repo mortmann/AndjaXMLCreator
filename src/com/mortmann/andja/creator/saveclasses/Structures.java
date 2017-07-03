@@ -1,4 +1,4 @@
-package com.mortmann.andja.creator.other;
+package com.mortmann.andja.creator.saveclasses;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

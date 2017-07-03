@@ -7,5 +7,8 @@ public class NeedsBuilding extends Structure {
 		BuildTyp = BuildTypes.Single;
 		myBuildingTyp =	BuildingTyp.Blocking;
 	}
-	
+	@Override
+	public int GetID() {
+		return ID;
+	}
 }

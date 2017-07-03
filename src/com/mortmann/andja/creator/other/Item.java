@@ -1,15 +1,18 @@
 package com.mortmann.andja.creator.other;
 
-import org.simpleframework.xml.*;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
 
 import com.mortmann.andja.creator.GUI;
+import com.mortmann.andja.creator.util.FieldInfo;
 
 public class Item implements Comparable<Item>{
+	@Attribute
+	@FieldInfo(order=0,required=true)
+	public int ID =-1;	
 	
 	public enum ItemType {Build,Intermediate,Luxury}
 
-	@Attribute
-	public int ID;
 	@Element(required=false)
 	public int count;
 	

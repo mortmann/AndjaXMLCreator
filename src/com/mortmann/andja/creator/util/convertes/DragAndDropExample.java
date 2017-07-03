@@ -1,4 +1,4 @@
-package com.mortmann.andja.creator.util.enumconvertes;
+package com.mortmann.andja.creator.util.convertes;
 //import java.io.File;
 //import java.io.FileInputStream;
 //import java.io.FileNotFoundException;

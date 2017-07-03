@@ -1,4 +1,4 @@
-package com.mortmann.andja.creator.util.enumconvertes;
+package com.mortmann.andja.creator.util.convertes;
 
 import org.simpleframework.xml.convert.Converter;
 import org.simpleframework.xml.stream.InputNode;

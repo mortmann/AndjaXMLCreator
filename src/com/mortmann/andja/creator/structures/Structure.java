@@ -5,7 +5,6 @@ import java.util.HashMap;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
-import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.convert.Convert;
@@ -14,38 +13,38 @@ import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.util.BuildingTypConverter;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
-import com.mortmann.andja.creator.util.enumconvertes.BuildTypesConverter;
-import com.mortmann.andja.creator.util.enumconvertes.DirectionConverter;
+import com.mortmann.andja.creator.util.convertes.BuildTypesConverter;
+import com.mortmann.andja.creator.util.convertes.DirectionConverter;
 
 @Root
-public abstract class Structure implements Comparable<Structure>, Tabable {
+public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public enum BuildTypes {Drag, Path, Single};
 	public enum BuildingTyp {Pathfinding, Blocking,Free};
 	public enum Direction {None, N, E, S, W};
 	
 	@Attribute
 	@FieldInfo(order=0,required=true)
-	public int ID =-1;
+	public int ID =-1;	
 	
-	@ElementMap(attribute=true) public HashMap<String,String> Name;
-	@ElementMap(attribute=true) public HashMap<String,String> Description;
-	@ElementMap(attribute=true) public HashMap<String,String> HoverOver;
-	@ElementList(required=false) public HashMap<String,String> Short;
+	@FieldInfo(order=0,required=true)@ElementMap(attribute=true) public HashMap<String,String> Name;
+	@FieldInfo(required=true)@ElementMap(attribute=true) public HashMap<String,String> Description;
+	@FieldInfo(required=true)@ElementMap(attribute=true) public HashMap<String,String> HoverOver;
+	@ElementMap(required=false) public HashMap<String,String> Short;
 	
 	
 	@Element(required=false) public boolean isWalkable;
 	@Element(required=false) public boolean hasHitbox;
 	@Element(required=false) public boolean isActive;
-	@Element public float MaxHealth;
+	@FieldInfo(required=true) @Element public float MaxHealth;
 
 	@Element(required=false) public int buildingRange = 0;
-	@Element public int PopulationLevel = 0;
-	@Element public int PopulationCount = 0;
+	@FieldInfo(required=true)@Element public int PopulationLevel = -1;
+	@FieldInfo(required=true)@Element public int PopulationCount = -1;
 
 	@Element(required=false) public int StructureLevel = 0;
 
-	@Element(required=false) public int tileWidth;
-	@Element(required=false) public int tileHeight;
+	@FieldInfo(required=true) @Element public int tileWidth;
+	@FieldInfo(required=true) @Element public int tileHeight;
 
 	@Element(required=false) public boolean canRotate = true;
 	@Element(required=false) public boolean canBeBuildOver = false;
@@ -79,5 +78,9 @@ public abstract class Structure implements Comparable<Structure>, Tabable {
 	@Override
 	public String toString() {
 		return ID+":"+(String) Name.values().toArray()[0];
+	}
+	@Override
+	public int GetID() {
+		return ID;
 	}
 }
