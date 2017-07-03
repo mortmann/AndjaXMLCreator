@@ -16,7 +16,7 @@ public class DamageType implements Tabable {
 	@FieldInfo(order=0,required=true)
 	public int ID =-1;	
 	
-	@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
+	@FieldInfo(order=0,required=true,subType=String.class) @ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
 //	@ElementMap(key = "types",attribute=true,required=false) public HashMap<Integer,Float> damageMultiplier;
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	@Override

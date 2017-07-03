@@ -9,4 +9,6 @@ public @interface FieldInfo {
     int order() default Integer.MAX_VALUE;
     @SuppressWarnings("rawtypes")
 	Class type() default void.class;
+    @SuppressWarnings("rawtypes")
+	Class subType() default void.class;
 }

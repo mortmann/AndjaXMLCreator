@@ -140,23 +140,43 @@ public class WorkTab {
             else if(compare == ItemType.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
             }
-            else if(compare == ArrayList.class) { // we´re gonna take it as list of climate if not check here what type
-            	enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
-            }
+            else if(compare == ArrayList.class) {
+            	if(fld[i].getAnnotation(FieldInfo.class)==null){
+            		System.out.println("[ERROR] This type "+ fld[i].getName() +" of field needs a fieldinfo-subtype declared!");
+            		continue;
+            	}
+            	FieldInfo fi = fld[i].getAnnotation(FieldInfo.class);
+            	if(fi.subType()==void.class){
+            		System.out.println("[ERROR] This type "+ fld[i].getName() +" of field needs a subtype declared!");
+            		continue;
+            	}
+            	if(fi.subType() == Climate.class){
+            		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
+            	}
+        	}
             else if(compare == Item[].class) {
             	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(compare == HashMap.class) { 
-            	HashMap<String,String> stringToString = new HashMap<>();
-            	if(compare == stringToString.getClass()){
-                	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
-                	continue;
-            	} 
+            	if(fld[i].getAnnotation(FieldInfo.class)==null){
+            		System.out.println("[ERROR] This type "+ fld[i].getName() +" of field needs a fieldinfo-subtype declared!");
+            		continue;
+            	}
+            	FieldInfo fi = fld[i].getAnnotation(FieldInfo.class);
+            	if(fi.subType()==void.class){
+            		System.out.println("[ERROR] This type "+ fld[i].getName() +" of field needs a subtype declared!");
+            		continue;
+            	}
             	//his is from armortype class
-            	if(fld[i].getName() == "damageMultiplier"){
+            	if(fi.subType()==DamageType.class){
             		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
             		continue;
             	} 
+            	if(fi.subType()==String.class){
+                	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
+                	continue;
+            	} 
+            	
 //            	if(fld[i].getName() == "damageToFLoat"){
 //            		otherGrid.add(CreateClassToIntSetter(fld[i].getName(),fld[i],obj,DamageType.class), 0, i);
 //            		continue;

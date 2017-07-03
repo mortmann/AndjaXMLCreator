@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.simpleframework.xml.*;
 import org.simpleframework.xml.convert.Convert;
 
+import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.convertes.ItemTypeConverter;
 
@@ -15,7 +16,9 @@ public class ItemXML extends Item implements Tabable {
 //	@Element public String EN_Name;
 //	@Element public String DE_Name;
 
-	@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
+	@FieldInfo(required=true,subType=String.class)
+	@ElementMap(key = "lang",attribute=true,required=false) 
+	public HashMap<String,String> Name;
 	@Element(required=false)@Convert(ItemTypeConverter.class) public ItemType Type;
 	@Element public int Decays;
 	

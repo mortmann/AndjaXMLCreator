@@ -15,10 +15,15 @@ public class ArmorType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true)
 	public int ID =-1;	
-	
-	@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
-	@FieldInfo(order = 0) @ElementMap(key = "types",attribute=true,required=false) public HashMap<Integer,Float> damageMultiplier;
-	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
+	@FieldInfo(required=true,subType=String.class)
+	@ElementMap(key = "lang",attribute=true,required=false)
+	public HashMap<String,String> Name;
+	@FieldInfo(order = 0,subType=ArmorType.class) 
+	@ElementMap(key = "types",attribute=true,required=false)
+	//Int is id of armortype
+	public HashMap<Integer,Float> damageMultiplier;
+	@FieldInfo(order=0,required=true) @Element(required=false)
+	public String spriteBaseName;
 	@Override
 	public int GetID() {
 		return ID;

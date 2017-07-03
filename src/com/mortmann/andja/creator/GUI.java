@@ -136,7 +136,7 @@ public class GUI {
 				idToStructures.put(i.ID, i);
 			}
 		} catch (Exception e1) {
-			e1.printStackTrace();
+//			e1.printStackTrace();
 			idToStructures = FXCollections.observableHashMap();
 		}        
         try {
@@ -204,6 +204,9 @@ public class GUI {
 			alert.setContentText(s);
 			
 			t.setOnCloseRequest(x->{
+				if(t.getText().contains("*")==false){
+					return;
+				}
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.isPresent() && result.get() == ButtonType.OK) {
 					
@@ -303,6 +306,8 @@ public class GUI {
 		SaveStructures();
 		SaveItems();
 		SaveFertilities();
+		SaveCombat();
+		SaveUnits();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -385,7 +390,7 @@ public class GUI {
 			idToDamageType.put(((DamageType)o).ID, ((DamageType)o));
 			saved = SaveCombat();
 		}
-		else if(o instanceof Unit){
+		else if(o instanceof ArmorType){
 			if(((Unit)o).ID==-1){
 				return;
 			}

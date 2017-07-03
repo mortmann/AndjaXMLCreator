@@ -18,12 +18,14 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	@FieldInfo(order=0,required=true)
 	public int ID;
 	
-	@FieldInfo(required=true)@ElementMap(key = "lang",attribute=true,required=false) 
+	@FieldInfo(required=true,subType=String.class)
+	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
 	//YOU Cannot create array of generic enum type 
 	//so to make my tab more generic changed to arraylist
 	//makes no difference for xml anyway
-	@FieldInfo(required=true)@Element(required=false)@Convert(ClimateArrayListConverter.class)
+	@FieldInfo(required=true,subType=Climate.class)@Element(required=false)
+	@Convert(ClimateArrayListConverter.class)
 	public ArrayList<Climate> climates;
 	
 	@Override

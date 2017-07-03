@@ -26,10 +26,10 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@FieldInfo(order=0,required=true)
 	public int ID =-1;	
 	
-	@FieldInfo(order=0,required=true)@ElementMap(attribute=true) public HashMap<String,String> Name;
-	@FieldInfo(required=true)@ElementMap(attribute=true) public HashMap<String,String> Description;
-	@FieldInfo(required=true)@ElementMap(attribute=true) public HashMap<String,String> HoverOver;
-	@ElementMap(required=false) public HashMap<String,String> Short;
+	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(attribute=true) public HashMap<String,String> Name;
+	@FieldInfo(required=true,subType=String.class)@ElementMap(attribute=true) public HashMap<String,String> Description;
+	@FieldInfo(required=true,subType=String.class)@ElementMap(attribute=true) public HashMap<String,String> HoverOver;
+	@FieldInfo(subType=String.class) @ElementMap(required=false) public HashMap<String,String> Short;
 	
 	
 	@Element(required=false) public boolean isWalkable;
