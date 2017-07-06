@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
-@Root
+@Root(strict=false)
 public class DamageType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true)

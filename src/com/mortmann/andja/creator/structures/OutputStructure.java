@@ -5,6 +5,7 @@ import org.simpleframework.xml.*;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.util.FieldInfo;
 
+@Root(strict=false)
 public abstract class OutputStructure extends Structure {
 	@Element public float contactRange=0;
 	@Element public boolean forMarketplace=true;

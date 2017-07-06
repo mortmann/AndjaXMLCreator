@@ -2,10 +2,12 @@ package com.mortmann.andja.creator.other;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.util.FieldInfo;
 
+@Root(strict=false)
 public class Item implements Comparable<Item>{
 	@Attribute
 	@FieldInfo(order=0,required=true)

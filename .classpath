@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="source"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/Klappdidi MK3/Desktop/AndjaXMLCreator/simple-xml-2.7.1.jar"/>
+	<classpathentry kind="lib" path="simple-xml-2.7.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

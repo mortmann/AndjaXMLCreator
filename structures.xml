@@ -1,21 +1,157 @@
 <structures>
-   <Roads/>
-   <Farms/>
-   <Growables/>
+   <Roads>
+      <structure ID="10">
+         <Name>
+            <entry string="English">Dirtroad</entry>
+            <entry string="German">Feldweg</entry>
+         </Name>
+         <Description>
+            <entry string="English">Simple road to connect Structures.</entry>
+            <entry string="German">Einfacher Weg um Gebäude mit einander zuverbinden.</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">Dirtroad</entry>
+            <entry string="German">Feldweg</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>true</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>15</buildcost>
+         <BuildTyp>1</BuildTyp>
+         <myBuildingTyp>0</myBuildingTyp>
+         <spriteBaseName>dirtroad</spriteBaseName>
+      </structure>
+   </Roads>
+   <Farms>
+      <structure ID="400">
+         <Name>
+            <entry string="English">Lumberjack Hut</entry>
+            <entry string="German">Holzfällerhütte</entry>
+         </Name>
+         <Description>
+            <entry string="English">Produces wood over time.</entry>
+            <entry string="German">Erzeugt Holz.</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">Lumberjack</entry>
+            <entry string="German">Holzfäller</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>3</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>2</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>25</maintenancecost>
+         <buildcost>250</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="1">
+            <Item ID="1">
+               <count>10</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>lumberjack</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>5</maxOutputStorage>
+         <output length="1">
+            <Item ID="1">
+               <count>1</count>
+            </Item>
+         </output>
+         <growable>101</growable>
+      </structure>
+   </Farms>
+   <Growables>
+      <structure ID="101">
+         <Name>
+            <entry string="English">Tree</entry>
+            <entry string="German">Baum</entry>
+         </Name>
+         <Description>
+            <entry string="English">Its a tree.</entry>
+            <entry string="German">Es ist ein Baum.</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">Tree</entry>
+            <entry string="German">Baum</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <isActive>false</isActive>
+         <MaxHealth>15.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>2</myBuildingTyp>
+         <buildingItems length="0"/>
+         <spriteBaseName>tree</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <output length="1">
+            <Item ID="1">
+               <count>0</count>
+            </Item>
+         </output>
+         <growTime>5.0</growTime>
+         <fertility>-1</fertility>
+         <ageStages>4</ageStages>
+      </structure>
+   </Growables>
    <Markets/>
    <Mines/>
    <NeedsBuildings/>
-   <Productions>
-      <structure ID="1">
-         <Name>
-            <entry string="English">Bla</entry>
-            <entry string="German">Bla</entry>
-         </Name>
-         <Description>
-            <entry string="English">TestName</entry>
-            <entry string="German">TestName</entry>
-         </Description>
-         <HoverOver>
-            <entry string="English">Test</entry>
-            <entry string="German">Test</entry>
-         </HoverOver>
+   <Productions/>
+   <Warehouses/>
+</structures>

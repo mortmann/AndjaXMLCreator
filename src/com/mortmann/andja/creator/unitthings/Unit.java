@@ -13,7 +13,7 @@ import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
-@Root
+@Root(strict=false)
 public class Unit implements Tabable {
 	
 	@Attribute

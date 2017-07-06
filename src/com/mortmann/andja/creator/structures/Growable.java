@@ -1,10 +1,12 @@
 package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Fertility;
 import com.mortmann.andja.creator.util.FieldInfo;
 
+@Root(strict=false)
 public class Growable extends OutputStructure {
 	@FieldInfo(required=true) @Element public float growTime = 5f;
 	@FieldInfo(order = 0,type=Fertility.class) @Element public int fertility=-1;

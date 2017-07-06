@@ -136,7 +136,7 @@ public class GUI {
 				idToStructures.put(i.ID, i);
 			}
 		} catch (Exception e1) {
-//			e1.printStackTrace();
+			e1.printStackTrace();
 			idToStructures = FXCollections.observableHashMap();
 		}        
         try {
@@ -448,7 +448,7 @@ public class GUI {
         ArrayList<Structure> s = new ArrayList<>(idToStructures.values());
         Structures st = new Structures(s);
         try {
-        	BackUPFile("structures.xml");
+        	BackUPFileTEMP("structures.xml");
 			serializer.write(st, new File("structures.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -458,6 +458,7 @@ public class GUI {
 			a.show();
 			return false;
 		}
+    	BackUPFile("structures.xml");
         return true;
         
 	}
@@ -465,7 +466,7 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Items it = new Items(idToItem.values());
         try {
-        	BackUPFile("items.xml");
+        	BackUPFileTEMP("items.xml");
 			serializer.write(it, new File("items.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -475,6 +476,7 @@ public class GUI {
 			a.show();
 			return false;
 		}
+        BackUPFile("items.xml");
 		return true;
 	}
 	
@@ -482,7 +484,7 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Fertilities ft = new Fertilities(idToFertility.values());
         try {
-        	BackUPFile("fertilities.xml");
+        	BackUPFileTEMP("fertilities.xml");
 			serializer.write(ft, new File("fertilities.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -492,13 +494,14 @@ public class GUI {
 			a.show();
 			return false;
 		}
-		return true;
+    	BackUPFile("fertilities.xml");
+        return true;
 	}
 	private boolean SaveCombat() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Units ft = new Units(idToUnit.values());
         try {
-        	BackUPFile("units.xml");
+        	BackUPFileTEMP("units.xml");
 			serializer.write(ft, new File("units.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -508,6 +511,7 @@ public class GUI {
 			a.show();
 			return false;
 		}
+        BackUPFile("units.xml");
 		return true;
 	}
 
@@ -515,7 +519,7 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         CombatTypes ft = new CombatTypes(idToArmorType.values(),idToDamageType.values());
         try {
-        	BackUPFile("combat.xml");
+        	BackUPFileTEMP("combat.xml");
 			serializer.write(ft, new File("combat.xml"));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -525,6 +529,7 @@ public class GUI {
 			a.show();
 			return false;
 		}
+        BackUPFile("combat.xml");
 		return true;
 	}
 	@SuppressWarnings({ "rawtypes" })
@@ -535,23 +540,22 @@ public class GUI {
 		return list;
 	}
 
-	public Collection<Tabable> getDamageTyps() {
-		return new ArrayList<Tabable>(idToDamageType.values());
-	}
-
-	public Collection<Tabable> getArmorTypes() {
-		return new ArrayList<Tabable>(idToArmorType.values());
-	}
-
 	private void BackUPFile(String name){
-		if(new File(name).exists()){
+		if(new File("temp_"+name).exists()){
     		if(new File("old_"+name).exists()){
     			new File("old_"+name).delete();
     		}
-    		new File(name).renameTo(new File("old_"+name));
+    		new File("temp_"+name).renameTo(new File("old_"+name));
     	}
 	}
-	
+	private void BackUPFileTEMP(String name){
+		if(new File(name).exists()){
+    		if(new File("temp_"+name).exists()){
+    			new File("temp_"+name).delete();
+    		}
+    		new File(name).renameTo(new File("temp_"+name));
+    	}
+	}
 	public boolean doesIDexistForTabable(int id, Tabable tab){
 		if(Structure.class.isAssignableFrom(tab.getClass())){
 			return idToStructures.containsKey(id)&&idToStructures.get(id)!=tab;

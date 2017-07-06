@@ -10,13 +10,13 @@ import org.simpleframework.xml.Root;
 import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.other.Item;
-import com.mortmann.andja.creator.util.BuildingTypConverter;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.convertes.BuildTypesConverter;
+import com.mortmann.andja.creator.util.convertes.BuildingTypConverter;
 import com.mortmann.andja.creator.util.convertes.DirectionConverter;
 
-@Root
+@Root(strict=false)
 public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public enum BuildTypes {Drag, Path, Single};
 	public enum BuildingTyp {Pathfinding, Blocking,Free};
@@ -34,7 +34,6 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	
 	@Element(required=false) public boolean isWalkable;
 	@Element(required=false) public boolean hasHitbox;
-	@Element(required=false) public boolean isActive;
 	@FieldInfo(required=true) @Element public float MaxHealth;
 
 	@Element(required=false) public int buildingRange = 0;

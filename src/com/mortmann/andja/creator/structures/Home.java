@@ -1,9 +1,11 @@
 package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.util.FieldInfo;
 
+@Root(strict=false)
 public class Home extends Structure {
 	@FieldInfo(required=true) @Element public int maxLivingSpaces;
 	@FieldInfo(required=true) @Element public float increaseSpeed;

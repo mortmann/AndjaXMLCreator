@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class MyInputHandler implements EventHandler<Event> {
 
@@ -45,6 +46,9 @@ public class MyInputHandler implements EventHandler<Event> {
 			if(((KeyEvent)event).getCode() == KeyCode.S&&((KeyEvent)event).isControlDown() || KeyEvent.KEY_PRESSED != ((KeyEvent)event).getEventType() ){
 				return;
 			}
+			GUI.Instance.changedCurrentTab();
+		}
+		if(event instanceof MouseEvent){
 			GUI.Instance.changedCurrentTab();
 		}
 		events.push(event);

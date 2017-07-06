@@ -1,6 +1,8 @@
 package com.mortmann.andja.creator;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import com.mortmann.andja.creator.util.NotClosableTab;
 import com.mortmann.andja.creator.util.Tabable;
 
@@ -71,7 +73,6 @@ public class DataTab<T extends Tabable> {
 	    v.getChildren().add(sp);
 		NotClosableTab nct = new NotClosableTab(name);
 		nct.setContent(v);
-
         tabs.getTabs().add(nct);
 	}
 	protected void AddButton(T valueAdded) {
@@ -88,11 +89,15 @@ public class DataTab<T extends Tabable> {
 //		b.setTextAlignment(TextAlignment.CENTER);
 		b.setTextOverrun(OverrunStyle.ELLIPSIS);
 		flow.getChildren().add(b);
+		
 	}
 	private void SetUPButtons(ObservableMap<Integer,T> map) {
-		for (T t : map.values()) {
-			AddButton(t);
+		ObservableList<Integer> l = FXCollections.observableArrayList(map.keySet());
+		FXCollections.sort(l);
+		for (Integer t : l) {
+			AddButton(map.get(t));
 		}
+		
 //		for (int i = 0; i < 200; i++) {
 //			String s = i+"-sadasdsdasda";
 //			Button b = new Button(s);

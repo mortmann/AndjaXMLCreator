@@ -5,6 +5,7 @@ import org.simpleframework.xml.*;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.util.FieldInfo;
 
+@Root(strict=false)
 public class Production extends OutputStructure {
 //	@ElementArray public int[] needIntake;
 //	@ElementArray public int[] maxIntake;
