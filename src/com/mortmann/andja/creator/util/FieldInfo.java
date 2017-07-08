@@ -11,4 +11,5 @@ public @interface FieldInfo {
 	Class type() default void.class;
     @SuppressWarnings("rawtypes")
 	Class subType() default void.class;
+    boolean id() default false;
 }

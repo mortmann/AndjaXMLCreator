@@ -15,7 +15,7 @@ import com.mortmann.andja.creator.util.convertes.ClimateArrayListConverter;
 public class Fertility implements Tabable, Comparable<Fertility> {
 	public enum Climate {Cold,Middle,Warm};
 	@Attribute
-	@FieldInfo(order=0,required=true)
+	@FieldInfo(order=0,required=true,id=true)
 	public int ID;
 	
 	@FieldInfo(required=true,subType=String.class)
@@ -39,5 +39,9 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	@Override
 	public int GetID() {
 		return ID;
+	}
+	@Override
+	public Tabable DependsOnTabable(Tabable t) {
+		return null;
 	}
 }

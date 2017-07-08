@@ -35,4 +35,8 @@ public class ItemXML extends Item implements Tabable {
 	}
 	public ItemXML() {
 	}
+	@Override
+	public Tabable DependsOnTabable(Tabable t) {
+		return null;
+	}
 }

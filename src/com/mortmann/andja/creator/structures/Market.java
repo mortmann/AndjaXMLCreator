@@ -15,5 +15,6 @@ public class Market extends OutputStructure {
 		myBuildingTyp = BuildingTyp.Blocking;
 		buildingRange = 18;
 		canTakeDamage = true;
+		canBeUpgraded=true;
 	}
 }

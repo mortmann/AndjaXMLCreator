@@ -10,6 +10,7 @@ import org.simpleframework.xml.Root;
 import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.other.Item;
+import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.convertes.BuildTypesConverter;
@@ -23,7 +24,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public enum Direction {None, N, E, S, W};
 	
 	@Attribute
-	@FieldInfo(order=0,required=true)
+	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(attribute=true) public HashMap<String,String> Name;
@@ -81,5 +82,19 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Override
 	public int GetID() {
 		return ID;
+	}
+	protected Tabable StructureDependsOnTabable(Tabable t) {
+		if(t.getClass()==ItemXML.class){
+			for (Item item : buildingItems) {
+				if(item.ID==t.GetID()){
+					return this;
+				}
+			}
+		}
+		return null;
+	}
+	@Override
+	public Tabable DependsOnTabable(Tabable t) {
+		return StructureDependsOnTabable(t);
 	}
 }

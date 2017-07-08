@@ -13,7 +13,7 @@ import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false)
 public class ArmorType implements Tabable {
 	@Attribute
-	@FieldInfo(order=0,required=true)
+	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false)
@@ -31,5 +31,9 @@ public class ArmorType implements Tabable {
 	@Override
 	public String toString() {
 		return Name.get(Language.English.toString());
+	}
+	@Override
+	public Tabable DependsOnTabable(Tabable t) {
+		return null;
 	}
 }

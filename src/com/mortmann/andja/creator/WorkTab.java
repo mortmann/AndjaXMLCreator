@@ -19,6 +19,7 @@ import com.mortmann.andja.creator.structures.Structure.Direction;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.MyInputHandler;
 import com.mortmann.andja.creator.util.NumberTextField;
 import com.mortmann.andja.creator.util.OrderEr;
 import com.mortmann.andja.creator.util.Tabable;
@@ -224,7 +225,7 @@ public class WorkTab {
 					Tabable tab = change.getValueAdded();
 					grid.add(new Label(tab.toString()), 0, row);
 					NumberTextField ntf = new NumberTextField(true);
-					CheckIfRequired(ntf, field);
+					CheckIfRequired(ntf, field, tab);
 					ntf.textProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -505,7 +506,7 @@ public class WorkTab {
 		for (int i = 0; i < langes.size(); i++) {
 			grid.add(new Label(langes.get(i).toString()), 0, i+1);
 			TextField t = new TextField();
-			CheckIfRequired(t, field);
+			CheckIfRequired(t, field, str);
 			int num = i;
 			
 			try {
@@ -647,7 +648,7 @@ public class WorkTab {
 		Label l = new Label(select.toString());
 		//Amount field
 		NumberTextField count = new NumberTextField(3);
-		CheckIfRequired(count, field);
+		CheckIfRequired(count, field, m);
 
 		count.setMaxWidth(35);
 		count.setText(select.count +"");
@@ -736,7 +737,7 @@ public class WorkTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		NumberTextField box = new NumberTextField(true);
-		CheckIfRequired(box, field);
+		CheckIfRequired(box, field, str);
 
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
@@ -770,7 +771,7 @@ public class WorkTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		NumberTextField box = new NumberTextField();
-		CheckIfRequired(box, field);
+		CheckIfRequired(box, field, str);
 
 		try {
 			if(field.get(str)!=null){
@@ -803,7 +804,7 @@ public class WorkTab {
         grid.getColumnConstraints().addAll(col1,col2);
 		
 		TextField box = new TextField();
-		CheckIfRequired(box, field);
+		CheckIfRequired(box, field, str);
 
 		try {
 			if(field.get(str)!=null){
@@ -899,7 +900,7 @@ public class WorkTab {
 	    return newA;
 	 */
 	
-	private void CheckIfRequired(TextField text,Field field){
+	private void CheckIfRequired(TextField text,Field field,Tabable t){
         FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info == null || info.required() == false){
         	return;
@@ -908,7 +909,22 @@ public class WorkTab {
 	    
 	    styleClass.add("text-field-error");
 		text.textProperty().addListener((arg0, oldValue, newValue) -> {		
-			
+			if(info.id()){
+				if(text instanceof NumberTextField){
+					Tabable exist = GUI.Instance.doesIDexistForTabable(((NumberTextField) text).GetIntValue(), t);
+					if(exist!=null && exist!=t){
+						if(!styleClass.contains("text-field-warning")) {
+			    	        styleClass.add("text-field-warning");
+			    	    }
+					} else {
+						if(styleClass.contains("text-field-warning")) {
+			    	        styleClass.remove("text-field-warning");
+			    	    }
+					}
+				} else {
+					System.out.println("Non integer ids are not supported atm!");
+				}
+			}
 			if(text.getText().isEmpty()){
 	    	    if(!styleClass.contains("text-field-error")) {
 	    	        styleClass.add("text-field-error");

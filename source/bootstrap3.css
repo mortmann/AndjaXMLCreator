@@ -424,6 +424,10 @@ VBox > .split-menu-button.last > .arrow-button {
     -fx-background-color: #FFF0F0;
     -fx-border-color: #DBB1B1;
 }
+.text-field-warning {
+    -fx-background-color: #ffeda8;
+    -fx-border-color: #ffe06d;
+}
 .combobox-error {
 	-fx-color: #FFF0F0;
     -fx-background-color: #FFF0F0;

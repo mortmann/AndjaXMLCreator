@@ -10,7 +10,7 @@ import com.mortmann.andja.creator.util.FieldInfo;
 @Root(strict=false)
 public class Item implements Comparable<Item>{
 	@Attribute
-	@FieldInfo(order=0,required=true)
+	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	
 	public enum ItemType {Build,Intermediate,Luxury}

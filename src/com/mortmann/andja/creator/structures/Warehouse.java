@@ -12,6 +12,7 @@ public class Warehouse extends Market {
 		showExtraUI = true;
 		hasHitbox = true;
 		canTakeDamage = true;
+		canBeUpgraded=true;
 		buildingRange = 18;
 	}
 	

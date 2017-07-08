@@ -22,6 +22,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
 
 import org.simpleframework.xml.Serializer;
@@ -340,11 +341,35 @@ public class GUI {
 			//its missing smth return error
 			return;
 		}
-		if(doesIDexistForTabable(o.GetID(),o)){
+		Tabable exist = doesIDexistForTabable(o.GetID(),o);
+		if(exist!=null && exist!=o){
 			Alert a = new Alert(AlertType.CONFIRMATION);
 			a.setTitle("ID already exists!");
-			a.setContentText("Overwrite existing Data?");
+			Tabable t = doesIDexistForTabable(o.GetID(),o);
+			HashSet<Tabable> allTabs = new HashSet<>();
+			allTabs.addAll(idToArmorType.values());
+			allTabs.addAll(idToDamageType.values());
+			allTabs.addAll(idToFertility.values());
+			allTabs.addAll(idToStructures.values());
+			allTabs.addAll(idToUnit.values());
+			allTabs.removeIf(x->x.DependsOnTabable(t)==null);
+			String depends = "Other Structures depends on it!\nRemove dependencies from ";
+			if(allTabs.size()==0){
+				depends="";
+			} else {
+				a.setAlertType(AlertType.ERROR);
+				for (Tabable st : allTabs) {
+					depends +=st.toString() + ", ";
+				}
+				depends=depends.substring(0, depends.length()-2);
+				depends+=".";
+			}
+			
+			a.setContentText("Overwrite existing Data?\n"+depends);
 			Optional<ButtonType> result = a.showAndWait();
+			if(a.getAlertType()==AlertType.ERROR){
+				return;
+			}
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				//you want to overwrite data so dont do anything
 			} else {
@@ -556,27 +581,27 @@ public class GUI {
     		new File(name).renameTo(new File("temp_"+name));
     	}
 	}
-	public boolean doesIDexistForTabable(int id, Tabable tab){
+	public Tabable doesIDexistForTabable(int id, Tabable tab){
 		if(Structure.class.isAssignableFrom(tab.getClass())){
-			return idToStructures.containsKey(id)&&idToStructures.get(id)!=tab;
+			return idToStructures.containsKey(id) ? idToStructures.get(id) : null;
 		}
 		if(tab.getClass()==ItemXML.class){
-			return idToItem.containsKey(id)&&idToItem.get(id)!=tab;
+			return idToItem.containsKey(id) ? idToItem.get(id) : null;
 		}
 		if(tab.getClass().isAssignableFrom(Unit.class)){
-			return idToUnit.containsKey(id)&&idToUnit.get(id)!=tab;
+			return idToUnit.containsKey(id) ? idToUnit.get(id) : null;
 		}
 		if(tab.getClass()==DamageType.class){
-			return idToDamageType.containsKey(id)&&idToDamageType.get(id)!=tab;
+			return idToDamageType.containsKey(id) ? idToDamageType.get(id) : null;
 		}
 		if(tab.getClass()==ArmorType.class){
-			return idToArmorType.containsKey(id)&&idToArmorType.get(id)!=tab;
+			return idToArmorType.containsKey(id) ? idToArmorType.get(id) : null;
 		}
 		if(tab.getClass()==Fertility.class){
-			return idToFertility.containsKey(id)&&idToFertility.get(id)!=tab;
+			return idToFertility.containsKey(id) ? idToFertility.get(id) : null;
 		}
 		System.out.println("CLASS doesnt have any map assigned!");
-		return false;
+		return null;
 	}
 	
 	

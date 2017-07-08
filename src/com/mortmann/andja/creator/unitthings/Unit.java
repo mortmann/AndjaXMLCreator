@@ -10,6 +10,7 @@ import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
+import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
@@ -17,7 +18,7 @@ import com.mortmann.andja.creator.util.Tabable;
 public class Unit implements Tabable {
 	
 	@Attribute
-	@FieldInfo(order=0,required=true)
+	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	
 	@FieldInfo(required=true) @Element public float MaxHealth;
@@ -50,5 +51,22 @@ public class Unit implements Tabable {
 	@Override
 	public String toString() {
 		return Name.get(Language.English.toString());
+	}
+	@Override
+	public Tabable DependsOnTabable(Tabable t) {
+		if(myArmorType==t.GetID()&&t.getClass()==ArmorType.class){
+			return this;
+		}
+		if(myDamageType==t.GetID()&&t.getClass()==DamageType.class){
+			return this;
+		}
+		if(t.getClass()==ItemXML.class){
+			for (Item item : buildingItems) {
+				if(item.ID==t.GetID()){
+					return this;
+				}
+			}
+		}
+		return null;
 	}
 }

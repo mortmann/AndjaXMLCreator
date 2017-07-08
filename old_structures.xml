@@ -1,6 +1,6 @@
 <structures>
    <Roads>
-      <structure ID="10">
+      <road ID="10">
          <Name>
             <entry string="English">Dirtroad</entry>
             <entry string="German">Feldweg</entry>
@@ -15,7 +15,6 @@
          </HoverOver>
          <isWalkable>false</isWalkable>
          <hasHitbox>false</hasHitbox>
-         <isActive>false</isActive>
          <MaxHealth>0.0</MaxHealth>
          <buildingRange>0</buildingRange>
          <PopulationLevel>0</PopulationLevel>
@@ -37,10 +36,10 @@
          <BuildTyp>1</BuildTyp>
          <myBuildingTyp>0</myBuildingTyp>
          <spriteBaseName>dirtroad</spriteBaseName>
-      </structure>
+      </road>
    </Roads>
    <Farms>
-      <structure ID="400">
+      <farm ID="400">
          <Name>
             <entry string="English">Lumberjack Hut</entry>
             <entry string="German">Holzfällerhütte</entry>
@@ -55,7 +54,6 @@
          </HoverOver>
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
-         <isActive>false</isActive>
          <MaxHealth>0.0</MaxHealth>
          <buildingRange>3</buildingRange>
          <PopulationLevel>0</PopulationLevel>
@@ -93,10 +91,10 @@
             </Item>
          </output>
          <growable>101</growable>
-      </structure>
+      </farm>
    </Farms>
    <Growables>
-      <structure ID="101">
+      <growable ID="101">
          <Name>
             <entry string="English">Tree</entry>
             <entry string="German">Baum</entry>
@@ -111,7 +109,6 @@
          </HoverOver>
          <isWalkable>false</isWalkable>
          <hasHitbox>false</hasHitbox>
-         <isActive>false</isActive>
          <MaxHealth>15.0</MaxHealth>
          <buildingRange>0</buildingRange>
          <PopulationLevel>0</PopulationLevel>
@@ -147,9 +144,136 @@
          <growTime>5.0</growTime>
          <fertility>-1</fertility>
          <ageStages>4</ageStages>
-      </structure>
+      </growable>
    </Growables>
-   <Markets/>
+   <Markets>
+      <market ID="1">
+         <Name>
+            <entry string="English">Market Building I</entry>
+            <entry string="German">Markthaus I</entry>
+         </Name>
+         <Description>
+            <entry string="English">Is required to expand your city and it will collect produced goods in its area, if they are connect with roads.</entry>
+            <entry string="German">Es ist benötigt um deine Stadt zu erweitern und um produzierte Produkte abzuholen, die in seiner reichweite sind und mit dem es Sraßen verbunden ist.</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">Market Building</entry>
+            <entry string="German">Markthaus </entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>18</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>1</StructureLevel>
+         <tileWidth>4</tileWidth>
+         <tileHeight>4</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>true</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>10</maintenancecost>
+         <buildcost>200</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="4">
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>smallmarketbuilding</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>0</maxOutputStorage>
+         <takeOverStartGoal>100.0</takeOverStartGoal>
+      </market>
+      <market class="com.mortmann.andja.creator.structures.Warehouse" ID="6">
+         <Name>
+            <entry string="English">Warehouse I</entry>
+            <entry string="German">Kontor I</entry>
+         </Name>
+         <Description>
+            <entry string="English">First structure of any City and it is used to trade with Ships.</entry>
+            <entry string="German">Das erste Gebäude einer Stadt und wird dazu genutzt mit Schiffen zu handeln.</entry>
+         </Description>
+         <HoverOver>
+            <entry string="English">Warehouse</entry>
+            <entry string="German">Kontor</entry>
+         </HoverOver>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>1000.0</MaxHealth>
+         <buildingRange>18</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>4</tileWidth>
+         <tileHeight>4</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>true</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>true</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>true</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>10</maintenancecost>
+         <buildcost>300</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="8">
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>warehouse</spriteBaseName>
+         <contactRange>6.3</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>0</maxOutputStorage>
+         <takeOverStartGoal>100.0</takeOverStartGoal>
+      </market>
+   </Markets>
    <Mines/>
    <NeedsBuildings/>
    <Productions/>
