@@ -8,52 +8,57 @@ import com.mortmann.andja.creator.structures.*;
 
 public class Structures {
 
-	public ArrayList<Road> Roads;
-	public ArrayList<Farm> Farms;
-	public ArrayList<Growable> Growables;
-	public ArrayList<Market> Markets;
-	public ArrayList<Mine> Mines;
-	public ArrayList<NeedsBuilding> NeedsBuildings;
-	public ArrayList<Production> Productions;
-	public ArrayList<Warehouse> Warehouses;
+	public ArrayList<Road> roads;
+	public ArrayList<Farm> farms;
+	public ArrayList<Growable> growables;
+	public ArrayList<Market> markets;
+	public ArrayList<Mine> mines;
+	public ArrayList<NeedsBuilding> needsbuildings;
+	public ArrayList<Production> productions;
+	public ArrayList<Warehouse> warehouses;
+	public ArrayList<Home> homes;
+
 	public Structures(){
 		
 	}
 	public Structures(Iterable<Structure> Structures){
-		Roads = new ArrayList<>();
-		Farms = new ArrayList<>();
-		Growables = new ArrayList<>();
-		Markets = new ArrayList<>();
-		Mines = new ArrayList<>();
-		NeedsBuildings = new ArrayList<>();
-		Productions = new ArrayList<>();
-		Warehouses = new ArrayList<>();
+		roads = new ArrayList<>();
+		farms = new ArrayList<>();
+		growables = new ArrayList<>();
+		markets = new ArrayList<>();
+		mines = new ArrayList<>();
+		needsbuildings = new ArrayList<>();
+		productions = new ArrayList<>();
+		warehouses = new ArrayList<>();
+		homes = new ArrayList<>();
 		for (Structure s : Structures) {
 			if(s instanceof Road){
-				Roads.add((Road)s);
+				roads.add((Road)s);
 			}
 			else if(s instanceof Farm){
-				Farms.add((Farm)s);
+				farms.add((Farm)s);
 			}
 			else if(s instanceof Growable){
-				Growables.add((Growable)s);
-			}
-			else if(s instanceof Market){
-				Markets.add((Market)s);			
+				growables.add((Growable)s);
 			}
 			else if(s instanceof Mine){
-				Mines.add((Mine)s);
+				mines.add((Mine)s);
 			}
 			else if(s instanceof NeedsBuilding){
-				NeedsBuildings.add((NeedsBuilding)s);
+				needsbuildings.add((NeedsBuilding)s);
 			}
 			else if(s instanceof Production){
-				Productions.add((Production)s);
+				productions.add((Production)s);
 			}
 			else if(s instanceof Warehouse){
-				Warehouses.add((Warehouse)s);
+				warehouses.add((Warehouse)s);
 			}
-			
+			else if(s instanceof Market){
+				markets.add((Market)s);			
+			}
+			else if(s instanceof Home){
+				homes.add((Home)s);			
+			}
 		}
 	}
 	

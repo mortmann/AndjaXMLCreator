@@ -32,6 +32,7 @@ import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.saveclasses.CombatTypes;
 import com.mortmann.andja.creator.saveclasses.Fertilities;
 import com.mortmann.andja.creator.saveclasses.Items;
+import com.mortmann.andja.creator.saveclasses.Needs;
 import com.mortmann.andja.creator.saveclasses.Structures;
 import com.mortmann.andja.creator.saveclasses.Units;
 import com.mortmann.andja.creator.structures.*;
@@ -63,6 +64,7 @@ public class GUI {
 	public ObservableMap<Integer,DamageType> idToDamageType;
 	public ObservableMap<Integer,ArmorType> idToArmorType;
 	public ObservableMap<Integer,Unit> idToUnit;
+	public ObservableMap<Integer,Need> idToNeed;
 
 	
 	HashMap<Tab,Tabable> tabToTabable;
@@ -74,6 +76,7 @@ public class GUI {
 	public void start(Stage primaryStage) {
         Instance = this;
         primaryStage.addEventHandler(EventType.ROOT,new MyInputHandler());
+        primaryStage.setTitle("Andja XML Creator Version 0.1 Unstable");
         scene = new Scene(new VBox(),1600,900);
         scene.getStylesheets().add("bootstrap3.css");
 		mainWindow = primaryStage;
@@ -88,7 +91,7 @@ public class GUI {
         idToUnit = FXCollections.observableHashMap();
         idToFertility = FXCollections.observableHashMap();
         idToItem = FXCollections.observableHashMap();
-        
+        idToNeed = FXCollections.observableHashMap();
         LoadData();
         
         classToDataTab = new HashMap<>();
@@ -105,7 +108,9 @@ public class GUI {
         classToDataTab.put(DamageType.class, d5);
         DataTab<ArmorType> d6 = new DataTab<>("ArmorType",idToArmorType, dataTabs);
         classToDataTab.put(ArmorType.class, d6);
-
+        DataTab<Need> d7 = new DataTab<>("Need",idToNeed, dataTabs);
+        classToDataTab.put(Need.class, d7);
+        
 		workTabs = new TabPane();
 		workTabs.setMaxHeight(Double.MAX_VALUE);
 		AddTab(null,mainLayout);
@@ -159,6 +164,14 @@ public class GUI {
 //			e.printStackTrace();
 		}
         try {
+			Needs e = serializer.read(Needs.class, new File("needs.xml"));
+			for (Need u : e.needs) {
+				idToNeed.put(u.ID, u);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        try {
 			CombatTypes e = serializer.read(CombatTypes.class, new File("combat.xml"));
 			for (DamageType u : e.damageTypes) {
 				idToDamageType.put(u.ID, u);
@@ -173,7 +186,6 @@ public class GUI {
         try {
 			Fertilities e = serializer.read(Fertilities.class, new File("fertilities.xml"));
 			for (Fertility i : e.fertilities) {
-//				items.add(new Item(i));
 				idToFertility.put(i.ID, i);
 //				i.Name = new HashMap<>();
 //				i.Name.put(Language.English.toString(), i.EN_Name);
@@ -291,13 +303,17 @@ public class GUI {
         menuBar.getMenus().add(mOther);
 		MenuItem item = new MenuItem("Item");
 		MenuItem fertility = new MenuItem("Fertility");
+		MenuItem need = new MenuItem("Need");
+		need.setOnAction(x-> {
+        	ClassAction(Need.class);
+        });
 		fertility.setOnAction(x-> {
         	ClassAction(Fertility.class);
         });
 		item.setOnAction(x-> {
         	ClassAction(ItemXML.class);
         });
-		mOther.getItems().addAll(item,fertility);
+		mOther.getItems().addAll(item,fertility,need);
 		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
 
 		
@@ -309,8 +325,11 @@ public class GUI {
 		SaveFertilities();
 		SaveCombat();
 		SaveUnits();
+		SaveNeeds();
 	}
 	
+
+
 	@SuppressWarnings("unchecked")
 	private void ClassAction(@SuppressWarnings("rawtypes") Class c){
 		try {
@@ -382,10 +401,8 @@ public class GUI {
 			if(((Structure)o).ID==-1){
 				return;
 			}
-			
 			idToStructures.put(((Structure)o).ID,((Structure)o));
 			saved = SaveStructures();
-			
 		}
 		else if(o instanceof Item){
 			if(((Item)o).ID==-1){
@@ -421,6 +438,13 @@ public class GUI {
 			}
 			idToArmorType.put(((ArmorType)o).ID, ((ArmorType)o));
 			saved = SaveCombat();
+		}
+		else if(o instanceof Need){
+			if(((Need)o).ID==-1){
+				return;
+			}
+			idToNeed.put(((Need)o).ID, ((Need)o));
+			saved = SaveNeeds();
 		}
 		if(saved){
 			curr.setText(curr.getText().replaceAll("\\*", ""));
@@ -522,7 +546,7 @@ public class GUI {
     	BackUPFile("fertilities.xml");
         return true;
 	}
-	private boolean SaveCombat() {
+	private boolean SaveUnits() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Units ft = new Units(idToUnit.values());
         try {
@@ -540,7 +564,7 @@ public class GUI {
 		return true;
 	}
 
-	private boolean SaveUnits() {
+	private boolean SaveCombat() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         CombatTypes ft = new CombatTypes(idToArmorType.values(),idToDamageType.values());
         try {
@@ -555,6 +579,23 @@ public class GUI {
 			return false;
 		}
         BackUPFile("combat.xml");
+		return true;
+	}
+	private boolean SaveNeeds() {
+		Serializer serializer = new Persister(new AnnotationStrategy());
+		Needs ft = new Needs(idToNeed.values());
+        try {
+        	BackUPFileTEMP("needs.xml");
+			serializer.write(ft, new File("needs.xml"));
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out! " + e.getMessage());
+			e.printStackTrace();
+			a.show();
+			return false;
+		}
+        BackUPFile("needs.xml");
 		return true;
 	}
 	@SuppressWarnings({ "rawtypes" })
@@ -599,6 +640,9 @@ public class GUI {
 		}
 		if(tab.getClass()==Fertility.class){
 			return idToFertility.containsKey(id) ? idToFertility.get(id) : null;
+		}
+		if(tab.getClass()==Need.class){
+			return idToFertility.containsKey(id) ? idToNeed.get(id) : null;
 		}
 		System.out.println("CLASS doesnt have any map assigned!");
 		return null;

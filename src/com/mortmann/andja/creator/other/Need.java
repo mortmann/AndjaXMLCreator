@@ -1,0 +1,76 @@
+package com.mortmann.andja.creator.other;
+
+import java.util.HashMap;
+
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementArray;
+import org.simpleframework.xml.ElementMap;
+import org.simpleframework.xml.Root;
+
+import com.mortmann.andja.creator.GUI.Language;
+import com.mortmann.andja.creator.structures.NeedsBuilding;
+import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Tabable;
+
+@Root(strict=false,name="Need")
+public class Need implements Tabable {
+	public enum People {Peasent,Citizen,Patrician,Nobleman}
+	
+	@Element(required=true)
+	public float Peasent=0;
+	@Element(required=true)
+	public float Citizen=0;
+	@Element(required=true)
+	public float Patrician=0;
+	@Element(required=true)
+	public float Nobleman=0;
+	
+	@Attribute
+	@FieldInfo(order=0,required=true,id=true)
+	public int ID;
+	
+	@FieldInfo(required=true,subType=String.class)
+	@ElementMap(key = "lang",attribute=true,required=false) 
+	public HashMap<String,String> Name;
+
+	@FieldInfo(required=false,type=Item.class)
+	@Element(required=false)
+	public int item;
+	@FieldInfo(required=false,type=NeedsBuilding.class)
+	@Element(required=false)
+	public int structure;
+	
+	 
+	@FieldInfo(required=true)
+	@Element(required=false)
+	public int startLevel;
+	@FieldInfo(required=true)
+	@Element(required=false)
+	public int popCount;
+	
+	
+	@Override
+	public int GetID() {
+		return ID;
+	}
+
+	@Override
+	public Tabable DependsOnTabable(Tabable t) {
+		if(t instanceof Item){
+			if(t.GetID() == ID){
+				return this;
+			}
+		}
+		if(t instanceof NeedsBuilding){
+			if(t.GetID() == ID){
+				return this;
+			}
+		}
+		return null;
+	}
+	@Override
+	public String toString() {
+		return ID +":"+ Name.get(Language.English.toString());
+	}
+}

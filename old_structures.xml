@@ -182,13 +182,7 @@
          <buildcost>200</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
-         <buildingItems length="4">
-            <Item ID="1">
-               <count>3</count>
-            </Item>
-            <Item ID="2">
-               <count>2</count>
-            </Item>
+         <buildingItems length="2">
             <Item ID="1">
                <count>3</count>
             </Item>
@@ -204,7 +198,12 @@
          <maxOutputStorage>0</maxOutputStorage>
          <takeOverStartGoal>100.0</takeOverStartGoal>
       </market>
-      <market class="com.mortmann.andja.creator.structures.Warehouse" ID="6">
+   </Markets>
+   <Mines/>
+   <NeedsBuildings/>
+   <Productions/>
+   <Warehouses>
+      <warehouse ID="6">
          <Name>
             <entry string="English">Warehouse I</entry>
             <entry string="German">Kontor I</entry>
@@ -239,25 +238,7 @@
          <buildcost>300</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
-         <buildingItems length="8">
-            <Item ID="1">
-               <count>3</count>
-            </Item>
-            <Item ID="2">
-               <count>2</count>
-            </Item>
-            <Item ID="1">
-               <count>3</count>
-            </Item>
-            <Item ID="2">
-               <count>2</count>
-            </Item>
-            <Item ID="1">
-               <count>3</count>
-            </Item>
-            <Item ID="2">
-               <count>2</count>
-            </Item>
+         <buildingItems length="2">
             <Item ID="1">
                <count>3</count>
             </Item>
@@ -272,10 +253,6 @@
          <produceTime>0.0</produceTime>
          <maxOutputStorage>0</maxOutputStorage>
          <takeOverStartGoal>100.0</takeOverStartGoal>
-      </market>
-   </Markets>
-   <Mines/>
-   <NeedsBuildings/>
-   <Productions/>
-   <Warehouses/>
+      </warehouse>
+   </Warehouses>
 </structures>

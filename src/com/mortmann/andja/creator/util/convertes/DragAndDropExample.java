@@ -20,7 +20,7 @@ package com.mortmann.andja.creator.util.convertes;
 //import javafx.scene.paint.Color;
 //import javafx.stage.Stage;
 // 
-//public class DragAndDropExample extends Application {
+public class DragAndDropExample {
 // 
 // 
 //    ImageView imageView;
@@ -127,4 +127,4 @@ package com.mortmann.andja.creator.util.convertes;
 //        }
 //    }
 // 
-//}
+}

@@ -12,4 +12,9 @@ public @interface FieldInfo {
     @SuppressWarnings("rawtypes")
 	Class subType() default void.class;
     boolean id() default false;
+    @SuppressWarnings("rawtypes")
+	Class arraypos() default void.class;//make its so you can select the poplevel through combobox with enumnames
+    //TODO For need make it so it cann toggle between item/structure
+    //TODO For need make it so it disables other fields
+    //maybe with enums...
 }
