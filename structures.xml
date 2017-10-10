@@ -2,17 +2,18 @@
    <roads>
       <road ID="10">
          <Name>
-            <entry string="English">Dirtroad</entry>
-            <entry string="German">Feldweg</entry>
+            <entry lang="English">Dirtroad</entry>
+            <entry lang="German">Feldweg</entry>
          </Name>
          <Description>
-            <entry string="English">Simple road to connect Structures.</entry>
-            <entry string="German">Einfacher Weg um Gebäude mit einander zuverbinden.</entry>
+            <entry lang="English">Simple road to connect Structures.</entry>
+            <entry lang="German">Einfacher Weg um Gebäude mit einander zuverbinden.</entry>
          </Description>
          <HoverOver>
-            <entry string="English">Dirtroad</entry>
-            <entry string="German">Feldweg</entry>
+            <entry lang="English">Dirtroad</entry>
+            <entry lang="German">Feldweg</entry>
          </HoverOver>
+         <canBeBuild>true</canBeBuild>
          <isWalkable>false</isWalkable>
          <hasHitbox>false</hasHitbox>
          <MaxHealth>0.0</MaxHealth>
@@ -41,17 +42,18 @@
    <farms>
       <farm ID="400">
          <Name>
-            <entry string="English">Lumberjack Hut</entry>
-            <entry string="German">Holzfällerhütte</entry>
+            <entry lang="English">Lumberjack Hut</entry>
+            <entry lang="German">Holzfällerhütte</entry>
          </Name>
          <Description>
-            <entry string="English">Produces wood over time.</entry>
-            <entry string="German">Erzeugt Holz.</entry>
+            <entry lang="English">Produces wood over time.</entry>
+            <entry lang="German">Erzeugt Holz.</entry>
          </Description>
          <HoverOver>
-            <entry string="English">Lumberjack</entry>
-            <entry string="German">Holzfäller</entry>
+            <entry lang="English">Lumberjack</entry>
+            <entry lang="German">Holzfäller</entry>
          </HoverOver>
+         <canBeBuild>true</canBeBuild>
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <MaxHealth>0.0</MaxHealth>
@@ -92,21 +94,89 @@
          </output>
          <growable>101</growable>
       </farm>
+      <farm ID="403">
+         <Name>
+            <entry lang="English">Hemp plantation</entry>
+            <entry lang="German">Hanfplantage</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Plantation that produces hemp.</entry>
+            <entry lang="German">Produziert Hanf.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Hemp plantation</entry>
+            <entry lang="German">Hanfplantage</entry>
+         </HoverOver>
+         <Short>
+            <entry>
+               <lang>English</lang>
+               <string>Hemp </string>
+            </entry>
+            <entry>
+               <lang>German</lang>
+               <string>Hanf</string>
+            </entry>
+         </Short>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>50.0</MaxHealth>
+         <buildingRange>2</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>2</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>20</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="2">
+            <Item ID="1">
+               <count>5</count>
+            </Item>
+            <Item ID="2">
+               <count>5</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>hempplantation</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>5.0</produceTime>
+         <maxOutputStorage>5</maxOutputStorage>
+         <output length="1">
+            <Item ID="47">
+               <count>1</count>
+            </Item>
+         </output>
+         <growable>104</growable>
+      </farm>
    </farms>
    <growables>
       <growable ID="101">
          <Name>
-            <entry string="English">Tree</entry>
-            <entry string="German">Baum</entry>
+            <entry lang="English">Tree</entry>
+            <entry lang="German">Baum</entry>
          </Name>
          <Description>
-            <entry string="English">Its a tree.</entry>
-            <entry string="German">Es ist ein Baum.</entry>
+            <entry lang="English">Its a tree.</entry>
+            <entry lang="German">Es ist ein Baum.</entry>
          </Description>
          <HoverOver>
-            <entry string="English">Tree</entry>
-            <entry string="German">Baum</entry>
+            <entry lang="English">Tree</entry>
+            <entry lang="German">Baum</entry>
          </HoverOver>
+         <canBeBuild>true</canBeBuild>
          <isWalkable>false</isWalkable>
          <hasHitbox>false</hasHitbox>
          <MaxHealth>15.0</MaxHealth>
@@ -117,7 +187,7 @@
          <tileWidth>1</tileWidth>
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
-         <canBeBuildOver>false</canBeBuildOver>
+         <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <showExtraUI>false</showExtraUI>
@@ -143,23 +213,75 @@
          </output>
          <growTime>5.0</growTime>
          <fertility>-1</fertility>
-         <ageStages>4</ageStages>
+         <ageStages>3</ageStages>
+      </growable>
+      <growable ID="104">
+         <Name>
+            <entry lang="English">Hempfield</entry>
+            <entry lang="German">Hanffeld</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Grows hemp.</entry>
+            <entry lang="German">Wächst Hanf an.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Hemp</entry>
+            <entry lang="German">Hanf</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>true</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>true</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>100</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>2</myBuildingTyp>
+         <spriteBaseName>hempfield</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <output length="1">
+            <Item ID="47">
+               <count>1</count>
+            </Item>
+         </output>
+         <growTime>3.0</growTime>
+         <fertility>0</fertility>
+         <ageStages>2</ageStages>
       </growable>
    </growables>
    <markets>
       <market ID="1">
          <Name>
-            <entry string="English">Market Building I</entry>
-            <entry string="German">Markthaus I</entry>
+            <entry lang="English">Market Building I</entry>
+            <entry lang="German">Markthaus I</entry>
          </Name>
          <Description>
-            <entry string="English">Is required to expand your city and it will collect produced goods in its area, if they are connect with roads.</entry>
-            <entry string="German">Es ist benötigt um deine Stadt zu erweitern und um produzierte Produkte abzuholen, die in seiner reichweite sind und mit dem es Sraßen verbunden ist.</entry>
+            <entry lang="English">Is required to expand your city and it will collect produced goods in its area, if they are connect with roads.</entry>
+            <entry lang="German">Es ist benötigt um deine Stadt zu erweitern und um produzierte Produkte abzuholen, die in seiner reichweite sind und mit dem es Sraßen verbunden ist.</entry>
          </Description>
          <HoverOver>
-            <entry string="English">Market Building</entry>
-            <entry string="German">Markthaus </entry>
+            <entry lang="English">Market Building</entry>
+            <entry lang="German">Markthaus </entry>
          </HoverOver>
+         <canBeBuild>true</canBeBuild>
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <MaxHealth>0.0</MaxHealth>
@@ -201,21 +323,201 @@
    </markets>
    <mines/>
    <needsbuildings/>
-   <productions/>
+   <productions>
+      <production ID="200">
+         <Name>
+            <entry lang="English">Fisherman&apos;s hut</entry>
+            <entry lang="German">Fischerhütte</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Catches Fish to eat.</entry>
+            <entry lang="German">Fischt Fisch zum essen.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Fisherman</entry>
+            <entry lang="German">Fischer</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>100.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>3</tileWidth>
+         <tileHeight>4</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>1</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>true</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>100</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="2">
+            <Item ID="1">
+               <count>3</count>
+            </Item>
+            <Item ID="2">
+               <count>2</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>fishermanshut</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>30.0</produceTime>
+         <maxOutputStorage>5</maxOutputStorage>
+         <output length="1">
+            <Item ID="27">
+               <count>1</count>
+            </Item>
+         </output>
+      </production>
+      <production ID="202">
+         <Name>
+            <entry lang="English">Hemp Weaver&apos;s Hut</entry>
+            <entry lang="German">Hanfweberei</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Uses raw hemp to produce weaved hemp fabric.</entry>
+            <entry lang="German">Benutzt rohen Hanf um gewebten Stoff herzustellen.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Hemp Weaver</entry>
+            <entry lang="German">Hanfweberei</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>100.0</MaxHealth>
+         <buildingRange>15</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>2</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>25</maintenancecost>
+         <buildcost>300</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="2">
+            <Item ID="1">
+               <count>15</count>
+            </Item>
+            <Item ID="2">
+               <count>5</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>hempweaver</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>10.0</produceTime>
+         <maxOutputStorage>5</maxOutputStorage>
+         <output length="1">
+            <Item ID="48">
+               <count>1</count>
+            </Item>
+         </output>
+         <intake length="1">
+            <Item ID="47">
+               <count>2</count>
+            </Item>
+         </intake>
+      </production>
+      <production ID="203">
+         <Name>
+            <entry lang="English">Hemp Tailor´s Hut</entry>
+            <entry lang="German">Hanfschneider</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Produces hempclothes out of hemp fabric.</entry>
+            <entry lang="German">Produziert Hanfkleidung aus Hanfgewebe.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Hemp Tailor</entry>
+            <entry lang="German">Hanfschneider</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>200.0</MaxHealth>
+         <buildingRange>15</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>3</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>40</maintenancecost>
+         <buildcost>750</buildcost>
+         <BuildTyp>2</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="2">
+            <Item ID="1">
+               <count>20</count>
+            </Item>
+            <Item ID="2">
+               <count>10</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>hemptailor</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>10.0</produceTime>
+         <maxOutputStorage>5</maxOutputStorage>
+         <output length="1">
+            <Item ID="49">
+               <count>1</count>
+            </Item>
+         </output>
+         <intake length="1">
+            <Item ID="48">
+               <count>1</count>
+            </Item>
+         </intake>
+      </production>
+   </productions>
    <warehouses>
       <warehouse ID="6">
          <Name>
-            <entry string="English">Warehouse I</entry>
-            <entry string="German">Kontor I</entry>
+            <entry lang="English">Warehouse I</entry>
+            <entry lang="German">Kontor I</entry>
          </Name>
          <Description>
-            <entry string="English">First structure of any City and it is used to trade with Ships.</entry>
-            <entry string="German">Das erste Gebäude einer Stadt und wird dazu genutzt mit Schiffen zu handeln.</entry>
+            <entry lang="English">First structure of any City and it is used to trade with Ships.</entry>
+            <entry lang="German">Das erste Gebäude einer Stadt und wird dazu genutzt mit Schiffen zu handeln.</entry>
          </Description>
          <HoverOver>
-            <entry string="English">Warehouse</entry>
-            <entry string="German">Kontor</entry>
+            <entry lang="English">Warehouse</entry>
+            <entry lang="German">Kontor</entry>
          </HoverOver>
+         <canBeBuild>true</canBeBuild>
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <MaxHealth>1000.0</MaxHealth>
@@ -255,5 +557,208 @@
          <takeOverStartGoal>100.0</takeOverStartGoal>
       </warehouse>
    </warehouses>
-   <homes/>
+   <homes>
+      <home ID="20">
+         <Name>
+            <entry lang="English">Peasant house</entry>
+            <entry lang="German">Bauernhaus</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Peasant lives here.</entry>
+            <entry lang="German">Bauern wohnen hier.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Peasant </entry>
+            <entry lang="German">Bauern</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>50.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>2</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="1">
+            <Item ID="1">
+               <count>2</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>peasanthouse</spriteBaseName>
+         <maxLivingSpaces>8</maxLivingSpaces>
+         <increaseSpeed>1.0</increaseSpeed>
+         <decreaseSpeed>2.0</decreaseSpeed>
+      </home>
+      <home ID="21">
+         <Name>
+            <entry lang="English">Citizen house</entry>
+            <entry lang="German">Bürgerhaus</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Citizen lives here.</entry>
+            <entry lang="German">Bürger leben hier.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Citizen </entry>
+            <entry lang="German">Bürger </entry>
+         </HoverOver>
+         <canBeBuild>false</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>50.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>1</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>3</tileWidth>
+         <tileHeight>3</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="2">
+            <Item ID="1">
+               <count>1</count>
+            </Item>
+            <Item ID="2">
+               <count>1</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>citizenhouse</spriteBaseName>
+         <maxLivingSpaces>0</maxLivingSpaces>
+         <increaseSpeed>2.0</increaseSpeed>
+         <decreaseSpeed>4.0</decreaseSpeed>
+      </home>
+      <home ID="22">
+         <Name>
+            <entry lang="English">Patrician house</entry>
+            <entry lang="German">Patrizierhaus</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Patrician lives here.</entry>
+            <entry lang="German">Patrizier leben hier.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Patrician </entry>
+            <entry lang="German">Patrizier </entry>
+         </HoverOver>
+         <canBeBuild>false</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>50.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>2</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>3</tileWidth>
+         <tileHeight>3</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="3">
+            <Item ID="1">
+               <count>1</count>
+            </Item>
+            <Item ID="2">
+               <count>1</count>
+            </Item>
+            <Item ID="3">
+               <count>4</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>patricianhouse</spriteBaseName>
+         <maxLivingSpaces>0</maxLivingSpaces>
+         <increaseSpeed>3.0</increaseSpeed>
+         <decreaseSpeed>6.0</decreaseSpeed>
+      </home>
+      <home ID="23">
+         <Name>
+            <entry lang="English">Nobleman house</entry>
+            <entry lang="German">Adligenhaus</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Nobleman lives here.</entry>
+            <entry lang="German">Adlige leben hier.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Nobleman </entry>
+            <entry lang="German">Adlige </entry>
+         </HoverOver>
+         <canBeBuild>false</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <MaxHealth>50.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>3</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>3</tileWidth>
+         <tileHeight>3</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>1</myBuildingTyp>
+         <buildingItems length="4">
+            <Item ID="1">
+               <count>1</count>
+            </Item>
+            <Item ID="2">
+               <count>1</count>
+            </Item>
+            <Item ID="3">
+               <count>3</count>
+            </Item>
+            <Item ID="5">
+               <count>3</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>noblemanhouse</spriteBaseName>
+         <maxLivingSpaces>0</maxLivingSpaces>
+         <increaseSpeed>4.0</increaseSpeed>
+         <decreaseSpeed>8.0</decreaseSpeed>
+      </home>
+   </homes>
 </structures>

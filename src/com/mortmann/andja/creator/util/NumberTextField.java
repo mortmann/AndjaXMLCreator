@@ -3,7 +3,7 @@ package com.mortmann.andja.creator.util;
 import javafx.scene.control.TextField;
 
 public class NumberTextField extends TextField {
-	int maxLength = 10;
+	int maxLength = 0;
 	int maxNumber = -1;
 	boolean isFloat = false;
 	
@@ -43,15 +43,14 @@ public class NumberTextField extends TextField {
 	@Override
 	public void replaceText(int start, int end, String text) {
 		if (validate(text)) {
-		 if (this.getMaxLength() <= 0 || getMaxLength() ==-1) {
+		 if (this.getMaxLength() <= 0) {
 	            // Default behavior, in case of no max length
-
 	            super.replaceText(start, end, text);
 	        }
 	        else {
 	            // Get the text in the textfield, before the user enters something
 	            String currentText = this.getText() == null ? "" : this.getText();
-
+	            
 	            // Compute the text that should normally be in the textfield now
 	            String finalText = currentText.substring(0, start) + text + currentText.substring(end);
 	            
@@ -79,33 +78,33 @@ public class NumberTextField extends TextField {
 		}
 
 	}
-
+	
 	@Override
 	public void replaceSelection(String text) {
 		if (validate(text)) {
 			super.replaceSelection(text);
 		}
-		
-		
 	}
 	
 	public int GetIntValue(){
-		if(this.getText()==null||this.getText()==""||this.getText().isEmpty()){
+		if(isFloat){
+			System.out.println("WARNING! YOUR TRYING TO GET A INT VALUE FROM AN FLOAT FIELD!");
+		}
+		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()){
 			return 0;
 		}
 		try {
-			return Integer.parseInt(this.getText());
+			return Integer.parseInt(this.getText().trim());
 		} catch (Exception e) {
-			setText(0+"");
 			return 0;
 		}
 	}
 	
 	public float GetFloatValue(){
-		if(this.getText()==null||this.getText()==""||this.getText().isEmpty()){
+		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()){
 			return 0;
 		}
-		return Float.parseFloat(this.getText());
+		return Float.parseFloat(this.getText().trim());
 	}
 	private int getMaxLength() {
 		return maxLength;
@@ -120,5 +119,8 @@ public class NumberTextField extends TextField {
 			return text.matches("[0-9]*[.]?[0-9]*");
 		}
 		return text.matches("[0-9]*");
+	}
+	public boolean isFloat() {
+		return isFloat;
 	}
 }

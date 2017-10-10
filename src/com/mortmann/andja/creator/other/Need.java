@@ -34,9 +34,9 @@ public class Need implements Tabable {
 	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
 
-	@FieldInfo(required=false,type=Item.class)
+	@FieldInfo(required=false)
 	@Element(required=false)
-	public int item;
+	public Item item;
 	@FieldInfo(required=false,type=NeedsBuilding.class)
 	@Element(required=false)
 	public int structure;

@@ -238,7 +238,11 @@ public class WorkTab {
 		}
 		box.setOnAction(x->{
 			try {
-				field.set(tab, box.getValue().ID);
+				if(field.isAnnotationPresent(FieldInfo.class)&&field.getAnnotation(FieldInfo.class).type()==Item.class){
+						field.set(tab, box.getValue().ID);
+				} else {
+					field.set(tab, box.getValue());
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -850,9 +854,10 @@ public class WorkTab {
 		grid.add(box, 1, 0);	
 		try {
 			if(field.get(str)!=null){
-				box.setText((Float) field.get(str) +"");
+				box.setText(field.get(str).toString());
 			}
 		} catch (Exception e1) {
+			e1.printStackTrace();
 		} 
 		
 		
@@ -885,6 +890,7 @@ public class WorkTab {
 				box.setText((Integer) field.get(str)+"");
 			}
 		} catch (Exception e1) {
+			e1.printStackTrace();
 		} 
 		grid.add(new Label(name), 0, 0);	
 		grid.add(box, 1, 0);	
@@ -1038,10 +1044,18 @@ public class WorkTab {
 	    	    }
 	        } else
 			if(text instanceof NumberTextField){
-				if(((NumberTextField) text).GetIntValue()>=0){
-					if(styleClass.contains("text-field-error")) {
-		    	        styleClass.remove("text-field-error");
-		    	    }
+				if(((NumberTextField) text).isFloat()==false){
+					if(((NumberTextField) text).GetIntValue()>=0){
+						if(styleClass.contains("text-field-error")) {
+			    	        styleClass.remove("text-field-error");
+			    	    }
+					}
+				} else {
+					if(((NumberTextField) text).GetFloatValue()>=0){
+						if(styleClass.contains("text-field-error")) {
+			    	        styleClass.remove("text-field-error");
+			    	    }
+					}
 				}
 			} else {
 	        	if(styleClass.contains("text-field-error")) {

@@ -11,8 +11,8 @@ public class Home extends Structure {
 	@FieldInfo(required=true) @Element public float increaseSpeed;
 	@FieldInfo(required=true) @Element public float decreaseSpeed;
 	public Home(){
-		tileWidth = 2;
-		tileHeight = 2;
+		tileWidth = 3;
+		tileHeight = 3;
 		BuildTyp = BuildTypes.Drag;
 		myBuildingTyp =	BuildingTyp.Blocking;
 		buildingRange = 0;

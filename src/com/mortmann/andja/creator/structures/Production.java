@@ -9,7 +9,7 @@ import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
 public class Production extends OutputStructure {
-	@FieldInfo(required=true)@ElementArray(entry="Item") public Item[] intake;
+	@FieldInfo(required=false)@ElementArray(entry="Item",required=false) public Item[] intake;
 	
 	public Production(){
 		maxOutputStorage = 5; // hardcoded 5 ? need this to change?

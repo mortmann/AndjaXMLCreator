@@ -13,6 +13,7 @@ public class Growable extends OutputStructure {
 	@FieldInfo(required=true) @Element public int ageStages = 2;
 	public Growable(){
 		forMarketplace = false;
+		canBeBuildOver = true;
 		maxNumberOfWorker = 0;
 		tileWidth = 1;
 		tileHeight = 1;
