@@ -50,7 +50,7 @@ public class Unit implements Tabable {
 	}
 	@Override
 	public String toString() {
-		return Name.get(Language.English.toString());
+		return GetName();
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
@@ -68,5 +68,12 @@ public class Unit implements Tabable {
 			}
 		}
 		return null;
+	}
+	@Override
+	public String GetName() {
+		if(Name==null||Name.isEmpty()){
+			return getClass().getSimpleName();
+		}
+		return Name.get(Language.English.toString());
 	}
 }

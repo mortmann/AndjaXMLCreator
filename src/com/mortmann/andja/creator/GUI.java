@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
@@ -209,7 +210,7 @@ public class GUI {
 	public void AddTab(Tabable c, Node content){
 		Tab t = new Tab("Empty");
 		if(c!=null){
-			t.setText("*"+c.getClass().getSimpleName());
+			t.setText(c.GetName());
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Warning!");
 			String s = "Any unsaved data will be lost!";
@@ -348,7 +349,7 @@ public class GUI {
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
 		Tabable o = tabToTabable.get(curr);
-		
+		curr.setText(o.GetName());
 		//check if its filled out all required
 		Field f = CheckForMissingFields(o);
 		if(f!=null){
@@ -641,11 +642,44 @@ public class GUI {
 			return idToFertility.containsKey(id) ? idToFertility.get(id) : null;
 		}
 		if(tab.getClass()==Need.class){
-			return idToFertility.containsKey(id) ? idToNeed.get(id) : null;
+			return idToNeed.containsKey(id) ? idToNeed.get(id) : null;
 		}
 		System.out.println("CLASS doesnt have any map assigned!");
 		return null;
 	}
-	
+	public int getOneHigherThanMaxID(Tabable tab){
+		if(Structure.class.isAssignableFrom(tab.getClass())){
+			HashMap<Integer,Structure> temp = new HashMap<Integer,Structure>(idToStructures);
+			temp.values().removeIf(x->x.getClass()!=tab.getClass()); 
+			int max = Collections.max(temp.keySet())+1;
+			if(doesIDexistForTabable(max,tab)!=null){
+				Alert a = new Alert(AlertType.INFORMATION);
+				a.setTitle("IDs for this structure-type overlaps with the next one!");
+				a.setContentText("ID set to the max of ALL! But that will intersect with reserved for anotherone!");
+				a.show();
+				return Collections.max(idToStructures.keySet())+1;
+			}
+			return max;
+		}
+		if(tab.getClass()==ItemXML.class){
+			return Collections.max(idToItem.keySet())+1;
+		}
+		if(tab.getClass().isAssignableFrom(Unit.class)){
+			return Collections.max(idToUnit.keySet())+1; 
+		}
+		if(tab.getClass()==DamageType.class){
+			return Collections.max(idToDamageType.keySet())+1; 
+		}
+		if(tab.getClass()==ArmorType.class){
+			return Collections.max(idToArmorType.keySet())+1; 
+		}
+		if(tab.getClass()==Fertility.class){
+			return Collections.max(idToFertility.keySet())+1;  
+		}
+		if(tab.getClass()==Need.class){
+			return Collections.max(idToNeed.keySet())+1; 
+		}
+		return -1;
+	}
 	
 }

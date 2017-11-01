@@ -1,8 +1,6 @@
 package com.mortmann.andja.creator;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-
 import com.mortmann.andja.creator.util.NotClosableTab;
 import com.mortmann.andja.creator.util.Tabable;
 

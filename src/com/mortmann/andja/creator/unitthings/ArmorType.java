@@ -36,4 +36,11 @@ public class ArmorType implements Tabable {
 	public Tabable DependsOnTabable(Tabable t) {
 		return null;
 	}
+	@Override
+	public String GetName() {
+		if(Name==null||Name.isEmpty()){
+			return getClass().getSimpleName();
+		}
+		return GetName();
+	}
 }

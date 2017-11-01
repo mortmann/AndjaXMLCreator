@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.simpleframework.xml.*;
 import org.simpleframework.xml.convert.Convert;
 
+import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.convertes.ItemTypeConverter;
@@ -24,7 +25,7 @@ public class ItemXML extends Item implements Tabable {
 	
 	@Override
 	public String toString() {
-		return ID +":"+ Name.get("English");
+		return ID +":"+ GetName();
 	}
 	@Override
 	public int GetID() {
@@ -38,5 +39,12 @@ public class ItemXML extends Item implements Tabable {
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		return null;
+	}
+	@Override
+	public String GetName() {
+		if(Name==null||Name.isEmpty()){
+			return getClass().getSimpleName();
+		}
+		return Name.get(Language.English.toString());
 	}
 }

@@ -734,14 +734,17 @@ public class WorkTab {
 	private void OnItemSelect(GridPane listpane, Field field, Tabable m, Item select,boolean setup){
 		//get existing field if null or not
 		Item[] old = null;
+		Integer rows = 0;
 		try {
 			old = (Item[]) field.get(m); 
+			Method method = listpane.getClass().getDeclaredMethod("getNumberOfRows");
+			method.setAccessible(true);
+			rows = (Integer) method.invoke(listpane);
 		} catch (Exception e1) {
 //			System.out.println(e1);
 		}
 		//if null we start at pos 1 else insert at length+1
 		int pos = 1;
-
 		if(old != null){
 			pos = old.length+1;
 			for (int i = 0; i < old.length; i++) {
@@ -807,14 +810,13 @@ public class WorkTab {
 				//set the new place in array to selected variable 
 				newArray[pos-1] = select;
 				field.set(m, newArray);
-				System.out.println("array");
 			}
  		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		listpane.add(l, 0, pos);
-		listpane.add(count, 1, pos);
-		listpane.add(b, 2, pos);
+		listpane.add(l, 0, rows);
+		listpane.add(count, 1, rows);
+		listpane.add(b, 2, rows);
 	}
 
 	public GridPane CreateBooleanSetter(String name, Field field, Tabable m){
@@ -884,6 +886,14 @@ public class WorkTab {
 		
 		NumberTextField box = new NumberTextField();
 		CheckIfRequired(box, field, str);
+        FieldInfo info = field.getAnnotation(FieldInfo.class);
+        if(info != null && info.id()){
+			try {
+				field.setInt(str, GUI.Instance.getOneHigherThanMaxID(str));
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+        }
 
 		try {
 			if(field.get(str)!=null){

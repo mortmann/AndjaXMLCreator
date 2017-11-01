@@ -44,4 +44,11 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	public Tabable DependsOnTabable(Tabable t) {
 		return null;
 	}
+	@Override
+	public String GetName() {
+		if(Name==null||Name.isEmpty()){
+			return getClass().getSimpleName();
+		}
+		return Name.get(Language.English.toString());
+	}
 }

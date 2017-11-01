@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
@@ -72,5 +71,12 @@ public class Need implements Tabable {
 	@Override
 	public String toString() {
 		return ID +":"+ Name.get(Language.English.toString());
+	}
+	@Override
+	public String GetName() {
+		if(Name==null||Name.isEmpty()){
+			return getClass().getSimpleName();
+		}
+		return Name.get(Language.English.toString());
 	}
 }

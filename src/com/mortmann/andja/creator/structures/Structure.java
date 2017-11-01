@@ -9,6 +9,7 @@ import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.convert.Convert;
 
+import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.util.FieldInfo;
@@ -77,7 +78,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	}	
 	@Override
 	public String toString() {
-		return ID+":"+(String) Name.values().toArray()[0];
+		return ID+":"+ GetName();
 	}
 	@Override
 	public int GetID() {
@@ -96,5 +97,12 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		return StructureDependsOnTabable(t);
+	}
+	@Override
+	public String GetName() {
+		if(Name==null||Name.isEmpty()){
+			return getClass().getSimpleName();
+		}
+		return Name.get(Language.English.toString());
 	}
 }
