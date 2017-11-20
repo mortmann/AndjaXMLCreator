@@ -31,7 +31,7 @@ public class DataTab<T extends Tabable> {
 		VBox v = new VBox();
 		
 	    flow = new FlowPane();
-	    flow.setPadding(new Insets(0, 7, 15, 5));
+	    flow.setPadding(new Insets(2, 2, 2, 2));
 	    flow.setVgap(3);
 	    flow.setHgap(3);
 	    SetUPButtons(map);
@@ -76,7 +76,7 @@ public class DataTab<T extends Tabable> {
 	protected void AddButton(T valueAdded) {
 		Button b = new Button();
 		Tabable s = valueAdded;
-		b.setOnAction(x->GUI.Instance.AddTab(s,new WorkTab(s).getScrollPaneContent()));
+		b.setOnAction(x->GUI.Instance.AddTab(s,new WorkTab(s,false).getScrollPaneContent()));
 		b.setText((String) s.toString());
 		b.setMinSize(100, 100);
 		b.setPrefSize(100, 100);

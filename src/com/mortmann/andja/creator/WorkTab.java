@@ -7,12 +7,15 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 
+import javax.crypto.CipherInputStream;
+
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Fertility;
 import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.other.ItemXML;
+import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.structures.Growable;
 import com.mortmann.andja.creator.structures.NeedsBuilding;
 import com.mortmann.andja.creator.structures.Structure.BuildTypes;
@@ -25,6 +28,7 @@ import com.mortmann.andja.creator.util.NumberTextField;
 import com.mortmann.andja.creator.util.OrderEr;
 import com.mortmann.andja.creator.util.Tabable;
 
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -37,6 +41,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -56,8 +61,9 @@ public class WorkTab {
 	GridPane otherGrid;
 
 	Tabable obj;
+	private boolean newTabable;
 	
-	public WorkTab(Tabable t){
+	public WorkTab(Tabable t, boolean newTabable){
         mainGrid = new GridPane();
         booleanGrid = new GridPane();
         floatGrid = new GridPane();
@@ -66,7 +72,7 @@ public class WorkTab {
         otherGrid = new GridPane();
         languageGrid = new GridPane();
         enumGrid = new GridPane();
-
+        this.newTabable=newTabable;
         mainGrid.setGridLinesVisible(true);
         mainGrid.add(wrapPaneInTitledPane("Integer",intGrid), 0, 0);
         mainGrid.add(wrapPaneInTitledPane("Boolean",booleanGrid), 1, 0);
@@ -76,9 +82,12 @@ public class WorkTab {
         mainGrid.add(wrapPaneInTitledPane("Other",otherGrid), 2, 1);
         mainGrid.add(wrapPaneInTitledPane("Language",languageGrid), 0, 2);
         ColumnConstraints col = new ColumnConstraints();
-        col.setPercentWidth(33);
+        ColumnConstraints mid = new ColumnConstraints();
+
+        col.setPercentWidth(40);
+        mid.setPercentWidth(30);
         col.setHgrow(Priority.ALWAYS);
-        mainGrid.getColumnConstraints().addAll(col,col,col);
+        mainGrid.getColumnConstraints().addAll(col,mid,col);
 //        booleanGrid.setPrefHeight(floatGrid.getHeight());
 //        floatGrid.setPrefHeight(intGrid.getHeight());
 //        intGrid.setPrefHeight(booleanGrid.getHeight());
@@ -89,6 +98,7 @@ public class WorkTab {
 
         
         scrollPaneContent = new ScrollPane();
+        mainGrid.setMaxWidth(1225);
         scrollPaneContent.setContent(mainGrid);
         scrollPaneContent.setMaxHeight(Double.MAX_VALUE);
         scrollPaneContent.setMaxWidth(Double.MAX_VALUE);
@@ -122,10 +132,21 @@ public class WorkTab {
             	floatGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(compare == Integer.TYPE) {
+            	if(fld[i].getAnnotation(FieldInfo.class)!=null){
+            		FieldInfo fi = fld[i].getAnnotation(FieldInfo.class);
+                	if(fi.subType() == People.class){
+                		intGrid.add(CreateEnumIntSetter(fld[i].getName(),fld[i],obj,People.class), 0, i);
+                		continue;
+                	}
+            	}
             	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(compare ==  String.class) {
-            	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	if(info.longtext()){
+                	stringGrid.add(CreateLongStringSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	} else {
+                	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	}
             }
             else if(compare ==  BuildTypes.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildTypes.class), 0, i);
@@ -213,6 +234,45 @@ public class WorkTab {
        
         
 	}
+
+	@SuppressWarnings("rawtypes")
+	public<E extends Enum<E>> GridPane CreateEnumIntSetter(String name, Field field, Tabable m, Class<E>  class1){
+		ObservableList<Enum> names = FXCollections.observableArrayList();
+		for (Enum e : EnumSet.allOf(class1)) {
+			  names.add(e);
+		}
+		GridPane grid = new  GridPane();
+		
+		ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMinWidth(150);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMinWidth(100);
+        col2.setHgrow(Priority.ALWAYS);
+        grid.getColumnConstraints().addAll(col1,col2);
+		ComboBox<Enum> box = new ComboBox<Enum>(names);
+		box.setMaxWidth(Double.MAX_VALUE);
+		grid.add(new Label(name), 0, 0);	
+		grid.add(box, 1, 0);	
+		
+		try {
+			if(field.get(m)!=null){
+				box.getSelectionModel().select((int) field.get(m));
+			}
+		} catch (Exception e1) {
+		} 
+		
+		box.setOnAction(x-> {
+				try {
+					field.set(m, box.getValue().ordinal() );
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		);
+		
+		return grid;
+	}
+
 	private Node CreateItemSetter(String name, Field field, Tabable tab) {
 		GridPane grid = new GridPane();
 		ObservableList<Item> its = FXCollections.observableArrayList();
@@ -265,22 +325,39 @@ public class WorkTab {
 
 	///NEEDS FIELDINFO ARRAYPOS
 	private Node CreateFloatArraySetter(String name, Field field, Tabable tab) {
+		System.out.println("CreateFloatArraySetter!");
+
 		GridPane grid = new GridPane();
 		FieldInfo fi = field.getDeclaredAnnotation(FieldInfo.class);
 		if(fi==null||fi.arraypos().isEnum()==false){
 			System.out.println("ERROR-Float Array Setter needs a enum to declare what is what!");
 			return grid;
 		}
-		Method[] names = fi.arraypos().getDeclaredMethods();
+		String[] temp = null;
+		if(fi.arraypos().isEnum()){
+			if(fi.arraypos()==People.class){
+				temp = new String[People.values().length];
+				for(int i = 0; i < People.values().length; i++){
+					System.out.println(People.values()[i].name());
+					temp[i] = People.values()[i].name();
+				}
+			}
+		} else {
+			temp = new String[fi.arraypos().getMethods().length];
+			for(int i = 0; i < fi.arraypos().getMethods().length; i++){
+				temp[i] = fi.arraypos().getMethods()[i].getName();
+			}
+		}
 		float[] val=null;
 		try {
 			val = (float[]) field.get(tab);
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
 		}
-
+		String[] names = temp;
 		for (int i = 0; i < names.length; i++) {
-			grid.add(new Label(names[i].getName()), 0, i);
+			System.out.println(names[i] + " " + i);
+			grid.add(new Label(names[i]), 0, i);
 			NumberTextField ntf = new NumberTextField(true);
 			CheckIfRequired(ntf, field, tab);
 			if(val!=null){
@@ -609,21 +686,35 @@ public class WorkTab {
 		
 		for (int i = 0; i < langes.size(); i++) {
 			grid.add(new Label(langes.get(i).toString()), 0, i+1);
-			TextField t = new TextField();
+			StringProperty temp = null;
+			FieldInfo fi = field.getDeclaredAnnotation(FieldInfo.class);
+			Node t = null;
+			if(fi!=null&&fi.longtext()){
+				t = new TextArea();
+				((TextArea) t).setPrefRowCount(3);
+				((TextArea) t).setPrefColumnCount(100);
+				((TextArea) t).setWrapText(true);
+				((TextArea) t).setPrefWidth(150);
+				temp = ((TextArea) t).textProperty();
+			} else {
+				t = new TextField();
+				temp = ((TextField) t).textProperty();
+			}
+			StringProperty sp = temp;
+
 			CheckIfRequired(t, field, str);
 			int num = i;
 			
 			try {
-				
 				HashMap<String, String> h = (HashMap<String, String>) field.get(str);
 				if(h != null){
-					t.setText(h.get(langes.get(i).toString()));
+					sp.set(h.get(langes.get(i).toString()));
 				}
 			} catch (Exception e1) {
 
 			} 
 			
-			t.textProperty().addListener(new ChangeListener<String>() {
+			sp.addListener(new ChangeListener<String>() {
 				@Override
 				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 					try {
@@ -631,7 +722,7 @@ public class WorkTab {
 						if(h == null){
 							h = new HashMap<>();
 						}
-						h.put(langes.get(num).toString(), t.getText());
+						h.put(langes.get(num).toString(), sp.get());
 						field.set(str,h);	
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -887,7 +978,7 @@ public class WorkTab {
 		NumberTextField box = new NumberTextField();
 		CheckIfRequired(box, field, str);
         FieldInfo info = field.getAnnotation(FieldInfo.class);
-        if(info != null && info.id()){
+        if(info != null && info.id() && newTabable){
 			try {
 				field.setInt(str, GUI.Instance.getOneHigherThanMaxID(str));
 			} catch (Exception e) {
@@ -916,7 +1007,44 @@ public class WorkTab {
 		});
 		return grid;
 	}
+	public GridPane CreateLongStringSetter(String name, Field field, Tabable str){
+		GridPane grid = new  GridPane();
+		
+		ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMinWidth(150);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMinWidth(75);
+        grid.getColumnConstraints().addAll(col1,col2);
+		
+		TextArea box = new TextArea();
+		box.setPrefRowCount(10);
+		box.setPrefColumnCount(100);
+		box.setWrapText(true);
+		box.setPrefWidth(150);
+		
+		CheckIfRequired(box, field, str);
 
+		try {
+			if(field.get(str)!=null){
+				box.setText((String) field.get(str));
+			}
+		} catch (Exception e1) {
+		} 
+		box.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				try {
+					field.set(str, box.getText());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		grid.add(new Label(name), 0, 0);	
+		grid.add(box, 1, 0);	
+		
+		return grid;
+	}
 	public GridPane CreateStringSetter(String name, Field field, Tabable str){
 		GridPane grid = new  GridPane();
 		
@@ -1023,7 +1151,7 @@ public class WorkTab {
 	    return newA;
 	 */
 	
-	private void CheckIfRequired(TextField text,Field field,Tabable t){
+	private void CheckIfRequired(Node text,Field field,Tabable t){
         FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info == null || info.required() == false){
         	return;
@@ -1031,7 +1159,15 @@ public class WorkTab {
 	    ObservableList<String> styleClass = text.getStyleClass();
 	    
 	    styleClass.add("text-field-error");
-		text.textProperty().addListener((arg0, oldValue, newValue) -> {		
+		StringProperty temp = null;
+	    if(text instanceof TextField){
+	    	temp = ((TextField) text).textProperty();
+	    }
+	    else if(text instanceof TextArea){
+	    	temp = ((TextArea) text).textProperty();
+	    }
+	    StringProperty sp = temp;
+	    sp.addListener((arg0, oldValue, newValue) -> {		
 			if(info.id()){
 				if(text instanceof NumberTextField){
 					Tabable exist = GUI.Instance.doesIDexistForTabable(((NumberTextField) text).GetIntValue(), t);
@@ -1048,7 +1184,7 @@ public class WorkTab {
 					System.out.println("Non integer ids are not supported atm!");
 				}
 			}
-			if(text.getText().isEmpty()){
+			if( sp.getValue().isEmpty()){
 	    	    if(!styleClass.contains("text-field-error")) {
 	    	        styleClass.add("text-field-error");
 	    	    }

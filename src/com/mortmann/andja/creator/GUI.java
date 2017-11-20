@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -119,7 +120,7 @@ public class GUI {
         hb.add(dataTabs,0,0);
         hb.add(workTabs,1,0);
         ColumnConstraints col1 = new ColumnConstraints();
-        int percentage = 28;
+        int percentage = 26;
         col1.setPercentWidth(percentage);
         col1.setHgrow(Priority.ALWAYS);
         ColumnConstraints col2 = new ColumnConstraints();
@@ -131,6 +132,23 @@ public class GUI {
 		mainWindow.show();
 		((VBox) scene.getRoot()).getChildren().addAll(hb);
 		VBox.setVgrow(workTabs, Priority.ALWAYS);
+		mainWindow.setOnCloseRequest(x->{
+			for(Tab t : workTabs.getTabs()){
+				if(t.getText().contains("*")==false){
+					continue;
+				}
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Warning!");
+				String s = "Any unsaved data will be lost!";
+				alert.setContentText(s);
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.isPresent() && result.get() == ButtonType.OK) {
+
+				} else {
+					x.consume();
+				}
+			}
+		});
 	}
 
 	private void LoadData(){
@@ -238,7 +256,7 @@ public class GUI {
 		workTabs.getSelectionModel().select(t);
 		t.setContent(content);
 		t.setOnClosed(x->{
-			if(workTabs.getTabs().contains(emptyTab) == false){
+			if(workTabs.getTabs().size()<1&&workTabs.getTabs().contains(emptyTab) == false){
 				AddTab(null,mainLayout);
 			}
 		});
@@ -333,7 +351,7 @@ public class GUI {
 	@SuppressWarnings("unchecked")
 	private void ClassAction(@SuppressWarnings("rawtypes") Class c){
 		try {
-			WorkTab my = new WorkTab((Tabable) c.getConstructor().newInstance());
+			WorkTab my = new WorkTab((Tabable) c.getConstructor().newInstance(),true);
 			AddTab(my.getTabable(),my.getScrollPaneContent());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -344,6 +362,7 @@ public class GUI {
 		for (ItemXML i : idToItem.values()) {
 			al.add(new Item(i));
 		}
+		Collections.sort(al);
 		return al;
 	}
 	public void SaveCurrentTab(){
@@ -651,6 +670,9 @@ public class GUI {
 		if(Structure.class.isAssignableFrom(tab.getClass())){
 			HashMap<Integer,Structure> temp = new HashMap<Integer,Structure>(idToStructures);
 			temp.values().removeIf(x->x.getClass()!=tab.getClass()); 
+			if(temp.keySet().isEmpty()){
+				return -1;
+			}
 			int max = Collections.max(temp.keySet())+1;
 			if(doesIDexistForTabable(max,tab)!=null){
 				Alert a = new Alert(AlertType.INFORMATION);

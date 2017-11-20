@@ -16,12 +16,16 @@ import com.mortmann.andja.creator.util.Tabable;
 public class Need implements Tabable {
 	public enum People {Peasent,Citizen,Patrician,Nobleman}
 	
+	@FieldInfo(order=1,required=true)
 	@Element(required=true)
 	public float Peasent=0;
+	@FieldInfo(order=2,required=true)
 	@Element(required=true)
 	public float Citizen=0;
+	@FieldInfo(order=3,required=true)
 	@Element(required=true)
 	public float Patrician=0;
+	@FieldInfo(order=4,required=true)
 	@Element(required=true)
 	public float Nobleman=0;
 	
@@ -44,7 +48,7 @@ public class Need implements Tabable {
 	@FieldInfo(required=true)
 	@Element(required=false)
 	public int startLevel;
-	@FieldInfo(required=true)
+	@FieldInfo(required=true,subType=People.class)
 	@Element(required=false)
 	public int popCount;
 	

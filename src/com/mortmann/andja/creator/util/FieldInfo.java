@@ -17,4 +17,6 @@ public @interface FieldInfo {
     //TODO For need make it so it cann toggle between item/structure
     //TODO For need make it so it disables other fields
     //maybe with enums...
+    boolean longtext() default false;
+    
 }

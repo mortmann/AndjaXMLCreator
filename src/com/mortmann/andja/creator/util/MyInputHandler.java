@@ -7,6 +7,7 @@ import com.mortmann.andja.creator.GUI;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -41,15 +42,21 @@ public class MyInputHandler implements EventHandler<Event> {
 		}
 		if(event.getTarget()==null){
 			return;//there is no target so no need to save event for reverse
-		}
+		}		
 		if(event instanceof KeyEvent){
-			if(((KeyEvent)event).getCode() == KeyCode.S&&((KeyEvent)event).isControlDown() || KeyEvent.KEY_PRESSED != ((KeyEvent)event).getEventType() ){
+			KeyCode key = ((KeyEvent)event).getCode();
+			if(key == KeyCode.S&&((KeyEvent)event).isControlDown() || KeyEvent.KEY_PRESSED != ((KeyEvent)event).getEventType() ){
+				return;
+			}
+			if(key==KeyCode.CONTROL||key==KeyCode.ALT||key==KeyCode.ALT_GRAPH){
 				return;
 			}
 			GUI.Instance.changedCurrentTab();
 		}
-		if(event instanceof MouseEvent){
-			GUI.Instance.changedCurrentTab();
+
+		if(event.getTarget() instanceof ComboBox || event.getTarget() instanceof CheckBox||  event.getTarget() instanceof Button){
+			if(event.getTarget() instanceof ComboBox)
+				GUI.Instance.changedCurrentTab();
 		}
 		events.push(event);
 	}

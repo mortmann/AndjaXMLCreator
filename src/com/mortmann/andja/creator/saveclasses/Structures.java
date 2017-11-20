@@ -3,6 +3,8 @@ package com.mortmann.andja.creator.saveclasses;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import com.mortmann.andja.creator.structures.*;
 
@@ -21,7 +23,7 @@ public class Structures {
 	public Structures(){
 		
 	}
-	public Structures(Iterable<Structure> Structures){
+	public Structures(List<Structure> Structures){
 		roads = new ArrayList<>();
 		farms = new ArrayList<>();
 		growables = new ArrayList<>();
@@ -31,6 +33,7 @@ public class Structures {
 		productions = new ArrayList<>();
 		warehouses = new ArrayList<>();
 		homes = new ArrayList<>();
+		Collections.sort(Structures);
 		for (Structure s : Structures) {
 			if(s instanceof Road){
 				roads.add((Road)s);

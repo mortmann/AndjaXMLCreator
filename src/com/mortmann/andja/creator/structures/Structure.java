@@ -12,6 +12,7 @@ import org.simpleframework.xml.convert.Convert;
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
+import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.convertes.BuildTypesConverter;
@@ -29,7 +30,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public int ID =-1;	
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
-	@FieldInfo(required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
+	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
 	@FieldInfo(required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> HoverOver;
 	@FieldInfo(subType=String.class) @ElementMap(key = "lang",required=false) public HashMap<String,String> Short;
 	
@@ -39,7 +40,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@FieldInfo(required=true) @Element public float MaxHealth;
 
 	@Element(required=false) public int buildingRange = 0;
-	@FieldInfo(required=true)@Element public int PopulationLevel = -1;
+	@FieldInfo(required=true,subType=People.class)@Element public int PopulationLevel = -1;
 	@FieldInfo(required=true)@Element public int PopulationCount = -1;
 
 	@Element(required=false) public int StructureLevel = 0;
@@ -62,7 +63,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public int maintenancecost;
 	@Element(required=false) public int buildcost;
 
-	@Element(required=false)@Convert(BuildTypesConverter.class) public BuildTypes BuildTyp =  BuildTypes.Single ;
+	@Element(required=false)@Convert(BuildTypesConverter.class) public BuildTypes BuildTyp =  BuildTypes.Single;
 	@Element(required=false)@Convert(BuildingTypConverter.class) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
 	
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
