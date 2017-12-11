@@ -62,167 +62,257 @@
       <Type>0</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="401">
+   <Item ID="101">
       <count>0</count>
       <Name>
-         <entry lang="English">Perfume Bottle</entry>
-         <entry lang="German">Parfümflaschen</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="402">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Whale Oil</entry>
-         <entry lang="German">Waltran</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="403">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Perfume</entry>
-         <entry lang="German">Parfum</entry>
+         <entry lang="English">Fish</entry>
+         <entry lang="German">Fisch</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="404">
+   <Item ID="102">
       <count>0</count>
       <Name>
-         <entry lang="English">Fur</entry>
-         <entry lang="German">Pelze</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="405">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Silk</entry>
-         <entry lang="German">Seide</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="406">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Luxury Clothes</entry>
-         <entry lang="German">Luxuskleider </entry>
+         <entry lang="English">Potatoes</entry>
+         <entry lang="German">Kartoffeln</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="407">
+   <Item ID="103">
       <count>0</count>
       <Name>
-         <entry lang="English">Wine Grapes</entry>
-         <entry lang="German">Weintrauben</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="408">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Casks</entry>
-         <entry lang="German">Fässer</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="409">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Wine</entry>
-         <entry lang="German">Wein</entry>
+         <entry lang="English">Venison</entry>
+         <entry lang="German">Wildfleisch</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="410">
+   <Item ID="104">
       <count>0</count>
       <Name>
-         <entry lang="English">Gold Ore</entry>
-         <entry lang="German">Goldnuggets</entry>
+         <entry lang="English">Sugar</entry>
+         <entry lang="German">Zucker</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="411">
+   <Item ID="105">
       <count>0</count>
       <Name>
-         <entry lang="English">Gold</entry>
-         <entry lang="German">Gold</entry>
+         <entry lang="English">Fruits</entry>
+         <entry lang="German">Früchte</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="412">
+   <Item ID="106">
       <count>0</count>
       <Name>
-         <entry lang="English">Rough Diamonds</entry>
-         <entry lang="German">Rohdiamanten</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="413">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Diamonds</entry>
-         <entry lang="German">Diamanten</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="414">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Jewelry</entry>
-         <entry lang="German">Schmuck</entry>
+         <entry lang="English">Liquor</entry>
+         <entry lang="German">Schnaps</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="416">
+   <Item ID="107">
       <count>0</count>
       <Name>
-         <entry lang="English">Cocoa</entry>
-         <entry lang="German">Kakao</entry>
+         <entry lang="English">Hemp</entry>
+         <entry lang="German">Hanf</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="418">
+   <Item ID="108">
       <count>0</count>
       <Name>
-         <entry lang="English">Sweets</entry>
-         <entry lang="German">Süßigkeiten</entry>
+         <entry lang="English">Hemp Fabric</entry>
+         <entry lang="German">Hanfballen</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="109">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Hemp Clothes</entry>
+         <entry lang="German">Hanfkleidung</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="420">
+   <Item ID="201">
       <count>0</count>
       <Name>
-         <entry lang="English">Carpets</entry>
-         <entry lang="German">Teppiche</entry>
+         <entry lang="English">Wheat</entry>
+         <entry lang="German">Getreide</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="202">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Flour</entry>
+         <entry lang="German">Mehl</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="203">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Bread</entry>
+         <entry lang="German">Brot</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="421">
+   <Item ID="204">
       <count>0</count>
       <Name>
-         <entry lang="English">Luxury Cutlery</entry>
-         <entry lang="German">Luxusbesteck</entry>
+         <entry lang="English">Grain Salt</entry>
+         <entry lang="German">Grobes Salz</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="205">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Salt</entry>
+         <entry lang="German">Salz</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
+   </Item>
+   <Item ID="206">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Iron Ore</entry>
+         <entry lang="German">Eisenerz</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="207">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Iron Ingot</entry>
+         <entry lang="German">Eisenrohling</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="208">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Coal</entry>
+         <entry lang="German">Kohle</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="209">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Milk</entry>
+         <entry lang="German">Milch</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>0</Decays>
+   </Item>
+   <Item ID="210">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Cheese</entry>
+         <entry lang="German">Käse</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>0</Decays>
+   </Item>
+   <Item ID="211">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Pig</entry>
+         <entry lang="German">Schwein</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="212">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Pig-Meat</entry>
+         <entry lang="German">Schweinefleisch</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="213">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Leather</entry>
+         <entry lang="German">Leder</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="214">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Leather Shoe</entry>
+         <entry lang="German">Lederschuhe</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="215">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Spice</entry>
+         <entry lang="German">Gewürz</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="216">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Cooper Ore</entry>
+         <entry lang="German">Kupfererz</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="217">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Copper Ingots</entry>
+         <entry lang="German">Kupferbarren</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="218">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Cutlery</entry>
+         <entry lang="German">Besteck</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="219">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Hopfen</entry>
+         <entry lang="German">Hops</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>0</Decays>
    </Item>
    <Item ID="301">
       <count>0</count>
@@ -422,200 +512,164 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="201">
+   <Item ID="401">
       <count>0</count>
       <Name>
-         <entry lang="English">Wheat</entry>
-         <entry lang="German">Getreide</entry>
+         <entry lang="English">Perfume Bottle</entry>
+         <entry lang="German">Parfümflaschen</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="202">
+   <Item ID="402">
       <count>0</count>
       <Name>
-         <entry lang="English">Flour</entry>
-         <entry lang="German">Mehl</entry>
+         <entry lang="English">Whale Oil</entry>
+         <entry lang="German">Waltran</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="203">
+   <Item ID="403">
       <count>0</count>
       <Name>
-         <entry lang="English">Bread</entry>
-         <entry lang="German">Brot</entry>
+         <entry lang="English">Perfume</entry>
+         <entry lang="German">Parfum</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="204">
+   <Item ID="404">
       <count>0</count>
       <Name>
-         <entry lang="English">Grain Salt</entry>
-         <entry lang="German">Grobes Salz</entry>
+         <entry lang="English">Fur</entry>
+         <entry lang="German">Pelze</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="205">
+   <Item ID="405">
       <count>0</count>
       <Name>
-         <entry lang="English">Salt</entry>
-         <entry lang="German">Salz</entry>
+         <entry lang="English">Silk</entry>
+         <entry lang="German">Seide</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="406">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Luxury Clothes</entry>
+         <entry lang="German">Luxuskleider </entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="206">
+   <Item ID="407">
       <count>0</count>
       <Name>
-         <entry lang="English">Iron Ore</entry>
-         <entry lang="German">Eisenerz</entry>
+         <entry lang="English">Wine Grapes</entry>
+         <entry lang="German">Weintrauben</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="207">
+   <Item ID="408">
       <count>0</count>
       <Name>
-         <entry lang="English">Iron Ingot</entry>
-         <entry lang="German">Eisenrohling</entry>
+         <entry lang="English">Casks</entry>
+         <entry lang="German">Fässer</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="208">
+   <Item ID="409">
       <count>0</count>
       <Name>
-         <entry lang="English">Coal</entry>
-         <entry lang="German">Kohle</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="211">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Pig</entry>
-         <entry lang="German">Schwein</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="212">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Pig-Meat</entry>
-         <entry lang="German">Schweinefleisch</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="213">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Leather</entry>
-         <entry lang="German">Leder</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="214">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Leather Shoe</entry>
-         <entry lang="German">Lederschuhe</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="215">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Spice</entry>
-         <entry lang="German">Gewürz</entry>
+         <entry lang="English">Wine</entry>
+         <entry lang="German">Wein</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="216">
+   <Item ID="410">
       <count>0</count>
       <Name>
-         <entry lang="English">Cooper Ore</entry>
-         <entry lang="German">Kupfererz</entry>
+         <entry lang="English">Gold Ore</entry>
+         <entry lang="German">Goldnuggets</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="217">
+   <Item ID="411">
       <count>0</count>
       <Name>
-         <entry lang="English">Copper Ingots</entry>
-         <entry lang="German">Kupferbarren</entry>
+         <entry lang="English">Gold</entry>
+         <entry lang="German">Gold</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="218">
+   <Item ID="412">
       <count>0</count>
       <Name>
-         <entry lang="English">Cutlery</entry>
-         <entry lang="German">Besteck</entry>
-      </Name>
-      <Type>2</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="221">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Sugar</entry>
-         <entry lang="German">Zucker</entry>
+         <entry lang="English">Rough Diamonds</entry>
+         <entry lang="German">Rohdiamanten</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="222">
+   <Item ID="413">
       <count>0</count>
       <Name>
-         <entry lang="English">Rum</entry>
-         <entry lang="German">Rum</entry>
-      </Name>
-      <Type>2</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="101">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Fish</entry>
-         <entry lang="German">Fisch</entry>
-      </Name>
-      <Type>2</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="102">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Potatoes</entry>
-         <entry lang="German">Kartoffeln</entry>
-      </Name>
-      <Type>2</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="104">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Fruits</entry>
-         <entry lang="German">Früchte</entry>
+         <entry lang="English">Diamonds</entry>
+         <entry lang="German">Diamanten</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="105">
+   <Item ID="414">
       <count>0</count>
       <Name>
-         <entry lang="English">Liquor</entry>
-         <entry lang="German">Schnaps</entry>
+         <entry lang="English">Jewelry</entry>
+         <entry lang="German">Schmuck</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="416">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Cocoa</entry>
+         <entry lang="German">Kakao</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="418">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Sweets</entry>
+         <entry lang="German">Süßigkeiten</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="420">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Carpets</entry>
+         <entry lang="German">Teppiche</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>-1</Decays>
+   </Item>
+   <Item ID="421">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Luxury Cutlery</entry>
+         <entry lang="German">Luxusbesteck</entry>
       </Name>
       <Type>2</Type>
       <Decays>-1</Decays>
@@ -629,29 +683,11 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="106">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Hemp</entry>
-         <entry lang="German">Hanf</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
    <Item ID="1002">
       <count>0</count>
       <Name>
          <entry lang="English">Armors</entry>
          <entry lang="German">Rüstungen</entry>
-      </Name>
-      <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="107">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Hemp Fabric</entry>
-         <entry lang="German">Hanfballen</entry>
       </Name>
       <Type>1</Type>
       <Decays>-1</Decays>
@@ -663,15 +699,6 @@
          <entry lang="German">Schwerter</entry>
       </Name>
       <Type>1</Type>
-      <Decays>-1</Decays>
-   </Item>
-   <Item ID="108">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Hemp Clothes</entry>
-         <entry lang="German">Hanfkleidung</entry>
-      </Name>
-      <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
    <Item ID="1004">

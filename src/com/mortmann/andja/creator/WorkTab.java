@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 
-import javax.crypto.CipherInputStream;
-
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Fertility;
 import com.mortmann.andja.creator.other.Fertility.Climate;
@@ -142,7 +140,7 @@ public class WorkTab {
             	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(compare ==  String.class) {
-            	if(info.longtext()){
+            	if(info!=null&&info.longtext()){
                 	stringGrid.add(CreateLongStringSetter(fld[i].getName(),fld[i],obj), 0, i);
             	} else {
                 	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);

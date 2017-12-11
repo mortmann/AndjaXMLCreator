@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -507,7 +506,7 @@ public class GUI {
 		}
 		GetCurrentTab().setText("*"+GetCurrentTab().getText());
 	}
-	private Tab GetCurrentTab(){
+	public Tab GetCurrentTab(){
 		return workTabs.getSelectionModel().getSelectedItem();
 	}
 	
@@ -702,6 +701,10 @@ public class GUI {
 			return Collections.max(idToNeed.keySet())+1; 
 		}
 		return -1;
+	}
+
+	public Node getRoot() {
+		return scene.getRoot();
 	}
 	
 }

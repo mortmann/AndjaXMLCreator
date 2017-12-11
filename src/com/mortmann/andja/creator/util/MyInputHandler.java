@@ -7,13 +7,14 @@ import com.mortmann.andja.creator.GUI;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 public class MyInputHandler implements EventHandler<Event> {
 
@@ -34,10 +35,8 @@ public class MyInputHandler implements EventHandler<Event> {
 		    }
 			if (((KeyEvent)event).getCode() == KeyCode.S&& KeyEvent.KEY_PRESSED == ((KeyEvent)event).getEventType() && ((KeyEvent)event).isControlDown()) { 
 				GUI.Instance.SaveCurrentTab();
-				//reverse
-				//make redo
 				event.consume();
-				return; //stop not save it as last 
+				return; 
 		    }
 		}
 		if(event.getTarget()==null){
@@ -55,8 +54,21 @@ public class MyInputHandler implements EventHandler<Event> {
 		}
 
 		if(event.getTarget() instanceof ComboBox || event.getTarget() instanceof CheckBox||  event.getTarget() instanceof Button){
-			if(event.getTarget() instanceof ComboBox)
-				GUI.Instance.changedCurrentTab();
+			Parent curr = ((Node)event.getTarget()).getParent();
+			Node root = GUI.Instance.getRoot(); 
+			while(curr != root){
+				if(curr == GUI.Instance.GetCurrentTab().getContent()){
+					GUI.Instance.changedCurrentTab();
+					break;
+				}
+				if(curr!=null){
+					curr = curr.getParent();
+				} else {
+					//temp fix
+					GUI.Instance.changedCurrentTab();
+					break;
+				}
+			}
 		}
 		events.push(event);
 	}

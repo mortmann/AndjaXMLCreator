@@ -89,6 +89,15 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
+   <Item ID="104">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Sugar</entry>
+         <entry lang="German">Zucker</entry>
+      </Name>
+      <Type>1</Type>
+      <Decays>-1</Decays>
+   </Item>
    <Item ID="105">
       <count>0</count>
       <Name>
@@ -206,6 +215,24 @@
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
+   <Item ID="209">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Milk</entry>
+         <entry lang="German">Milch</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>0</Decays>
+   </Item>
+   <Item ID="210">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Cheese</entry>
+         <entry lang="German">Käse</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>0</Decays>
+   </Item>
    <Item ID="211">
       <count>0</count>
       <Name>
@@ -278,14 +305,23 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="104">
+   <Item ID="219">
       <count>0</count>
       <Name>
-         <entry lang="English">Sugar</entry>
-         <entry lang="German">Zucker</entry>
+         <entry lang="English">Hopfen</entry>
+         <entry lang="German">Hops</entry>
       </Name>
       <Type>1</Type>
-      <Decays>-1</Decays>
+      <Decays>0</Decays>
+   </Item>
+   <Item ID="220">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Beer</entry>
+         <entry lang="German">Bier</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>0</Decays>
    </Item>
    <Item ID="301">
       <count>0</count>
