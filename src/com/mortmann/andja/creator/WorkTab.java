@@ -16,6 +16,7 @@ import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.structures.Growable;
 import com.mortmann.andja.creator.structures.NeedsBuilding;
+import com.mortmann.andja.creator.structures.Production.InputTyp;
 import com.mortmann.andja.creator.structures.Structure.BuildTypes;
 import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
 import com.mortmann.andja.creator.structures.Structure.Direction;
@@ -146,6 +147,7 @@ public class WorkTab {
                 	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
             	}
             }
+            
             else if(compare ==  BuildTypes.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildTypes.class), 0, i);
             }
@@ -160,6 +162,12 @@ public class WorkTab {
             }
             else if(compare == ItemType.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
+            }
+            else if(compare == ItemType.class) {
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
+            }
+            else if(compare == InputTyp.class) {
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,InputTyp.class), 0, i);
             }
             else if(compare == ArrayList.class) {
             	if(fld[i].getAnnotation(FieldInfo.class)==null){

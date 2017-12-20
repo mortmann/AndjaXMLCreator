@@ -393,7 +393,7 @@
                <count>1</count>
             </Item>
          </output>
-         <growable>506</growable>
+         <growable>505</growable>
       </farm>
       <farm ID="604">
          <Name>
@@ -450,7 +450,7 @@
                <count>1</count>
             </Item>
          </output>
-         <growable>505</growable>
+         <growable>504</growable>
       </farm>
       <farm ID="606">
          <Name>
@@ -627,7 +627,7 @@
                <count>1</count>
             </Item>
          </output>
-         <growable>0</growable>
+         <growable>501</growable>
       </farm>
       <farm ID="609">
          <Name>
@@ -687,7 +687,7 @@
                <count>1</count>
             </Item>
          </output>
-         <growable>0</growable>
+         <growable>501</growable>
       </farm>
       <farm ID="610">
          <Name>
@@ -751,6 +751,52 @@
       </farm>
    </farms>
    <growables>
+      <growable ID="501">
+         <Name>
+            <entry lang="English">Farmland</entry>
+            <entry lang="German">Ackerland</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Free spaces for animals.</entry>
+            <entry lang="German">Freies Land für Tiere.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Farmland</entry>
+            <entry lang="German">Ackerland</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>true</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>5</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>2</myBuildingTyp>
+         <spriteBaseName>farmland</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <growTime>0.0</growTime>
+         <fertility>-1</fertility>
+         <ageStages>0</ageStages>
+      </growable>
       <growable ID="502">
          <Name>
             <entry lang="English">Tree</entry>
@@ -803,6 +849,57 @@
          <fertility>-1</fertility>
          <ageStages>3</ageStages>
       </growable>
+      <growable ID="506">
+         <Name>
+            <entry lang="English">Hempfield</entry>
+            <entry lang="German">Hanffeld</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Grows hemp.</entry>
+            <entry lang="German">Wächst Hanf an.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Hemp</entry>
+            <entry lang="German">Hanf</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <MaxHealth>0.0</MaxHealth>
+         <buildingRange>0</buildingRange>
+         <PopulationLevel>0</PopulationLevel>
+         <PopulationCount>0</PopulationCount>
+         <StructureLevel>0</StructureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>true</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <showExtraUI>false</showExtraUI>
+         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <mustBeBuildOnShore>false</mustBeBuildOnShore>
+         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
+         <maintenancecost>0</maintenancecost>
+         <buildcost>0</buildcost>
+         <BuildTyp>0</BuildTyp>
+         <myBuildingTyp>2</myBuildingTyp>
+         <spriteBaseName>hempfield</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <output length="1">
+            <Item ID="107">
+               <count>0</count>
+            </Item>
+         </output>
+         <growTime>5.0</growTime>
+         <fertility>0</fertility>
+         <ageStages>2</ageStages>
+      </growable>
       <growable ID="503">
          <Name>
             <entry lang="English">Potatoefield</entry>
@@ -854,7 +951,7 @@
          <fertility>-1</fertility>
          <ageStages>2</ageStages>
       </growable>
-      <growable ID="505">
+      <growable ID="504">
          <Name>
             <entry lang="English">Sugarcanefield</entry>
             <entry lang="German">Zuckerrohrfeld</entry>
@@ -905,7 +1002,7 @@
          <fertility>11</fertility>
          <ageStages>2</ageStages>
       </growable>
-      <growable ID="506">
+      <growable ID="505">
          <Name>
             <entry lang="English">Orchard</entry>
             <entry lang="German">Obstgarten</entry>
@@ -1291,7 +1388,7 @@
       </mine>
    </mines>
    <needsbuildings>
-      <needsBuilding ID="401">
+      <needsbuilding ID="401">
          <Name>
             <entry lang="English">Marketplace</entry>
             <entry lang="German">Gemeinschaftsplatz</entry>
@@ -1336,8 +1433,8 @@
             </Item>
          </buildingItems>
          <spriteBaseName>marketplace</spriteBaseName>
-      </needsBuilding>
-      <needsBuilding ID="402">
+      </needsbuilding>
+      <needsbuilding ID="402">
          <Name>
             <entry lang="English">Chapel</entry>
             <entry lang="German">Kapelle</entry>
@@ -1382,8 +1479,8 @@
             </Item>
          </buildingItems>
          <spriteBaseName>chapel</spriteBaseName>
-      </needsBuilding>
-      <needsBuilding ID="403">
+      </needsbuilding>
+      <needsbuilding ID="403">
          <Name>
             <entry lang="English">Inn</entry>
             <entry lang="German">Gasthaus</entry>
@@ -1428,7 +1525,7 @@
             </Item>
          </buildingItems>
          <spriteBaseName>inn</spriteBaseName>
-      </needsBuilding>
+      </needsbuilding>
    </needsbuildings>
    <productions>
       <production ID="801">
@@ -1486,6 +1583,7 @@
                <count>1</count>
             </Item>
          </output>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="804">
          <Name>
@@ -1547,6 +1645,7 @@
                <count>2</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="805">
          <Name>
@@ -1608,6 +1707,7 @@
                <count>1</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="803">
          <Name>
@@ -1664,11 +1764,18 @@
                <count>1</count>
             </Item>
          </output>
-         <intake length="1">
+         <intake length="3">
             <Item ID="102">
                <count>1</count>
             </Item>
+            <Item ID="104">
+               <count>1</count>
+            </Item>
+            <Item ID="105">
+               <count>1</count>
+            </Item>
          </intake>
+         <myInputTyp>1</myInputTyp>
       </production>
       <production ID="802">
          <Name>
@@ -1726,6 +1833,7 @@
             </Item>
          </output>
          <intake length="0"/>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="806">
          <Name>
@@ -1790,6 +1898,7 @@
                <count>2</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="807">
          <Name>
@@ -1854,6 +1963,7 @@
                <count>1</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="808">
          <Name>
@@ -1921,6 +2031,7 @@
                <count>1</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="809">
          <Name>
@@ -1985,6 +2096,7 @@
                <count>1</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="810">
          <Name>
@@ -2049,6 +2161,7 @@
                <count>1</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="811">
          <Name>
@@ -2113,6 +2226,7 @@
                <count>2</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
       <production ID="812">
          <Name>
@@ -2180,6 +2294,7 @@
                <count>2</count>
             </Item>
          </intake>
+         <myInputTyp>0</myInputTyp>
       </production>
    </productions>
    <warehouses>

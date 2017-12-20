@@ -2,7 +2,7 @@ package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.Root;
 
-@Root(strict=false)
+@Root(strict=false,name="needsbuilding")
 public class NeedsBuilding extends Structure {
 
 	
