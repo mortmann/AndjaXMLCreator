@@ -8,7 +8,6 @@ import com.mortmann.andja.creator.util.FieldInfo;
 
 @Root(strict=false)
 public class Growable extends OutputStructure {
-	@FieldInfo(required=true) @Element public float growTime = 5f;
 	@FieldInfo(order = 0,type=Fertility.class) @Element public int fertility=-1;
 	@FieldInfo(required=true) @Element public int ageStages = 2;
 	public Growable(){

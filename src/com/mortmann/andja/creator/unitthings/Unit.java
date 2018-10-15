@@ -15,18 +15,20 @@ import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
-public class Unit implements Tabable {
+public class Unit implements Tabable, Comparable<Unit> {
 	
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	
 	@FieldInfo(required=true) @Element public float MaxHealth;
+	@FieldInfo(required=true) public float buildTime = 1f;
+
 	@Element public int PopulationLevel = 0;
 	@Element public int PopulationCount = 0;
-	@FieldInfo(required=true) @Element public float inventoryPlaces;
-	@FieldInfo(required=true) @Element public float inventorySize;
-	@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
+	@FieldInfo(required=true) @Element public int inventoryPlaces;
+	@FieldInfo(required=true) @Element public int inventorySize;
+	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
 
 	@Element(required=false) public int maintenancecost;
 	@Element(required=false) public int buildcost;
@@ -44,6 +46,10 @@ public class Unit implements Tabable {
 	
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 
+	public Unit(){
+		
+	}
+	
 	@Override
 	public int GetID() {
 		return ID;
@@ -72,8 +78,14 @@ public class Unit implements Tabable {
 	@Override
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
+			System.out.println("Name is empty!");
 			return getClass().getSimpleName();
 		}
 		return Name.get(Language.English.toString());
 	}
+	@Override
+	public int compareTo(Unit u) {
+		return Integer.compare(ID, u.ID);
+	}
+	
 }

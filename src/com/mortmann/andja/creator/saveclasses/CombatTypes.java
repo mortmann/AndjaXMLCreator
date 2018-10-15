@@ -15,9 +15,9 @@ public class CombatTypes {
 	}
 	public CombatTypes() {
 	}
-	@ElementList(name="ArmorTypes", inline=true)
+	@ElementList(name="ArmorTypes", inline=true,required=false)
 	public ArrayList<ArmorType> armorTypes;
 
-	@ElementList(name="DamageTypes", inline=true)
+	@ElementList(name="DamageTypes", inline=true,required=false)
 	public ArrayList<DamageType> damageTypes;
 }

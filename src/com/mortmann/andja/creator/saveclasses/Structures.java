@@ -19,6 +19,7 @@ public class Structures {
 	public ArrayList<Production> productions;
 	public ArrayList<Warehouse> warehouses;
 	public ArrayList<Home> homes;
+	public ArrayList<MilitaryBuilding> militarybuildings;
 
 	public Structures(){
 		
@@ -33,6 +34,7 @@ public class Structures {
 		productions = new ArrayList<>();
 		warehouses = new ArrayList<>();
 		homes = new ArrayList<>();
+		militarybuildings = new ArrayList<>();
 		Collections.sort(Structures);
 		for (Structure s : Structures) {
 			if(s instanceof Road){
@@ -61,6 +63,9 @@ public class Structures {
 			}
 			else if(s instanceof Home){
 				homes.add((Home)s);			
+			}
+			else if(s instanceof MilitaryBuilding){
+				militarybuildings.add((MilitaryBuilding)s);			
 			}
 		}
 	}
