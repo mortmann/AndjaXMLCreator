@@ -1,5 +1,6 @@
 package com.mortmann.andja.creator;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
 import com.mortmann.andja.creator.structures.Structure.Direction;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
+import com.mortmann.andja.creator.unitthings.Unit;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.NumberTextField;
 import com.mortmann.andja.creator.util.OrderEr;
@@ -113,7 +115,8 @@ public class WorkTab {
         return btp;
 	}
 	@SuppressWarnings({ "rawtypes" })
-	private void ClassAction(Tabable t){
+	private void ClassAction(Tabable t){               
+
         Class c = t.getClass();
 		Field fld[] = c.getFields();
 		obj = t;
@@ -163,9 +166,9 @@ public class WorkTab {
             else if(compare == ItemType.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
             }
-            else if(compare == ItemType.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
-            }
+//            else if(compare == ItemType.class) {
+//            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
+//            }
             else if(compare == InputTyp.class) {
             	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,InputTyp.class), 0, i);
             }
@@ -204,15 +207,15 @@ public class WorkTab {
             		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
             		continue;
             	} 
+            	//his is from armortype class
+            	if(fi.subType()==ArmorType.class){
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToArmorType), 0, i);
+            		continue;
+            	} 
             	if(fi.subType()==String.class){
                 	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
                 	continue;
             	} 
-            	
-//            	if(fld[i].getName() == "damageToFLoat"){
-//            		otherGrid.add(CreateClassToIntSetter(fld[i].getName(),fld[i],obj,DamageType.class), 0, i);
-//            		continue;
-//            	} 
             }
             else if(compare == Fertility.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Fertility.class,GUI.Instance.idToFertility), 0, i);
@@ -232,13 +235,104 @@ public class WorkTab {
             else if(compare == float[].class){
             	otherGrid.add(CreateFloatArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
+            else if(compare == Unit[].class){                
+            	otherGrid.add(CreateUnitArraySetter(fld[i].getName(),fld[i],obj), 0, i);
+            }
             else {
-                System.out.println("Variable Name is : " + fld[i].getName() +" : " + compare );
+                System.out.println("Variable Name is: " + fld[i].getName() +" : " + compare );
 
             }
         }         
        
         
+	}
+
+	private Node CreateUnitArraySetter(String name, Field field, Tabable m) {
+		ObservableList<Unit> units = FXCollections.observableArrayList();
+		units.addAll(GUI.Instance.getUnits());
+		GUI.Instance.idToUnit.addListener(new MapChangeListener<Integer,Unit>(){
+			@Override
+			public void onChanged(
+					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends Unit> change) {
+				if(change.getValueAdded()==null){
+					return;
+				}
+				units.add(change.getValueAdded());
+			}
+		});
+		
+		GridPane grid = new GridPane();
+		GridPane listpane = new  GridPane();
+        ColumnConstraints gridcol1 = new ColumnConstraints();
+        gridcol1.setMinWidth(75);
+        ColumnConstraints gridcol2 = new ColumnConstraints();
+        gridcol2.setMinWidth(25);
+        grid.getColumnConstraints().addAll(gridcol1,gridcol2);
+        
+        ColumnConstraints listcol1 = new ColumnConstraints();
+        listcol1.setMinWidth(50);
+        ColumnConstraints listcol2 = new ColumnConstraints();
+        listcol2.setMinWidth(50);
+        
+        listpane.getColumnConstraints().addAll(listcol1,listcol2);
+        int[] oldArray = null;
+		
+		try {
+			oldArray = (int[]) field.get(m);
+		} catch (Exception e1) {
+		}
+		if(oldArray ==null){
+			oldArray = new int[1];
+			oldArray[0] = -1;
+		} else {
+			for (int id : oldArray) {
+				OnArrayClassSelect(listpane,field,m, GUI.Instance.idToUnit.get(id) ,true);
+			}
+		}
+		
+		ComboBox<Unit> box = new ComboBox<Unit>(units);
+		if(oldArray[0] != -1){
+			box.getSelectionModel().select(oldArray[0]);
+		}
+		if(field.getAnnotation(FieldInfo.class)!=null){
+			if(field.getAnnotation(FieldInfo.class).required()){
+			    ObservableList<String> styleClass = box.getStyleClass();
+				if(oldArray[0] == -1){
+					styleClass.add("combobox-error");
+				}
+				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
+					int[] i = null;
+					try {
+						i = (int[]) field.get(m);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(newValue == null && i==null){
+			    	    if(!styleClass.contains("combobox-error")) {
+			    	        styleClass.add("combobox-error");
+			    	    }
+			        } else {
+			        	if(styleClass.contains("combobox-error")) {
+			    	        styleClass.remove("combobox-error");
+			    	    }
+			        }
+				});
+
+			}
+		}
+		grid.add(new Label(name), 0, oldArray.length+1);	
+		grid.add(box, 1, oldArray.length+1);	
+		ScrollPane sp = new ScrollPane();
+		// Action on selection
+		box.setOnAction(x -> {
+			OnArrayClassSelect(listpane,field,m,box.getSelectionModel().getSelectedItem(),false);
+		});
+	    sp.setStyle("-fx-background-color:transparent;");
+		sp.setContent(listpane);
+		sp.setFitToHeight(true);
+		sp.setFitToWidth(true);
+		grid.add(sp, 3, oldArray.length+1);
+		return grid;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -297,7 +391,8 @@ public class WorkTab {
 		ComboBox<Item> box = new ComboBox<Item>(its);
 		try {
 			if(field.get(tab) != null){
-				box.getSelectionModel().select(GUI.Instance.idToItem.get(field.get(tab)));
+				//if error i changed from GUI.Instance.idToItem.get(field.get(tab)) to just field.get(tab)
+				box.getSelectionModel().select((Item) field.get(tab));
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
@@ -439,6 +534,7 @@ public class WorkTab {
 					if(h.containsKey(tab.GetID()))
 					ntf.setText((Float) h.get(tab.GetID())+"");
 				} catch (Exception e1) {
+					e1.printStackTrace();
 				} 
 				ntf.textProperty().addListener(new ChangeListener<String>() {
 					@Override
@@ -455,6 +551,7 @@ public class WorkTab {
 						}
 					}
 				});
+				grid.add(ntf, 1, row);
 				row++;
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e2) {
@@ -889,7 +986,7 @@ public class WorkTab {
 					listpane.add(children.get(i + 2), 2, i);
 				}
 				// remove this value and set the array in class
-				field.set(m, removeItemElement(array, remove - 1));
+				field.set(m, removeElementFromArray(array, remove - 1));
 			} catch (Exception e1) {
 				System.out.println(e1);
 			}
@@ -913,6 +1010,77 @@ public class WorkTab {
 		}
 		listpane.add(l, 0, rows);
 		listpane.add(count, 1, rows);
+		listpane.add(b, 2, rows);
+	}
+	@SuppressWarnings("unchecked")
+	private<T extends Tabable> void OnArrayClassSelect(GridPane listpane, Field field, Tabable m, T select,boolean setup){
+		//get existing field if null or not
+		int[] old = null;
+		Integer rows = 0;
+		try {
+			old = (int[]) field.get(m); 
+			Method method = listpane.getClass().getDeclaredMethod("getNumberOfRows");
+			method.setAccessible(true);
+			rows = (Integer) method.invoke(listpane);
+		} catch (Exception e1) {
+//			System.out.println(e1);
+		}
+		//if null we start at pos 1 else insert at length+1
+		int pos = 1;
+		if(old != null){
+			pos = old.length+1;
+			for (int i = 0; i < old.length; i++) {
+				if(old[i] == select.GetID() ){
+					if(setup== false){
+						return;
+					}
+					pos = i;
+				}
+			}
+		}
+		// Name of Unit
+		Label l = new Label(select.toString());
+		// Remove Button
+		Button b = new Button("X");
+		// set the press button action
+		int remove = pos;
+		b.setOnAction(s -> {
+			try {
+				// get array
+				T[] array = (T[]) field.get(m);
+				// remove the label and button
+				listpane.getChildren().removeAll(l, b);
+				ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
+				listpane.getChildren().clear();
+				for (int i = 0; i < children.size(); i += 3) {
+					listpane.add(children.get(i), 0, i);
+					listpane.add(children.get(i + 1), 1, i);
+					listpane.add(children.get(i + 2), 2, i);
+				}
+				// remove this value and set the array in class
+				field.set(m, removeElementFromArray(array, remove - 1));
+			} catch (Exception e1) {
+				System.out.println(e1);
+			}
+		});
+		try {
+			if(setup==false){
+				// Create newArray in Case old was null
+				int[] newArray = new int[1];
+				if(old != null){
+					//else create a array one bigger than old
+					newArray = new int[old.length + 1];
+					//copy over variables
+					System.arraycopy(old,0,newArray,0,old.length);
+				}
+				//set the new place in array to selected variable 
+				newArray[pos-1] = select.GetID();
+				field.set(m, newArray);
+			}
+ 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		listpane.add(l, 0, rows);
 		listpane.add(b, 2, rows);
 	}
 
@@ -1123,11 +1291,12 @@ public class WorkTab {
 		return grid;
 	}
 	
-	public Item[] removeItemElement(Item[] a, int del) {
+	@SuppressWarnings("unchecked")
+	public<T> T[] removeElementFromArray(T[] a, int del) {
 		if(a.length-1==0){
-			return new Item[0];
+			return (T[])Array.newInstance(a.getClass().getComponentType(), 0);
 		}
-		Item[] newA = new Item[a.length-1];
+		T[] newA = (T[])Array.newInstance(a.getClass().getComponentType(), a.length-1);
 //	    System.arraycopy(newA,0,a,del,a.length-1-del);
 		int newI = 0;// new array pos
 	    for (int i = 0; i < a.length; i++) { // increase old array pos
@@ -1139,23 +1308,6 @@ public class WorkTab {
 		}
 	    return newA;
 	}
-	/*
-	 * if(a.length-1==0){
-			return new Item[0];
-		}
-		Item[] newA = new Item[a.length-1];
-		int newI = 0;
-	    for (int i = 0; i < a.length; i++) {
-	    	System.out.println(a[i]);
-	    	if(i==del){
-	    		i++;
-	    		continue;
-	    	}
-			newA[newI] = a[i];
-	    	newI++;
-		}
-	    return newA;
-	 */
 	
 	private void CheckIfRequired(Node text,Field field,Tabable t){
         FieldInfo info = field.getAnnotation(FieldInfo.class);

@@ -34,7 +34,7 @@ import com.mortmann.andja.creator.saveclasses.Fertilities;
 import com.mortmann.andja.creator.saveclasses.Items;
 import com.mortmann.andja.creator.saveclasses.Needs;
 import com.mortmann.andja.creator.saveclasses.Structures;
-import com.mortmann.andja.creator.saveclasses.Units;
+import com.mortmann.andja.creator.saveclasses.UnitSave;
 import com.mortmann.andja.creator.structures.*;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
@@ -83,6 +83,8 @@ public class GUI {
 		mainLayout = new BorderPane();
 		SetUpMenuBar();
 
+		new TestMapGenerator();
+		
         tabToTabable = new HashMap<>();
 
         idToStructures = FXCollections.observableHashMap();
@@ -172,13 +174,13 @@ public class GUI {
 			e.printStackTrace();
 		}
         try {
-			Units e = serializer.read(Units.class, new File("units.xml"));
-			for (Unit u : e.units) {
+			UnitSave e = serializer.read(UnitSave.class, new File("units.xml"));
+			for (Unit u : e.getAllUnits()) {
 				idToUnit.put(u.ID, u);
 			}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
         try {
 			Needs e = serializer.read(Needs.class, new File("needs.xml"));
@@ -190,15 +192,17 @@ public class GUI {
 		}
         try {
 			CombatTypes e = serializer.read(CombatTypes.class, new File("combat.xml"));
-			for (DamageType u : e.damageTypes) {
-				idToDamageType.put(u.ID, u);
-			}
-			for (ArmorType u : e.armorTypes) {
-				idToArmorType.put(u.ID, u);
-			}
+			if(e.damageTypes!=null)
+				for (DamageType u : e.damageTypes) {
+					idToDamageType.put(u.ID, u);
+				}
+			if(e.armorTypes!=null)
+				for (ArmorType u : e.armorTypes) {
+					idToArmorType.put(u.ID, u);
+				}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
         try {
 			Fertilities e = serializer.read(Fertilities.class, new File("fertilities.xml"));
@@ -285,7 +289,9 @@ public class GUI {
 		MenuItem warehouse = new MenuItem("Warehouse");
 		MenuItem mine = new MenuItem("Mine");
 		MenuItem road = new MenuItem("Road");
-		mStructure.getItems().addAll(production,needsBuilding,farm,growable,home,market,warehouse,mine,road);
+		MenuItem military = new MenuItem("MilitaryBuilding");
+
+		mStructure.getItems().addAll(production,needsBuilding,farm,growable,home,market,warehouse,mine,road,military);
 		production.setOnAction(x->{ClassAction(Production.class);});
 		needsBuilding.setOnAction(x->{ClassAction(NeedsBuilding.class);});
 		farm.setOnAction(x->{ClassAction(Farm.class);});
@@ -295,6 +301,7 @@ public class GUI {
 		warehouse.setOnAction(x->{ClassAction(Warehouse.class);});
 		mine.setOnAction(x->{ClassAction(Mine.class);});
 		road.setOnAction(x->{ClassAction(Road.class);});
+		military.setOnAction(x->{ClassAction(MilitaryBuilding.class);});
 
         Menu mUnit = new Menu("New Unit-Things");
         menuBar.getMenus().add(mUnit);
@@ -451,7 +458,7 @@ public class GUI {
 			saved = SaveCombat();
 		}
 		else if(o instanceof ArmorType){
-			if(((Unit)o).ID==-1){
+			if(((ArmorType)o).ID==-1){
 				return;
 			}
 			idToArmorType.put(((ArmorType)o).ID, ((ArmorType)o));
@@ -566,7 +573,7 @@ public class GUI {
 	}
 	private boolean SaveUnits() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
-        Units ft = new Units(idToUnit.values());
+        UnitSave ft = new UnitSave(idToUnit.values());
         try {
         	BackUPFileTEMP("units.xml");
 			serializer.write(ft, new File("units.xml"));
@@ -705,6 +712,15 @@ public class GUI {
 
 	public Node getRoot() {
 		return scene.getRoot();
+	}
+
+	public ArrayList<Unit> getUnits() {
+		ArrayList<Unit> al = new ArrayList<>();
+		for (Unit u : idToUnit.values()) {
+			al.add(u);
+		}
+		Collections.sort(al);
+		return al;
 	}
 	
 }

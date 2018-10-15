@@ -15,7 +15,6 @@
       </Name>
       <climates>
          <Climate>0</Climate>
-         <Climate>1</Climate>
       </climates>
    </Fertility>
    <Fertility ID="2">
@@ -25,7 +24,6 @@
       </Name>
       <climates>
          <Climate>0</Climate>
-         <Climate>1</Climate>
       </climates>
    </Fertility>
    <Fertility ID="3">
@@ -89,7 +87,6 @@
       </Name>
       <climates>
          <Climate>2</Climate>
-         <Climate>1</Climate>
       </climates>
    </Fertility>
    <Fertility ID="10">

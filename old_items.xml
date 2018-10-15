@@ -314,6 +314,15 @@
       <Type>1</Type>
       <Decays>0</Decays>
    </Item>
+   <Item ID="220">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Beer</entry>
+         <entry lang="German">Bier</entry>
+      </Name>
+      <Type>2</Type>
+      <Decays>0</Decays>
+   </Item>
    <Item ID="301">
       <count>0</count>
       <Name>
@@ -638,7 +647,7 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="416">
+   <Item ID="415">
       <count>0</count>
       <Name>
          <entry lang="English">Cocoa</entry>
@@ -647,7 +656,7 @@
       <Type>1</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="418">
+   <Item ID="416">
       <count>0</count>
       <Name>
          <entry lang="English">Sweets</entry>
@@ -656,7 +665,7 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="420">
+   <Item ID="417">
       <count>0</count>
       <Name>
          <entry lang="English">Carpets</entry>
@@ -665,7 +674,7 @@
       <Type>2</Type>
       <Decays>-1</Decays>
    </Item>
-   <Item ID="421">
+   <Item ID="418">
       <count>0</count>
       <Name>
          <entry lang="English">Luxury Cutlery</entry>

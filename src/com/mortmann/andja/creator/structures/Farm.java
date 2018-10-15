@@ -9,7 +9,8 @@ import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false)
 public class Farm extends OutputStructure {
 	
-	@FieldInfo(order = 0,type=Growable.class) @Element(required=false) public int growable;
+	@FieldInfo(order = 0 ,type=Growable.class , required = true) @Element(required=false) public int growable;
+	@FieldInfo(order = 0, required = true) @Element(required=false) public int neededHarvestToProduce = 5;
 	
 	public Farm(){
 		myBuildingTyp = BuildingTyp.Blocking;
