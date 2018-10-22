@@ -52,6 +52,9 @@ public class Need implements Tabable {
 	@Element(required=false)
 	public int popCount;
 	
+	@FieldInfo(required=true,type=NeedGroup.class)
+	@Element(required=false)
+	public int group;
 	
 	@Override
 	public int GetID() {

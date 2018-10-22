@@ -27,7 +27,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -36,6 +35,8 @@
          <buildcost>15</buildcost>
          <BuildTyp>1</BuildTyp>
          <myBuildingTyp>0</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>dirtroad</spriteBaseName>
       </road>
       <road ID="102">
@@ -65,7 +66,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -74,6 +74,8 @@
          <buildcost>50</buildcost>
          <BuildTyp>1</BuildTyp>
          <myBuildingTyp>0</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="0"/>
          <spriteBaseName>stoneroad</spriteBaseName>
       </road>
@@ -104,7 +106,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -113,6 +114,8 @@
          <buildcost>100</buildcost>
          <BuildTyp>1</BuildTyp>
          <myBuildingTyp>0</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="1">
             <Item ID="4">
                <count>2</count>
@@ -147,7 +150,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -156,6 +158,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>1</BuildTyp>
          <myBuildingTyp>0</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>marbelroad</spriteBaseName>
       </road>
    </roads>
@@ -187,7 +191,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -196,6 +199,8 @@
          <buildcost>250</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="1">
             <Item ID="1">
                <count>10</count>
@@ -252,7 +257,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -261,6 +265,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>5</count>
@@ -310,7 +316,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -319,6 +324,8 @@
          <buildcost>500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>6</count>
@@ -368,7 +375,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -377,6 +383,8 @@
          <buildcost>650</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>15</count>
@@ -426,7 +434,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -435,6 +442,8 @@
          <buildcost>1000</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>10</count>
@@ -484,7 +493,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -493,6 +501,8 @@
          <buildcost>1250</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>3</count>
@@ -545,7 +555,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -554,6 +563,8 @@
          <buildcost>250</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>6</count>
@@ -603,7 +614,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -612,6 +622,8 @@
          <buildcost>450</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>4</count>
@@ -664,7 +676,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -673,6 +684,8 @@
          <buildcost>600</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>3</count>
@@ -725,7 +738,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -734,6 +746,8 @@
          <buildcost>720</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>7</count>
@@ -788,7 +802,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -797,6 +810,8 @@
          <buildcost>5</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>farmland</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -833,7 +848,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -842,6 +856,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="0"/>
          <spriteBaseName>tree</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -884,7 +900,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -893,6 +908,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>hempfield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -934,7 +951,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -943,6 +959,8 @@
          <buildcost>25</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>potatoefield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -984,7 +1002,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -993,6 +1010,8 @@
          <buildcost>25</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>sugarcanefield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1034,7 +1053,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1043,6 +1061,8 @@
          <buildcost>25</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>orchard</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1084,7 +1104,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1093,6 +1112,8 @@
          <buildcost>45</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="0"/>
          <spriteBaseName>wheatfield</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -1135,7 +1156,6 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1144,6 +1164,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>2</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <spriteBaseName>hopvines</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1187,7 +1209,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1196,6 +1217,8 @@
          <buildcost>200</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>3</count>
@@ -1241,7 +1264,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1250,6 +1272,8 @@
          <buildcost>1000</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>0</count>
@@ -1298,7 +1322,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1307,6 +1330,8 @@
          <buildcost>800</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>10</count>
@@ -1355,7 +1380,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1364,6 +1388,8 @@
          <buildcost>1100</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>12</count>
@@ -1417,7 +1443,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1426,6 +1451,8 @@
          <buildcost>200</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>10</count>
@@ -1463,7 +1490,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1472,6 +1498,8 @@
          <buildcost>1500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="2">
                <count>7</count>
@@ -1509,7 +1537,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1518,6 +1545,8 @@
          <buildcost>2000</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="2">
                <count>15</count>
@@ -1557,7 +1586,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>1</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>true</mustBeBuildOnShore>
@@ -1566,6 +1594,8 @@
          <buildcost>100</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>3</count>
@@ -1614,7 +1644,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1623,6 +1652,8 @@
          <buildcost>300</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>15</count>
@@ -1676,7 +1707,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1685,6 +1715,8 @@
          <buildcost>750</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>20</count>
@@ -1738,7 +1770,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1747,6 +1778,8 @@
          <buildcost>500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>5</count>
@@ -1806,7 +1839,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1815,6 +1847,8 @@
          <buildcost>1200</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>10</count>
@@ -1864,7 +1898,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1873,6 +1906,8 @@
          <buildcost>1500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>10</count>
@@ -1929,7 +1964,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -1938,6 +1972,8 @@
          <buildcost>500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>5</count>
@@ -1994,7 +2030,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2003,6 +2038,8 @@
          <buildcost>1250</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>8</count>
@@ -2062,7 +2099,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2071,6 +2107,8 @@
          <buildcost>750</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>5</count>
@@ -2127,7 +2165,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2136,6 +2173,8 @@
          <buildcost>1400</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>12</count>
@@ -2192,7 +2231,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2201,6 +2239,8 @@
          <buildcost>1500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>6</count>
@@ -2257,7 +2297,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2266,6 +2305,8 @@
          <buildcost>1700</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>10</count>
@@ -2327,7 +2368,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>true</showExtraUI>
          <mustFrontBuildDir>4</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>true</mustBeBuildOnShore>
@@ -2336,6 +2376,8 @@
          <buildcost>300</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>1</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>3</count>
@@ -2381,7 +2423,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2390,6 +2431,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>2</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="1">
             <Item ID="1">
                <count>2</count>
@@ -2427,7 +2470,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2436,6 +2478,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>2</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="1">
                <count>1</count>
@@ -2476,7 +2520,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2485,6 +2528,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>2</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>1</count>
@@ -2528,7 +2573,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2537,6 +2581,8 @@
          <buildcost>0</buildcost>
          <BuildTyp>0</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>2</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="4">
             <Item ID="1">
                <count>1</count>
@@ -2585,7 +2631,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>2</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>true</mustBeBuildOnShore>
@@ -2594,6 +2639,8 @@
          <buildcost>1500</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="3">
             <Item ID="1">
                <count>10</count>
@@ -2638,7 +2685,6 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <showExtraUI>false</showExtraUI>
          <mustFrontBuildDir>0</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
          <mustBeBuildOnShore>false</mustBeBuildOnShore>
@@ -2647,6 +2693,8 @@
          <buildcost>5000</buildcost>
          <BuildTyp>2</BuildTyp>
          <myBuildingTyp>1</myBuildingTyp>
+         <ExtraUITyp>0</ExtraUITyp>
+         <ExtraBuildUITyp>0</ExtraBuildUITyp>
          <buildingItems length="2">
             <Item ID="2">
                <count>10</count>

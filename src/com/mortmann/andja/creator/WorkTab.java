@@ -21,6 +21,8 @@ import com.mortmann.andja.creator.structures.Production.InputTyp;
 import com.mortmann.andja.creator.structures.Structure.BuildTypes;
 import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
 import com.mortmann.andja.creator.structures.Structure.Direction;
+import com.mortmann.andja.creator.structures.Structure.ExtraBuildUI;
+import com.mortmann.andja.creator.structures.Structure.ExtraUI;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.unitthings.Unit;
@@ -114,7 +116,7 @@ public class WorkTab {
         btp.setMaxHeight(Double.MAX_VALUE);
         return btp;
 	}
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void ClassAction(Tabable t){               
 
         Class c = t.getClass();
@@ -150,27 +152,9 @@ public class WorkTab {
                 	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
             	}
             }
-            
-            else if(compare ==  BuildTypes.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildTypes.class), 0, i);
-            }
-            else if(compare == BuildingTyp.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,BuildingTyp.class), 0, i);
-            }
-            else if(compare == Direction.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,Direction.class), 0, i);
-            }
-            else if(compare == Climate.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
-            }
-            else if(compare == ItemType.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
-            }
-//            else if(compare == ItemType.class) {
-//            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,ItemType.class), 0, i);
-//            }
-            else if(compare == InputTyp.class) {
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,InputTyp.class), 0, i);
+            else if(compare.isEnum()) {
+            	//This is for all enums makes it way easier in the future to create new ones and removes need to add smth here
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,compare), 0, i);
             }
             else if(compare == ArrayList.class) {
             	if(fld[i].getAnnotation(FieldInfo.class)==null){

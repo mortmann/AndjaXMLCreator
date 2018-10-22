@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.simpleframework.xml.ElementList;
 
 import com.mortmann.andja.creator.other.Need;
+import com.mortmann.andja.creator.other.NeedGroup;
 
 public class Needs {
 	public Needs(Collection<Need> values) {
@@ -14,5 +15,7 @@ public class Needs {
 	public Needs(){}
 	@ElementList(name="Needs", inline=true)
 	public ArrayList<Need> needs;
+	@ElementList(name="GroupNeeds", inline=true)
+	public ArrayList<NeedGroup> groupNeeds;
 	
 }

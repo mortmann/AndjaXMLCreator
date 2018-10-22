@@ -33,6 +33,7 @@ import com.mortmann.andja.creator.saveclasses.CombatTypes;
 import com.mortmann.andja.creator.saveclasses.Fertilities;
 import com.mortmann.andja.creator.saveclasses.Items;
 import com.mortmann.andja.creator.saveclasses.Needs;
+import com.mortmann.andja.creator.saveclasses.Others;
 import com.mortmann.andja.creator.saveclasses.Structures;
 import com.mortmann.andja.creator.saveclasses.UnitSave;
 import com.mortmann.andja.creator.structures.*;
@@ -65,8 +66,9 @@ public class GUI {
 	public ObservableMap<Integer,ArmorType> idToArmorType;
 	public ObservableMap<Integer,Unit> idToUnit;
 	public ObservableMap<Integer,Need> idToNeed;
+	public ObservableMap<Integer, NeedGroup> idToNeedGroup;
+	public ObservableMap<Integer, PopulationLevel> idToPopulationLevel;
 
-	
 	HashMap<Tab,Tabable> tabToTabable;
 	
 	@SuppressWarnings("rawtypes")
@@ -94,6 +96,8 @@ public class GUI {
         idToFertility = FXCollections.observableHashMap();
         idToItem = FXCollections.observableHashMap();
         idToNeed = FXCollections.observableHashMap();
+        idToNeedGroup = FXCollections.observableHashMap();
+        idToPopulationLevel = FXCollections.observableHashMap();
         LoadData();
         
         classToDataTab = new HashMap<>();
@@ -112,7 +116,11 @@ public class GUI {
         classToDataTab.put(ArmorType.class, d6);
         DataTab<Need> d7 = new DataTab<>("Need",idToNeed, dataTabs);
         classToDataTab.put(Need.class, d7);
-        
+        DataTab<NeedGroup> d8 = new DataTab<>("NeedGroup", idToNeedGroup, dataTabs);
+        classToDataTab.put(NeedGroup.class, d8);
+        DataTab<PopulationLevel> d9 = new DataTab<>("PopulationLevel", idToPopulationLevel, dataTabs);
+        classToDataTab.put(PopulationLevel.class, d9);
+
 		workTabs = new TabPane();
 		workTabs.setMaxHeight(Double.MAX_VALUE);
 		AddTab(null,mainLayout);
@@ -187,6 +195,9 @@ public class GUI {
 			for (Need u : e.needs) {
 				idToNeed.put(u.ID, u);
 			}
+			for (NeedGroup u : e.groupNeeds) {
+				idToNeedGroup.put(u.ID, u);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -199,6 +210,16 @@ public class GUI {
 			if(e.armorTypes!=null)
 				for (ArmorType u : e.armorTypes) {
 					idToArmorType.put(u.ID, u);
+				}
+//			serializer.write(e,new File( "items.xml" ));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        try {
+			Others e = serializer.read(Others.class, new File("other.xml"));
+			if(e.populationLevels!=null)
+				for (PopulationLevel u : e.populationLevels) {
+					idToPopulationLevel.put(u.Level, u);
 				}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {

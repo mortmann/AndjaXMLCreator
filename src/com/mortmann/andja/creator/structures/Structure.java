@@ -26,7 +26,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public enum BuildTypes {Drag, Path, Single};
 	public enum BuildingTyp {Pathfinding, Blocking,Free};
 	public enum Direction {None, N, E, S, W};
-	public enum ExtraUI { None, ContactRange, Efficiency };
+	public enum ExtraUI { None, ContactRange, Upgrade, Efficiency };
 	public enum ExtraBuildUI { None, Range, Efficiency };
 	
 	@Attribute

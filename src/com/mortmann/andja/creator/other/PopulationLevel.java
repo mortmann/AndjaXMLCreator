@@ -10,25 +10,17 @@ import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
-@Root(strict=false,name="NeedGroup")
-public class NeedGroup implements Tabable {
-	
+@Root(strict=false,name="PopulationLevel")
+public class PopulationLevel implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID;
+	public int Level =-1;	
 	
-	@FieldInfo(required=true,subType=String.class)
-	@ElementMap(key = "lang",attribute=true,required=false) 
-	public HashMap<String,String> Name;
+	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
+	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
 
-	@Attribute
-	@FieldInfo(order=0,required=true,id=true)
-	public float ImportanceLevel;
-
-	@Override
-	public String toString() {
-		return ID +":"+ Name.get(Language.English.toString());
-	}
+	//List of Dependend Need Group will be calculated inside of the Prototype Controller
+	
 	@Override
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
@@ -36,9 +28,10 @@ public class NeedGroup implements Tabable {
 		}
 		return Name.get(Language.English.toString());
 	}
+
 	@Override
 	public int GetID() {
-		return ID;
+		return Level;
 	}
 
 	@Override
