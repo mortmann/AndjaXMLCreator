@@ -15,6 +15,6 @@ public class ExtraBuildUIConverter implements Converter<ExtraBuildUI>{
 	
 		@Override
 		public void write(OutputNode node, ExtraBuildUI arg1) throws Exception {
-			node.setValue(arg1.ordinal()+"");
+			node.setValue(arg1.toString());
 		}
 }

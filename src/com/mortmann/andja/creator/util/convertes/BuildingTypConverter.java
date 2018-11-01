@@ -15,6 +15,6 @@ public class BuildingTypConverter implements Converter<BuildingTyp> {
 
 	@Override
 	public void write(OutputNode node, BuildingTyp arg1) throws Exception {
-		node.setValue(arg1.ordinal() + "");
+		node.setValue(arg1.toString());
 	}
 }

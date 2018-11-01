@@ -20,7 +20,7 @@ public class ItemXML extends Item implements Tabable {
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
-	@Element(required=false)@Convert(ItemTypeConverter.class) public ItemType Type;
+	@Element(required=false) public ItemType Type;
 	@Element public int Decays;
 	
 	@Override

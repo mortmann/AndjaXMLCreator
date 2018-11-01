@@ -9,27 +9,12 @@ import java.util.EnumSet;
 import java.util.HashMap;
 
 import com.mortmann.andja.creator.GUI.Language;
-import com.mortmann.andja.creator.other.Fertility;
+import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.other.Fertility.Climate;
-import com.mortmann.andja.creator.other.Item;
-import com.mortmann.andja.creator.other.Item.ItemType;
-import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.Need.People;
-import com.mortmann.andja.creator.structures.Growable;
-import com.mortmann.andja.creator.structures.NeedsBuilding;
-import com.mortmann.andja.creator.structures.Production.InputTyp;
-import com.mortmann.andja.creator.structures.Structure.BuildTypes;
-import com.mortmann.andja.creator.structures.Structure.BuildingTyp;
-import com.mortmann.andja.creator.structures.Structure.Direction;
-import com.mortmann.andja.creator.structures.Structure.ExtraBuildUI;
-import com.mortmann.andja.creator.structures.Structure.ExtraUI;
-import com.mortmann.andja.creator.unitthings.ArmorType;
-import com.mortmann.andja.creator.unitthings.DamageType;
-import com.mortmann.andja.creator.unitthings.Unit;
-import com.mortmann.andja.creator.util.FieldInfo;
-import com.mortmann.andja.creator.util.NumberTextField;
-import com.mortmann.andja.creator.util.OrderEr;
-import com.mortmann.andja.creator.util.Tabable;
+import com.mortmann.andja.creator.structures.*;
+import com.mortmann.andja.creator.unitthings.*;
+import com.mortmann.andja.creator.util.*;
 
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -203,6 +188,12 @@ public class WorkTab {
             }
             else if(compare == Fertility.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Fertility.class,GUI.Instance.idToFertility), 0, i);
+            }
+            else if(compare == NeedGroup.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,NeedGroup.class,GUI.Instance.idToNeedGroup), 0, i);
+            }
+            else if(compare == NeedGroup.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,PopulationLevel.class,GUI.Instance.idToPopulationLevel), 0, i);
             }
             else if(compare == Growable.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Growable.class,GUI.Instance.idToStructures), 0, i);
@@ -699,13 +690,13 @@ public class WorkTab {
 			    
 			    styleClass.add("combobox-error");
 				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
-					Tabable i = null;
+					int i = 0;
 					try {
-						i =  (Tabable) field.get(m);
+						i =  ((int) field.get(m));
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					if(i==null){
+					if(obsMapTabable.containsKey(i) == false){
 			    	    if(!styleClass.contains("combobox-error")) {
 			    	        styleClass.add("combobox-error");
 			    	    }

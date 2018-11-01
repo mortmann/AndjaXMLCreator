@@ -3,6 +3,7 @@ package com.mortmann.andja.creator.other;
 import java.util.HashMap;
 
 import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
@@ -21,8 +22,8 @@ public class NeedGroup implements Tabable {
 	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
 
-	@Attribute
-	@FieldInfo(order=0,required=true,id=true)
+	@Element
+	@FieldInfo(order=0,required=true)
 	public float ImportanceLevel;
 
 	@Override

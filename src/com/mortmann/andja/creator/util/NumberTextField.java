@@ -88,7 +88,12 @@ public class NumberTextField extends TextField {
 	
 	public int GetIntValue(){
 		if(isFloat){
-			System.out.println("WARNING! YOUR TRYING TO GET A INT VALUE FROM AN FLOAT FIELD!");
+			System.out.println("WARNING! YOUR TRYING TO GET A INT VALUE FROM AN FLOAT FIELD! ");
+			try {
+				throw new Exception("INT VALUE FROM AN FLOAT FIELD");
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()){
 			return 0;

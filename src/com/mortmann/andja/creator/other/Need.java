@@ -64,12 +64,17 @@ public class Need implements Tabable {
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		if(t instanceof Item){
-			if(t.GetID() == ID){
+			if(t.GetID() == item.ID){
 				return this;
 			}
 		}
 		if(t instanceof NeedsBuilding){
-			if(t.GetID() == ID){
+			if(t.GetID() == structure){
+				return this;
+			}
+		}
+		if(t instanceof NeedGroup){
+			if(t.GetID() == group){
 				return this;
 			}
 		}

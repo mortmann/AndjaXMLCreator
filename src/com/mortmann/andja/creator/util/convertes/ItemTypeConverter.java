@@ -15,6 +15,6 @@ public class ItemTypeConverter implements Converter<ItemType>{
 	
 		@Override
 		public void write(OutputNode node, ItemType arg1) throws Exception {
-			node.setValue(arg1.ordinal()+"");
+			node.setValue(arg1.toString());
 		}
 	}

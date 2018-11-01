@@ -29,7 +29,7 @@ public class ClimateArrayListConverter implements Converter<ArrayList<Climate>>{
 	@Override
 	public void write(OutputNode node, ArrayList<Climate> arg1) throws Exception {
 		for(Climate c : arg1){
-			node.getChild("Climate").setValue(c.ordinal()+"");
+			node.setValue(c.toString());
 		}
 	}
 }

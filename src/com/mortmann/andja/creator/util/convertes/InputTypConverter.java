@@ -16,6 +16,6 @@ public class InputTypConverter implements Converter<InputTyp> {
 
 	@Override
 	public void write(OutputNode node, InputTyp arg1) throws Exception {
-		node.setValue(arg1.ordinal() + "");
+		node.setValue(arg1.toString());
 	}
 }

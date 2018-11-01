@@ -26,8 +26,9 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public enum BuildTypes {Drag, Path, Single};
 	public enum BuildingTyp {Pathfinding, Blocking,Free};
 	public enum Direction {None, N, E, S, W};
-	public enum ExtraUI { None, ContactRange, Upgrade, Efficiency };
+	public enum ExtraUI { None, Range, Upgrade, Efficiency };
 	public enum ExtraBuildUI { None, Range, Efficiency };
+	public enum BuildRestriktions { Land, Shore, Mountain };
 	
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
@@ -57,19 +58,19 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public boolean canBeUpgraded = false;
 	@Element(required=false) public boolean canTakeDamage = false;
 
-	@Element(required=false)@Convert(DirectionConverter.class) public Direction mustFrontBuildDir = Direction.None; 
+	@Element(required=false)public Direction mustFrontBuildDir = Direction.None; 
 
 	@Element(required=false) public boolean canStartBurning = false;
-	@Element(required=false) public boolean mustBeBuildOnShore = false;
-	@Element(required=false) public boolean mustBeBuildOnMountain = false;
  
 	@Element(required=false) public int maintenancecost;
 	@Element(required=false) public int buildcost;
 
-	@Element(required=false)@Convert(BuildTypesConverter.class) public BuildTypes BuildTyp =  BuildTypes.Single;
-	@Element(required=false)@Convert(BuildingTypConverter.class) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
-	@Element(required=false)@Convert(ExtraUIConverter.class) public ExtraUI ExtraUITyp = ExtraUI.None;
-	@Element(required=false)@Convert(ExtraBuildUIConverter.class) public ExtraBuildUI ExtraBuildUITyp = ExtraBuildUI.None;
+	@Element(required=false) public BuildTypes BuildTyp =  BuildTypes.Single;
+	@Element(required=false) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
+	@Element(required=false) public ExtraUI ExtraUITyp = ExtraUI.None;
+	@Element(required=false) public ExtraBuildUI ExtraBuildUITyp = ExtraBuildUI.None;
+	@Element(required=false) public BuildRestriktions hasToBuildOnRestriktion;
+	
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;

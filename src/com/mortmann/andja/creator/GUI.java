@@ -37,6 +37,7 @@ import com.mortmann.andja.creator.saveclasses.Others;
 import com.mortmann.andja.creator.saveclasses.Structures;
 import com.mortmann.andja.creator.saveclasses.UnitSave;
 import com.mortmann.andja.creator.structures.*;
+import com.mortmann.andja.creator.structures.Structure.BuildRestriktions;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.unitthings.Ship;
@@ -99,7 +100,6 @@ public class GUI {
         idToNeedGroup = FXCollections.observableHashMap();
         idToPopulationLevel = FXCollections.observableHashMap();
         LoadData();
-        
         classToDataTab = new HashMap<>();
         dataTabs = new TabPane();
         DataTab<Structure> d1 = new DataTab<>("Structures",idToStructures, dataTabs);
@@ -172,6 +172,7 @@ public class GUI {
 			e1.printStackTrace();
 			idToStructures = FXCollections.observableHashMap();
 		}        
+		
         try {
 			Items e = serializer.read(Items.class, new File("items.xml"));
 			for (ItemXML i : e.items) {
@@ -192,9 +193,11 @@ public class GUI {
 		}
         try {
 			Needs e = serializer.read(Needs.class, new File("needs.xml"));
+			if(e.needs!=null)
 			for (Need u : e.needs) {
 				idToNeed.put(u.ID, u);
 			}
+			if(e.groupNeeds!=null)
 			for (NeedGroup u : e.groupNeeds) {
 				idToNeedGroup.put(u.ID, u);
 			}
@@ -292,7 +295,7 @@ public class GUI {
         Menu f = new Menu("File");
         menuBar.getMenus().add(f);
 		MenuItem files = new MenuItem("Save Files");
-		files.setOnAction(x->{saveData();});
+		files.setOnAction(x->{SaveData();});
 		SeparatorMenuItem line = new SeparatorMenuItem();
 		MenuItem exit = new MenuItem("Exit");
 		exit.setOnAction(x->{ System.exit(0); });
@@ -349,8 +352,17 @@ public class GUI {
 		MenuItem item = new MenuItem("Item");
 		MenuItem fertility = new MenuItem("Fertility");
 		MenuItem need = new MenuItem("Need");
+		MenuItem needGroup = new MenuItem("NeedGroup");
+		MenuItem populationLevel = new MenuItem("PopulationLevel");
+
 		need.setOnAction(x-> {
         	ClassAction(Need.class);
+        });
+		needGroup.setOnAction(x-> {
+        	ClassAction(NeedGroup.class);
+        });
+		populationLevel.setOnAction(x-> {
+        	ClassAction(PopulationLevel.class);
         });
 		fertility.setOnAction(x-> {
         	ClassAction(Fertility.class);
@@ -358,13 +370,13 @@ public class GUI {
 		item.setOnAction(x-> {
         	ClassAction(ItemXML.class);
         });
-		mOther.getItems().addAll(item,fertility,need);
+		mOther.getItems().addAll(item,fertility,need,needGroup,populationLevel);
 		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
 
 		
 	}
 	
-	private void saveData() {
+	private void SaveData() {
 		SaveStructures();
 		SaveItems();
 		SaveFertilities();
@@ -492,9 +504,23 @@ public class GUI {
 			idToNeed.put(((Need)o).ID, ((Need)o));
 			saved = SaveNeeds();
 		}
+		else if(o instanceof NeedGroup){
+			if(((NeedGroup)o).ID==-1){
+				return;
+			}
+			idToNeedGroup.put(((NeedGroup)o).ID, ((NeedGroup)o));
+			saved = SaveNeeds();
+		}
+		else if(o instanceof PopulationLevel){
+			if(((PopulationLevel)o).Level<=-1){
+				return;
+			}
+			idToPopulationLevel.put(((PopulationLevel)o).Level, ((PopulationLevel)o));
+			saved = SaveOthers();
+		}
 		if(saved){
 			curr.setText(curr.getText().replaceAll("\\*", ""));
-		}
+		} 
 	}
 	
 
@@ -629,7 +655,7 @@ public class GUI {
 	}
 	private boolean SaveNeeds() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
-		Needs ft = new Needs(idToNeed.values());
+		Needs ft = new Needs(idToNeed.values(), idToNeedGroup.values());
         try {
         	BackUPFileTEMP("needs.xml");
 			serializer.write(ft, new File("needs.xml"));
@@ -642,6 +668,23 @@ public class GUI {
 			return false;
 		}
         BackUPFile("needs.xml");
+		return true;
+	}
+	private boolean SaveOthers(){
+		Serializer serializer = new Persister(new AnnotationStrategy());
+		Others ft = new Others(idToPopulationLevel.values());
+        try {
+        	BackUPFileTEMP("other.xml");
+			serializer.write(ft, new File("other.xml"));
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out! " + e.getMessage());
+			e.printStackTrace();
+			a.show();
+			return false;
+		}
+        BackUPFile("other.xml");
 		return true;
 	}
 	@SuppressWarnings({ "rawtypes" })
@@ -690,7 +733,13 @@ public class GUI {
 		if(tab.getClass()==Need.class){
 			return idToNeed.containsKey(id) ? idToNeed.get(id) : null;
 		}
-		System.out.println("CLASS doesnt have any map assigned!");
+		if(tab.getClass()==NeedGroup.class){
+			return idToNeedGroup.containsKey(id) ? idToNeedGroup.get(id) : null;
+		}
+		if(tab.getClass()==PopulationLevel.class){
+			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
+		}
+		System.out.println("CLASS doesnt have any map assigned! -- doesIDexistForTabable" );
 		return null;
 	}
 	public int getOneHigherThanMaxID(Tabable tab){
@@ -727,6 +776,12 @@ public class GUI {
 		}
 		if(tab.getClass()==Need.class){
 			return Collections.max(idToNeed.keySet())+1; 
+		}
+		if(tab.getClass()==NeedGroup.class){
+			return Collections.max(idToNeedGroup.keySet())+1; 
+		}
+		if(tab.getClass()==PopulationLevel.class){
+			return Collections.max(idToPopulationLevel.keySet())+1; 
 		}
 		return -1;
 	}
