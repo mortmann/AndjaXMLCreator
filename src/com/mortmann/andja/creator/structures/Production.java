@@ -1,13 +1,11 @@
 package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.*;
-import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
-import com.mortmann.andja.creator.util.convertes.InputTypConverter;
 
 @Root(strict=false)
 public class Production extends OutputStructure {

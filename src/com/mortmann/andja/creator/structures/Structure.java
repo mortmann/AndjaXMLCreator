@@ -7,7 +7,6 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
-import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
@@ -15,11 +14,6 @@ import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
-import com.mortmann.andja.creator.util.convertes.BuildTypesConverter;
-import com.mortmann.andja.creator.util.convertes.BuildingTypConverter;
-import com.mortmann.andja.creator.util.convertes.DirectionConverter;
-import com.mortmann.andja.creator.util.convertes.ExtraBuildUIConverter;
-import com.mortmann.andja.creator.util.convertes.ExtraUIConverter;
 
 @Root(strict=false)
 public abstract class Structure implements Tabable, Comparable<Structure>  {
@@ -58,7 +52,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public boolean canBeUpgraded = false;
 	@Element(required=false) public boolean canTakeDamage = false;
 
-	@Element(required=false)public Direction mustFrontBuildDir = Direction.None; 
+	@Element(required=false) public Direction mustFrontBuildDir = Direction.None; 
 
 	@Element(required=false) public boolean canStartBurning = false;
  

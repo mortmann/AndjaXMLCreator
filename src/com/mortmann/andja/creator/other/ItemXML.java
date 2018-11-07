@@ -3,12 +3,10 @@ package com.mortmann.andja.creator.other;
 import java.util.HashMap;
 
 import org.simpleframework.xml.*;
-import org.simpleframework.xml.convert.Convert;
 
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
-import com.mortmann.andja.creator.util.convertes.ItemTypeConverter;
 
 
 @Root(name="Item",strict=false)

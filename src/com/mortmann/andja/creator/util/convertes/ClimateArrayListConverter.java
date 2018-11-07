@@ -19,7 +19,7 @@ public class ClimateArrayListConverter implements Converter<ArrayList<Climate>>{
 			if(val==null||val.isEmpty()){
 				break;
 			}
-			Climate c = (Climate.values())[( Integer.parseInt(val))];
+			Climate c = Climate.valueOf(val);
 			cs.add(c);
 			n.getNext("Climate");
 		}
