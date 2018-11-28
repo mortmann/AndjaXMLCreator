@@ -192,7 +192,7 @@ public class WorkTab {
             else if(compare == NeedGroup.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,NeedGroup.class,GUI.Instance.idToNeedGroup), 0, i);
             }
-            else if(compare == NeedGroup.class) { 
+            else if(compare == PopulationLevel.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,PopulationLevel.class,GUI.Instance.idToPopulationLevel), 0, i);
             }
             else if(compare == Growable.class) { 
@@ -211,28 +211,44 @@ public class WorkTab {
             	otherGrid.add(CreateFloatArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(compare == Unit[].class){                
-            	otherGrid.add(CreateUnitArraySetter(fld[i].getName(),fld[i],obj), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Unit.class, GUI.Instance.idToUnit), 0, i);
+            }
+            else if(compare == NeedsBuilding[].class){                
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, NeedsBuilding[].class, GUI.Instance.idToStructures), 0, i);
+            }
+            else if(compare == Structure[].class){                
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Structure[].class, GUI.Instance.idToStructures), 0, i);
             }
             else {
                 System.out.println("Variable Name is: " + fld[i].getName() +" : " + compare );
-
             }
         }         
        
         
 	}
+	@SuppressWarnings("rawtypes") 
+	private<T extends Tabable> Node CreateTabableArraySetter(String name, Field field, Tabable m, Class tabableClass, ObservableMap<Integer, T> obsMapTabable) {
+		ObservableList<Tabable> tabables = FXCollections.observableArrayList();
+		tabables.addAll(obsMapTabable.values());
 
-	private Node CreateUnitArraySetter(String name, Field field, Tabable m) {
-		ObservableList<Unit> units = FXCollections.observableArrayList();
-		units.addAll(GUI.Instance.getUnits());
-		GUI.Instance.idToUnit.addListener(new MapChangeListener<Integer,Unit>(){
+		Class singleItemClass = tabableClass.getComponentType();
+		if(Structure.class.isAssignableFrom(singleItemClass)) {
+			//if its a structure we need only THAT type of structure in the list so we need to filter the rest out.
+			tabables.removeIf(p-> p.getClass() != singleItemClass);
+		} 
+		obsMapTabable.addListener(new MapChangeListener<Integer,Tabable>(){
 			@Override
 			public void onChanged(
-					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends Unit> change) {
+					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends Tabable> change) {
 				if(change.getValueAdded()==null){
 					return;
 				}
-				units.add(change.getValueAdded());
+				if(Structure.class.isAssignableFrom(singleItemClass)) {
+					if(change.getValueAdded().getClass() != singleItemClass) {
+						return;
+					}
+				}
+				tabables.add(change.getValueAdded());
 			}
 		});
 		
@@ -265,7 +281,7 @@ public class WorkTab {
 			}
 		}
 		
-		ComboBox<Unit> box = new ComboBox<Unit>(units);
+		ComboBox<Tabable> box = new ComboBox<Tabable>(tabables);
 		if(oldArray[0] != -1){
 			box.getSelectionModel().select(oldArray[0]);
 		}
@@ -671,7 +687,6 @@ public class WorkTab {
 		GridPane grid = new  GridPane();
 		ObservableList<Tabable> strs = FXCollections.observableArrayList(obsMapTabable.values());
 		obsMapTabable.addListener(new MapChangeListener<Integer, T>(){
-
 			@Override
 			public void onChanged(javafx.collections.MapChangeListener.Change<? extends Integer, ? extends T> change) {
 				if(change.getValueAdded()!=null)

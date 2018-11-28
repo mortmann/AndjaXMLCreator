@@ -798,5 +798,37 @@ public class GUI {
 		Collections.sort(al);
 		return al;
 	}
+
+	@SuppressWarnings("rawtypes")
+	public ObservableMap<Integer, ? extends Tabable> GetObservableList(Class classTabable) {
+		if(Structure.class.isAssignableFrom(classTabable)){
+			return idToStructures;
+		}
+		if(classTabable==ItemXML.class){
+			return idToItem;
+		}
+		if(Unit.class.isAssignableFrom(classTabable)){
+			return idToUnit; 
+		}
+		if(classTabable==DamageType.class){
+			return idToDamageType; 
+		}
+		if(classTabable==ArmorType.class){
+			return idToArmorType; 
+		}
+		if(classTabable==Fertility.class){
+			return idToFertility;  
+		}
+		if(classTabable==Need.class){
+			return idToNeed; 
+		}
+		if(classTabable==NeedGroup.class){
+			return idToNeedGroup; 
+		}
+		if(classTabable==PopulationLevel.class){
+			return idToPopulationLevel; 
+		}
+		return null;
+	}
 	
 }

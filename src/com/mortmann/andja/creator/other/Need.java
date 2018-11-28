@@ -40,9 +40,9 @@ public class Need implements Tabable {
 	@FieldInfo(required=false)
 	@Element(required=false)
 	public Item item;
-	@FieldInfo(required=false,type=NeedsBuilding.class)
+	@FieldInfo(required=false,type=NeedsBuilding[].class)
 	@Element(required=false)
-	public int structure;
+	public int[] structures;
 	
 	 
 	@FieldInfo(required=true)
@@ -69,8 +69,10 @@ public class Need implements Tabable {
 			}
 		}
 		if(t instanceof NeedsBuilding){
-			if(t.GetID() == structure){
-				return this;
+			for (int id : structure) {
+				if(t.GetID() == id){
+					return this;
+				}
 			}
 		}
 		if(t instanceof NeedGroup){
