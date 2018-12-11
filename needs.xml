@@ -8,7 +8,6 @@
          <entry lang="English">Companionship </entry>
          <entry lang="German">Gemeinschaft</entry>
       </Name>
-      <structure>401</structure>
       <startLevel>0</startLevel>
       <popCount>0</popCount>
       <group>2</group>
@@ -22,7 +21,6 @@
          <entry lang="English">Belief</entry>
          <entry lang="German">Glauben</entry>
       </Name>
-      <structure>402</structure>
       <startLevel>0</startLevel>
       <popCount>500</popCount>
       <group>8</group>
@@ -36,7 +34,6 @@
          <entry lang="English">Fun</entry>
          <entry lang="German">Spaß</entry>
       </Name>
-      <structure>403</structure>
       <startLevel>0</startLevel>
       <popCount>0</popCount>
       <group>3</group>
@@ -53,7 +50,6 @@
       <item ID="102">
          <count>0</count>
       </item>
-      <structure>0</structure>
       <startLevel>0</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -70,7 +66,6 @@
       <item ID="106">
          <count>0</count>
       </item>
-      <structure>0</structure>
       <startLevel>0</startLevel>
       <popCount>500</popCount>
       <group>1</group>
@@ -87,7 +82,6 @@
       <item ID="103">
          <count>0</count>
       </item>
-      <structure>0</structure>
       <startLevel>0</startLevel>
       <popCount>1250</popCount>
       <group>0</group>
@@ -101,7 +95,6 @@
          <entry lang="English">Clothes</entry>
          <entry lang="German">Bekleidung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>0</startLevel>
       <popCount>0</popCount>
       <group>4</group>
@@ -115,7 +108,6 @@
          <entry lang="English">Security</entry>
          <entry lang="German">Sicherkeit</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>5</group>
@@ -129,7 +121,6 @@
          <entry lang="English">Clean</entry>
          <entry lang="German">Sauberkeit</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -143,7 +134,6 @@
          <entry lang="English">Education</entry>
          <entry lang="German">Bildung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -157,7 +147,6 @@
          <entry lang="English">Food</entry>
          <entry lang="German">Nahrung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -171,7 +160,6 @@
          <entry lang="English">Salt?</entry>
          <entry lang="German">Salz?</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -185,7 +173,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -199,7 +186,6 @@
          <entry lang="English">Food</entry>
          <entry lang="German">Nahrung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -213,7 +199,6 @@
          <entry lang="English">Alcohol</entry>
          <entry lang="German">Alkohol</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -227,7 +212,6 @@
          <entry lang="English">Spice?</entry>
          <entry lang="German">Gewürz?</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -241,7 +225,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -255,7 +238,6 @@
          <entry lang="English">Clean</entry>
          <entry lang="German">Sauberkeit</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -269,7 +251,6 @@
          <entry lang="English">Belief</entry>
          <entry lang="German">Glauben</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -283,7 +264,6 @@
          <entry lang="English">Security</entry>
          <entry lang="German">Sicherkeit</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -297,7 +277,6 @@
          <entry lang="English">Fun</entry>
          <entry lang="German">Spaß</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -311,7 +290,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -325,7 +303,6 @@
          <entry lang="English">Food</entry>
          <entry lang="German">Nahrung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -339,7 +316,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -353,7 +329,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -367,7 +342,6 @@
          <entry lang="English">Clothes</entry>
          <entry lang="German">Bekleidung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -381,7 +355,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -395,7 +368,6 @@
          <entry lang="English">Fun</entry>
          <entry lang="German">Spaß</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -409,7 +381,6 @@
          <entry lang="English">Education</entry>
          <entry lang="German">Bildung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -423,7 +394,6 @@
          <entry lang="English">Belief</entry>
          <entry lang="German">Glauben</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -437,7 +407,6 @@
          <entry lang="English">Fun</entry>
          <entry lang="German">Spaß</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -451,7 +420,6 @@
          <entry lang="English">MONUMENT</entry>
          <entry lang="German">MONUMENT</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -465,7 +433,6 @@
          <entry lang="English">MONUMENT</entry>
          <entry lang="German">MONUMENT</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -479,7 +446,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -493,7 +459,6 @@
          <entry lang="English">Clothes</entry>
          <entry lang="German">Bekleidung</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -507,7 +472,6 @@
          <entry lang="English">Alcohol</entry>
          <entry lang="German">Alkohol</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -521,7 +485,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -535,7 +498,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -549,7 +511,6 @@
          <entry lang="English">Luxury</entry>
          <entry lang="German">Luxus</entry>
       </Name>
-      <structure>0</structure>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>0</group>
@@ -566,7 +527,6 @@
       <item ID="101">
          <count>0</count>
       </item>
-      <structure>0</structure>
       <startLevel>0</startLevel>
       <popCount>0</popCount>
       <group>0</group>

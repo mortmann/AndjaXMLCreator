@@ -37,7 +37,6 @@ import com.mortmann.andja.creator.saveclasses.Others;
 import com.mortmann.andja.creator.saveclasses.Structures;
 import com.mortmann.andja.creator.saveclasses.UnitSave;
 import com.mortmann.andja.creator.structures.*;
-import com.mortmann.andja.creator.structures.Structure.BuildRestriktions;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.unitthings.Ship;

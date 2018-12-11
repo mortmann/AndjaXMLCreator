@@ -4,7 +4,6 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Item;
-import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.util.FieldInfo;
 
 @Root(strict=false)

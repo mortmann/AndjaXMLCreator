@@ -27,16 +27,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>15</buildcost>
-         <BuildTyp>1</BuildTyp>
-         <myBuildingTyp>0</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Path</BuildTyp>
+         <myBuildingTyp>Pathfinding</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>dirtroad</spriteBaseName>
       </road>
@@ -67,16 +65,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>50</buildcost>
-         <BuildTyp>1</BuildTyp>
-         <myBuildingTyp>0</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Path</BuildTyp>
+         <myBuildingTyp>Pathfinding</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="0"/>
          <spriteBaseName>stoneroad</spriteBaseName>
@@ -108,16 +104,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>100</buildcost>
-         <BuildTyp>1</BuildTyp>
-         <myBuildingTyp>0</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Path</BuildTyp>
+         <myBuildingTyp>Pathfinding</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="1">
             <Item ID="4">
@@ -153,16 +147,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>1</BuildTyp>
-         <myBuildingTyp>0</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Path</BuildTyp>
+         <myBuildingTyp>Pathfinding</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>marbelroad</spriteBaseName>
       </road>
@@ -195,16 +187,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>25</maintenancecost>
          <buildcost>250</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="1">
             <Item ID="1">
@@ -262,16 +252,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>20</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -322,16 +310,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>60</maintenancecost>
          <buildcost>500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -382,16 +368,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>75</maintenancecost>
          <buildcost>650</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -442,16 +426,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>100</maintenancecost>
          <buildcost>1000</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -502,16 +484,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>65</maintenancecost>
          <buildcost>1250</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -565,16 +545,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>25</maintenancecost>
          <buildcost>250</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -625,16 +603,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>75</maintenancecost>
          <buildcost>450</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -688,16 +664,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>100</maintenancecost>
          <buildcost>600</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -751,16 +725,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>110</maintenancecost>
          <buildcost>720</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -816,16 +788,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>5</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>farmland</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -863,16 +833,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="0"/>
          <spriteBaseName>tree</spriteBaseName>
@@ -916,16 +884,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>hempfield</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -968,16 +934,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>25</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>potatoefield</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -1020,16 +984,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>25</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>sugarcanefield</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -1072,16 +1034,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>25</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>orchard</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -1124,16 +1084,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>45</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="0"/>
          <spriteBaseName>wheatfield</spriteBaseName>
@@ -1177,16 +1135,14 @@
          <canBeBuildOver>true</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>2</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Free</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>hopvines</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -1231,16 +1187,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>10</maintenancecost>
          <buildcost>200</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1287,16 +1241,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>true</mustBeBuildOnMountain>
          <maintenancecost>90</maintenancecost>
          <buildcost>1000</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Mountain</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1346,16 +1298,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>true</mustBeBuildOnMountain>
          <maintenancecost>55</maintenancecost>
          <buildcost>800</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Mountain</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1405,16 +1355,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>true</mustBeBuildOnMountain>
          <maintenancecost>80</maintenancecost>
          <buildcost>1100</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Mountain</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -1469,16 +1417,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>15</maintenancecost>
          <buildcost>200</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1517,16 +1463,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>120</maintenancecost>
          <buildcost>1500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="2">
@@ -1565,16 +1509,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>225</maintenancecost>
          <buildcost>2000</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="2">
@@ -1615,16 +1557,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>1</mustFrontBuildDir>
+         <mustFrontBuildDir>N</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>true</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>100</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Shore</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1645,7 +1585,7 @@
                <count>1</count>
             </Item>
          </output>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="804">
          <Name>
@@ -1674,16 +1614,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>25</maintenancecost>
          <buildcost>300</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1709,7 +1647,7 @@
                <count>2</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="805">
          <Name>
@@ -1738,16 +1676,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>40</maintenancecost>
          <buildcost>750</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1773,7 +1709,7 @@
                <count>1</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="803">
          <Name>
@@ -1802,16 +1738,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>50</maintenancecost>
          <buildcost>500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1843,7 +1777,7 @@
                <count>1</count>
             </Item>
          </intake>
-         <myInputTyp>1</myInputTyp>
+         <myInputTyp>OR</myInputTyp>
       </production>
       <production ID="802">
          <Name>
@@ -1872,16 +1806,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>80</maintenancecost>
          <buildcost>1200</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -1903,7 +1835,7 @@
             </Item>
          </output>
          <intake length="0"/>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="806">
          <Name>
@@ -1932,16 +1864,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>50</maintenancecost>
          <buildcost>1500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -1970,7 +1900,7 @@
                <count>2</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="807">
          <Name>
@@ -1999,16 +1929,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>100</maintenancecost>
          <buildcost>500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2037,7 +1965,7 @@
                <count>1</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="808">
          <Name>
@@ -2066,16 +1994,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>100</maintenancecost>
          <buildcost>1250</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2107,7 +2033,7 @@
                <count>1</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="809">
          <Name>
@@ -2136,16 +2062,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>75</maintenancecost>
          <buildcost>750</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2174,7 +2098,7 @@
                <count>1</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="810">
          <Name>
@@ -2203,16 +2127,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>45</maintenancecost>
          <buildcost>1400</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2241,7 +2163,7 @@
                <count>1</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="811">
          <Name>
@@ -2270,16 +2192,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>150</maintenancecost>
          <buildcost>1500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2308,7 +2228,7 @@
                <count>2</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
       <production ID="812">
          <Name>
@@ -2337,16 +2257,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>160</maintenancecost>
          <buildcost>1700</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2378,7 +2296,7 @@
                <count>2</count>
             </Item>
          </intake>
-         <myInputTyp>0</myInputTyp>
+         <myInputTyp>AND</myInputTyp>
       </production>
    </productions>
    <warehouses>
@@ -2409,16 +2327,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>4</mustFrontBuildDir>
+         <mustFrontBuildDir>W</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>true</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>10</maintenancecost>
          <buildcost>300</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>1</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>Range</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Shore</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -2465,16 +2381,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>2</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>Upgrade</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="1">
             <Item ID="1">
@@ -2483,8 +2397,8 @@
          </buildingItems>
          <spriteBaseName>peasanthouse</spriteBaseName>
          <maxLivingSpaces>8</maxLivingSpaces>
-         <increaseSpeed>1.0</increaseSpeed>
-         <decreaseSpeed>2.0</decreaseSpeed>
+         <increaseTime>1.0</increaseTime>
+         <decreaseTime>2.0</decreaseTime>
       </home>
       <home ID="202">
          <Name>
@@ -2513,16 +2427,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>2</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>Upgrade</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="1">
@@ -2534,8 +2446,8 @@
          </buildingItems>
          <spriteBaseName>citizenhouse</spriteBaseName>
          <maxLivingSpaces>0</maxLivingSpaces>
-         <increaseSpeed>2.0</increaseSpeed>
-         <decreaseSpeed>4.0</decreaseSpeed>
+         <increaseTime>2.0</increaseTime>
+         <decreaseTime>4.0</decreaseTime>
       </home>
       <home ID="203">
          <Name>
@@ -2564,16 +2476,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>2</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>Upgrade</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2588,8 +2498,8 @@
          </buildingItems>
          <spriteBaseName>patricianhouse</spriteBaseName>
          <maxLivingSpaces>0</maxLivingSpaces>
-         <increaseSpeed>3.0</increaseSpeed>
-         <decreaseSpeed>6.0</decreaseSpeed>
+         <increaseTime>3.0</increaseTime>
+         <decreaseTime>6.0</decreaseTime>
       </home>
       <home ID="204">
          <Name>
@@ -2618,16 +2528,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>0</maintenancecost>
          <buildcost>0</buildcost>
-         <BuildTyp>0</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>2</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Drag</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>Upgrade</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="4">
             <Item ID="1">
@@ -2645,8 +2553,8 @@
          </buildingItems>
          <spriteBaseName>noblemanhouse</spriteBaseName>
          <maxLivingSpaces>0</maxLivingSpaces>
-         <increaseSpeed>4.0</increaseSpeed>
-         <decreaseSpeed>8.0</decreaseSpeed>
+         <increaseTime>4.0</increaseTime>
+         <decreaseTime>8.0</decreaseTime>
       </home>
    </homes>
    <militarybuildings>
@@ -2677,16 +2585,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>2</mustFrontBuildDir>
+         <mustFrontBuildDir>E</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>true</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>50</maintenancecost>
          <buildcost>1500</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Shore</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="1">
@@ -2732,16 +2638,14 @@
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
-         <mustFrontBuildDir>0</mustFrontBuildDir>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
          <canStartBurning>false</canStartBurning>
-         <mustBeBuildOnShore>false</mustBeBuildOnShore>
-         <mustBeBuildOnMountain>false</mustBeBuildOnMountain>
          <maintenancecost>250</maintenancecost>
          <buildcost>5000</buildcost>
-         <BuildTyp>2</BuildTyp>
-         <myBuildingTyp>1</myBuildingTyp>
-         <ExtraUITyp>0</ExtraUITyp>
-         <ExtraBuildUITyp>0</ExtraBuildUITyp>
+         <BuildTyp>Single</BuildTyp>
+         <myBuildingTyp>Blocking</myBuildingTyp>
+         <ExtraUITyp>None</ExtraUITyp>
+         <ExtraBuildUITyp>None</ExtraBuildUITyp>
          <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="2">

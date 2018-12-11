@@ -7,7 +7,6 @@ import java.util.Collection;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.unitthings.*;
 
 @Root(name="units")

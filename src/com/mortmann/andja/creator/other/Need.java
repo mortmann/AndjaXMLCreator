@@ -69,7 +69,7 @@ public class Need implements Tabable {
 			}
 		}
 		if(t instanceof NeedsBuilding){
-			for (int id : structure) {
+			for (int id : structures) {
 				if(t.GetID() == id){
 					return this;
 				}
