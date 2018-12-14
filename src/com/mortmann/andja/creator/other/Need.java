@@ -16,18 +16,9 @@ import com.mortmann.andja.creator.util.Tabable;
 public class Need implements Tabable {
 	public enum People {Peasent,Citizen,Patrician,Nobleman}
 	
-	@FieldInfo(order=1,required=true)
-	@Element(required=true)
-	public float Peasent=0;
-	@FieldInfo(order=2,required=true)
-	@Element(required=true)
-	public float Citizen=0;
-	@FieldInfo(order=3,required=true)
-	@Element(required=true)
-	public float Patrician=0;
-	@FieldInfo(order=4,required=true)
-	@Element(required=true)
-	public float Nobleman=0;
+	@ElementMap(key = "Level",attribute=true,required=false) 
+	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
+	public HashMap<Integer,Float> UsageAmounts;
 	
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
@@ -78,6 +69,13 @@ public class Need implements Tabable {
 		if(t instanceof NeedGroup){
 			if(t.GetID() == group){
 				return this;
+			}
+		}
+		if(t instanceof PopulationLevel) {
+			for(int id : UsageAmounts.keySet()){
+				if(t.GetID() == id){
+					return this;
+				}
 			}
 		}
 		return null;

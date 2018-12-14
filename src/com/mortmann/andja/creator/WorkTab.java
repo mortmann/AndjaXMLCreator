@@ -171,16 +171,18 @@ public class WorkTab {
             		System.out.println("[ERROR] This type "+ fld[i].getName() +" of field needs a subtype declared!");
             		continue;
             	}
-            	//his is from armortype class
             	if(fi.subType()==DamageType.class){
             		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
             		continue;
             	} 
-            	//his is from armortype class
             	if(fi.subType()==ArmorType.class){
             		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToArmorType), 0, i);
             		continue;
             	} 
+            	if(fi.subType()==PopulationLevel.class){
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToPopulationLevel), 0, i);
+            		continue;
+            	}
             	if(fi.subType()==String.class){
                 	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
                 	continue;

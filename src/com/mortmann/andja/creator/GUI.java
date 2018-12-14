@@ -200,6 +200,14 @@ public class GUI {
 			for (NeedGroup u : e.groupNeeds) {
 				idToNeedGroup.put(u.ID, u);
 			}
+//			for(Need u : idToNeed.values()) {
+//				u.UsageAmounts = new HashMap<>();
+//				u.UsageAmounts.put(0, u.Peasent);
+//				u.UsageAmounts.put(1, u.Citizen);
+//				u.UsageAmounts.put(2, u.Patrician);
+//				u.UsageAmounts.put(3, u.Nobleman);
+//			}
+			SaveNeeds();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
