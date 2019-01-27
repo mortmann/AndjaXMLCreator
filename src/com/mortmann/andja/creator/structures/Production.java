@@ -17,7 +17,7 @@ public class Production extends OutputStructure {
 	public Production(){
 		maxOutputStorage = 5; // hardcoded 5 ? need this to change?
 		hasHitbox = true;
-		myBuildingTyp = BuildingTyp.Blocking;
+		myStructureTyp = StructureTyp.Blocking;
 		BuildTyp = BuildTypes.Single;
 		myInputTyp = InputTyp.AND;
 		canTakeDamage = true;

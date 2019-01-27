@@ -13,7 +13,7 @@ public class Farm extends OutputStructure {
 	@FieldInfo(order = 0, required = true) @Element(required=false) public int neededHarvestToProduce = 5;
 	
 	public Farm(){
-		myBuildingTyp = BuildingTyp.Blocking;
+		myStructureTyp = StructureTyp.Blocking;
 		BuildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		this.canTakeDamage = true;

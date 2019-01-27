@@ -18,7 +18,7 @@ import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false)
 public abstract class Structure implements Tabable, Comparable<Structure>  {
 	public enum BuildTypes {Drag, Path, Single};
-	public enum BuildingTyp {Pathfinding, Blocking,Free};
+	public enum StructureTyp {Pathfinding, Blocking,Free};
 	public enum Direction {None, N, E, S, W};
 	public enum ExtraUI { None, Range, Upgrade, Efficiency };
 	public enum ExtraBuildUI { None, Range, Efficiency };
@@ -38,7 +38,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public boolean hasHitbox;
 	@FieldInfo(required=true) @Element public float MaxHealth;
 
-	@Element(required=false) public int buildingRange = 0;
+	@Element(required=false) public int structureRange = 0;
 	@FieldInfo(required=true,subType=People.class)@Element public int PopulationLevel = -1;
 	@FieldInfo(required=true)@Element public int PopulationCount = -1;
 
@@ -60,7 +60,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public int buildcost;
 
 	@Element(required=false) public BuildTypes BuildTyp =  BuildTypes.Single;
-	@Element(required=false) public BuildingTyp myBuildingTyp = BuildingTyp.Blocking;
+	@Element(required=false) public StructureTyp myStructureTyp = StructureTyp.Blocking;
 	@Element(required=false) public ExtraUI ExtraUITyp = ExtraUI.None;
 	@Element(required=false) public ExtraBuildUI ExtraBuildUITyp = ExtraBuildUI.None;
 	@Element(required=false) public BuildRestriktions hasToBuildOnRestriktion;

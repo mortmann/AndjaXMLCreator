@@ -10,10 +10,10 @@ public class Mine extends OutputStructure{
 	public Mine(){
 		tileWidth = 2;
 		tileHeight = 3;
-		myBuildingTyp = BuildingTyp.Blocking;
+		myStructureTyp = StructureTyp.Blocking;
 		BuildTyp = BuildTypes.Single;
 		hasHitbox = true;
-		buildingRange = 0;
+		structureRange = 0;
 	}
 	
 }

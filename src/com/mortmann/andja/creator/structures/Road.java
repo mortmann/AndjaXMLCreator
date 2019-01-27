@@ -9,7 +9,7 @@ public class Road extends Structure {
 		tileWidth = 1;
 		tileHeight = 1;
 		BuildTyp = BuildTypes.Path;
-		myBuildingTyp = BuildingTyp.Pathfinding;
+		myStructureTyp = StructureTyp.Pathfinding;
 		canBeUpgraded = true;
 	}
 	@Override

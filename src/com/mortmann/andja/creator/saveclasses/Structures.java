@@ -15,11 +15,11 @@ public class Structures {
 	public ArrayList<Growable> growables;
 	public ArrayList<Market> markets;
 	public ArrayList<Mine> mines;
-	public ArrayList<NeedsBuilding> needsbuildings;
+	public ArrayList<NeedStructure> needstructures;
 	public ArrayList<Production> productions;
 	public ArrayList<Warehouse> warehouses;
 	public ArrayList<Home> homes;
-	public ArrayList<MilitaryBuilding> militarybuildings;
+	public ArrayList<MilitaryStructure> militarystructures;
 
 	public Structures(){
 		
@@ -30,11 +30,11 @@ public class Structures {
 		growables = new ArrayList<>();
 		markets = new ArrayList<>();
 		mines = new ArrayList<>();
-		needsbuildings = new ArrayList<>();
+		needstructures = new ArrayList<>();
 		productions = new ArrayList<>();
 		warehouses = new ArrayList<>();
 		homes = new ArrayList<>();
-		militarybuildings = new ArrayList<>();
+		militarystructures = new ArrayList<>();
 		Collections.sort(Structures);
 		for (Structure s : Structures) {
 			if(s instanceof Road){
@@ -49,8 +49,8 @@ public class Structures {
 			else if(s instanceof Mine){
 				mines.add((Mine)s);
 			}
-			else if(s instanceof NeedsBuilding){
-				needsbuildings.add((NeedsBuilding)s);
+			else if(s instanceof NeedStructure){
+				needstructures.add((NeedStructure)s);
 			}
 			else if(s instanceof Production){
 				productions.add((Production)s);
@@ -64,8 +64,8 @@ public class Structures {
 			else if(s instanceof Home){
 				homes.add((Home)s);			
 			}
-			else if(s instanceof MilitaryBuilding){
-				militarybuildings.add((MilitaryBuilding)s);			
+			else if(s instanceof MilitaryStructure){
+				militarystructures.add((MilitaryStructure)s);			
 			}
 		}
 	}

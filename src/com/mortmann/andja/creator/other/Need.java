@@ -8,7 +8,7 @@ import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI.Language;
-import com.mortmann.andja.creator.structures.NeedsBuilding;
+import com.mortmann.andja.creator.structures.NeedStructure;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
@@ -31,7 +31,7 @@ public class Need implements Tabable {
 	@FieldInfo(required=false)
 	@Element(required=false)
 	public Item item;
-	@FieldInfo(required=false,type=NeedsBuilding[].class)
+	@FieldInfo(required=false,type=NeedStructure[].class)
 	@Element(required=false)
 	public int[] structures;
 	
@@ -59,7 +59,7 @@ public class Need implements Tabable {
 				return this;
 			}
 		}
-		if(t instanceof NeedsBuilding){
+		if(t instanceof NeedStructure){
 			for (int id : structures) {
 				if(t.GetID() == id){
 					return this;

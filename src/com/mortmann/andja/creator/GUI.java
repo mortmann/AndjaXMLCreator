@@ -312,7 +312,7 @@ public class GUI {
         menuBar.getMenus().add(mStructure);
 		
 		MenuItem production = new MenuItem("Production");
-		MenuItem needsBuilding = new MenuItem("NeedsBuilding");
+		MenuItem needStructure = new MenuItem("NeedStructure");
 		MenuItem farm = new MenuItem("Farm");
 		MenuItem growable = new MenuItem("Growable");
 		MenuItem home = new MenuItem("Home");
@@ -320,11 +320,11 @@ public class GUI {
 		MenuItem warehouse = new MenuItem("Warehouse");
 		MenuItem mine = new MenuItem("Mine");
 		MenuItem road = new MenuItem("Road");
-		MenuItem military = new MenuItem("MilitaryBuilding");
+		MenuItem military = new MenuItem("MilitaryStructure");
 
-		mStructure.getItems().addAll(production,needsBuilding,farm,growable,home,market,warehouse,mine,road,military);
+		mStructure.getItems().addAll(production,needStructure,farm,growable,home,market,warehouse,mine,road,military);
 		production.setOnAction(x->{ClassAction(Production.class);});
-		needsBuilding.setOnAction(x->{ClassAction(NeedsBuilding.class);});
+		needStructure.setOnAction(x->{ClassAction(NeedStructure.class);});
 		farm.setOnAction(x->{ClassAction(Farm.class);});
 		growable.setOnAction(x->{ClassAction(Growable.class);});
 		home.setOnAction(x->{ClassAction(Home.class);});
@@ -332,7 +332,7 @@ public class GUI {
 		warehouse.setOnAction(x->{ClassAction(Warehouse.class);});
 		mine.setOnAction(x->{ClassAction(Mine.class);});
 		road.setOnAction(x->{ClassAction(Road.class);});
-		military.setOnAction(x->{ClassAction(MilitaryBuilding.class);});
+		military.setOnAction(x->{ClassAction(MilitaryStructure.class);});
 
         Menu mUnit = new Menu("New Unit-Things");
         menuBar.getMenus().add(mUnit);

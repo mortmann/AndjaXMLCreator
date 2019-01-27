@@ -2,13 +2,13 @@ package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.Root;
 
-@Root(strict=false,name="needsbuilding")
-public class NeedsBuilding extends Structure {
+@Root(strict=false,name="needstructure")
+public class NeedStructure extends Structure {
 
 	
-	public NeedsBuilding(){
+	public NeedStructure(){
 		BuildTyp = BuildTypes.Single;
-		myBuildingTyp =	BuildingTyp.Blocking;
+		myStructureTyp =	StructureTyp.Blocking;
 	}
 	@Override
 	public int GetID() {

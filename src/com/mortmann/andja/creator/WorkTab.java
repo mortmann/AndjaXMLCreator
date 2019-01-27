@@ -200,8 +200,8 @@ public class WorkTab {
             else if(compare == Growable.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Growable.class,GUI.Instance.idToStructures), 0, i);
             }
-            else if(compare == NeedsBuilding.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,NeedsBuilding.class,GUI.Instance.idToStructures), 0, i);
+            else if(compare == NeedStructure.class) { 
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,NeedStructure.class,GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == DamageType.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,DamageType.class,GUI.Instance.idToDamageType), 0, i);
@@ -215,8 +215,8 @@ public class WorkTab {
             else if(compare == Unit[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Unit.class, GUI.Instance.idToUnit), 0, i);
             }
-            else if(compare == NeedsBuilding[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, NeedsBuilding[].class, GUI.Instance.idToStructures), 0, i);
+            else if(compare == NeedStructure[].class){                
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, NeedStructure[].class, GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == Structure[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Structure[].class, GUI.Instance.idToStructures), 0, i);

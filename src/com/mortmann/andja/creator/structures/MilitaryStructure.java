@@ -7,9 +7,9 @@ import org.simpleframework.xml.Root;
 import com.mortmann.andja.creator.unitthings.*;
 import com.mortmann.andja.creator.util.FieldInfo;
 
-@Root(strict=false,name="militarybuilding")
-public class MilitaryBuilding extends Structure{
-	public MilitaryBuilding() {
+@Root(strict=false,name="militarystructure")
+public class MilitaryStructure extends Structure{
+	public MilitaryStructure() {
 		
 	}
 	@FieldInfo(required=true,type=Unit[].class) @ElementArray(entry="Unit",required=true) public int[] canBeBuildUnits;
