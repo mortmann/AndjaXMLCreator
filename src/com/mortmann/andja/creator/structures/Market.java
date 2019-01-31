@@ -11,7 +11,7 @@ public class Market extends OutputStructure {
 		hasHitbox = true;
 		tileWidth = 4;
 		tileHeight = 4;
-		BuildTyp = BuildTypes.Single;
+		buildTyp = BuildTypes.Single;
 		myStructureTyp = StructureTyp.Blocking;
 		structureRange = 18;
 		canTakeDamage = true;

@@ -7,7 +7,7 @@ public class NeedStructure extends Structure {
 
 	
 	public NeedStructure(){
-		BuildTyp = BuildTypes.Single;
+		buildTyp = BuildTypes.Single;
 		myStructureTyp =	StructureTyp.Blocking;
 	}
 	@Override

@@ -8,7 +8,7 @@ public class Road extends Structure {
 	public Road(){
 		tileWidth = 1;
 		tileHeight = 1;
-		BuildTyp = BuildTypes.Path;
+		buildTyp = BuildTypes.Path;
 		myStructureTyp = StructureTyp.Pathfinding;
 		canBeUpgraded = true;
 	}

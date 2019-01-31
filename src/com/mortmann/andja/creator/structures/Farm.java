@@ -14,7 +14,7 @@ public class Farm extends OutputStructure {
 	
 	public Farm(){
 		myStructureTyp = StructureTyp.Blocking;
-		BuildTyp = BuildTypes.Single;
+		buildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		this.canTakeDamage = true;
 	}

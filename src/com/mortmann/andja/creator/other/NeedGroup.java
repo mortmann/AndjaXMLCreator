@@ -24,7 +24,7 @@ public class NeedGroup implements Tabable {
 
 	@Element
 	@FieldInfo(order=0,required=true)
-	public float ImportanceLevel;
+	public float importanceLevel;
 
 	@Override
 	public String toString() {

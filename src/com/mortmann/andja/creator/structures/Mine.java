@@ -11,7 +11,7 @@ public class Mine extends OutputStructure{
 		tileWidth = 2;
 		tileHeight = 3;
 		myStructureTyp = StructureTyp.Blocking;
-		BuildTyp = BuildTypes.Single;
+		buildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		structureRange = 0;
 	}

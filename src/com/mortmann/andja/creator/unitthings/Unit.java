@@ -21,11 +21,11 @@ public class Unit implements Tabable, Comparable<Unit> {
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	
-	@FieldInfo(required=true) @Element public float MaxHealth;
+	@FieldInfo(required=true) @Element public float maxHealth;
 	@FieldInfo(required=true) public float buildTime = 1f;
 
-	@Element public int PopulationLevel = 0;
-	@Element public int PopulationCount = 0;
+	@Element public int populationLevel = 0;
+	@Element public int populationCount = 0;
 	@FieldInfo(required=true) @Element public int inventoryPlaces;
 	@FieldInfo(required=true) @Element public int inventorySize;
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;

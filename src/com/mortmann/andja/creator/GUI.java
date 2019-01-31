@@ -229,7 +229,7 @@ public class GUI {
 			Others e = serializer.read(Others.class, new File("other.xml"));
 			if(e.populationLevels!=null)
 				for (PopulationLevel u : e.populationLevels) {
-					idToPopulationLevel.put(u.Level, u);
+					idToPopulationLevel.put(u.LEVEL, u);
 				}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
@@ -519,10 +519,10 @@ public class GUI {
 			saved = SaveNeeds();
 		}
 		else if(o instanceof PopulationLevel){
-			if(((PopulationLevel)o).Level<=-1){
+			if(((PopulationLevel)o).LEVEL<=-1){
 				return;
 			}
-			idToPopulationLevel.put(((PopulationLevel)o).Level, ((PopulationLevel)o));
+			idToPopulationLevel.put(((PopulationLevel)o).LEVEL, ((PopulationLevel)o));
 			saved = SaveOthers();
 		}
 		if(saved){

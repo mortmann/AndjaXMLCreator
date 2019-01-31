@@ -36,13 +36,13 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public boolean canBeBuild = true;
 	@Element(required=false) public boolean isWalkable;
 	@Element(required=false) public boolean hasHitbox;
-	@FieldInfo(required=true) @Element public float MaxHealth;
+	@FieldInfo(required=true) @Element public float maxHealth;
 
 	@Element(required=false) public int structureRange = 0;
-	@FieldInfo(required=true,subType=People.class)@Element public int PopulationLevel = -1;
-	@FieldInfo(required=true)@Element public int PopulationCount = -1;
-
-	@Element(required=false) public int StructureLevel = 0;
+	
+	@FieldInfo(required=true,subType=People.class)@Element public int populationLevel = -1;
+	@FieldInfo(required=true)@Element public int populationCount = -1;
+	@Element(required=false) public int structureLevel = 0;
 
 	@FieldInfo(required=true) @Element public int tileWidth;
 	@FieldInfo(required=true) @Element public int tileHeight;
@@ -56,13 +56,13 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 
 	@Element(required=false) public boolean canStartBurning = false;
  
-	@Element(required=false) public int maintenancecost;
-	@Element(required=false) public int buildcost;
+	@Element(required=false) public int maintenanceCost;
+	@Element(required=false) public int buildCost;
 
-	@Element(required=false) public BuildTypes BuildTyp =  BuildTypes.Single;
+	@Element(required=false) public BuildTypes buildTyp =  BuildTypes.Single;
 	@Element(required=false) public StructureTyp myStructureTyp = StructureTyp.Blocking;
-	@Element(required=false) public ExtraUI ExtraUITyp = ExtraUI.None;
-	@Element(required=false) public ExtraBuildUI ExtraBuildUITyp = ExtraBuildUI.None;
+	@Element(required=false) public ExtraUI extraUITyp = ExtraUI.None;
+	@Element(required=false) public ExtraBuildUI extraBuildUITyp = ExtraBuildUI.None;
 	@Element(required=false) public BuildRestriktions hasToBuildOnRestriktion;
 	
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
@@ -70,9 +70,9 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	
 	public int compareTo(Structure str) {
-		int val = Integer.compare(PopulationLevel, str.PopulationLevel); // first order after Level
+		int val = Integer.compare(populationLevel, str.populationLevel); // first order after Level
 		if(val == 0){
-			return Integer.compare(PopulationCount, str.PopulationCount); // if its the same then order count
+			return Integer.compare(populationCount, str.populationCount); // if its the same then order count
 		}
 		return val;
 	}	

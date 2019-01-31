@@ -7,7 +7,7 @@ public class Warehouse extends Market {
 	
 	public Warehouse(){
 		contactRange = 6.3f;
-		BuildTyp = BuildTypes.Single;
+		buildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		canTakeDamage = true;
 		canBeUpgraded=true;

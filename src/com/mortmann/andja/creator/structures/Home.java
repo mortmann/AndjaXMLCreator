@@ -13,12 +13,12 @@ public class Home extends Structure {
 	public Home(){
 		tileWidth = 3;
 		tileHeight = 3;
-		BuildTyp = BuildTypes.Drag;
+		buildTyp = BuildTypes.Drag;
 		myStructureTyp =	StructureTyp.Blocking;
 		structureRange = 0;
 		hasHitbox = true;
 		canTakeDamage = true;
-		maintenancecost = 0;
+		maintenanceCost = 0;
 	}
 	@Override
 	public int GetID() {

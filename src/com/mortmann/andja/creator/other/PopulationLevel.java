@@ -14,7 +14,7 @@ import com.mortmann.andja.creator.util.Tabable;
 public class PopulationLevel implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int Level =-1;	
+	public int LEVEL =-1;	
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
@@ -31,7 +31,7 @@ public class PopulationLevel implements Tabable {
 
 	@Override
 	public int GetID() {
-		return Level;
+		return LEVEL;
 	}
 
 	@Override
