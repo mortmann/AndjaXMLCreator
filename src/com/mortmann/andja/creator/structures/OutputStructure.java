@@ -11,9 +11,11 @@ import com.mortmann.andja.creator.util.Tabable;
 public abstract class OutputStructure extends Structure {
 	@Element public float contactRange=0;
 	@Element public boolean forMarketplace=true;
-	@Element public int maxNumberOfWorker = 1;
-	@FieldInfo(required=true) @Element public float produceTime =0;
-	@Element(required=false) public int maxOutputStorage;
+	@FieldInfo(required = true, IsEffectable=true) @Element public int maxNumberOfWorker = 1;
+	@FieldInfo(required = true, IsEffectable=true) @Element public float produceTime = 0;
+	@FieldInfo(required = true, IsEffectable=true) @Element(required=false) public int maxOutputStorage;
+	@FieldInfo(required = true, IsEffectable=true) @Element(required=false) public float efficiency = 1f;
+
 	@ElementArray(entry="Item",required=false) public Item[] output;
 	@Override
 	public int GetID() {

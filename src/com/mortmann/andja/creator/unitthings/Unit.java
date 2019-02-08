@@ -21,29 +21,30 @@ public class Unit implements Tabable, Comparable<Unit> {
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
 	
-	@FieldInfo(required=true) @Element public float maxHealth;
 	@FieldInfo(required=true) public float buildTime = 1f;
 
 	@Element public int populationLevel = 0;
 	@Element public int populationCount = 0;
-	@FieldInfo(required=true) @Element public int inventoryPlaces;
-	@FieldInfo(required=true) @Element public int inventorySize;
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
-
-	@Element(required=false) public int maintenancecost;
-	@Element(required=false) public int buildcost;
+	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(required = false, key = "lang",attribute=true) public HashMap<String,String> Description;
 
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
-	@FieldInfo(required=true) @Element float aggroTimer=1f;
-	@FieldInfo(required=true) @Element public float attackRange=1f;
-	@FieldInfo(required=true) @Element public float damage=10;
+	@Element(required=false) public int buildcost;
+	
+	@FieldInfo(required = true, IsEffectable=true) @Element public int inventoryPlaces;
+	@FieldInfo(required = true, IsEffectable=true) @Element public int inventorySize;
+	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public int maintenancecost;
+	@FieldInfo(required=true, IsEffectable=true) @Element public float maximumHealth;
+	@FieldInfo(required=true, IsEffectable=true) @Element float aggroTimer=1f;
+	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRange=1f;
+	@FieldInfo(required=true, IsEffectable=true) @Element public float damage=10;
 	@FieldInfo(order = 0,type=DamageType.class) @Element public int myDamageType;
 	@FieldInfo(order = 0,type=ArmorType.class) @Element public int myArmorType;
-	@FieldInfo(required=true) @Element public float attackCooldown=1;
-	@FieldInfo(required=true) @Element public float attackRate=1;
-	@FieldInfo(required=true) @Element public float speed;   // Tiles per second
-	@FieldInfo(required=true) @Element public float turnSpeed;   // Tiles per second
-	
+	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRate=1;
+	@FieldInfo(required=true, IsEffectable=true) @Element public float speed;   // Tiles per second
+	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second
+	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float aggroTime;   
+
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 
 	public Unit(){

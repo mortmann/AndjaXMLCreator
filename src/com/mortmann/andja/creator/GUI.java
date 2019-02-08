@@ -30,6 +30,7 @@ import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.saveclasses.CombatTypes;
+import com.mortmann.andja.creator.saveclasses.Events;
 import com.mortmann.andja.creator.saveclasses.Fertilities;
 import com.mortmann.andja.creator.saveclasses.Items;
 import com.mortmann.andja.creator.saveclasses.Needs;
@@ -68,6 +69,8 @@ public class GUI {
 	public ObservableMap<Integer,Need> idToNeed;
 	public ObservableMap<Integer, NeedGroup> idToNeedGroup;
 	public ObservableMap<Integer, PopulationLevel> idToPopulationLevel;
+	public ObservableMap<Integer, Effect> idToEffect;
+	private ObservableMap<Integer, GameEvent> idToGameEvent;
 
 	HashMap<Tab,Tabable> tabToTabable;
 	
@@ -98,6 +101,8 @@ public class GUI {
         idToNeed = FXCollections.observableHashMap();
         idToNeedGroup = FXCollections.observableHashMap();
         idToPopulationLevel = FXCollections.observableHashMap();
+        idToEffect = FXCollections.observableHashMap();
+        idToGameEvent = FXCollections.observableHashMap();
         LoadData();
         classToDataTab = new HashMap<>();
         dataTabs = new TabPane();
@@ -119,6 +124,10 @@ public class GUI {
         classToDataTab.put(NeedGroup.class, d8);
         DataTab<PopulationLevel> d9 = new DataTab<>("PopulationLevel", idToPopulationLevel, dataTabs);
         classToDataTab.put(PopulationLevel.class, d9);
+        DataTab<Effect> d10 = new DataTab<>("Effect", idToEffect, dataTabs);
+        classToDataTab.put(Effect.class, d10);
+        DataTab<GameEvent> d11 = new DataTab<>("GameEvent", idToGameEvent, dataTabs);
+        classToDataTab.put(GameEvent.class, d11);
 
 		workTabs = new TabPane();
 		workTabs.setMaxHeight(Double.MAX_VALUE);
@@ -256,6 +265,19 @@ public class GUI {
 			e.printStackTrace();
         	idToFertility = FXCollections.observableHashMap();
 		}
+        try {
+			Events e = serializer.read(Events.class, new File("events.xml"));
+			if(e.effects!=null)
+				for (Effect u : e.effects) {
+					idToEffect.put(u.ID, u);
+				}
+			if(e.gameEvents!=null)
+				for (GameEvent u : e.gameEvents) {
+					idToGameEvent.put(u.ID, u);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -380,7 +402,19 @@ public class GUI {
 		mOther.getItems().addAll(item,fertility,need,needGroup,populationLevel);
 		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
 
-		
+        Menu mEvents = new Menu("Events");
+        menuBar.getMenus().add(mEvents);
+        
+		MenuItem effect = new MenuItem("Effect");
+		MenuItem gameEvent = new MenuItem("GameEvent");
+
+		effect.setOnAction(x-> {
+        	ClassAction(Effect.class);
+        });
+		gameEvent.setOnAction(x-> {
+        	ClassAction(GameEvent.class);
+        });
+		mEvents.getItems().addAll(effect,gameEvent);
 	}
 	
 	private void SaveData() {
@@ -435,7 +469,11 @@ public class GUI {
 			allTabs.addAll(idToDamageType.values());
 			allTabs.addAll(idToFertility.values());
 			allTabs.addAll(idToStructures.values());
-			allTabs.addAll(idToUnit.values());
+			allTabs.addAll(idToNeed.values());
+			allTabs.addAll(idToNeedGroup.values());
+			allTabs.addAll(idToPopulationLevel.values());
+			allTabs.addAll(idToEffect.values());
+
 			allTabs.removeIf(x->x.DependsOnTabable(t)==null);
 			String depends = "Other Structures depends on it!\nRemove dependencies from ";
 			if(allTabs.size()==0){
@@ -524,6 +562,20 @@ public class GUI {
 			}
 			idToPopulationLevel.put(((PopulationLevel)o).LEVEL, ((PopulationLevel)o));
 			saved = SaveOthers();
+		}
+		else if(o instanceof Effect) {
+			if(((Effect)o).ID<=-1){
+				return;
+			}
+			idToEffect.put(((Effect)o).ID, ((Effect)o));
+			saved = SaveEvents();
+		}
+		else if(o instanceof GameEvent) {
+			if(((GameEvent)o).ID<=-1){
+				return;
+			}
+			idToGameEvent.put(((GameEvent)o).ID, ((GameEvent)o));
+			saved = SaveEvents();
 		}
 		if(saved){
 			curr.setText(curr.getText().replaceAll("\\*", ""));
@@ -677,6 +729,23 @@ public class GUI {
         BackUPFile("needs.xml");
 		return true;
 	}
+	private boolean SaveEvents(){
+		Serializer serializer = new Persister(new AnnotationStrategy());
+		Events ft = new Events(idToEffect.values(), idToGameEvent.values());
+        try {
+        	BackUPFileTEMP("events.xml");
+			serializer.write(ft, new File("events.xml"));
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out! " + e.getMessage());
+			e.printStackTrace();
+			a.show();
+			return false;
+		}
+        BackUPFile("other.xml");
+		return true;
+	}
 	private boolean SaveOthers(){
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		Others ft = new Others(idToPopulationLevel.values());
@@ -744,6 +813,12 @@ public class GUI {
 			return idToNeedGroup.containsKey(id) ? idToNeedGroup.get(id) : null;
 		}
 		if(tab.getClass()==PopulationLevel.class){
+			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
+		}
+		if(tab.getClass()==Effect.class){
+			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
+		}
+		if(tab.getClass()==GameEvent.class){
 			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
 		}
 		System.out.println("CLASS doesnt have any map assigned! -- doesIDexistForTabable" );

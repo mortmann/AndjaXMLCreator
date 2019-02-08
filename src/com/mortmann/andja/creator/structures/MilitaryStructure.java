@@ -13,6 +13,6 @@ public class MilitaryStructure extends Structure{
 		
 	}
 	@FieldInfo(required=true,type=Unit[].class) @ElementArray(entry="Unit",required=true) public int[] canBeBuildUnits;
-	@Element public float buildTimeModifier;
+	@FieldInfo(required = true, IsEffectable=true)@Element public float buildTimeModifier;
 	
 }

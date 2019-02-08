@@ -11,7 +11,9 @@ import java.util.HashMap;
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.other.Fertility.Climate;
+import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.other.Need.People;
+import com.mortmann.andja.creator.saveclasses.Needs;
 import com.mortmann.andja.creator.structures.*;
 import com.mortmann.andja.creator.unitthings.*;
 import com.mortmann.andja.creator.util.*;
@@ -154,6 +156,9 @@ public class WorkTab {
             	if(fi.subType() == Climate.class){
             		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
             	}
+            	if(fi.subType() == Target.class){
+            		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Target.class), 0, i);
+            	}
         	}
             else if(compare == Item[].class) {
             	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],obj), 0, i);
@@ -215,11 +220,17 @@ public class WorkTab {
             else if(compare == Unit[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Unit.class, GUI.Instance.idToUnit), 0, i);
             }
+            else if(compare == Effect[].class){                
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Effect.class, GUI.Instance.idToEffect), 0, i);
+            }
             else if(compare == NeedStructure[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, NeedStructure[].class, GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == Structure[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Structure[].class, GUI.Instance.idToStructures), 0, i);
+            }
+            else if(compare == Tabable.class && info.RequiresEffectable()) {
+            	otherGrid.add(CreateEffectableSetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else {
                 System.out.println("Variable Name is: " + fld[i].getName() +" : " + compare );
@@ -228,13 +239,98 @@ public class WorkTab {
        
         
 	}
+	@SuppressWarnings("rawtypes")
+	private Node CreateEffectableSetter(String name, Field field, Tabable tab) {
+		GridPane grid = new  GridPane();
+		ObservableList<Class> classes = FXCollections.observableArrayList();
+		classes.addAll(Structure.class, Growable.class, Home.class, Market.class, MilitaryStructure.class, Mine.class,NeedStructure.class,
+				OutputStructure.class,Production.class,Road.class,Warehouse.class);
+		classes.addAll(Unit.class, Ship.class);
+		ComboBox<Class> box = new ComboBox<Class>(classes);
+		
+		if(field.getAnnotation(FieldInfo.class)!=null){
+			if(field.getAnnotation(FieldInfo.class).required()){
+			    ObservableList<String> styleClass = box.getStyleClass();
+			    
+			    styleClass.add("combobox-error");
+				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
+					Class o = null;
+					try {
+						o =  ((Class) field.get(tab));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(o == null){
+			    	    if(!styleClass.contains("combobox-error")) {
+			    	        styleClass.add("combobox-error");
+			    	    }
+			        } else {
+			        	if(styleClass.contains("combobox-error")) {
+			    	        styleClass.remove("combobox-error");
+			    	    }
+			        }
+				});
+
+			}
+		}
+		box.setMaxWidth(Double.MAX_VALUE);
+		grid.add(new Label(name), 0, 0);	
+		grid.add(box, 1, 0);
+			
+		ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMinWidth(75);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMinWidth(165);
+        
+        grid.getColumnConstraints().addAll(col1,col2);
+		try {
+			if(field.get(tab)!=null){
+				box.getSelectionModel().select((Class)field.get(tab));
+			}
+		} catch (Exception e1) {
+		} 
+		ComboBox<String> variablebox = new ComboBox<String>();
+		box.setOnAction(x-> {
+			ObservableList<String> names = FXCollections.observableArrayList();
+			for(Field f : box.getValue().getFields()) {
+	            FieldInfo info = f.getAnnotation(FieldInfo.class);
+	            if(info == null)
+	            	continue;
+	            names.add(f.getName());
+			}
+			variablebox.setItems(names);
+				try {
+					if(box.getValue()==null){
+						return;
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		);
+		variablebox.setOnAction(x-> {
+				try {
+					if(box.getValue()==null){
+						return;
+					}
+					field.set(tab, box.getValue());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		);
+		
+		return grid;
+	}
+
 	@SuppressWarnings("rawtypes") 
 	private<T extends Tabable> Node CreateTabableArraySetter(String name, Field field, Tabable m, Class tabableClass, ObservableMap<Integer, T> obsMapTabable) {
 		ObservableList<Tabable> tabables = FXCollections.observableArrayList();
 		tabables.addAll(obsMapTabable.values());
 
 		Class singleItemClass = tabableClass.getComponentType();
-		if(Structure.class.isAssignableFrom(singleItemClass)) {
+		if(singleItemClass != null && Structure.class.isAssignableFrom(singleItemClass)) {
 			//if its a structure we need only THAT type of structure in the list so we need to filter the rest out.
 			tabables.removeIf(p-> p.getClass() != singleItemClass);
 		} 

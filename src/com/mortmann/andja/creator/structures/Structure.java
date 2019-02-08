@@ -36,9 +36,10 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public boolean canBeBuild = true;
 	@Element(required=false) public boolean isWalkable;
 	@Element(required=false) public boolean hasHitbox;
-	@FieldInfo(required=true) @Element public float maxHealth;
+	
+	@FieldInfo(required=true, IsEffectable=true) @Element public float maxHealth;
 
-	@Element(required=false) public int structureRange = 0;
+	@FieldInfo(IsEffectable=true) @Element(required=false) public int structureRange = 0;
 	
 	@FieldInfo(required=true,subType=People.class)@Element public int populationLevel = -1;
 	@FieldInfo(required=true)@Element public int populationCount = -1;
@@ -56,7 +57,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 
 	@Element(required=false) public boolean canStartBurning = false;
  
-	@Element(required=false) public int maintenanceCost;
+	@FieldInfo(IsEffectable=true) @Element(required=false) public int maintenanceCost;
 	@Element(required=false) public int buildCost;
 
 	@Element(required=false) public BuildTypes buildTyp =  BuildTypes.Single;

@@ -1,13 +1,16 @@
 package com.mortmann.andja.creator.saveclasses;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 
+@Root
 public class CombatTypes {
 	public CombatTypes(Collection<ArmorType> values, Collection<DamageType> values2) {
 		armorTypes = new ArrayList<>(values);
