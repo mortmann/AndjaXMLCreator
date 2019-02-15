@@ -31,7 +31,7 @@ public class Need implements Tabable {
 	@FieldInfo(required=false)
 	@Element(required=false)
 	public Item item;
-	@FieldInfo(required=false,type=NeedStructure[].class)
+	@FieldInfo(required=false,compareType=NeedStructure[].class)
 	@Element(required=false)
 	public int[] structures;
 	
@@ -43,7 +43,7 @@ public class Need implements Tabable {
 	@Element(required=false)
 	public int popCount;
 	
-	@FieldInfo(required=true,type=NeedGroup.class)
+	@FieldInfo(required=true,compareType=NeedGroup.class)
 	@Element(required=false)
 	public int group;
 	

@@ -13,7 +13,6 @@ import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.other.Need.People;
-import com.mortmann.andja.creator.saveclasses.Needs;
 import com.mortmann.andja.creator.structures.*;
 import com.mortmann.andja.creator.unitthings.*;
 import com.mortmann.andja.creator.util.*;
@@ -36,8 +35,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 public class WorkTab {
 	ScrollPane scrollPaneContent;
@@ -113,8 +114,8 @@ public class WorkTab {
         for (int i = 0; i < fld.length; i++) {
             FieldInfo info = fld[i].getAnnotation(FieldInfo.class);
         	Class compare = fld[i].getType();
-            if(info!=null&&info.type().equals(void.class)==false){
-        		compare = info.type();
+            if(info!=null&&info.compareType().equals(void.class)==false){
+        		compare = info.compareType();
         	}
             if(compare == Boolean.TYPE){
             	booleanGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],obj), 0, i);
@@ -192,6 +193,10 @@ public class WorkTab {
                 	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
                 	continue;
             	} 
+            	if(fi.mainType() == Target.class && fi.subType()==String.class){
+            		otherGrid.add(CreateEffectableToTabableSetter(fld[i].getName(), fld[i], obj), 0, i);
+                	continue;
+            	} 
             }
             else if(compare == Fertility.class) { 
             	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Fertility.class,GUI.Instance.idToFertility), 0, i);
@@ -239,14 +244,119 @@ public class WorkTab {
        
         
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Node CreateEffectableToTabableSetter(String name, Field field, Tabable tab) {
+		GridPane grid = new  GridPane();
+		
+		ComboBox<Target> box = new ComboBox<Target>(GameEvent.specialTargetRangeClasses);
+		
+		box.setMaxWidth(Double.MAX_VALUE);
+		grid.add(new Label(name), 0, 0);	
+		grid.add(box, 1, 0);
+			
+		ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMinWidth(75);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMinWidth(165);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setMinWidth(165);
+        grid.getColumnConstraints().addAll(col1,col2,col3);
+		try {
+			if(field.get(tab)!=null){
+				box.getSelectionModel().select((Target)field.get(tab));
+			}
+		} catch (Exception e1) {
+		} 
+		ComboBox<Tabable> tabableBox = new ComboBox<Tabable>();
+		grid.add(tabableBox, 2, 0);
+
+		box.setOnAction(x-> {
+			Target c = box.getValue();
+			ObservableList<Tabable> tabs = FXCollections.observableArrayList();
+			if(c == Target.AllStructure) {
+				tabs.addAll(GUI.Instance.idToStructures.values());
+			}
+			if(c == Target.AllUnit) {
+				tabs.addAll(GUI.Instance.idToUnit.values());
+			}
+			tabableBox.setItems(tabs);
+				try {
+					if(box.getValue()==null){
+						return;
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		);
+		
+		VBox listbox = new  VBox();
+        grid.add(listbox, 1, 1);
+        GridPane.setColumnSpan(listbox, 2);
+
+		try {		
+			HashMap<Target, ArrayList<Integer>> map =  (HashMap<Target, ArrayList<Integer>>) field.get(tab);
+			for(Target t : map.keySet()) {
+				for(int id : map.get(t)) {
+					listbox.getChildren().add(CreateHBoxEffectableTabable(id,"" ,t,listbox,map));
+				}
+			}
+			tabableBox.setOnAction(x-> {
+					try {
+						Target target = box.getValue();
+						Tabable select = tabableBox.getValue();
+						if(tabableBox.getValue()==null){
+							return;
+						}
+						if(map.containsKey(box.getValue()) == false) {
+							map.put(target, new ArrayList<Integer>());
+						}
+						map.get(target).add(tabableBox.getValue().GetID());
+						field.set(tab, map);
+						
+						
+						listbox.getChildren()
+							.add(CreateHBoxEffectableTabable(select.GetID(),select.GetName(),target,listbox,map));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			);
+		} catch (Exception e1) {
+			
+		} 
+		return grid;
+	}
+
+	private Node CreateHBoxEffectableTabable(int selectID,String selectName, Target target, VBox listbox,HashMap<Target, ArrayList<Integer>> map) {
+		HBox hbox = new HBox();
+		// Name
+		Label tabable = new Label(selectName);
+		// Remove Button
+		Button b = new Button("X");
+		Label targetLabel = new Label(target.toString());
+
+		hbox.getChildren().addAll (targetLabel,tabable,b);
+		// set the press button action
+		b.setOnAction(s -> {
+			try {
+				// remove the label and button
+				listbox.getChildren().remove(hbox);
+				map.get(target).remove(selectID);
+				if(map.get(target).isEmpty())
+					map.remove(target);
+			} catch (Exception e1) {
+				System.out.println(e1);
+			}
+		});
+		return hbox;
+	}
+
 	@SuppressWarnings("rawtypes")
 	private Node CreateEffectableSetter(String name, Field field, Tabable tab) {
 		GridPane grid = new  GridPane();
-		ObservableList<Class> classes = FXCollections.observableArrayList();
-		classes.addAll(Structure.class, Growable.class, Home.class, Market.class, MilitaryStructure.class, Mine.class,NeedStructure.class,
-				OutputStructure.class,Production.class,Road.class,Warehouse.class);
-		classes.addAll(Unit.class, Ship.class);
-		ComboBox<Class> box = new ComboBox<Class>(classes);
+		ComboBox<Class> box = new ComboBox<Class>(GameEvent.targetClasses);
 		
 		if(field.getAnnotation(FieldInfo.class)!=null){
 			if(field.getAnnotation(FieldInfo.class).required()){
@@ -311,10 +421,10 @@ public class WorkTab {
 		);
 		variablebox.setOnAction(x-> {
 				try {
-					if(box.getValue()==null){
+					if(variablebox.getValue()==null){
 						return;
 					}
-					field.set(tab, box.getValue());
+					field.set(tab, variablebox.getValue());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -488,7 +598,7 @@ public class WorkTab {
 		}
 		box.setOnAction(x->{
 			try {
-				if(field.isAnnotationPresent(FieldInfo.class)&&field.getAnnotation(FieldInfo.class).type()==Item.class){
+				if(field.isAnnotationPresent(FieldInfo.class)&&field.getAnnotation(FieldInfo.class).compareType()==Item.class){
 						field.set(tab, box.getValue().ID);
 				} else {
 					field.set(tab, box.getValue());
@@ -1126,7 +1236,7 @@ public class WorkTab {
 				}
 			}
 		}
-		// Name of Unit
+		// Name
 		Label l = new Label(select.toString());
 		// Remove Button
 		Button b = new Button("X");

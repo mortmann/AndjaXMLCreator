@@ -38,8 +38,8 @@ public class Unit implements Tabable, Comparable<Unit> {
 	@FieldInfo(required=true, IsEffectable=true) @Element float aggroTimer=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRange=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float damage=10;
-	@FieldInfo(order = 0,type=DamageType.class) @Element public int myDamageType;
-	@FieldInfo(order = 0,type=ArmorType.class) @Element public int myArmorType;
+	@FieldInfo(order = 0,compareType=DamageType.class) @Element public int myDamageType;
+	@FieldInfo(order = 0,compareType=ArmorType.class) @Element public int myArmorType;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRate=1;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float speed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second

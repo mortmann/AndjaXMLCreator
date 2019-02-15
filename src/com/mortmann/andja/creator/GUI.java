@@ -60,8 +60,8 @@ public class GUI {
 
 	Tab emptyTab;
 	
-	ObservableMap<Integer,Structure> idToStructures;
-	ObservableMap<Integer,Fertility> idToFertility;
+	public ObservableMap<Integer,Structure> idToStructures;
+	public ObservableMap<Integer,Fertility> idToFertility;
 	public ObservableMap<Integer,ItemXML> idToItem;
 	public ObservableMap<Integer,DamageType> idToDamageType;
 	public ObservableMap<Integer,ArmorType> idToArmorType;
@@ -71,6 +71,8 @@ public class GUI {
 	public ObservableMap<Integer, PopulationLevel> idToPopulationLevel;
 	public ObservableMap<Integer, Effect> idToEffect;
 	private ObservableMap<Integer, GameEvent> idToGameEvent;
+	@SuppressWarnings("rawtypes")
+	public HashMap<Class, ObservableMap> classToClassObservableMap;
 
 	HashMap<Tab,Tabable> tabToTabable;
 	
@@ -103,6 +105,21 @@ public class GUI {
         idToPopulationLevel = FXCollections.observableHashMap();
         idToEffect = FXCollections.observableHashMap();
         idToGameEvent = FXCollections.observableHashMap();
+        
+        classToClassObservableMap = new HashMap<>();
+        classToClassObservableMap.put(Structure.class, idToStructures);
+        classToClassObservableMap.put(ArmorType.class, idToArmorType);
+        classToClassObservableMap.put(DamageType.class, idToDamageType);
+        classToClassObservableMap.put(Unit.class, idToUnit);
+        classToClassObservableMap.put(Fertility.class, idToFertility);
+        classToClassObservableMap.put(Need.class, idToNeed);
+        classToClassObservableMap.put(ItemXML.class, idToItem);
+        classToClassObservableMap.put(NeedGroup.class, idToNeedGroup);
+        classToClassObservableMap.put(PopulationLevel.class, idToPopulationLevel);
+        classToClassObservableMap.put(Effect.class, idToEffect);
+        classToClassObservableMap.put(GameEvent.class, idToGameEvent);
+
+        
         LoadData();
         classToDataTab = new HashMap<>();
         dataTabs = new TabPane();
