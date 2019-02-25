@@ -37,12 +37,12 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	    FarmStructure, ProductionStructure
 	}
 	@SuppressWarnings("rawtypes")
-	public static final ObservableList<Class> targetClasses = FXCollections.observableArrayList(
+	@FieldInfo(ignore = true) public static final ObservableList<Class> targetClasses = FXCollections.observableArrayList(
 			Structure.class, Growable.class, Home.class, Market.class, MilitaryStructure.class, Mine.class,NeedStructure.class,
 			OutputStructure.class,Production.class,Road.class,Warehouse.class,
 			Unit.class, Ship.class
 	);
-	public static final ObservableList<Target> specialTargetRangeClasses = FXCollections.observableArrayList(
+	@FieldInfo(ignore = true) public static final ObservableList<Target> specialTargetRangeClasses = FXCollections.observableArrayList(
 			Target.AllStructure, Target.AllUnit
 	);
 	@Attribute
@@ -51,15 +51,17 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
 	@FieldInfo(required=false,mainType=Target.class, subType=Integer.class)
-	@ElementMap(key = "target",attribute=true) 
+	@ElementMap(required=false, key = "target",attribute=true) 
 	public HashMap<Target, ArrayList<Integer>> specialRange;
 
-	@Element public float probability = 10;
-	@Element public float minDuration = 50;
-	@Element public float maxDuration = 100;
-	@Element public float minRange = 50;
-	@Element public float maxRange = 100;
-	@FieldInfo(required=false,compareType=Effect[].class) @ElementArray(entry="Effect",required=false) public int[] effects;
+	@Element @FieldInfo(order = 0) public float probability = 10;
+	@Element @FieldInfo(order = 1) public float minDuration = 50;
+	@Element @FieldInfo(order = 2) public float maxDuration = 100;
+	@Element @FieldInfo(order = 3) public float minRange = 50;
+	@Element @FieldInfo(order = 4) public float maxRange = 100;
+	@FieldInfo(required=false,compareType=Effect[].class) 
+	@ElementArray(entry="Effect",required=false) 
+	public int[] effects;
 	
 	@Override
 	public String GetName() {

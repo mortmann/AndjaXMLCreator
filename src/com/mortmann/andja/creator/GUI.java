@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -72,7 +73,7 @@ public class GUI {
 	public ObservableMap<Integer, Effect> idToEffect;
 	private ObservableMap<Integer, GameEvent> idToGameEvent;
 	@SuppressWarnings("rawtypes")
-	public HashMap<Class, ObservableMap> classToClassObservableMap;
+	public HashMap<Class, ObservableMap<Integer, ? extends Tabable>> classToClassObservableMap;
 
 	HashMap<Tab,Tabable> tabToTabable;
 	
@@ -467,11 +468,16 @@ public class GUI {
 		Tabable o = tabToTabable.get(curr);
 		curr.setText(o.GetName());
 		//check if its filled out all required
-		Field f = CheckForMissingFields(o);
-		if(f!=null){
+		ArrayList<Field> missingFields = CheckForMissingFields(o);
+		if(missingFields.isEmpty() == false){
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
-			a.setContentText("Can´t save data! Fill all required data out!\n" + f.getName() +" is not filled out!");
+			String missingstring = "";
+			for(Field f : missingFields) {
+				missingstring += missingstring.isEmpty()? "" : ", ";
+				missingstring += f.getName();
+			}
+			a.setContentText("Can´t save data! Fill all required data out!\n 	Following Fields are not filled out:\n"  + missingstring +"!");
 			a.show();
 			//its missing smth return error
 			return;
@@ -482,14 +488,18 @@ public class GUI {
 			a.setTitle("ID already exists!");
 			Tabable t = doesIDexistForTabable(o.GetID(),o);
 			HashSet<Tabable> allTabs = new HashSet<>();
-			allTabs.addAll(idToArmorType.values());
-			allTabs.addAll(idToDamageType.values());
-			allTabs.addAll(idToFertility.values());
-			allTabs.addAll(idToStructures.values());
-			allTabs.addAll(idToNeed.values());
-			allTabs.addAll(idToNeedGroup.values());
-			allTabs.addAll(idToPopulationLevel.values());
-			allTabs.addAll(idToEffect.values());
+			for(ObservableMap<Integer, ? extends Tabable> map : classToClassObservableMap.values()) {
+				allTabs.addAll(map.values());
+			}
+//			allTabs.addAll(idToArmorType.values());
+//			allTabs.addAll(idToDamageType.values());
+//			allTabs.addAll(idToFertility.values());
+//			allTabs.addAll(idToStructures.values());
+//			allTabs.addAll(idToNeed.values());
+//			allTabs.addAll(idToNeedGroup.values());
+//			allTabs.addAll(idToPopulationLevel.values());
+//			allTabs.addAll(idToEffect.values());
+//			allTabs.addAll(idToGameEvent.values());
 
 			allTabs.removeIf(x->x.DependsOnTabable(t)==null);
 			String depends = "Other Structures depends on it!\nRemove dependencies from ";
@@ -599,8 +609,9 @@ public class GUI {
 		} 
 	}
 	
-
-	private Field CheckForMissingFields(Tabable t) {
+	@SuppressWarnings("rawtypes")
+	private ArrayList<Field> CheckForMissingFields(Tabable t) {
+		ArrayList<Field> missings = new ArrayList<>();
 		Field[] fs = t.getClass().getFields();
 		for (Field field : fs) {
 			if(field.isAnnotationPresent(FieldInfo.class)==false){
@@ -613,18 +624,23 @@ public class GUI {
 			try {
 				Object o = field.get(t);
 				if(o == null){
-					return field;
+					missings.add(field);
 				}
 				if(field.getType()==Integer.class){
 					if((int)o==-1){
-						return field;
+						missings.add(field);
+					}
+				}
+				if(Collection.class.isAssignableFrom(field.getType())){
+					if(((Collection)o).isEmpty()){
+						missings.add(field);
 					}
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return missings;
 	}
 
 	public void changedCurrentTab() {
@@ -760,7 +776,7 @@ public class GUI {
 			a.show();
 			return false;
 		}
-        BackUPFile("other.xml");
+        BackUPFile("events.xml");
 		return true;
 	}
 	private boolean SaveOthers(){
@@ -805,41 +821,16 @@ public class GUI {
     	}
 	}
 	public Tabable doesIDexistForTabable(int id, Tabable tab){
-		if(Structure.class.isAssignableFrom(tab.getClass())){
-			return idToStructures.containsKey(id) ? idToStructures.get(id) : null;
+		@SuppressWarnings("rawtypes")
+		Class c = tab.getClass();
+		if(Structure.class.isAssignableFrom(c)){
+			c = Structure.class;
 		}
-		if(tab.getClass()==ItemXML.class){
-			return idToItem.containsKey(id) ? idToItem.get(id) : null;
+		if(classToClassObservableMap.containsKey(c) == false) {
+			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
+			return null;
 		}
-		if(tab.getClass().isAssignableFrom(Unit.class)){
-			return idToUnit.containsKey(id) ? idToUnit.get(id) : null;
-		}
-		if(tab.getClass()==DamageType.class){
-			return idToDamageType.containsKey(id) ? idToDamageType.get(id) : null;
-		}
-		if(tab.getClass()==ArmorType.class){
-			return idToArmorType.containsKey(id) ? idToArmorType.get(id) : null;
-		}
-		if(tab.getClass()==Fertility.class){
-			return idToFertility.containsKey(id) ? idToFertility.get(id) : null;
-		}
-		if(tab.getClass()==Need.class){
-			return idToNeed.containsKey(id) ? idToNeed.get(id) : null;
-		}
-		if(tab.getClass()==NeedGroup.class){
-			return idToNeedGroup.containsKey(id) ? idToNeedGroup.get(id) : null;
-		}
-		if(tab.getClass()==PopulationLevel.class){
-			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
-		}
-		if(tab.getClass()==Effect.class){
-			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
-		}
-		if(tab.getClass()==GameEvent.class){
-			return idToPopulationLevel.containsKey(id) ? idToPopulationLevel.get(id) : null;
-		}
-		System.out.println("CLASS doesnt have any map assigned! -- doesIDexistForTabable" );
-		return null;
+		return classToClassObservableMap.get(c).containsKey(id) ? classToClassObservableMap.get(c).get(id) : null;
 	}
 	public int getOneHigherThanMaxID(Tabable tab){
 		if(Structure.class.isAssignableFrom(tab.getClass())){
@@ -857,31 +848,16 @@ public class GUI {
 				return Collections.max(idToStructures.keySet())+1;
 			}
 			return max;
+		} else
+		if(classToClassObservableMap.containsKey(tab.getClass())) {
+			if(classToClassObservableMap.get(tab.getClass()).isEmpty())
+				return 0;
+			int max = (int) Collections.max(classToClassObservableMap.get(tab.getClass()).keySet());
+			return max+1;
+		} else {
+			System.out.println("Forgot to add the new Class to classToClassObservableMap!");
 		}
-		if(tab.getClass()==ItemXML.class){
-			return Collections.max(idToItem.keySet())+1;
-		}
-		if(tab.getClass().isAssignableFrom(Unit.class)){
-			return Collections.max(idToUnit.keySet())+1; 
-		}
-		if(tab.getClass()==DamageType.class){
-			return Collections.max(idToDamageType.keySet())+1; 
-		}
-		if(tab.getClass()==ArmorType.class){
-			return Collections.max(idToArmorType.keySet())+1; 
-		}
-		if(tab.getClass()==Fertility.class){
-			return Collections.max(idToFertility.keySet())+1;  
-		}
-		if(tab.getClass()==Need.class){
-			return Collections.max(idToNeed.keySet())+1; 
-		}
-		if(tab.getClass()==NeedGroup.class){
-			return Collections.max(idToNeedGroup.keySet())+1; 
-		}
-		if(tab.getClass()==PopulationLevel.class){
-			return Collections.max(idToPopulationLevel.keySet())+1; 
-		}
+
 		return -1;
 	}
 
@@ -900,34 +876,13 @@ public class GUI {
 
 	@SuppressWarnings("rawtypes")
 	public ObservableMap<Integer, ? extends Tabable> GetObservableList(Class classTabable) {
-		if(Structure.class.isAssignableFrom(classTabable)){
-			return idToStructures;
+		if(classToClassObservableMap.containsKey(classTabable) == false) {
+			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
+			return null;
 		}
-		if(classTabable==ItemXML.class){
-			return idToItem;
-		}
-		if(Unit.class.isAssignableFrom(classTabable)){
-			return idToUnit; 
-		}
-		if(classTabable==DamageType.class){
-			return idToDamageType; 
-		}
-		if(classTabable==ArmorType.class){
-			return idToArmorType; 
-		}
-		if(classTabable==Fertility.class){
-			return idToFertility;  
-		}
-		if(classTabable==Need.class){
-			return idToNeed; 
-		}
-		if(classTabable==NeedGroup.class){
-			return idToNeedGroup; 
-		}
-		if(classTabable==PopulationLevel.class){
-			return idToPopulationLevel; 
-		}
-		return null;
+		if(Structure.class.isAssignableFrom(classTabable))
+			classTabable = Structure.class;
+		return classToClassObservableMap.get(classTabable);
 	}
 	
 }

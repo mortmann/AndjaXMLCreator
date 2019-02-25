@@ -1,0 +1,30 @@
+<events>
+   <Effect ID="0">
+      <unique>true</unique>
+      <nameOfVariable>CurrentHealth</nameOfVariable>
+      <change>1.0</change>
+      <targets>
+         <Target>AllStructure</Target>
+      </targets>
+      <addType>Float</addType>
+      <modifierType>Update</modifierType>
+      <updateChange>Health</updateChange>
+      <classification>Negativ</classification>
+      <uiSpriteName>fire</uiSpriteName>
+      <onMapSpriteName>fire</onMapSpriteName>
+   </Effect>
+   <Effect ID="1">
+      <unique>true</unique>
+      <nameOfVariable>decreaseTime</nameOfVariable>
+      <change>2.0</change>
+      <targets>
+         <Target>HomeStructure</Target>
+      </targets>
+      <addType>Float</addType>
+      <modifierType>Multiplicative</modifierType>
+      <updateChange>None</updateChange>
+      <classification>Negativ</classification>
+      <uiSpriteName>illness</uiSpriteName>
+      <onMapSpriteName>illness</onMapSpriteName>
+   </Effect>
+</events>

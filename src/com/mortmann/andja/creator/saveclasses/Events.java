@@ -11,15 +11,15 @@ import com.mortmann.andja.creator.other.GameEvent;
 
 @Root
 public class Events {
-	@ElementList(name="Effects", inline=true)
+	@ElementList(required=false, name="Effects", inline=true)
 	public ArrayList<Effect> effects;
+	@ElementList(required=false, name="Effects", inline=true)
 	public ArrayList<GameEvent> gameEvents;
 	
 	public Events() {}
 	public Events(Collection<Effect> effects,Collection<GameEvent> gameEvents) {
 		this.effects = new ArrayList<>(effects);
 		this.gameEvents = new ArrayList<>(gameEvents);
-
 	}
 
 }

@@ -1,7 +1,10 @@
 package com.mortmann.andja.creator.other;
 
+import java.util.ArrayList;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.GameEvent.Target;
@@ -15,15 +18,23 @@ public class Effect implements Tabable, Comparable<Effect> {
 	public int ID =-1;	
 	
 	public enum EffectTypes { Integer, Float, Special }
-	public enum EffectModifier { Additive, Multiplicative, Special }
-
-	@FieldInfo(order = 0, required = true, RequiresEffectable = true) @Element(required=false) public String nameOfVariable; // what does it change
-	@FieldInfo(order = 1, required = true) @Element(required=false)public float change; // how it changes the Variable?
-	@Element(required=false) public Target[] targets; // what it can target
-	@Element(required=false) public EffectTypes addType;
-	@Element(required=false) public EffectModifier modifierType;
-	@Element(required=false) public boolean unique;
+	public enum EffectModifier { Additive, Multiplicative, Update, Special }
+	public enum EffectUpdateChanges { None, Health }
+	public enum EffectClassification { Negativ, Neutral, Positiv }
 	
+	@Element(required=false) public boolean unique;
+	@FieldInfo(order = 0, required = true, RequiresEffectable = true, compareType=Tabable.class) 
+	@Element(required=false) public String nameOfVariable; // what does it change
+	@FieldInfo(order = 1, required = true) @Element(required=false)public float change; // how it changes the Variable?
+	@ElementList(required=false,entry="Target")@FieldInfo(required=true,subType=Target.class)public ArrayList<Target> targets; // what it can target
+	@Element(required=false) @FieldInfo(order = 3) public EffectTypes addType;
+	@Element(required=false) @FieldInfo(order = 1) public EffectModifier modifierType;
+	@Element(required=false) @FieldInfo(order = 2) public EffectUpdateChanges updateChange;
+	@Element(required=false) @FieldInfo(order = 0) public EffectClassification classification;
+
+	@Element(required=false) public String uiSpriteName;
+	@Element(required=false) public String onMapSpriteName;
+
 	@Override
 	public String GetName() {
 		return targets + " => " + nameOfVariable + " -> " + change;
@@ -43,5 +54,8 @@ public class Effect implements Tabable, Comparable<Effect> {
 	public int compareTo(Effect other) {
 		return Integer.compare(GetID(), other.GetID());
 	}
-
+	@Override
+	public String toString() {
+		return ID+":"+ GetName();
+	}
 }

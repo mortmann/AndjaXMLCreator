@@ -113,6 +113,8 @@ public class WorkTab {
 		Arrays.sort(fld,new OrderEr());
         for (int i = 0; i < fld.length; i++) {
             FieldInfo info = fld[i].getAnnotation(FieldInfo.class);
+            if(info!=null && info.ignore())
+            	continue;
         	Class compare = fld[i].getType();
             if(info!=null&&info.compareType().equals(void.class)==false){
         		compare = info.compareType();
@@ -193,7 +195,7 @@ public class WorkTab {
                 	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
                 	continue;
             	} 
-            	if(fi.mainType() == Target.class && fi.subType()==String.class){
+            	if(fi.mainType() == Target.class && fi.subType()==Integer.class){		
             		otherGrid.add(CreateEffectableToTabableSetter(fld[i].getName(), fld[i], obj), 0, i);
                 	continue;
             	} 
@@ -223,10 +225,10 @@ public class WorkTab {
             	otherGrid.add(CreateFloatArraySetter(fld[i].getName(),fld[i],obj), 0, i);
             }
             else if(compare == Unit[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Unit.class, GUI.Instance.idToUnit), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Unit[].class, GUI.Instance.idToUnit), 0, i);
             }
             else if(compare == Effect[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Effect.class, GUI.Instance.idToEffect), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Effect[].class, GUI.Instance.idToEffect), 0, i);
             }
             else if(compare == NeedStructure[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, NeedStructure[].class, GUI.Instance.idToStructures), 0, i);
@@ -244,10 +246,9 @@ public class WorkTab {
        
         
 	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	private Node CreateEffectableToTabableSetter(String name, Field field, Tabable tab) {
 		GridPane grid = new  GridPane();
-		
 		ComboBox<Target> box = new ComboBox<Target>(GameEvent.specialTargetRangeClasses);
 		
 		box.setMaxWidth(Double.MAX_VALUE);
@@ -261,12 +262,6 @@ public class WorkTab {
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setMinWidth(165);
         grid.getColumnConstraints().addAll(col1,col2,col3);
-		try {
-			if(field.get(tab)!=null){
-				box.getSelectionModel().select((Target)field.get(tab));
-			}
-		} catch (Exception e1) {
-		} 
 		ComboBox<Tabable> tabableBox = new ComboBox<Tabable>();
 		grid.add(tabableBox, 2, 0);
 
@@ -296,12 +291,13 @@ public class WorkTab {
         GridPane.setColumnSpan(listbox, 2);
 
 		try {		
-			HashMap<Target, ArrayList<Integer>> map =  (HashMap<Target, ArrayList<Integer>>) field.get(tab);
+			HashMap<Target, ArrayList<Integer>> map = field.get(tab)!=null ? (HashMap<Target, ArrayList<Integer>>) field.get(tab) : new HashMap<>();
 			for(Target t : map.keySet()) {
 				for(int id : map.get(t)) {
 					listbox.getChildren().add(CreateHBoxEffectableTabable(id,"" ,t,listbox,map));
 				}
 			}
+			
 			tabableBox.setOnAction(x-> {
 					try {
 						Target target = box.getValue();
@@ -314,8 +310,6 @@ public class WorkTab {
 						}
 						map.get(target).add(tabableBox.getValue().GetID());
 						field.set(tab, map);
-						
-						
 						listbox.getChildren()
 							.add(CreateHBoxEffectableTabable(select.GetID(),select.GetName(),target,listbox,map));
 					} catch (Exception e) {
@@ -324,7 +318,7 @@ public class WorkTab {
 				}
 			);
 		} catch (Exception e1) {
-			
+			e1.printStackTrace();
 		} 
 		return grid;
 	}
@@ -336,7 +330,6 @@ public class WorkTab {
 		// Remove Button
 		Button b = new Button("X");
 		Label targetLabel = new Label(target.toString());
-
 		hbox.getChildren().addAll (targetLabel,tabable,b);
 		// set the press button action
 		b.setOnAction(s -> {
@@ -347,26 +340,31 @@ public class WorkTab {
 				if(map.get(target).isEmpty())
 					map.remove(target);
 			} catch (Exception e1) {
-				System.out.println(e1);
+				e1.printStackTrace();
 			}
 		});
 		return hbox;
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes"})
 	private Node CreateEffectableSetter(String name, Field field, Tabable tab) {
 		GridPane grid = new  GridPane();
-		ComboBox<Class> box = new ComboBox<Class>(GameEvent.targetClasses);
+		HashMap<String, Class> nameToClass = new HashMap<>();
+		ObservableList<String> names = FXCollections.observableArrayList();
+		for(Class c : GameEvent.targetClasses) {
+			names.add(c.getSimpleName());
+			nameToClass.put(c.getSimpleName(), c);
+		}
+		ComboBox<String> box = new ComboBox<String>(names);
 		
 		if(field.getAnnotation(FieldInfo.class)!=null){
 			if(field.getAnnotation(FieldInfo.class).required()){
 			    ObservableList<String> styleClass = box.getStyleClass();
-			    
 			    styleClass.add("combobox-error");
 				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
-					Class o = null;
+					Object o = null;
 					try {
-						o =  ((Class) field.get(tab));
+						o =  (field.get(tab));
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -393,22 +391,19 @@ public class WorkTab {
         col2.setMinWidth(165);
         
         grid.getColumnConstraints().addAll(col1,col2);
-		try {
-			if(field.get(tab)!=null){
-				box.getSelectionModel().select((Class)field.get(tab));
-			}
-		} catch (Exception e1) {
-		} 
+		
 		ComboBox<String> variablebox = new ComboBox<String>();
 		box.setOnAction(x-> {
-			ObservableList<String> names = FXCollections.observableArrayList();
-			for(Field f : box.getValue().getFields()) {
+			ObservableList<String> varnames = FXCollections.observableArrayList();
+			for(Field f : nameToClass.get(box.getValue()).getFields()) {
 	            FieldInfo info = f.getAnnotation(FieldInfo.class);
 	            if(info == null)
 	            	continue;
-	            names.add(f.getName());
+	            if(info.IsEffectable() == false)
+	            	continue;
+	            varnames.add(f.getName());
 			}
-			variablebox.setItems(names);
+			variablebox.setItems(varnames);
 				try {
 					if(box.getValue()==null){
 						return;
@@ -431,6 +426,22 @@ public class WorkTab {
 			}
 		);
 		
+		try {
+			if(field.get(tab)!=null){
+				for(Class c : GameEvent.targetClasses) {
+					for(Field f : c.getFields()) {
+						if(f.getName() == (String)field.get(tab)) {
+							box.getSelectionModel().select(c.getSimpleName());
+							variablebox.getSelectionModel().select((String)field.get(tab));
+						}
+					}
+				}
+			}
+		} catch (Exception e1) {
+		} 
+		
+		
+		grid.add(variablebox, 1, 1);
 		return grid;
 	}
 
@@ -440,6 +451,7 @@ public class WorkTab {
 		tabables.addAll(obsMapTabable.values());
 
 		Class singleItemClass = tabableClass.getComponentType();
+
 		if(singleItemClass != null && Structure.class.isAssignableFrom(singleItemClass)) {
 			//if its a structure we need only THAT type of structure in the list so we need to filter the rest out.
 			tabables.removeIf(p-> p.getClass() != singleItemClass);
@@ -1186,7 +1198,7 @@ public class WorkTab {
 				// remove this value and set the array in class
 				field.set(m, removeElementFromArray(array, remove - 1));
 			} catch (Exception e1) {
-				System.out.println(e1);
+				e1.printStackTrace();
 			}
 		});
 		try {
@@ -1210,7 +1222,6 @@ public class WorkTab {
 		listpane.add(count, 1, rows);
 		listpane.add(b, 2, rows);
 	}
-	@SuppressWarnings("unchecked")
 	private<T extends Tabable> void OnArrayClassSelect(GridPane listpane, Field field, Tabable m, T select,boolean setup){
 		//get existing field if null or not
 		int[] old = null;
@@ -1221,7 +1232,7 @@ public class WorkTab {
 			method.setAccessible(true);
 			rows = (Integer) method.invoke(listpane);
 		} catch (Exception e1) {
-//			System.out.println(e1);
+			System.out.println(e1);
 		}
 		//if null we start at pos 1 else insert at length+1
 		int pos = 1;
@@ -1245,20 +1256,19 @@ public class WorkTab {
 		b.setOnAction(s -> {
 			try {
 				// get array
-				T[] array = (T[]) field.get(m);
+				int[] array = (int[]) field.get(m);
 				// remove the label and button
 				listpane.getChildren().removeAll(l, b);
 				ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
 				listpane.getChildren().clear();
-				for (int i = 0; i < children.size(); i += 3) {
+				for (int i = 0; i < children.size(); i += 2) {
 					listpane.add(children.get(i), 0, i);
 					listpane.add(children.get(i + 1), 1, i);
-					listpane.add(children.get(i + 2), 2, i);
 				}
 				// remove this value and set the array in class
 				field.set(m, removeElementFromArray(array, remove - 1));
 			} catch (Exception e1) {
-				System.out.println(e1);
+				e1.printStackTrace();
 			}
 		});
 		try {
@@ -1506,7 +1516,22 @@ public class WorkTab {
 		}
 	    return newA;
 	}
-	
+	public int[] removeElementFromArray(int[] a, int del) {
+		if(a.length-1==0){
+			return (int[])Array.newInstance(a.getClass().getComponentType(), 0);
+		}
+		int[] newA = (int[])Array.newInstance(a.getClass().getComponentType(), a.length-1);
+//	    System.arraycopy(newA,0,a,del,a.length-1-del);
+		int newI = 0;// new array pos
+	    for (int i = 0; i < a.length; i++) { // increase old array pos
+	    	if(i==del){ // its the one to copy -> skip
+	    		continue;
+	    	}
+			newA[newI] = a[i]; // just copy 
+	    	newI++; // increase new array pos
+		}
+	    return newA;
+	}
 	private void CheckIfRequired(Node text,Field field,Tabable t){
         FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info == null || info.required() == false){

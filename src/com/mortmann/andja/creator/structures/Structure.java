@@ -38,6 +38,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	@Element(required=false) public boolean hasHitbox;
 	
 	@FieldInfo(required=true, IsEffectable=true) @Element public float maxHealth;
+	@FieldInfo(required=true, ignore=true, IsEffectable=true) public float CurrentHealth; //only for effects here!
 
 	@FieldInfo(IsEffectable=true) @Element(required=false) public int structureRange = 0;
 	

@@ -19,5 +19,7 @@ public @interface FieldInfo {
     boolean longtext() default false;
     boolean IsEffectable() default false;
     boolean RequiresEffectable() default false;
+	boolean ignore() default false;
+
 
 }
