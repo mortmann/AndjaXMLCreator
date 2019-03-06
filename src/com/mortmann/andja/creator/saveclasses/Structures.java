@@ -20,6 +20,7 @@ public class Structures {
 	public ArrayList<Warehouse> warehouses;
 	public ArrayList<Home> homes;
 	public ArrayList<MilitaryStructure> militarystructures;
+	public ArrayList<ServiceStructure> servicestructures;
 
 	public Structures(){
 		
@@ -35,6 +36,7 @@ public class Structures {
 		warehouses = new ArrayList<>();
 		homes = new ArrayList<>();
 		militarystructures = new ArrayList<>();
+		servicestructures = new ArrayList<>();
 		Collections.sort(Structures);
 		for (Structure s : Structures) {
 			if(s instanceof Road){
@@ -67,6 +69,9 @@ public class Structures {
 			else if(s instanceof MilitaryStructure){
 				militarystructures.add((MilitaryStructure)s);			
 			}
+			else if(s instanceof ServiceStructure){
+				servicestructures.add((ServiceStructure)s);			
+			}
 		}
 	}
 	
@@ -75,7 +80,8 @@ public class Structures {
 		ArrayList<Structure> strs = new ArrayList<>();
 		for (Field f : this.getClass().getFields()) {
 			try {
-				strs.addAll((Collection<? extends Structure>) f.get(this));
+				if(f.get(this) != null)
+					strs.addAll((Collection<? extends Structure>) f.get(this));
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {

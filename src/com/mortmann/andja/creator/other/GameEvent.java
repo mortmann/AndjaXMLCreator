@@ -32,9 +32,11 @@ import javafx.collections.ObservableList;
 public class GameEvent implements Comparable<GameEvent>, Tabable {
 	
 	public enum Target {
-	    World, Player, AllUnit, Ship, LandUnit, Island, City, AllStructure, RoadStructure, NeedStructure, MilitaryStructure, HomeStructure,
-	    ServiceStructure, GrowableStructure, OutputStructure, MarketStructure, WarehouseStructure, MineStructure,
-	    FarmStructure, ProductionStructure
+	    World, Player, AllUnit, Ship, LandUnit, Island, City, 
+	    AllStructure, DamagableStructure,
+	    RoadStructure, NeedStructure, MilitaryStructure, HomeStructure,
+	    ServiceStructure, GrowableStructure, OutputStructure, MarketStructure, 
+	    WarehouseStructure, MineStructure, FarmStructure, ProductionStructure
 	}
 	@SuppressWarnings("rawtypes")
 	@FieldInfo(ignore = true) public static final ObservableList<Class> targetClasses = FXCollections.observableArrayList(

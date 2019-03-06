@@ -24,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -39,6 +40,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class WorkTab {
 	ScrollPane scrollPaneContent;
@@ -68,10 +70,16 @@ public class WorkTab {
         mainGrid.add(wrapPaneInTitledPane("Integer",intGrid), 0, 0);
         mainGrid.add(wrapPaneInTitledPane("Boolean",booleanGrid), 1, 0);
         mainGrid.add(wrapPaneInTitledPane("Float",floatGrid), 2, 0);
-        mainGrid.add(wrapPaneInTitledPane("Enum",enumGrid), 0, 1);
-        mainGrid.add(wrapPaneInTitledPane("String",stringGrid), 1, 1);
-        mainGrid.add(wrapPaneInTitledPane("Other",otherGrid), 2, 1);
-        mainGrid.add(wrapPaneInTitledPane("Language",languageGrid), 0, 2);
+        mainGrid.add(wrapPaneInTitledPane("Enum",enumGrid), 0, 2);
+        TitledPane string = wrapPaneInTitledPane("String",stringGrid);
+        mainGrid.add(string,  0, 1);
+        TitledPane other = wrapPaneInTitledPane("Other",otherGrid);
+        GridPane.setColumnSpan(other, 2);
+        mainGrid.add(other, 1, 1);
+        TitledPane language = wrapPaneInTitledPane("Language",languageGrid);
+        mainGrid.add(language, 1, 2);
+        GridPane.setColumnSpan(language, 2);
+
         ColumnConstraints col = new ColumnConstraints();
         ColumnConstraints mid = new ColumnConstraints();
 
@@ -79,14 +87,6 @@ public class WorkTab {
         mid.setPercentWidth(30);
         col.setHgrow(Priority.ALWAYS);
         mainGrid.getColumnConstraints().addAll(col,mid,col);
-//        booleanGrid.setPrefHeight(floatGrid.getHeight());
-//        floatGrid.setPrefHeight(intGrid.getHeight());
-//        intGrid.setPrefHeight(booleanGrid.getHeight());
-//        stringGrid.setPrefHeight(stringGrid.getHeight());
-//        otherGrid.setPrefHeight(otherGrid.getHeight());
-//        languageGrid.setPrefHeight(enumGrid.getHeight());
-//        enumGrid.setPrefHeight(Double.MAX_VALUE);
-
         
         scrollPaneContent = new ScrollPane();
         mainGrid.setMaxWidth(1225);
@@ -1004,13 +1004,16 @@ public class WorkTab {
 			Node t = null;
 			if(fi!=null&&fi.longtext()){
 				t = new TextArea();
-				((TextArea) t).setPrefRowCount(3);
+				((TextArea) t).setPrefRowCount(5);
 				((TextArea) t).setPrefColumnCount(100);
 				((TextArea) t).setWrapText(true);
-				((TextArea) t).setPrefWidth(150);
+				((TextArea) t).setPrefWidth(400);
+				
+				
 				temp = ((TextArea) t).textProperty();
 			} else {
-				t = new TextField();
+				t = new TextField();				
+				t.prefWidth(400);
 				temp = ((TextField) t).textProperty();
 			}
 			StringProperty sp = temp;
@@ -1397,13 +1400,13 @@ public class WorkTab {
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setMinWidth(75);
         grid.getColumnConstraints().addAll(col1,col2);
-		
 		TextArea box = new TextArea();
-		box.setPrefRowCount(10);
-		box.setPrefColumnCount(100);
-		box.setWrapText(true);
-		box.setPrefWidth(150);
 		
+		
+		box.setPrefRowCount(10);
+		box.setPrefColumnCount(1000);
+		box.setWrapText(true);
+		box.setPrefSize( Double.MAX_VALUE, Double.MAX_VALUE );		
 		CheckIfRequired(box, field, str);
 
 		try {

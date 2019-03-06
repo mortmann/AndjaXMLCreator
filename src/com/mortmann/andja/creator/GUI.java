@@ -361,8 +361,11 @@ public class GUI {
 		MenuItem mine = new MenuItem("Mine");
 		MenuItem road = new MenuItem("Road");
 		MenuItem military = new MenuItem("MilitaryStructure");
+		MenuItem service = new MenuItem("ServiceStructure");
 
-		mStructure.getItems().addAll(production,needStructure,farm,growable,home,market,warehouse,mine,road,military);
+		mStructure.getItems().addAll(production,needStructure,farm,growable,
+										home,market,warehouse,mine,road,military,
+										service);
 		production.setOnAction(x->{ClassAction(Production.class);});
 		needStructure.setOnAction(x->{ClassAction(NeedStructure.class);});
 		farm.setOnAction(x->{ClassAction(Farm.class);});
@@ -373,7 +376,8 @@ public class GUI {
 		mine.setOnAction(x->{ClassAction(Mine.class);});
 		road.setOnAction(x->{ClassAction(Road.class);});
 		military.setOnAction(x->{ClassAction(MilitaryStructure.class);});
-
+		service.setOnAction(x->{ClassAction(ServiceStructure.class);});
+		
         Menu mUnit = new Menu("New Unit-Things");
         menuBar.getMenus().add(mUnit);
         MenuItem unit = new MenuItem("Unit");
@@ -491,15 +495,6 @@ public class GUI {
 			for(ObservableMap<Integer, ? extends Tabable> map : classToClassObservableMap.values()) {
 				allTabs.addAll(map.values());
 			}
-//			allTabs.addAll(idToArmorType.values());
-//			allTabs.addAll(idToDamageType.values());
-//			allTabs.addAll(idToFertility.values());
-//			allTabs.addAll(idToStructures.values());
-//			allTabs.addAll(idToNeed.values());
-//			allTabs.addAll(idToNeedGroup.values());
-//			allTabs.addAll(idToPopulationLevel.values());
-//			allTabs.addAll(idToEffect.values());
-//			allTabs.addAll(idToGameEvent.values());
 
 			allTabs.removeIf(x->x.DependsOnTabable(t)==null);
 			String depends = "Other Structures depends on it!\nRemove dependencies from ";
