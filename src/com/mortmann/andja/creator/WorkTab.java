@@ -291,7 +291,7 @@ public class WorkTab {
         GridPane.setColumnSpan(listbox, 2);
 
 		try {		
-			HashMap<Target, ArrayList<Integer>> map = field.get(tab)!=null ? (HashMap<Target, ArrayList<Integer>>) field.get(tab) : new HashMap<>();
+			HashMap<Target, Integer[]> map = field.get(tab)!=null ? (HashMap<Target, Integer[]>) field.get(tab) : new HashMap<>();
 			for(Target t : map.keySet()) {
 				for(int id : map.get(t)) {
 					listbox.getChildren().add(CreateHBoxEffectableTabable(id,"" ,t,listbox,map));
@@ -305,10 +305,15 @@ public class WorkTab {
 						if(tabableBox.getValue()==null){
 							return;
 						}
-						if(map.containsKey(box.getValue()) == false) {
-							map.put(target, new ArrayList<Integer>());
-						}
-						map.get(target).add(tabableBox.getValue().GetID());
+						ArrayList<Integer> temp = new ArrayList<Integer>();
+						if(map.get(target) != null)
+							temp.addAll(Arrays.asList(map.get(target)));
+//						if(map.containsKey(box.getValue()) == false) {
+//							map.put(target, new Integer[1]);
+//						}
+						temp.add(new Integer(tabableBox.getValue().GetID()));
+						Integer[] t = new Integer[1];
+ 						map.put(target, temp.toArray(t));
 						field.set(tab, map);
 						listbox.getChildren()
 							.add(CreateHBoxEffectableTabable(select.GetID(),select.GetName(),target,listbox,map));
@@ -323,7 +328,7 @@ public class WorkTab {
 		return grid;
 	}
 
-	private Node CreateHBoxEffectableTabable(int selectID,String selectName, Target target, VBox listbox,HashMap<Target, ArrayList<Integer>> map) {
+	private Node CreateHBoxEffectableTabable(int selectID,String selectName, Target target, VBox listbox,HashMap<Target, Integer[]> map) {
 		HBox hbox = new HBox();
 		// Name
 		Label tabable = new Label(selectName);
@@ -336,8 +341,11 @@ public class WorkTab {
 			try {
 				// remove the label and button
 				listbox.getChildren().remove(hbox);
-				map.get(target).remove(selectID);
-				if(map.get(target).isEmpty())
+				ArrayList<Integer> temp = new ArrayList<Integer>(Arrays.asList(map.get(target)));
+				temp.remove(new Integer(selectID));
+				Integer[] t = new Integer[1];
+				map.put(target, temp.toArray(t));
+				if(temp.isEmpty())
 					map.remove(target);
 			} catch (Exception e1) {
 				e1.printStackTrace();

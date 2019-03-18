@@ -53,8 +53,8 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
 	@FieldInfo(required=false,mainType=Target.class, subType=Integer.class)
-	@ElementMap(required=false, key = "target",attribute=true) 
-	public HashMap<Target, ArrayList<Integer>> specialRange;
+	@ElementMap(required=false, key = "target",entry="range",attribute=true) 
+	public HashMap<Target, Integer[]> specialRange;
 
 	@Element @FieldInfo(order = 0) public float probability = 10;
 	@Element @FieldInfo(order = 1) public float minDuration = 50;
@@ -68,9 +68,9 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	@Override
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
-			return getClass().getSimpleName();
+			return ID + " : " + getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return ID + " : " +Name.get(Language.English.toString());
 	}
 
 	@Override
@@ -91,5 +91,8 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	public int compareTo(GameEvent ge) {
 		return Integer.compare(ID, ge.ID);
 	}
-
+	@Override
+	public String toString() {
+		return GetName();
+	}
 }
