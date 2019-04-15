@@ -2,10 +2,11 @@ package com.mortmann.andja.creator.structures;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
+import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Effect;
 import com.mortmann.andja.creator.util.FieldInfo;
-
+@Root(strict=false,name="servicestructure")
 public class ServiceStructure extends Structure {
 	public enum ServiceTarget { All, Damageable, Military, Homes, Production, Service, NeedStructure, SpecificRange, City, None }
 	public enum ServiceFunction { None, Repair, AddEffect, RemoveEffect, PreventEffect }

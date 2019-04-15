@@ -1,10 +1,12 @@
 package com.mortmann.andja.creator.other;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.GameEvent.Target;
@@ -22,6 +24,8 @@ public class Effect implements Tabable, Comparable<Effect> {
 	public enum EffectUpdateChanges { None, Health }
 	public enum EffectClassification { Negativ, Neutral, Positiv }
 	
+	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
+	
 	@Element(required=false) public boolean unique;
 	@FieldInfo(order = 0, required = true, RequiresEffectable = true, compareType=Tabable.class) 
 	@Element(required=false) public String nameOfVariable; // what does it change
@@ -37,7 +41,7 @@ public class Effect implements Tabable, Comparable<Effect> {
 
 	@Override
 	public String GetName() {
-		return targets + " => " + nameOfVariable + " -> " + change;
+		return Name + ": " +targets + " => " + nameOfVariable + " -> " + change;
 	}
 
 	@Override
