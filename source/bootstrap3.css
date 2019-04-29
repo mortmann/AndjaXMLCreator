@@ -433,6 +433,23 @@ VBox > .split-menu-button.last > .arrow-button {
     -fx-background-color: #FFF0F0;
     -fx-border-color: #DBB1B1;
 }
+.titledpane-error {
+	-fx-color: #FFF0F0;
+    -fx-background-color: #FFF0F0;
+    -fx-border-color: #DBB1B1;
+    
+    
+}
+.titledpane-error > .title{
+    -fx-background-color: #FFF0F0 !important;
+    
+}
+.titledpane-noerror {
+	-fx-color: #FFFFFF;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+    
+}
 .text-field:focused, .text-area:focused {
 	-fx-border-color: #66afe9;
 	-fx-effect: dropshadow(gaussian, #66afe9, 10, 0, 0, 0);

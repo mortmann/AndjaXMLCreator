@@ -1,0 +1,380 @@
+<UI>
+      <element name="Right Canvas">
+         <element name="CityInventory">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="CityInfoToggle"/>
+            <element name="City UI">
+               <element name="Statistics">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Income"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="People"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Expanses"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Balance"/>
+               </element>
+               <element name="Settings">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="AutoUpgrade"/>
+               </element>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="CityName Input"/>
+            </element>
+            <element name="TradePanel">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="DeleteTrade"/>
+               <element name="Trade-Canvas">
+                  <element name="ItemTrade">
+                     <element name="Layout">
+                        <element name="Prices">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Sell"/>
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Buy"/>
+                        </element>
+                     </element>
+                  </element>
+               </element>
+            </element>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="TradeMenuButton"/>
+         </element>
+         <element name="Citizen Canvas">
+            <element name="StructureUI">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Health"/>
+            </element>
+         </element>
+         <element name="OtherPlayerCity">
+            <element name="Trade-Canvas">
+               <element name="ItemTrade-Prefab">
+                  <element name="Layout">
+                     <element name="Prices">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Buy"/>
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Sell"/>
+                     </element>
+                  </element>
+               </element>
+            </element>
+         </element>
+      </element>
+      <element name="Menu Canvas">
+         <element name="Menu Button">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="QuickSave"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Destroytool"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Fast"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Slow"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="QuickLoad"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="NormalSpeed"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Fastest"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Pause"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Options"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Slowest"/>
+         </element>
+      </element>
+      <element name="Layout">
+         <element name="Prices">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Sell">
+               <text>Sell</text>
+               <hoverOver>How much you sell 1t for.</hoverOver>
+            </element>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Buy">
+               <text>Buy</text>
+               <hoverOver>How much you pay for 1t.</hoverOver>
+            </element>
+         </element>
+      </element>
+      <element class="com.mortmann.andja.creator.ui.UIElementText" name="Health"/>
+      <element name="OffWorldMarket">
+         <element name="OFFWORLD-Panel">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Delete"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="ONSHIP"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="TOBUY"/>
+         </element>
+      </element>
+      <element name="Info Canvas">
+         <element name="MilitaryStructure Info">
+            <element name="CurrentlyBuilding">
+               <element name="Active Building">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="BuildProgress"/>
+               </element>
+            </element>
+         </element>
+         <element name="InfoButtons">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Info"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Close"/>
+         </element>
+         <element name="Unit Panel">
+            <element name="CombatInfo">
+               <element name="Text">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="MaximumDamage"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Speed"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="CurrentDamage"/>
+               </element>
+            </element>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Health"/>
+            <element name="Buttons">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Settle"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Patrol"/>
+            </element>
+         </element>
+         <element name="Produktion Panel">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Sleep"/>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="ProduceProgress"/>
+         </element>
+         <element name="StructureUI">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Health"/>
+         </element>
+      </element>
+      <element name="Menu">
+         <element name="MenuPanel">
+            <element name="MenuButtons (1)">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="QuitMenu"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Quit"/>
+            </element>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+            <element name="MenuButtons">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Save"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Load"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Options"/>
+            </element>
+         </element>
+         <element name="GameplayPanel">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+            <element name="Content">
+               <element name="ScrollRect">
+                  <element name="VerticalLayoutGroup">
+                     <element name="Autorotate Buildings">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                  </element>
+               </element>
+            </element>
+         </element>
+         <element name="NotSavedDialog">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="WarningTitle"/>
+            <element name="Content">
+               <element name="VerticalLayoutGroup">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Text"/>
+                  <element name="Buttons">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Yes"/>
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="No"/>
+                  </element>
+               </element>
+            </element>
+         </element>
+         <element name="LoadPanel">
+            <element name="MenuButtons">
+               <element name="SaveDetails">
+                  <element name="Descriptons">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="CreationDate"/>
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Climate"/>
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Size"/>
+                  </element>
+               </element>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Load"/>
+            </element>
+            <element name="Title">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="TitleText"/>
+            </element>
+         </element>
+         <element name="SavePanel">
+            <element name="MenuButtons">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Save"/>
+            </element>
+            <element name="Title">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="TitleText"/>
+            </element>
+         </element>
+         <element name="OptionsPanel">
+            <element name="MenuButtons">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Graphics"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Controls"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Sound"/>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Gameplay"/>
+            </element>
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Back"/>
+         </element>
+         <element name="GraphicsPanel">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+            <element name="Content">
+               <element name="ScrollRect">
+                  <element name="VerticalLayoutGroup">
+                     <element name="Brightness">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="TextureQuality">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="Vsync">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Value"/>
+                     </element>
+                     <element name="Fullscreen">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Value"/>
+                     </element>
+                     <element name="Resolutions">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                  </element>
+               </element>
+            </element>
+         </element>
+         <element name="SoundPanel">
+            <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+            <element name="Content">
+               <element name="VerticalLayoutGroup">
+                  <element name="Master">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                  </element>
+                  <element name="SoundEffects">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                  </element>
+                  <element name="Ambient">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                  </element>
+                  <element name="Music">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                  </element>
+                  <element name="UI">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                  </element>
+               </element>
+            </element>
+         </element>
+         <element name="ControlPanel">
+            <element name="Content">
+               <element name="VerticalLayoutGroup">
+                  <element name="Mouse Sensitivity">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                  </element>
+                  <element name="KEYTitles">
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="HotkeyText"/>
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="PrimaryKeyText"/>
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="SecondaryKeyText"/>
+                  </element>
+               </element>
+            </element>
+         </element>
+      </element>
+      <element name="PauseMenu">
+         <element name="Menu">
+            <element name="NotSavedDialog">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="WarningTitle"/>
+               <element name="Content">
+                  <element name="VerticalLayoutGroup">
+                     <element name="Buttons">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="No"/>
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Yes"/>
+                     </element>
+                     <element class="com.mortmann.andja.creator.ui.UIElementText" name="Text"/>
+                  </element>
+               </element>
+            </element>
+            <element name="GraphicsPanel">
+               <element name="Content">
+                  <element name="ScrollRect">
+                     <element name="VerticalLayoutGroup">
+                        <element name="Brightness">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                        </element>
+                        <element name="Fullscreen">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Value"/>
+                        </element>
+                        <element name="TextureQuality">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                        </element>
+                        <element name="Vsync">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Value"/>
+                        </element>
+                        <element name="Resolutions">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                        </element>
+                     </element>
+                  </element>
+               </element>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+            </element>
+            <element name="OptionsPanel">
+               <element name="MenuButtons">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Gameplay"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Controls"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Sound"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Graphics"/>
+               </element>
+            </element>
+            <element name="LoadPanel">
+               <element name="MenuButtons">
+                  <element name="SaveDetails">
+                     <element name="Descriptons">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="CreationDate"/>
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Size"/>
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Climate"/>
+                     </element>
+                  </element>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Load"/>
+               </element>
+               <element name="Title">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="TitleText"/>
+               </element>
+            </element>
+            <element name="MenuPanel">
+               <element name="MenuButtons">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Options"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Load"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Save"/>
+               </element>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+               <element name="MenuButtons (1)">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Quit"/>
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="QuitMenu"/>
+               </element>
+            </element>
+            <element name="SoundPanel">
+               <element name="Content">
+                  <element name="VerticalLayoutGroup">
+                     <element name="Ambient">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="Master">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="Music">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="UI">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="SoundEffects">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                  </element>
+               </element>
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+            </element>
+            <element name="ControlPanel">
+               <element name="Content">
+                  <element name="VerticalLayoutGroup">
+                     <element name="Mouse Sensitivity">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                     </element>
+                     <element name="KEYTitles">
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="SecondaryKeyText"/>
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="PrimaryKeyText"/>
+                        <element class="com.mortmann.andja.creator.ui.UIElementText" name="HotkeyText"/>
+                     </element>
+                  </element>
+               </element>
+            </element>
+            <element name="SavePanel">
+               <element name="Title">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="TitleText"/>
+               </element>
+               <element name="MenuButtons">
+                  <element class="com.mortmann.andja.creator.ui.UIElementText" name="Save"/>
+               </element>
+            </element>
+            <element name="GameplayPanel">
+               <element class="com.mortmann.andja.creator.ui.UIElementText" name="Title"/>
+               <element name="Content">
+                  <element name="ScrollRect">
+                     <element name="VerticalLayoutGroup">
+                        <element name="Autorotate Buildings">
+                           <element class="com.mortmann.andja.creator.ui.UIElementText" name="Label"/>
+                        </element>
+                     </element>
+                  </element>
+               </element>
+            </element>
+         </element>
+      </element>
+      <element class="com.mortmann.andja.creator.ui.UIElementText" name="*Back"/>
+</UI>

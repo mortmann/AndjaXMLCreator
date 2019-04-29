@@ -39,6 +39,10 @@ import com.mortmann.andja.creator.saveclasses.Others;
 import com.mortmann.andja.creator.saveclasses.Structures;
 import com.mortmann.andja.creator.saveclasses.UnitSave;
 import com.mortmann.andja.creator.structures.*;
+import com.mortmann.andja.creator.ui.UIElement;
+import com.mortmann.andja.creator.ui.UIElementText;
+import com.mortmann.andja.creator.ui.UILanguageLocalizations;
+import com.mortmann.andja.creator.ui.UITab;
 import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.unitthings.Ship;
@@ -72,6 +76,7 @@ public class GUI {
 	public ObservableMap<Integer, PopulationLevel> idToPopulationLevel;
 	public ObservableMap<Integer, Effect> idToEffect;
 	private ObservableMap<Integer, GameEvent> idToGameEvent;
+	public HashMap<Language,UITab> languageToLocalization;
 	@SuppressWarnings("rawtypes")
 	public HashMap<Class, ObservableMap<Integer, ? extends Tabable>> classToClassObservableMap;
 
@@ -184,6 +189,11 @@ public class GUI {
 				}
 			}
 		});
+		
+        languageToLocalization = new HashMap<>();
+        for(Language l : Language.values())
+        	LoadMissingUIData(l);
+		
 	}
 
 	private void LoadData(){
@@ -297,6 +307,98 @@ public class GUI {
 			e.printStackTrace();
 		}
 	}
+	public UITab LoadLocalization(Language language) {
+		Serializer serializer = new Persister(new AnnotationStrategy());
+		String filename ="localization-"+ language +".xml";
+        UITab tab = new UITab();
+		try {
+			tab = serializer.read(tab, new File(filename));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			tab = new UITab(new HashMap<>(), language);
+		}    
+		HashMap<String,UIElement> missing = LoadMissingUIData(language);
+		if(missing == null)
+			return tab;
+		HashMap<String,UIElement> inTab = new HashMap<>(); 
+		for(UIElement element : tab.elements) {
+			inTab.put(element.name, element);
+		}
+		for(String name : missing.keySet()) {
+			if(inTab.containsKey(name)) {
+				inTab.get(name).AddMissing(missing.get(name).childs);
+			} else {
+				inTab.put(name, missing.get(name));
+			}
+		}
+		return new UITab(inTab, language);
+	}
+	
+	
+	public HashMap<String,UIElement> LoadMissingUIData(Language language) {
+		AnnotationStrategy as = new AnnotationStrategy();
+		Serializer serializer = new Persister(as);
+		ArrayList<String> strings = new ArrayList<>();		
+//		for(Language l : Language.values()) {
+		UILanguageLocalizations missings = new UILanguageLocalizations();
+		try {
+			serializer.read(missings, new File("Missing-UI-Localization-"+language));
+		} catch (Exception e) {
+//			continue;
+			return null;
+		}
+		strings.addAll(missings.missingLocalization);
+//		}
+		HashMap<String,UIElement> map = new HashMap<>();
+		for(String s : strings) {
+			String[] parts = s.split("/");
+			UIElement element = new UIElement(null,null);
+			String key = parts[0];
+			if(map.containsKey(key)) {
+				element = map.get(key);
+			} else {
+				if(parts.length>2)
+					element = new UIElement(key,null);
+				else
+					element = new UIElementText(key,null);
+				map.put(key,element);
+			}
+			if(parts.length<=2) //when it is max 2 -> its already end node 
+				continue;
+			
+			for (int i = 1; i < parts.length; i++) {
+				key = parts[i];
+				if( i == parts.length-2){
+					element.SetUIElementText(key,parts[i+1]);
+					break;
+				} else {
+					element = element.GetUIElement(key);
+				}
+			}
+		}
+//		UITab tab = new UITab(map);
+//		Tab t = new Tab("Localization");
+//		t.setContent(tab.scroll);
+//		workTabs.getTabs().add(t);
+		return map;
+	}
+	public void SaveLocalization(Language lang) {
+		UITab tab = languageToLocalization.get(lang);
+		Serializer serializer = new Persister(new AnnotationStrategy());
+		String filename ="localization-"+ lang +".xml";
+        try {
+        	BackUPFileTEMP(filename);
+			serializer.write(tab, new File(filename));
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Missing requierd Data!");
+			a.setContentText("Can´t save data! Fill all required data out! " + e.getMessage());
+			e.printStackTrace();
+			a.show();
+			return;
+		}
+        BackUPFile(filename);
+	}
 	
 	
 	public void AddTab(Tabable c, Node content){
@@ -379,6 +481,7 @@ public class GUI {
 		service.setOnAction(x->{ClassAction(ServiceStructure.class);});
 		
         Menu mUnit = new Menu("New Unit-Things");
+
         menuBar.getMenus().add(mUnit);
         MenuItem unit = new MenuItem("Unit");
 		MenuItem armorType = new MenuItem("ArmorType");
@@ -437,8 +540,45 @@ public class GUI {
         	ClassAction(GameEvent.class);
         });
 		mEvents.getItems().addAll(effect,gameEvent);
+		
+		Menu localization = new Menu("Localization");
+		for(Language l : Language.values()) {
+	        MenuItem localizationItem = new MenuItem(l+"");
+	        localizationItem.setOnAction(x-> {
+	        	LocalizationAction(l);
+	        });
+	        localization.getItems().add(localizationItem);
+		}
+        menuBar.getMenus().add(localization);
+
+		
 	}
 	
+	private void LocalizationAction(Language l) {
+		UITab tab = LoadLocalization(l);
+		if(tab == null)
+			return;
+		for(Tabable t : tabToTabable.values()) {
+			if(t instanceof UITab) {
+				if(((UITab)t).language == l)
+					return;
+			}
+		}
+		AddTab(tab, tab.scroll);
+		languageToLocalization.put(l, tab);
+//		Stage langWindow = new Stage();
+//		VBox box = new VBox();
+//		box.getChildren().add(tab.scroll);
+//        Scene langscene = new Scene(box,1600,900);
+//        langscene.getStylesheets().add("bootstrap3.css");
+//        langWindow.setScene(langscene);
+//        langWindow.show();
+//        langWindow.setOnCloseRequest(x->{
+//			
+//		});
+
+	}
+
 	private void SaveData() {
 		SaveStructures();
 		SaveItems();
@@ -446,6 +586,9 @@ public class GUI {
 		SaveCombat();
 		SaveUnits();
 		SaveNeeds();
+		for(Language l : Language.values()) {
+			SaveLocalization(l);
+		}
 	}
 	
 
@@ -470,6 +613,11 @@ public class GUI {
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
 		Tabable o = tabToTabable.get(curr);
+		if(o instanceof UITab) {
+			SaveLocalization(((UITab)o).language);
+			curr.setText(curr.getText().replaceAll("\\*", ""));
+			return;
+		}
 		curr.setText(o.GetName());
 		//check if its filled out all required
 		ArrayList<Field> missingFields = CheckForMissingFields(o);
