@@ -24,7 +24,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -40,7 +39,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class WorkTab {
 	ScrollPane scrollPaneContent;
@@ -180,15 +178,15 @@ public class WorkTab {
             		continue;
             	}
             	if(fi.subType()==DamageType.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.tidToDamageType), 0, i);
             		continue;
             	} 
             	if(fi.subType()==ArmorType.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToArmorType), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.tidToArmorType), 0, i);
             		continue;
             	} 
             	if(fi.subType()==PopulationLevel.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToPopulationLevel), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.tidToPopulationLevel), 0, i);
             		continue;
             	}
             	if(fi.subType()==String.class){
@@ -291,9 +289,9 @@ public class WorkTab {
         GridPane.setColumnSpan(listbox, 2);
 
 		try {		
-			HashMap<Target, Integer[]> map = field.get(tab)!=null ? (HashMap<Target, Integer[]>) field.get(tab) : new HashMap<>();
+			HashMap<Target, String[]> map = field.get(tab)!=null ? (HashMap<Target, String[]>) field.get(tab) : new HashMap<>();
 			for(Target t : map.keySet()) {
-				for(int id : map.get(t)) {
+				for(String id : map.get(t)) {
 					listbox.getChildren().add(CreateHBoxEffectableTabable(id,"" ,t,listbox,map));
 				}
 			}
@@ -305,14 +303,14 @@ public class WorkTab {
 						if(tabableBox.getValue()==null){
 							return;
 						}
-						ArrayList<Integer> temp = new ArrayList<Integer>();
+						ArrayList<String> temp = new ArrayList<String>();
 						if(map.get(target) != null)
 							temp.addAll(Arrays.asList(map.get(target)));
 //						if(map.containsKey(box.getValue()) == false) {
 //							map.put(target, new Integer[1]);
 //						}
-						temp.add(new Integer(tabableBox.getValue().GetID()));
-						Integer[] t = new Integer[1];
+						temp.add(tabableBox.getValue().GetID());
+						String[] t = new String[1];
  						map.put(target, temp.toArray(t));
 						field.set(tab, map);
 						listbox.getChildren()
@@ -328,7 +326,7 @@ public class WorkTab {
 		return grid;
 	}
 
-	private Node CreateHBoxEffectableTabable(int selectID,String selectName, Target target, VBox listbox,HashMap<Target, Integer[]> map) {
+	private Node CreateHBoxEffectableTabable(String selectID,String selectName, Target target, VBox listbox,HashMap<Target, String[]> map) {
 		HBox hbox = new HBox();
 		// Name
 		Label tabable = new Label(selectName);
@@ -341,9 +339,9 @@ public class WorkTab {
 			try {
 				// remove the label and button
 				listbox.getChildren().remove(hbox);
-				ArrayList<Integer> temp = new ArrayList<Integer>(Arrays.asList(map.get(target)));
-				temp.remove(new Integer(selectID));
-				Integer[] t = new Integer[1];
+				ArrayList<String> temp = new ArrayList<String>(Arrays.asList(map.get(target)));
+				temp.remove(selectID);
+				String[] t = new String[1];
 				map.put(target, temp.toArray(t));
 				if(temp.isEmpty())
 					map.remove(target);
@@ -619,7 +617,7 @@ public class WorkTab {
 		box.setOnAction(x->{
 			try {
 				if(field.isAnnotationPresent(FieldInfo.class)&&field.getAnnotation(FieldInfo.class).compareType()==Item.class){
-						field.set(tab, box.getValue().ID);
+						field.set(tab, box.getValue().GetID());
 				} else {
 					field.set(tab, box.getValue());
 				}
@@ -706,18 +704,18 @@ public class WorkTab {
 	}
 
 	@SuppressWarnings("unchecked")
-	private<T extends Tabable> Node CreateClassToFloatSetter(String name, Field field, Tabable t, ObservableMap<Integer,T> hash) {
+	private<T extends Tabable> Node CreateClassToFloatSetter(String name, Field field, Tabable t, ObservableMap<String,T> hash) {
 		GridPane grid = new GridPane();
 		int row=0;
 		try {
-			HashMap<Integer, Float> h = (HashMap<Integer, Float>) field.get(t);
+			HashMap<String, Float> h = (HashMap<String, Float>) field.get(t);
 			if(h == null){
 				h = new HashMap<>();
 			}
-			hash.addListener(new MapChangeListener<Integer, T>(){
+			hash.addListener(new MapChangeListener<String, T>(){
 				@Override
 				public void onChanged(
-						javafx.collections.MapChangeListener.Change<? extends Integer, ? extends T> change) {
+						javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
 					if(change.getValueAdded()==null){
 						return; // doin nothin for removed for now
 					}
@@ -731,7 +729,7 @@ public class WorkTab {
 						@Override
 						public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 							try {
-								HashMap<Integer, Float> ha = (HashMap<Integer, Float>) field.get(t);
+								HashMap<String, Float> ha = (HashMap<String, Float>) field.get(t);
 								if(ha == null){
 									ha = new HashMap<>();
 								}
@@ -751,7 +749,7 @@ public class WorkTab {
 				NumberTextField ntf = new NumberTextField(true);
 				try {
 					if(h.containsKey(tab.GetID()))
-					ntf.setText((Float) h.get(tab.GetID())+"");
+						ntf.setText((Float) h.get(tab.GetID())+"");
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				} 
@@ -759,7 +757,7 @@ public class WorkTab {
 					@Override
 					public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 						try {
-							HashMap<Integer, Float> ha = (HashMap<Integer, Float>) field.get(t);
+							HashMap<String, Float> ha = (HashMap<String, Float>) field.get(t);
 							if(ha == null){
 								ha = new HashMap<>();
 							}
@@ -1163,7 +1161,7 @@ public class WorkTab {
 		if(old != null){
 			pos = old.length+1;
 			for (int i = 0; i < old.length; i++) {
-				if(old[i].ID == select.ID ){
+				if(old[i].GetID() == select.GetID() ){
 					if(setup== false){
 						return;
 					}
@@ -1235,10 +1233,10 @@ public class WorkTab {
 	}
 	private<T extends Tabable> void OnArrayClassSelect(GridPane listpane, Field field, Tabable m, T select,boolean setup){
 		//get existing field if null or not
-		int[] old = null;
+		String[] old = null;
 		Integer rows = 0;
 		try {
-			old = (int[]) field.get(m); 
+			old = (String[]) field.get(m); 
 			Method method = listpane.getClass().getDeclaredMethod("getNumberOfRows");
 			method.setAccessible(true);
 			rows = (Integer) method.invoke(listpane);
@@ -1250,7 +1248,7 @@ public class WorkTab {
 		if(old != null){
 			pos = old.length+1;
 			for (int i = 0; i < old.length; i++) {
-				if(old[i] == select.GetID() ){
+				if( old[i] == select.GetID() ){
 					if(setup== false){
 						return;
 					}
@@ -1285,10 +1283,10 @@ public class WorkTab {
 		try {
 			if(setup==false){
 				// Create newArray in Case old was null
-				int[] newArray = new int[1];
+				String[] newArray = new String[1];
 				if(old != null){
 					//else create a array one bigger than old
-					newArray = new int[old.length + 1];
+					newArray = new String[old.length + 1];
 					//copy over variables
 					System.arraycopy(old,0,newArray,0,old.length);
 				}
@@ -1370,6 +1368,7 @@ public class WorkTab {
 		
 		NumberTextField box = new NumberTextField();
 		CheckIfRequired(box, field, str);
+		// NEEDED FOR POPULATIONSLEVEL!
         FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info != null && info.id() && newTabable){
 			try {
@@ -1572,8 +1571,19 @@ public class WorkTab {
 			    	        styleClass.remove("text-field-warning");
 			    	    }
 					}
+				} else if(text instanceof TextField){
+					Tabable exist = GUI.Instance.doesIDexistForTabable(((TextField) text).textProperty().getValueSafe(), t);
+					if(exist!=null && exist!=t){
+						if(!styleClass.contains("text-field-warning")) {
+			    	        styleClass.add("text-field-warning");
+			    	    }
+					} else {
+						if(styleClass.contains("text-field-warning")) {
+			    	        styleClass.remove("text-field-warning");
+			    	    }
+					}
 				} else {
-					System.out.println("Non integer ids are not supported atm!");
+					System.out.println("Non integer&string ids are not supported atm!");
 				}
 			}
 			if( sp.getValue().isEmpty()){

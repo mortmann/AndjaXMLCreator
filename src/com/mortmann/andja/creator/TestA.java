@@ -2,12 +2,9 @@ package com.mortmann.andja.creator;
 
 import java.util.ArrayList;
 
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Transient;
-
-import com.mortmann.andja.creator.ui.UIElement;
 
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;

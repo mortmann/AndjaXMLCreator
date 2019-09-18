@@ -20,7 +20,9 @@ public class Unit implements Tabable, Comparable<Unit> {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
-	
+	@Attribute(required=false) 
+	public String tempID = "";	
+
 	@FieldInfo(required=true) public float buildTime = 1f;
 
 	@Element public int populationLevel = 0;
@@ -40,6 +42,8 @@ public class Unit implements Tabable, Comparable<Unit> {
 	@FieldInfo(required=true, IsEffectable=true) @Element public float damage=10;
 	@FieldInfo(order = 0,compareType=DamageType.class) @Element public int myDamageType;
 	@FieldInfo(order = 0,compareType=ArmorType.class) @Element public int myArmorType;
+	@FieldInfo(order = 0,compareType=DamageType.class) @Element(required=false) public String tmyDamageType;
+	@FieldInfo(order = 0,compareType=ArmorType.class) @Element(required=false) public String tmyArmorType;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRate=1;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float speed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second
@@ -52,8 +56,8 @@ public class Unit implements Tabable, Comparable<Unit> {
 	}
 	
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 	@Override
 	public String toString() {
@@ -61,15 +65,15 @@ public class Unit implements Tabable, Comparable<Unit> {
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
-		if(myArmorType==t.GetID()&&t.getClass()==ArmorType.class){
+		if(tmyArmorType==t.GetID()&&t.getClass()==ArmorType.class){
 			return this;
 		}
-		if(myDamageType==t.GetID()&&t.getClass()==DamageType.class){
+		if(tmyDamageType==t.GetID()&&t.getClass()==DamageType.class){
 			return this;
 		}
 		if(t.getClass()==ItemXML.class){
 			for (Item item : buildingItems) {
-				if(item.ID==t.GetID()){
+				if(item.GetID()==t.GetID()){
 					return this;
 				}
 			}

@@ -17,7 +17,9 @@ public class NeedGroup implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID;
-	
+	@Attribute(required=false) 
+	public String tempID = "";	
+
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
@@ -38,8 +40,8 @@ public class NeedGroup implements Tabable {
 		return Name.get(Language.English.toString());
 	}
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 
 	@Override

@@ -30,8 +30,8 @@ public class PopulationLevel implements Tabable {
 	}
 
 	@Override
-	public int GetID() {
-		return LEVEL;
+	public String GetID() {
+		return ""+LEVEL;
 	}
 
 	@Override

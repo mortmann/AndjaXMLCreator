@@ -15,16 +15,23 @@ public class DamageType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
-	
-	@FieldInfo(order=0,required=true,subType=String.class) @ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
+	@Attribute(required=false) 
+	public String tempID = "";	
+
+	@FieldInfo(order=0,required=true,subType=String.class) @ElementMap(key = "lang",attribute=true,required=false) 
+	public HashMap<String,String> Name;
 	@FieldInfo(order=0,required=true,subType=ArmorType.class) 
 	@ElementMap(key = "ArmorTyp",attribute=true,required=false) 
 	public HashMap<Integer,Float> damageMultiplier;
 	
+	@FieldInfo(order=0,required=true,subType=ArmorType.class) 
+	@ElementMap(key = "ArmorTyp",attribute=true,required=false) 
+	public HashMap<String, Float> tdamageMultiplier;
+	
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 	@Override
 	public String toString() {

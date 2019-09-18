@@ -2,6 +2,6 @@ package com.mortmann.andja.creator.util;
 
 public interface Tabable {
 	String GetName();
-	int GetID();
+	String GetID();
 	Tabable DependsOnTabable(Tabable t);
 }

@@ -21,7 +21,7 @@ public class Home extends Structure {
 		maintenanceCost = 0;
 	}
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 }

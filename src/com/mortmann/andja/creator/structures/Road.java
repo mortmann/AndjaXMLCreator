@@ -13,7 +13,7 @@ public class Road extends Structure {
 		canBeUpgraded = true;
 	}
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 }

@@ -12,7 +12,9 @@ public class Item implements Comparable<Item>{
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
-	
+	@Attribute(required=false) 
+	public String tempID = "";	
+
 	public enum ItemType {Build,Intermediate,Luxury}
 
 	@Element(required=false)
@@ -31,5 +33,7 @@ public class Item implements Comparable<Item>{
 	public int compareTo(Item arg0) {
 		return Integer.compare(ID, arg0.ID);
 	}
-	
+	public String GetID() {
+		return tempID;
+	}
  }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.ElementListUnion;
-import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI.Language;
@@ -52,8 +51,8 @@ public class UITab implements Tabable {
 		return language+"";
 	}
 	@Override
-	public int GetID() {
-		return -1;
+	public String GetID() {
+		return ""+-1;
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {

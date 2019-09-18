@@ -15,6 +15,9 @@ public class ArmorType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
+	@Attribute(required=false) 
+	public String tempID = "";	
+
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false)
 	public HashMap<String,String> Name;
@@ -26,8 +29,8 @@ public class ArmorType implements Tabable {
 	public String spriteBaseName;
 	
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 	@Override
 	public String toString() {

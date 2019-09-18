@@ -20,10 +20,16 @@ public class Need implements Tabable {
 	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
 	public HashMap<Integer,Float> UsageAmounts;
 	
+	@ElementMap(key = "Level",attribute=true,required=false) 
+	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
+	public HashMap<String,Float> tUsageAmounts;
+
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID;
-	
+	@Attribute(required=false) 
+	public String tempID = "";	
+
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
@@ -35,6 +41,10 @@ public class Need implements Tabable {
 	@Element(required=false)
 	public int[] structures;
 	
+	@FieldInfo(required=false,compareType=NeedStructure[].class)
+	@Element(required=false)
+	public String[] tstructures;
+
 	 
 	@FieldInfo(required=true)
 	@Element(required=false)
@@ -46,33 +56,36 @@ public class Need implements Tabable {
 	@FieldInfo(required=true,compareType=NeedGroup.class)
 	@Element(required=false)
 	public int group;
+	@FieldInfo(required=true,compareType=NeedGroup.class)
+	@Element(required=false)
+	public String tgroup;
 	
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		if(t instanceof Item){
-			if(t.GetID() == item.ID){
+			if(t.GetID() == item.GetID()){
 				return this;
 			}
 		}
 		if(t instanceof NeedStructure){
-			for (int id : structures) {
+			for (String id : tstructures) {
 				if(t.GetID() == id){
 					return this;
 				}
 			}
 		}
 		if(t instanceof NeedGroup){
-			if(t.GetID() == group){
+			if(t.GetID() == tgroup){
 				return this;
 			}
 		}
 		if(t instanceof PopulationLevel) {
-			for(int id : UsageAmounts.keySet()){
+			for(String id : tUsageAmounts.keySet()){
 				if(t.GetID() == id){
 					return this;
 				}

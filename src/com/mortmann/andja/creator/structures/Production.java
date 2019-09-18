@@ -27,7 +27,7 @@ public class Production extends OutputStructure {
 	protected Tabable StructureDependsOnTabable(Tabable t) {
 		if(t.getClass()==ItemXML.class){
 			for (Item item : intake) {
-				if(item.ID==t.GetID()){
+				if(item.GetID()==t.GetID()){
 					return this;
 				}
 			}

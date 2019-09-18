@@ -20,14 +20,10 @@ public class ItemXML extends Item implements Tabable {
 	public HashMap<String,String> Name;
 	@Element(required=false) public ItemType type;
 	@Element public int decays;
-	
+
 	@Override
 	public String toString() {
-		return ID +":"+ GetName();
-	}
-	@Override
-	public int GetID() {
-		return ID;
+		return GetName();
 	}
 	public ItemXML(ItemXML i) {
 		super(i);

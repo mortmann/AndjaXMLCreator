@@ -18,6 +18,8 @@ public class Effect implements Tabable, Comparable<Effect> {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public int ID =-1;	
+	@Attribute(required=false) 
+	public String tempID = "";	
 	
 	public enum EffectTypes { Integer, Float, Special }
 	public enum EffectModifier { Additive, Multiplicative, Update, Special }
@@ -45,8 +47,8 @@ public class Effect implements Tabable, Comparable<Effect> {
 	}
 
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 
 	@Override
@@ -56,7 +58,7 @@ public class Effect implements Tabable, Comparable<Effect> {
 
 	@Override
 	public int compareTo(Effect other) {
-		return Integer.compare(GetID(), other.GetID());
+		return GetID().compareToIgnoreCase(other.GetID());
 	}
 	@Override
 	public String toString() {

@@ -11,7 +11,7 @@ public class NeedStructure extends Structure {
 		myStructureTyp =	StructureTyp.Blocking;
 	}
 	@Override
-	public int GetID() {
-		return ID;
+	public String GetID() {
+		return tempID;
 	}
 }

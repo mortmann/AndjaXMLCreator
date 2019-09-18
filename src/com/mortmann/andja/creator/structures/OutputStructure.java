@@ -17,14 +17,11 @@ public abstract class OutputStructure extends Structure {
 	@FieldInfo(required = true, IsEffectable=true) @Element(required=false) public float efficiency = 1f;
 
 	@ElementArray(entry="Item",required=false) public Item[] output;
-	@Override
-	public int GetID() {
-		return ID;
-	}
+
 	protected Tabable OutputDependsOnTabable(Tabable t) {
 		if(t.getClass()==ItemXML.class){
 			for (Item item : output) {
-				if(item.ID==t.GetID()){
+				if(item.GetID()==t.GetID()){
 					return this;
 				}
 			}

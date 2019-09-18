@@ -15,10 +15,10 @@ public class ServiceStructure extends Structure {
     @Element public ServiceFunction function;
     @FieldInfo(required=false,compareType=Structure[].class) 
 	@ElementArray(entry="Structure",required=false) 
-    public int[] specificRange = null;
+    public String[] specificRange = null;
     @FieldInfo(required=false,compareType=Effect[].class) 
 	@ElementArray(entry="Effect",required=false) 
-	public int[] effectsOnTargets;
+	public String[] effectsOnTargets;
     @Element public int maxNumberOfWorker = 1;
     @Element public float workSpeed = 0.01f;
 	

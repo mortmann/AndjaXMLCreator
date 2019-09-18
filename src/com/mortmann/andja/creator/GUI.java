@@ -18,7 +18,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -53,8 +56,9 @@ import com.mortmann.andja.creator.util.Tabable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.EventType;
-
+@SuppressWarnings("rawtypes")
 public class GUI {
+	static final String saveFilePath = "Latest/"; 
 	public enum Language {English, German}
 	public static GUI Instance;
 	private Stage mainWindow;
@@ -76,13 +80,25 @@ public class GUI {
 	public ObservableMap<Integer, PopulationLevel> idToPopulationLevel;
 	public ObservableMap<Integer, Effect> idToEffect;
 	private ObservableMap<Integer, GameEvent> idToGameEvent;
+	
+	public ObservableMap<String,Structure> tidToStructures;
+	public ObservableMap<String,Fertility> tidToFertility;
+	public ObservableMap<String,ItemXML> tidToItem;
+	public ObservableMap<String,DamageType> tidToDamageType;
+	public ObservableMap<String,ArmorType> tidToArmorType;
+	public ObservableMap<String,Unit> tidToUnit;
+	public ObservableMap<String,Need> tidToNeed;
+	public ObservableMap<String, NeedGroup> tidToNeedGroup;
+	public ObservableMap<String, PopulationLevel> tidToPopulationLevel;
+	public ObservableMap<String, Effect> tidToEffect;
+	private ObservableMap<String, GameEvent> tidToGameEvent;
+	
 	public HashMap<Language,UITab> languageToLocalization;
-	@SuppressWarnings("rawtypes")
 	public HashMap<Class, ObservableMap<Integer, ? extends Tabable>> classToClassObservableMap;
+	public HashMap<Class, ObservableMap<String, ? extends Tabable>> tempClassToClassObservableMap;
 
 	HashMap<Tab,Tabable> tabToTabable;
 	
-	@SuppressWarnings("rawtypes")
 	HashMap<Class,DataTab> classToDataTab;
 	
 	
@@ -112,6 +128,18 @@ public class GUI {
         idToEffect = FXCollections.observableHashMap();
         idToGameEvent = FXCollections.observableHashMap();
         
+        tidToStructures = FXCollections.observableHashMap();
+        tidToArmorType = FXCollections.observableHashMap();
+        tidToDamageType = FXCollections.observableHashMap();
+        tidToUnit = FXCollections.observableHashMap();
+        tidToFertility = FXCollections.observableHashMap();
+        tidToItem = FXCollections.observableHashMap();
+        tidToNeed = FXCollections.observableHashMap();
+        tidToNeedGroup = FXCollections.observableHashMap();
+        tidToPopulationLevel = FXCollections.observableHashMap();
+        tidToEffect = FXCollections.observableHashMap();
+        tidToGameEvent = FXCollections.observableHashMap();
+        
         classToClassObservableMap = new HashMap<>();
         classToClassObservableMap.put(Structure.class, idToStructures);
         classToClassObservableMap.put(ArmorType.class, idToArmorType);
@@ -125,7 +153,19 @@ public class GUI {
         classToClassObservableMap.put(Effect.class, idToEffect);
         classToClassObservableMap.put(GameEvent.class, idToGameEvent);
 
-        
+        tempClassToClassObservableMap = new HashMap<>();
+        tempClassToClassObservableMap.put(Structure.class, tidToStructures);
+        tempClassToClassObservableMap.put(ArmorType.class, tidToArmorType);
+        tempClassToClassObservableMap.put(DamageType.class, tidToDamageType);
+        tempClassToClassObservableMap.put(Unit.class, tidToUnit);
+        tempClassToClassObservableMap.put(Fertility.class, tidToFertility);
+        tempClassToClassObservableMap.put(Need.class, tidToNeed);
+        tempClassToClassObservableMap.put(ItemXML.class, tidToItem);
+        tempClassToClassObservableMap.put(NeedGroup.class, tidToNeedGroup);
+        tempClassToClassObservableMap.put(PopulationLevel.class, tidToPopulationLevel);
+        tempClassToClassObservableMap.put(Effect.class, tidToEffect);
+        tempClassToClassObservableMap.put(GameEvent.class, tidToGameEvent);
+
         LoadData();
         classToDataTab = new HashMap<>();
         dataTabs = new TabPane();
@@ -200,9 +240,11 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Structures s = new Structures();
 		try {
-			serializer.read(s, new File("structures.xml"));
+			serializer.read(s, Paths.get(saveFilePath, "structures.xml").toFile());
 			for (Structure i : s.GetAllStructures()) {
 				idToStructures.put(i.ID, i);
+				tidToStructures.put(i.GetID(), i);
+				i.tempID = i.spriteBaseName;
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -210,60 +252,66 @@ public class GUI {
 		}        
 		
         try {
-			Items e = serializer.read(Items.class, new File("items.xml"));
+			Items e = serializer.read(Items.class, Paths.get(saveFilePath, "items.xml").toFile());
 			for (ItemXML i : e.items) {
 				idToItem.put(i.ID, i);
+				tidToItem.put(i.GetID(), i);
+				i.tempID = i.GetName().trim().toLowerCase();
 			}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
         try {
-			UnitSave e = serializer.read(UnitSave.class, new File("units.xml"));
+			UnitSave e = serializer.read(UnitSave.class, Paths.get(saveFilePath, "units.xml").toFile());
 			for (Unit u : e.getAllUnits()) {
 				idToUnit.put(u.ID, u);
+				tidToUnit.put(u.GetID(), u);
+				u.tempID = u.spriteBaseName;				
 			}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
         try {
-			Needs e = serializer.read(Needs.class, new File("needs.xml"));
+			Needs e = serializer.read(Needs.class, Paths.get(saveFilePath, "needs.xml").toFile());
 			if(e.needs!=null)
 			for (Need u : e.needs) {
 				idToNeed.put(u.ID, u);
+				tidToNeed.put(u.GetID(), u);
+				u.tempID = u.GetName().trim().toLowerCase();
 			}
 			if(e.groupNeeds!=null)
 			for (NeedGroup u : e.groupNeeds) {
 				idToNeedGroup.put(u.ID, u);
+				tidToNeedGroup.put(u.GetID(), u);
+				u.tempID = u.GetName().trim().toLowerCase();
 			}
-//			for(Need u : idToNeed.values()) {
-//				u.UsageAmounts = new HashMap<>();
-//				u.UsageAmounts.put(0, u.Peasent);
-//				u.UsageAmounts.put(1, u.Citizen);
-//				u.UsageAmounts.put(2, u.Patrician);
-//				u.UsageAmounts.put(3, u.Nobleman);
-//			}
+
 			SaveNeeds();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
         try {
-			CombatTypes e = serializer.read(CombatTypes.class, new File("combat.xml"));
+			CombatTypes e = serializer.read(CombatTypes.class, Paths.get(saveFilePath, "combat.xml").toFile());
 			if(e.damageTypes!=null)
 				for (DamageType u : e.damageTypes) {
 					idToDamageType.put(u.ID, u);
+					tidToDamageType.put(u.GetID(), u);
+					u.tempID = u.GetName().trim().toLowerCase();
 				}
 			if(e.armorTypes!=null)
 				for (ArmorType u : e.armorTypes) {
 					idToArmorType.put(u.ID, u);
+					tidToArmorType.put(u.GetID(), u);
+					u.tempID = u.GetName().trim().toLowerCase();
 				}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
         try {
-			Others e = serializer.read(Others.class, new File("other.xml"));
+			Others e = serializer.read(Others.class, Paths.get(saveFilePath, "other.xml").toFile());
 			if(e.populationLevels!=null)
 				for (PopulationLevel u : e.populationLevels) {
 					idToPopulationLevel.put(u.LEVEL, u);
@@ -273,46 +321,41 @@ public class GUI {
 			e.printStackTrace();
 		}
         try {
-			Fertilities e = serializer.read(Fertilities.class, new File("fertilities.xml"));
+			Fertilities e = serializer.read(Fertilities.class, Paths.get(saveFilePath, "fertilities.xml").toFile() );
 			for (Fertility i : e.fertilities) {
 				idToFertility.put(i.ID, i);
-//				i.Name = new HashMap<>();
-//				i.Name.put(Language.English.toString(), i.EN_Name);
-//				i.Name.put(Language.German.toString(), i.DE_Name);
-//				i.EN_Name = null;
-//				i.DE_Name = null;
-//				String[] clis = i.Climate.split(";");
-//				i.Climate = null;
-//				i.climates = new ArrayList<Climate>();
-//				for (int x = 0; x<clis.length;x++) {
-//					i.climates.add((Climate.values()[ Integer.parseInt(clis[x]) ]));
-//				}
-//				SaveFertilities();
+				tidToFertility.put(i.GetID(), i);
+				i.tempID = i.GetName().trim().toLowerCase();
 			}
         } catch (Exception e) {
 			e.printStackTrace();
         	idToFertility = FXCollections.observableHashMap();
 		}
         try {
-			Events e = serializer.read(Events.class, new File("events.xml"));
+			Events e = serializer.read(Events.class, Paths.get(saveFilePath, "events.xml").toFile());
 			if(e.effects!=null)
 				for (Effect u : e.effects) {
 					idToEffect.put(u.ID, u);
+					tidToEffect.put(u.GetID(), u);
+					u.tempID = u.GetName().trim().toLowerCase();
 				}
 			if(e.gameEvents!=null)
 				for (GameEvent u : e.gameEvents) {
 					idToGameEvent.put(u.ID, u);
+					tidToGameEvent.put(u.GetID(), u);
+					u.tempID = u.GetName().trim().toLowerCase();
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        SaveData();
 	}
 	public UITab LoadLocalization(Language language) {
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		String filename ="localization-"+ language +".xml";
         UITab tab = new UITab();
 		try {
-			tab = serializer.read(tab, new File(filename));
+			tab = serializer.read(tab, Paths.get(saveFilePath, filename).toFile());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			tab = new UITab(new HashMap<>(), language);
@@ -383,11 +426,14 @@ public class GUI {
 		return map;
 	}
 	public void SaveLocalization(Language lang) {
+		if(languageToLocalization==null)
+			return; // should only happen when MANUEL programmed changes saved on startup
 		UITab tab = languageToLocalization.get(lang);
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		String filename ="localization-"+ lang +".xml";
         try {
-        	BackUPFileTEMP(filename);
+    		File file = Paths.get(saveFilePath, filename).toFile();
+        	BackUPFileTEMP(file);
 			serializer.write(tab, new File(filename));
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
@@ -594,7 +640,7 @@ public class GUI {
 
 
 	@SuppressWarnings("unchecked")
-	private void ClassAction(@SuppressWarnings("rawtypes") Class c){
+	private void ClassAction(Class c){
 		try {
 			WorkTab my = new WorkTab((Tabable) c.getConstructor().newInstance(),true);
 			AddTab(my.getTabable(),my.getScrollPaneContent());
@@ -671,59 +717,59 @@ public class GUI {
 		}
 		boolean saved=false;
 		if(o instanceof Structure){
-			if(((Structure)o).ID==-1){
+			if(((Structure)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToStructures.put(((Structure)o).ID,((Structure)o));
+			tidToStructures.put(((Structure)o).GetID(),((Structure)o));
 			saved = SaveStructures();
 		}
 		else if(o instanceof Item){
-			if(((Item)o).ID==-1){
+			if(((Item)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToItem.put(((ItemXML)o).ID, ((ItemXML)o));
+			tidToItem.put(((ItemXML)o).GetID(), ((ItemXML)o));
 			saved = SaveItems();
 		}
 		else if(o instanceof Fertility){
-			if(((Fertility)o).ID==-1){
+			if(((Fertility)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToFertility.put(((Fertility)o).ID, ((Fertility)o));
+			tidToFertility.put(((Fertility)o).GetID(), ((Fertility)o));
 			saved = SaveFertilities();
 		}
 		else if(o instanceof Unit){
-			if(((Unit)o).ID==-1){
+			if(((Unit)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToUnit.put(((Unit)o).ID, ((Unit)o));
+			tidToUnit.put(((Unit)o).GetID(), ((Unit)o));
 			saved = SaveUnits();
 		}
 		else if(o instanceof DamageType){
-			if(((DamageType)o).ID==-1){
+			if(((DamageType)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToDamageType.put(((DamageType)o).ID, ((DamageType)o));
+			tidToDamageType.put(((DamageType)o).GetID(), ((DamageType)o));
 			saved = SaveCombat();
 		}
 		else if(o instanceof ArmorType){
-			if(((ArmorType)o).ID==-1){
+			if(((ArmorType)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToArmorType.put(((ArmorType)o).ID, ((ArmorType)o));
+			tidToArmorType.put(((ArmorType)o).GetID(), ((ArmorType)o));
 			saved = SaveCombat();
 		}
 		else if(o instanceof Need){
-			if(((Need)o).ID==-1){
+			if(((Need)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToNeed.put(((Need)o).ID, ((Need)o));
+			tidToNeed.put(((Need)o).GetID(), ((Need)o));
 			saved = SaveNeeds();
 		}
 		else if(o instanceof NeedGroup){
-			if(((NeedGroup)o).ID==-1){
+			if(((NeedGroup)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToNeedGroup.put(((NeedGroup)o).ID, ((NeedGroup)o));
+			tidToNeedGroup.put(((NeedGroup)o).GetID(), ((NeedGroup)o));
 			saved = SaveNeeds();
 		}
 		else if(o instanceof PopulationLevel){
@@ -734,17 +780,17 @@ public class GUI {
 			saved = SaveOthers();
 		}
 		else if(o instanceof Effect) {
-			if(((Effect)o).ID<=-1){
+			if(((Effect)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToEffect.put(((Effect)o).ID, ((Effect)o));
+			tidToEffect.put(((Effect)o).GetID(), ((Effect)o));
 			saved = SaveEvents();
 		}
 		else if(o instanceof GameEvent) {
-			if(((GameEvent)o).ID<=-1){
+			if(((GameEvent)o).GetID().trim().isEmpty()){
 				return;
 			}
-			idToGameEvent.put(((GameEvent)o).ID, ((GameEvent)o));
+			tidToGameEvent.put(((GameEvent)o).GetID(), ((GameEvent)o));
 			saved = SaveEvents();
 		}
 		if(saved){
@@ -752,7 +798,6 @@ public class GUI {
 		} 
 	}
 	
-	@SuppressWarnings("rawtypes")
 	private ArrayList<Field> CheckForMissingFields(Tabable t) {
 		ArrayList<Field> missings = new ArrayList<>();
 		Field[] fs = t.getClass().getFields();
@@ -799,13 +844,41 @@ public class GUI {
 		return workTabs.getSelectionModel().getSelectedItem();
 	}
 	
-	public boolean SaveStructures(){
+	private boolean SaveStructures(){
         Serializer serializer = new Persister(new AnnotationStrategy());
         ArrayList<Structure> s = new ArrayList<>(idToStructures.values());
+        
+        for(Structure str : s) {
+        	if(str instanceof Farm) {
+        		((Farm) str).tgrowable = idToStructures.get(((Farm) str).growable).tempID;
+        	}
+        	if(str.buildingItems!=null)
+			for(Item i : str.buildingItems) {
+				i.tempID = idToItem.get(i.ID).tempID;
+			}
+			if(str instanceof Production) {
+				if(((Production)str).intake!=null)
+				for(Item i : ((Production)str).intake) {
+					i.tempID = idToItem.get(i.ID).tempID;
+				}
+			}
+			if(str instanceof OutputStructure) {
+				if(((OutputStructure)str).output!=null)
+				for(Item i : ((OutputStructure)str).output) {
+					i.tempID = idToItem.get(i.ID).tempID;
+				}
+			}
+			
+        }
+        
         Structures st = new Structures(s);
+        
+        
+        
+		File file = Paths.get(saveFilePath, "structures.xml").toFile();
         try {
-        	BackUPFileTEMP("structures.xml");
-			serializer.write(st, new File("structures.xml"));
+        	BackUPFileTEMP(file);
+			serializer.write(st, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -818,12 +891,13 @@ public class GUI {
         return true;
         
 	}
-	public boolean SaveItems(){
+	private boolean SaveItems(){
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Items it = new Items(idToItem.values());
         try {
-        	BackUPFileTEMP("items.xml");
-			serializer.write(it, new File("items.xml"));
+    		File file = Paths.get(saveFilePath, "items.xml").toFile();
+        	BackUPFileTEMP(file);
+			serializer.write(it, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -840,8 +914,9 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
         Fertilities ft = new Fertilities(idToFertility.values());
         try {
-        	BackUPFileTEMP("fertilities.xml");
-			serializer.write(ft, new File("fertilities.xml"));
+    		File file = Paths.get(saveFilePath, "fertilities.xml").toFile();
+        	BackUPFileTEMP(file);
+			serializer.write(ft, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -855,10 +930,18 @@ public class GUI {
 	}
 	private boolean SaveUnits() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
+		for(Unit u : idToUnit.values()) {
+			u.tmyArmorType = idToArmorType.get(u.myArmorType).tempID;
+			u.tmyDamageType = idToDamageType.get(u.myDamageType).tempID;
+			for(Item i : u.buildingItems) {
+				i.tempID = idToItem.get(i.ID).tempID;
+			}
+		}
         UnitSave ft = new UnitSave(idToUnit.values());
         try {
-        	BackUPFileTEMP("units.xml");
-			serializer.write(ft, new File("units.xml"));
+    		File file = Paths.get(saveFilePath, "units.xml").toFile();
+        	BackUPFileTEMP(file);
+			serializer.write(ft, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -873,10 +956,17 @@ public class GUI {
 
 	private boolean SaveCombat() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
+		for(DamageType u : idToDamageType.values()) {
+			u.tdamageMultiplier = new HashMap<String, Float>();
+			for(int m : u.damageMultiplier.keySet()) {
+				u.tdamageMultiplier.put( idToArmorType.get(m).tempID , u.damageMultiplier.get(m));
+			}
+		}
         CombatTypes ft = new CombatTypes(idToArmorType.values(),idToDamageType.values());
         try {
-        	BackUPFileTEMP("combat.xml");
-			serializer.write(ft, new File("combat.xml"));
+    		File file = Paths.get(saveFilePath, "combat.xml").toFile();
+        	BackUPFileTEMP (file);
+			serializer.write(ft, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -890,10 +980,23 @@ public class GUI {
 	}
 	private boolean SaveNeeds() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
+		for(Need n : idToNeed.values()) {
+			if(n.item!=null)
+				n.item.tempID = idToItem.get(n.item.ID).tempID; 
+			if(n.structures!=null) {
+				ArrayList<String> ls = new ArrayList<>();
+				for (int s : n.structures) {
+					ls.add(idToStructures.get(s).tempID);
+				}
+			}
+			n.tgroup = idToNeedGroup.get(n.group).tempID;
+		}
+		
 		Needs ft = new Needs(idToNeed.values(), idToNeedGroup.values());
         try {
-        	BackUPFileTEMP("needs.xml");
-			serializer.write(ft, new File("needs.xml"));
+    		File file = Paths.get(saveFilePath, "needs.xml").toFile();
+        	BackUPFileTEMP(file);
+			serializer.write(ft, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -909,8 +1012,9 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		Events ft = new Events(idToEffect.values(), idToGameEvent.values());
         try {
-        	BackUPFileTEMP("events.xml");
-			serializer.write(ft, new File("events.xml"));
+    		File file = Paths.get(saveFilePath, "events.xml").toFile();
+        	BackUPFileTEMP(file);
+			serializer.write(ft, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -926,8 +1030,9 @@ public class GUI {
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		Others ft = new Others(idToPopulationLevel.values());
         try {
-        	BackUPFileTEMP("other.xml");
-			serializer.write(ft, new File("other.xml"));
+    		File file = Paths.get(saveFilePath, "other.xml").toFile();
+        	BackUPFileTEMP(file);
+			serializer.write(ft, file);
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -939,7 +1044,6 @@ public class GUI {
         BackUPFile("other.xml");
 		return true;
 	}
-	@SuppressWarnings({ "rawtypes" })
 	public ArrayList<Tabable> getStructureList(Class class1) {
 		ArrayList<Tabable> list = new ArrayList<>();
 		list.addAll( idToStructures.values());
@@ -948,23 +1052,35 @@ public class GUI {
 	}
 
 	private void BackUPFile(String name){
-		if(new File("temp_"+name).exists()){
-    		if(new File("old_"+name).exists()){
-    			new File("old_"+name).delete();
+		String backuppath = "old/";
+		File tempf = Paths.get(backuppath, "temp_"+name).toFile();
+		File oldf = Paths.get(backuppath, "old_"+name).toFile();
+		if(tempf.exists()){
+    		if(oldf.exists()){
+    			oldf.delete();
     		}
-    		new File("temp_"+name).renameTo(new File("old_"+name));
+    		tempf.renameTo(oldf);
     	}
 	}
-	private void BackUPFileTEMP(String name){
-		if(new File(name).exists()){
-    		if(new File("temp_"+name).exists()){
-    			new File("temp_"+name).delete();
+	private void BackUPFileTEMP(File file){
+		String backuppath = "old/";
+		File f = Paths.get(backuppath, file.getName()).toFile();
+		if(f.exists()){
+			if(Files.exists(Paths.get(backuppath))) {
+				try {
+					Files.createDirectory(Paths.get(backuppath));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			File tempf = Paths.get(backuppath, "temp_"+file.getName()).toFile();
+    		if(tempf.exists()){
+    			tempf.delete();
     		}
-    		new File(name).renameTo(new File("temp_"+name));
+    		f.renameTo(tempf);
     	}
 	}
 	public Tabable doesIDexistForTabable(int id, Tabable tab){
-		@SuppressWarnings("rawtypes")
 		Class c = tab.getClass();
 		if(Structure.class.isAssignableFrom(c)){
 			c = Structure.class;
@@ -974,6 +1090,17 @@ public class GUI {
 			return null;
 		}
 		return classToClassObservableMap.get(c).containsKey(id) ? classToClassObservableMap.get(c).get(id) : null;
+	}
+	public Tabable doesIDexistForTabable(String valueSafe, Tabable tab) {
+		Class c = tab.getClass();
+		if(Structure.class.isAssignableFrom(c)){
+			c = Structure.class;
+		}
+		if(classToClassObservableMap.containsKey(c) == false) {
+			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
+			return null;
+		}
+		return null;
 	}
 	public int getOneHigherThanMaxID(Tabable tab){
 		if(Structure.class.isAssignableFrom(tab.getClass())){
@@ -1017,7 +1144,6 @@ public class GUI {
 		return al;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public ObservableMap<Integer, ? extends Tabable> GetObservableList(Class classTabable) {
 		if(classToClassObservableMap.containsKey(classTabable) == false) {
 			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
@@ -1027,5 +1153,5 @@ public class GUI {
 			classTabable = Structure.class;
 		return classToClassObservableMap.get(classTabable);
 	}
-	
+
 }
