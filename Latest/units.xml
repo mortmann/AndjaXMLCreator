@@ -1,5 +1,5 @@
 <units>
-   <unit ID="0" tempID="basicunit">
+   <unit ID="basicunit">
       <populationLevel>0</populationLevel>
       <populationCount>0</populationCount>
       <Name>
@@ -7,7 +7,7 @@
          <entry lang="German">Standard Einheit</entry>
       </Name>
       <buildingItems length="1">
-         <Item ID="1003" tempID="swords">
+         <Item ID="swords">
             <count>5</count>
          </Item>
       </buildingItems>
@@ -19,17 +19,15 @@
       <aggroTimer>1.0</aggroTimer>
       <attackRange>1.0</attackRange>
       <damage>10.0</damage>
-      <myDamageType>0</myDamageType>
-      <myArmorType>0</myArmorType>
-      <tmyDamageType>slashing</tmyDamageType>
-      <tmyArmorType>leather</tmyArmorType>
+      <myDamageType>slashing</myDamageType>
+      <myArmorType>leather</myArmorType>
       <attackRate>1.0</attackRate>
       <speed>1.0</speed>
       <turnSpeed>1.0</turnSpeed>
       <aggroTime>0.0</aggroTime>
       <spriteBaseName>basicunit</spriteBaseName>
    </unit>
-   <ship ID="1" tempID="ship">
+   <ship ID="ship">
       <populationLevel>0</populationLevel>
       <populationCount>0</populationCount>
       <Name>
@@ -37,16 +35,16 @@
          <entry lang="German">Flaggschiff</entry>
       </Name>
       <buildingItems length="4">
-         <Item ID="1" tempID="wood">
+         <Item ID="wood">
             <count>20</count>
          </Item>
-         <Item ID="2" tempID="tools">
+         <Item ID="tools">
             <count>2</count>
          </Item>
-         <Item ID="1001" tempID="ropes">
+         <Item ID="ropes">
             <count>4</count>
          </Item>
-         <Item ID="108" tempID="hemp fabric">
+         <Item ID="hemp fabric">
             <count>6</count>
          </Item>
       </buildingItems>
@@ -58,10 +56,8 @@
       <aggroTimer>1.0</aggroTimer>
       <attackRange>1.0</attackRange>
       <damage>10.0</damage>
-      <myDamageType>1</myDamageType>
-      <myArmorType>1</myArmorType>
-      <tmyDamageType>cannonball</tmyDamageType>
-      <tmyArmorType>wooden wall</tmyArmorType>
+      <myDamageType>cannonball</myDamageType>
+      <myArmorType>wooden wall</myArmorType>
       <attackRate>1.0</attackRate>
       <speed>2.0</speed>
       <turnSpeed>1.0</turnSpeed>
@@ -69,7 +65,7 @@
       <spriteBaseName>ship</spriteBaseName>
       <maximumAmountOfCannons>15</maximumAmountOfCannons>
       <damagePerCannon>1</damagePerCannon>
-      <cannonType ID="1006" tempID="">
+      <cannonType ID="cannons">
          <count>0</count>
       </cannonType>
    </ship>

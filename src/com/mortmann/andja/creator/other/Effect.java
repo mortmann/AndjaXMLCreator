@@ -17,9 +17,8 @@ import com.mortmann.andja.creator.util.Tabable;
 public class Effect implements Tabable, Comparable<Effect> {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID =-1;	
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID = "";	
+
 	
 	public enum EffectTypes { Integer, Float, Special }
 	public enum EffectModifier { Additive, Multiplicative, Update, Special }
@@ -48,7 +47,7 @@ public class Effect implements Tabable, Comparable<Effect> {
 
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 
 	@Override
@@ -62,6 +61,6 @@ public class Effect implements Tabable, Comparable<Effect> {
 	}
 	@Override
 	public String toString() {
-		return ID+":"+ GetName();
+		return GetName();
 	}
 }

@@ -69,33 +69,20 @@ public class GUI {
 
 	Tab emptyTab;
 	
-	public ObservableMap<Integer,Structure> idToStructures;
-	public ObservableMap<Integer,Fertility> idToFertility;
-	public ObservableMap<Integer,ItemXML> idToItem;
-	public ObservableMap<Integer,DamageType> idToDamageType;
-	public ObservableMap<Integer,ArmorType> idToArmorType;
-	public ObservableMap<Integer,Unit> idToUnit;
-	public ObservableMap<Integer,Need> idToNeed;
-	public ObservableMap<Integer, NeedGroup> idToNeedGroup;
-	public ObservableMap<Integer, PopulationLevel> idToPopulationLevel;
-	public ObservableMap<Integer, Effect> idToEffect;
-	private ObservableMap<Integer, GameEvent> idToGameEvent;
-	
-	public ObservableMap<String,Structure> tidToStructures;
-	public ObservableMap<String,Fertility> tidToFertility;
-	public ObservableMap<String,ItemXML> tidToItem;
-	public ObservableMap<String,DamageType> tidToDamageType;
-	public ObservableMap<String,ArmorType> tidToArmorType;
-	public ObservableMap<String,Unit> tidToUnit;
-	public ObservableMap<String,Need> tidToNeed;
-	public ObservableMap<String, NeedGroup> tidToNeedGroup;
-	public ObservableMap<String, PopulationLevel> tidToPopulationLevel;
-	public ObservableMap<String, Effect> tidToEffect;
-	private ObservableMap<String, GameEvent> tidToGameEvent;
+	public ObservableMap<String,Structure> idToStructures;
+	public ObservableMap<String,Fertility> idToFertility;
+	public ObservableMap<String,ItemXML> idToItem;
+	public ObservableMap<String,DamageType> idToDamageType;
+	public ObservableMap<String,ArmorType> idToArmorType;
+	public ObservableMap<String,Unit> idToUnit;
+	public ObservableMap<String,Need> idToNeed;
+	public ObservableMap<String, NeedGroup> idToNeedGroup;
+	public ObservableMap<String, PopulationLevel> idToPopulationLevel;
+	public ObservableMap<String, Effect> idToEffect;
+	private ObservableMap<String, GameEvent> idToGameEvent;
 	
 	public HashMap<Language,UITab> languageToLocalization;
-	public HashMap<Class, ObservableMap<Integer, ? extends Tabable>> classToClassObservableMap;
-	public HashMap<Class, ObservableMap<String, ? extends Tabable>> tempClassToClassObservableMap;
+	public HashMap<Class, ObservableMap<String, ? extends Tabable>> classToClassObservableMap;
 
 	HashMap<Tab,Tabable> tabToTabable;
 	
@@ -128,18 +115,6 @@ public class GUI {
         idToEffect = FXCollections.observableHashMap();
         idToGameEvent = FXCollections.observableHashMap();
         
-        tidToStructures = FXCollections.observableHashMap();
-        tidToArmorType = FXCollections.observableHashMap();
-        tidToDamageType = FXCollections.observableHashMap();
-        tidToUnit = FXCollections.observableHashMap();
-        tidToFertility = FXCollections.observableHashMap();
-        tidToItem = FXCollections.observableHashMap();
-        tidToNeed = FXCollections.observableHashMap();
-        tidToNeedGroup = FXCollections.observableHashMap();
-        tidToPopulationLevel = FXCollections.observableHashMap();
-        tidToEffect = FXCollections.observableHashMap();
-        tidToGameEvent = FXCollections.observableHashMap();
-        
         classToClassObservableMap = new HashMap<>();
         classToClassObservableMap.put(Structure.class, idToStructures);
         classToClassObservableMap.put(ArmorType.class, idToArmorType);
@@ -153,18 +128,6 @@ public class GUI {
         classToClassObservableMap.put(Effect.class, idToEffect);
         classToClassObservableMap.put(GameEvent.class, idToGameEvent);
 
-        tempClassToClassObservableMap = new HashMap<>();
-        tempClassToClassObservableMap.put(Structure.class, tidToStructures);
-        tempClassToClassObservableMap.put(ArmorType.class, tidToArmorType);
-        tempClassToClassObservableMap.put(DamageType.class, tidToDamageType);
-        tempClassToClassObservableMap.put(Unit.class, tidToUnit);
-        tempClassToClassObservableMap.put(Fertility.class, tidToFertility);
-        tempClassToClassObservableMap.put(Need.class, tidToNeed);
-        tempClassToClassObservableMap.put(ItemXML.class, tidToItem);
-        tempClassToClassObservableMap.put(NeedGroup.class, tidToNeedGroup);
-        tempClassToClassObservableMap.put(PopulationLevel.class, tidToPopulationLevel);
-        tempClassToClassObservableMap.put(Effect.class, tidToEffect);
-        tempClassToClassObservableMap.put(GameEvent.class, tidToGameEvent);
 
         LoadData();
         classToDataTab = new HashMap<>();
@@ -242,10 +205,8 @@ public class GUI {
 		try {
 			serializer.read(s, Paths.get(saveFilePath, "structures.xml").toFile());
 			for (Structure i : s.GetAllStructures()) {
-				idToStructures.put(i.ID, i);
-				tidToStructures.put(i.GetID(), i);
-				i.tempID = i.spriteBaseName;
-			}
+				idToStructures.put(i.GetID(), i);
+			} 
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			idToStructures = FXCollections.observableHashMap();
@@ -254,9 +215,7 @@ public class GUI {
         try {
 			Items e = serializer.read(Items.class, Paths.get(saveFilePath, "items.xml").toFile());
 			for (ItemXML i : e.items) {
-				idToItem.put(i.ID, i);
-				tidToItem.put(i.GetID(), i);
-				i.tempID = i.GetName().trim().toLowerCase();
+				idToItem.put(i.GetID(), i);
 			}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
@@ -265,9 +224,7 @@ public class GUI {
         try {
 			UnitSave e = serializer.read(UnitSave.class, Paths.get(saveFilePath, "units.xml").toFile());
 			for (Unit u : e.getAllUnits()) {
-				idToUnit.put(u.ID, u);
-				tidToUnit.put(u.GetID(), u);
-				u.tempID = u.spriteBaseName;				
+				idToUnit.put(u.GetID(), u);
 			}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
@@ -277,15 +234,12 @@ public class GUI {
 			Needs e = serializer.read(Needs.class, Paths.get(saveFilePath, "needs.xml").toFile());
 			if(e.needs!=null)
 			for (Need u : e.needs) {
-				idToNeed.put(u.ID, u);
-				tidToNeed.put(u.GetID(), u);
-				u.tempID = u.GetName().trim().toLowerCase();
+				idToNeed.put(u.GetID(), u);
 			}
 			if(e.groupNeeds!=null)
 			for (NeedGroup u : e.groupNeeds) {
-				idToNeedGroup.put(u.ID, u);
-				tidToNeedGroup.put(u.GetID(), u);
-				u.tempID = u.GetName().trim().toLowerCase();
+				idToNeedGroup.put(u.GetID(), u);
+				u.ID = u.tempID;				
 			}
 
 			SaveNeeds();
@@ -296,15 +250,12 @@ public class GUI {
 			CombatTypes e = serializer.read(CombatTypes.class, Paths.get(saveFilePath, "combat.xml").toFile());
 			if(e.damageTypes!=null)
 				for (DamageType u : e.damageTypes) {
-					idToDamageType.put(u.ID, u);
-					tidToDamageType.put(u.GetID(), u);
-					u.tempID = u.GetName().trim().toLowerCase();
+					idToDamageType.put(u.GetID(), u);
+					u.ID = u.tempID;				
 				}
 			if(e.armorTypes!=null)
 				for (ArmorType u : e.armorTypes) {
-					idToArmorType.put(u.ID, u);
-					tidToArmorType.put(u.GetID(), u);
-					u.tempID = u.GetName().trim().toLowerCase();
+					idToArmorType.put(u.GetID(), u);
 				}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
@@ -314,7 +265,7 @@ public class GUI {
 			Others e = serializer.read(Others.class, Paths.get(saveFilePath, "other.xml").toFile());
 			if(e.populationLevels!=null)
 				for (PopulationLevel u : e.populationLevels) {
-					idToPopulationLevel.put(u.LEVEL, u);
+					idToPopulationLevel.put(""+u.LEVEL, u);
 				}
 //			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
@@ -323,9 +274,7 @@ public class GUI {
         try {
 			Fertilities e = serializer.read(Fertilities.class, Paths.get(saveFilePath, "fertilities.xml").toFile() );
 			for (Fertility i : e.fertilities) {
-				idToFertility.put(i.ID, i);
-				tidToFertility.put(i.GetID(), i);
-				i.tempID = i.GetName().trim().toLowerCase();
+				idToFertility.put(i.GetID(), i);
 			}
         } catch (Exception e) {
 			e.printStackTrace();
@@ -335,15 +284,11 @@ public class GUI {
 			Events e = serializer.read(Events.class, Paths.get(saveFilePath, "events.xml").toFile());
 			if(e.effects!=null)
 				for (Effect u : e.effects) {
-					idToEffect.put(u.ID, u);
-					tidToEffect.put(u.GetID(), u);
-					u.tempID = u.GetName().trim().toLowerCase();
+					idToEffect.put(u.GetID(), u);
 				}
 			if(e.gameEvents!=null)
 				for (GameEvent u : e.gameEvents) {
-					idToGameEvent.put(u.ID, u);
-					tidToGameEvent.put(u.GetID(), u);
-					u.tempID = u.GetName().trim().toLowerCase();
+					idToGameEvent.put(u.GetID(), u);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -686,7 +631,7 @@ public class GUI {
 			a.setTitle("ID already exists!");
 			Tabable t = doesIDexistForTabable(o.GetID(),o);
 			HashSet<Tabable> allTabs = new HashSet<>();
-			for(ObservableMap<Integer, ? extends Tabable> map : classToClassObservableMap.values()) {
+			for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
 				allTabs.addAll(map.values());
 			}
 
@@ -720,77 +665,77 @@ public class GUI {
 			if(((Structure)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToStructures.put(((Structure)o).GetID(),((Structure)o));
+			idToStructures.put(((Structure)o).GetID(),((Structure)o));
 			saved = SaveStructures();
 		}
 		else if(o instanceof Item){
 			if(((Item)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToItem.put(((ItemXML)o).GetID(), ((ItemXML)o));
+			idToItem.put(((ItemXML)o).GetID(), ((ItemXML)o));
 			saved = SaveItems();
 		}
 		else if(o instanceof Fertility){
 			if(((Fertility)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToFertility.put(((Fertility)o).GetID(), ((Fertility)o));
+			idToFertility.put(((Fertility)o).GetID(), ((Fertility)o));
 			saved = SaveFertilities();
 		}
 		else if(o instanceof Unit){
 			if(((Unit)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToUnit.put(((Unit)o).GetID(), ((Unit)o));
+			idToUnit.put(((Unit)o).GetID(), ((Unit)o));
 			saved = SaveUnits();
 		}
 		else if(o instanceof DamageType){
 			if(((DamageType)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToDamageType.put(((DamageType)o).GetID(), ((DamageType)o));
+			idToDamageType.put(((DamageType)o).GetID(), ((DamageType)o));
 			saved = SaveCombat();
 		}
 		else if(o instanceof ArmorType){
 			if(((ArmorType)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToArmorType.put(((ArmorType)o).GetID(), ((ArmorType)o));
+			idToArmorType.put(((ArmorType)o).GetID(), ((ArmorType)o));
 			saved = SaveCombat();
 		}
 		else if(o instanceof Need){
 			if(((Need)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToNeed.put(((Need)o).GetID(), ((Need)o));
+			idToNeed.put(((Need)o).GetID(), ((Need)o));
 			saved = SaveNeeds();
 		}
 		else if(o instanceof NeedGroup){
 			if(((NeedGroup)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToNeedGroup.put(((NeedGroup)o).GetID(), ((NeedGroup)o));
+			idToNeedGroup.put(((NeedGroup)o).GetID(), ((NeedGroup)o));
 			saved = SaveNeeds();
 		}
 		else if(o instanceof PopulationLevel){
 			if(((PopulationLevel)o).LEVEL<=-1){
 				return;
 			}
-			idToPopulationLevel.put(((PopulationLevel)o).LEVEL, ((PopulationLevel)o));
+			idToPopulationLevel.put(""+((PopulationLevel)o).LEVEL, ((PopulationLevel)o));
 			saved = SaveOthers();
 		}
 		else if(o instanceof Effect) {
 			if(((Effect)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToEffect.put(((Effect)o).GetID(), ((Effect)o));
+			idToEffect.put(((Effect)o).GetID(), ((Effect)o));
 			saved = SaveEvents();
 		}
 		else if(o instanceof GameEvent) {
 			if(((GameEvent)o).GetID().trim().isEmpty()){
 				return;
 			}
-			tidToGameEvent.put(((GameEvent)o).GetID(), ((GameEvent)o));
+			idToGameEvent.put(((GameEvent)o).GetID(), ((GameEvent)o));
 			saved = SaveEvents();
 		}
 		if(saved){
@@ -848,33 +793,7 @@ public class GUI {
         Serializer serializer = new Persister(new AnnotationStrategy());
         ArrayList<Structure> s = new ArrayList<>(idToStructures.values());
         
-        for(Structure str : s) {
-        	if(str instanceof Farm) {
-        		((Farm) str).tgrowable = idToStructures.get(((Farm) str).growable).tempID;
-        	}
-        	if(str.buildingItems!=null)
-			for(Item i : str.buildingItems) {
-				i.tempID = idToItem.get(i.ID).tempID;
-			}
-			if(str instanceof Production) {
-				if(((Production)str).intake!=null)
-				for(Item i : ((Production)str).intake) {
-					i.tempID = idToItem.get(i.ID).tempID;
-				}
-			}
-			if(str instanceof OutputStructure) {
-				if(((OutputStructure)str).output!=null)
-				for(Item i : ((OutputStructure)str).output) {
-					i.tempID = idToItem.get(i.ID).tempID;
-				}
-			}
-			
-        }
-        
         Structures st = new Structures(s);
-        
-        
-        
 		File file = Paths.get(saveFilePath, "structures.xml").toFile();
         try {
         	BackUPFileTEMP(file);
@@ -930,13 +849,6 @@ public class GUI {
 	}
 	private boolean SaveUnits() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
-		for(Unit u : idToUnit.values()) {
-			u.tmyArmorType = idToArmorType.get(u.myArmorType).tempID;
-			u.tmyDamageType = idToDamageType.get(u.myDamageType).tempID;
-			for(Item i : u.buildingItems) {
-				i.tempID = idToItem.get(i.ID).tempID;
-			}
-		}
         UnitSave ft = new UnitSave(idToUnit.values());
         try {
     		File file = Paths.get(saveFilePath, "units.xml").toFile();
@@ -956,13 +868,7 @@ public class GUI {
 
 	private boolean SaveCombat() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
-		for(DamageType u : idToDamageType.values()) {
-			u.tdamageMultiplier = new HashMap<String, Float>();
-			for(int m : u.damageMultiplier.keySet()) {
-				u.tdamageMultiplier.put( idToArmorType.get(m).tempID , u.damageMultiplier.get(m));
-			}
-		}
-        CombatTypes ft = new CombatTypes(idToArmorType.values(),idToDamageType.values());
+        CombatTypes ft = new CombatTypes(idToArmorType.values() , idToDamageType.values());
         try {
     		File file = Paths.get(saveFilePath, "combat.xml").toFile();
         	BackUPFileTEMP (file);
@@ -980,17 +886,6 @@ public class GUI {
 	}
 	private boolean SaveNeeds() {
 		Serializer serializer = new Persister(new AnnotationStrategy());
-		for(Need n : idToNeed.values()) {
-			if(n.item!=null)
-				n.item.tempID = idToItem.get(n.item.ID).tempID; 
-			if(n.structures!=null) {
-				ArrayList<String> ls = new ArrayList<>();
-				for (int s : n.structures) {
-					ls.add(idToStructures.get(s).tempID);
-				}
-			}
-			n.tgroup = idToNeedGroup.get(n.group).tempID;
-		}
 		
 		Needs ft = new Needs(idToNeed.values(), idToNeedGroup.values());
         try {
@@ -1081,15 +976,16 @@ public class GUI {
     	}
 	}
 	public Tabable doesIDexistForTabable(int id, Tabable tab){
-		Class c = tab.getClass();
-		if(Structure.class.isAssignableFrom(c)){
-			c = Structure.class;
-		}
-		if(classToClassObservableMap.containsKey(c) == false) {
-			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
-			return null;
-		}
-		return classToClassObservableMap.get(c).containsKey(id) ? classToClassObservableMap.get(c).get(id) : null;
+		return null;
+//		Class c = tab.getClass();
+//		if(Structure.class.isAssignableFrom(c)){
+//			c = Structure.class;
+//		}
+//		if(classToClassObservableMap.containsKey(c) == false) {
+//			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
+//			return null;
+//		}
+//		return classToClassObservableMap.get(c).containsKey(id) ? classToClassObservableMap.get(c).get(id) : null;
 	}
 	public Tabable doesIDexistForTabable(String valueSafe, Tabable tab) {
 		Class c = tab.getClass();
@@ -1102,34 +998,34 @@ public class GUI {
 		}
 		return null;
 	}
-	public int getOneHigherThanMaxID(Tabable tab){
-		if(Structure.class.isAssignableFrom(tab.getClass())){
-			HashMap<Integer,Structure> temp = new HashMap<Integer,Structure>(idToStructures);
-			temp.values().removeIf(x->x.getClass()!=tab.getClass()); 
-			if(temp.keySet().isEmpty()){
-				return -1;
-			}
-			int max = Collections.max(temp.keySet())+1;
-			if(doesIDexistForTabable(max,tab)!=null){
-				Alert a = new Alert(AlertType.INFORMATION);
-				a.setTitle("IDs for this structure-type overlaps with the next one!");
-				a.setContentText("ID set to the max of ALL! But that will intersect with reserved for anotherone!");
-				a.show();
-				return Collections.max(idToStructures.keySet())+1;
-			}
-			return max;
-		} else
-		if(classToClassObservableMap.containsKey(tab.getClass())) {
-			if(classToClassObservableMap.get(tab.getClass()).isEmpty())
-				return 0;
-			int max = (int) Collections.max(classToClassObservableMap.get(tab.getClass()).keySet());
-			return max+1;
-		} else {
-			System.out.println("Forgot to add the new Class to classToClassObservableMap!");
-		}
-
-		return -1;
-	}
+//	public int getOneHigherThanMaxID(Tabable tab){
+//		if(Structure.class.isAssignableFrom(tab.getClass())){
+//			HashMap<Integer,Structure> temp = new HashMap<Integer,Structure>(idToStructures);
+//			temp.values().removeIf(x->x.getClass()!=tab.getClass()); 
+//			if(temp.keySet().isEmpty()){
+//				return -1;
+//			}
+//			int max = Collections.max(temp.keySet())+1;
+//			if(doesIDexistForTabable(max,tab)!=null){
+//				Alert a = new Alert(AlertType.INFORMATION);
+//				a.setTitle("IDs for this structure-type overlaps with the next one!");
+//				a.setContentText("ID set to the max of ALL! But that will intersect with reserved for anotherone!");
+//				a.show();
+//				return Collections.max(idToStructures.keySet())+1;
+//			}
+//			return max;
+//		} else
+//		if(classToClassObservableMap.containsKey(tab.getClass())) {
+//			if(classToClassObservableMap.get(tab.getClass()).isEmpty())
+//				return 0;
+//			int max = (int) Collections.max(classToClassObservableMap.get(tab.getClass()).keySet());
+//			return max+1;
+//		} else {
+//			System.out.println("Forgot to add the new Class to classToClassObservableMap!");
+//		}
+//
+//		return -1;
+//	}
 
 	public Node getRoot() {
 		return scene.getRoot();
@@ -1144,7 +1040,7 @@ public class GUI {
 		return al;
 	}
 
-	public ObservableMap<Integer, ? extends Tabable> GetObservableList(Class classTabable) {
+	public ObservableMap<String, ? extends Tabable> GetObservableList(Class classTabable) {
 		if(classToClassObservableMap.containsKey(classTabable) == false) {
 			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
 			return null;

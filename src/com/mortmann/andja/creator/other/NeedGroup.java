@@ -16,7 +16,7 @@ public class NeedGroup implements Tabable {
 	
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID;
+	public String ID;
 	@Attribute(required=false) 
 	public String tempID = "";	
 

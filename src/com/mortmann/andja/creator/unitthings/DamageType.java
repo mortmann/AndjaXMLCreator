@@ -14,7 +14,7 @@ import com.mortmann.andja.creator.util.Tabable;
 public class DamageType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID =-1;	
+	public String ID;	
 	@Attribute(required=false) 
 	public String tempID = "";	
 
@@ -22,11 +22,7 @@ public class DamageType implements Tabable {
 	public HashMap<String,String> Name;
 	@FieldInfo(order=0,required=true,subType=ArmorType.class) 
 	@ElementMap(key = "ArmorTyp",attribute=true,required=false) 
-	public HashMap<Integer,Float> damageMultiplier;
-	
-	@FieldInfo(order=0,required=true,subType=ArmorType.class) 
-	@ElementMap(key = "ArmorTyp",attribute=true,required=false) 
-	public HashMap<String, Float> tdamageMultiplier;
+	public HashMap<String, Float> damageMultiplier;
 	
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	@Override

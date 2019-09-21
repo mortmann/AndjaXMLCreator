@@ -26,9 +26,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID =-1;	
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID;	
 
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
@@ -86,7 +84,7 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 	}
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 	protected Tabable StructureDependsOnTabable(Tabable t) {
 		if(t.getClass()==ItemXML.class){

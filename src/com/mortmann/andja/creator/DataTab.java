@@ -26,7 +26,7 @@ public class DataTab<T extends Tabable> {
 	private ArrayList<Node> allNodeList;
 	private FlowPane flow;
 
-	public DataTab(String name, ObservableMap<Integer, T> map, TabPane tabs){
+	public DataTab(String name, ObservableMap<String, T> map, TabPane tabs){
 		ScrollPane sp = new ScrollPane();
 		VBox v = new VBox();
 		
@@ -35,9 +35,9 @@ public class DataTab<T extends Tabable> {
 	    flow.setVgap(3);
 	    flow.setHgap(3);
 	    SetUPButtons(map);
-		map.addListener(new MapChangeListener<Integer, T>() {
+		map.addListener(new MapChangeListener<String, T>() {
 			@Override
-			public void onChanged(javafx.collections.MapChangeListener.Change<? extends Integer, ? extends T> change) {
+			public void onChanged(javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
 				if(change.getValueAdded()==null){
 					return; // doin nothin for removed for now
 				}
@@ -89,10 +89,10 @@ public class DataTab<T extends Tabable> {
 		flow.getChildren().add(b);
 		
 	}
-	private void SetUPButtons(ObservableMap<Integer,T> map) {
-		ObservableList<Integer> l = FXCollections.observableArrayList(map.keySet());
+	private void SetUPButtons(ObservableMap<String,T> map) {
+		ObservableList<String> l = FXCollections.observableArrayList(map.keySet());
 		FXCollections.sort(l);
-		for (Integer t : l) {
+		for (String t : l) {
 			AddButton(map.get(t));
 		}
 		

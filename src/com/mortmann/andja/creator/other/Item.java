@@ -11,9 +11,7 @@ import com.mortmann.andja.creator.util.FieldInfo;
 public class Item implements Comparable<Item>{
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID =-1;	
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID;	
 
 	public enum ItemType {Build,Intermediate,Luxury}
 
@@ -30,10 +28,10 @@ public class Item implements Comparable<Item>{
 		return GUI.Instance.idToItem.get(ID).toString();
 	}
 	@Override
-	public int compareTo(Item arg0) {
-		return Integer.compare(ID, arg0.ID);
+	public int compareTo(Item i) {
+		return ID.compareTo(i.ID);
 	}
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
  }

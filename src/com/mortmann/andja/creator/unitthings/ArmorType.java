@@ -14,9 +14,7 @@ import com.mortmann.andja.creator.util.Tabable;
 public class ArmorType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID =-1;	
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID;	
 
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false)
@@ -30,7 +28,7 @@ public class ArmorType implements Tabable {
 	
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 	@Override
 	public String toString() {

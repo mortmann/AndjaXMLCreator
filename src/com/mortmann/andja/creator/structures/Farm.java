@@ -9,10 +9,7 @@ import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false)
 public class Farm extends OutputStructure {
 	
-	@FieldInfo(order = 0 ,compareType=Growable.class , required = true) @Element(required=false) public int growable;
-	@FieldInfo(order = 0 ,compareType=Growable.class , required = true) @Element(required=false) public String tgrowable;
-
-	@FieldInfo(order = 0 ,compareType=Growable.class , required = true) @Element(required=false) public String tempgrowable;
+	@FieldInfo(order = 0 ,compareType=Growable.class , required = true) @Element(required=false) public String growable;
 
 	@FieldInfo(order = 0, required = true, IsEffectable=true) @Element(required=false) public int neededHarvestToProduce = 5;
 	
@@ -24,7 +21,7 @@ public class Farm extends OutputStructure {
 	}
 	
 	public Tabable DependsOnTabable(Tabable t) {
-		if(t.GetID()==tgrowable&&t.getClass()==Growable.class){
+		if(t.GetID()==growable&&t.getClass()==Growable.class){
 			return this;
 		}
 		return OutputDependsOnTabable(t);

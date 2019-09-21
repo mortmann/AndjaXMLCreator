@@ -24,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -178,15 +179,15 @@ public class WorkTab {
             		continue;
             	}
             	if(fi.subType()==DamageType.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.tidToDamageType), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
             		continue;
             	} 
             	if(fi.subType()==ArmorType.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.tidToArmorType), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToArmorType), 0, i);
             		continue;
             	} 
             	if(fi.subType()==PopulationLevel.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.tidToPopulationLevel), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToPopulationLevel), 0, i);
             		continue;
             	}
             	if(fi.subType()==String.class){
@@ -452,7 +453,7 @@ public class WorkTab {
 	}
 
 	@SuppressWarnings("rawtypes") 
-	private<T extends Tabable> Node CreateTabableArraySetter(String name, Field field, Tabable m, Class tabableClass, ObservableMap<Integer, T> obsMapTabable) {
+	private<T extends Tabable> Node CreateTabableArraySetter(String name, Field field, Tabable m, Class tabableClass, ObservableMap<String, T> obsMapTabable) {
 		ObservableList<Tabable> tabables = FXCollections.observableArrayList();
 		tabables.addAll(obsMapTabable.values());
 
@@ -462,10 +463,10 @@ public class WorkTab {
 			//if its a structure we need only THAT type of structure in the list so we need to filter the rest out.
 			tabables.removeIf(p-> p.getClass() != singleItemClass);
 		} 
-		obsMapTabable.addListener(new MapChangeListener<Integer,Tabable>(){
+		obsMapTabable.addListener(new MapChangeListener<String,Tabable>(){
 			@Override
 			public void onChanged(
-					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends Tabable> change) {
+					javafx.collections.MapChangeListener.Change<? extends String, ? extends Tabable> change) {
 				if(change.getValueAdded()==null){
 					return;
 				}
@@ -492,29 +493,32 @@ public class WorkTab {
         listcol2.setMinWidth(50);
         
         listpane.getColumnConstraints().addAll(listcol1,listcol2);
-        int[] oldArray = null;
+        String[] oldArray = null;
 		
 		try {
-			oldArray = (int[]) field.get(m);
+			oldArray = (String[]) field.get(m);
 		} catch (Exception e1) {
 		}
 		if(oldArray ==null){
-			oldArray = new int[1];
-			oldArray[0] = -1;
+			oldArray = new String[1];
+			oldArray[0] = "";
 		} else {
-			for (int id : oldArray) {
-				OnArrayClassSelect(listpane,field,m, GUI.Instance.idToUnit.get(id) ,true);
+			for (String id : oldArray) {
+				OnArrayClassSelect(listpane,field,m, obsMapTabable.get(id) ,true);
 			}
 		}
 		
 		ComboBox<Tabable> box = new ComboBox<Tabable>(tabables);
-		if(oldArray[0] != -1){
-			box.getSelectionModel().select(oldArray[0]);
+		if(oldArray[0] != ""){
+			String filter =oldArray[0];
+			FilteredList<Tabable> filterd = tabables.filtered(x-> x.GetID() == filter);
+			if(filterd.size()>0)
+				box.getSelectionModel().select(tabables.indexOf(filterd.get(0)));
 		}
 		if(field.getAnnotation(FieldInfo.class)!=null){
 			if(field.getAnnotation(FieldInfo.class).required()){
 			    ObservableList<String> styleClass = box.getStyleClass();
-				if(oldArray[0] == -1){
+				if(oldArray[0] == ""){
 					styleClass.add("combobox-error");
 				}
 				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
@@ -594,10 +598,10 @@ public class WorkTab {
 		GridPane grid = new GridPane();
 		ObservableList<Item> its = FXCollections.observableArrayList();
 		its.addAll(GUI.Instance.getItems());
-		GUI.Instance.idToItem.addListener(new MapChangeListener<Integer,ItemXML>(){
+		GUI.Instance.idToItem.addListener(new MapChangeListener<String,ItemXML>(){
 			@Override
 			public void onChanged(
-					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends ItemXML> change) {
+					javafx.collections.MapChangeListener.Change<? extends String, ? extends ItemXML> change) {
 				if(change.getValueAdded()==null){
 					return;
 				}
@@ -909,12 +913,12 @@ public class WorkTab {
 	}
 
 	@SuppressWarnings({ "rawtypes" })
-	private<T extends Tabable> Node CreateTabableSetter(String name, Field field, Tabable m, Class str, ObservableMap<Integer, T> obsMapTabable) {
+	private<T extends Tabable> Node CreateTabableSetter(String name, Field field, Tabable m, Class str, ObservableMap<String, T> obsMapTabable) {
 		GridPane grid = new  GridPane();
 		ObservableList<Tabable> strs = FXCollections.observableArrayList(obsMapTabable.values());
-		obsMapTabable.addListener(new MapChangeListener<Integer, T>(){
+		obsMapTabable.addListener(new MapChangeListener<String, T>(){
 			@Override
-			public void onChanged(javafx.collections.MapChangeListener.Change<? extends Integer, ? extends T> change) {
+			public void onChanged(javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
 				if(change.getValueAdded()!=null)
 					strs.add(change.getValueAdded());
 				if(change.getValueRemoved()!=null)
@@ -931,9 +935,9 @@ public class WorkTab {
 			    
 			    styleClass.add("combobox-error");
 				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
-					int i = 0;
+					String i = "";
 					try {
-						i =  ((int) field.get(m));
+						i =  ((String) field.get(m));
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -1062,10 +1066,10 @@ public class WorkTab {
 	private Node CreateItemArraySetter(String name, Field field, Tabable m) {
 		ObservableList<Item> its = FXCollections.observableArrayList();
 		its.addAll(GUI.Instance.getItems());
-		GUI.Instance.idToItem.addListener(new MapChangeListener<Integer,ItemXML>(){
+		GUI.Instance.idToItem.addListener(new MapChangeListener<String,ItemXML>(){
 			@Override
 			public void onChanged(
-					javafx.collections.MapChangeListener.Change<? extends Integer, ? extends ItemXML> change) {
+					javafx.collections.MapChangeListener.Change<? extends String, ? extends ItemXML> change) {
 				if(change.getValueAdded()==null){
 					return;
 				}
@@ -1372,7 +1376,8 @@ public class WorkTab {
         FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info != null && info.id() && newTabable){
 			try {
-				field.setInt(str, GUI.Instance.getOneHigherThanMaxID(str));
+				System.out.println("CURRENTLY NOT SUPPORTED");
+//				field.setInt(str, GUI.Instance.getOneHigherThanMaxID(str));
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 

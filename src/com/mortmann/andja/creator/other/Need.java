@@ -18,17 +18,11 @@ public class Need implements Tabable {
 	
 	@ElementMap(key = "Level",attribute=true,required=false) 
 	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
-	public HashMap<Integer,Float> UsageAmounts;
-	
-	@ElementMap(key = "Level",attribute=true,required=false) 
-	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
-	public HashMap<String,Float> tUsageAmounts;
+	public HashMap<String,Float> UsageAmounts;
 
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID;
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID;
 
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false) 
@@ -39,13 +33,8 @@ public class Need implements Tabable {
 	public Item item;
 	@FieldInfo(required=false,compareType=NeedStructure[].class)
 	@Element(required=false)
-	public int[] structures;
+	public String[] structures;
 	
-	@FieldInfo(required=false,compareType=NeedStructure[].class)
-	@Element(required=false)
-	public String[] tstructures;
-
-	 
 	@FieldInfo(required=true)
 	@Element(required=false)
 	public int startLevel;
@@ -55,14 +44,11 @@ public class Need implements Tabable {
 	
 	@FieldInfo(required=true,compareType=NeedGroup.class)
 	@Element(required=false)
-	public int group;
-	@FieldInfo(required=true,compareType=NeedGroup.class)
-	@Element(required=false)
-	public String tgroup;
+	public String group;
 	
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 
 	@Override
@@ -73,19 +59,19 @@ public class Need implements Tabable {
 			}
 		}
 		if(t instanceof NeedStructure){
-			for (String id : tstructures) {
+			for (String id : structures) {
 				if(t.GetID() == id){
 					return this;
 				}
 			}
 		}
 		if(t instanceof NeedGroup){
-			if(t.GetID() == tgroup){
+			if(t.GetID() == group){
 				return this;
 			}
 		}
 		if(t instanceof PopulationLevel) {
-			for(String id : tUsageAmounts.keySet()){
+			for(String id : UsageAmounts.keySet()){
 				if(t.GetID() == id){
 					return this;
 				}

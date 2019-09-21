@@ -48,9 +48,7 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	);
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID =-1;	
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID;	
 
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) 
@@ -81,7 +79,7 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 
 	@Override
@@ -95,7 +93,7 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 
 	@Override
 	public int compareTo(GameEvent ge) {
-		return Integer.compare(ID, ge.ID);
+		return ID.compareTo(ge.ID);
 	}
 	@Override
 	public String toString() {

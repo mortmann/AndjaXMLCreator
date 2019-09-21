@@ -10,8 +10,4 @@ public class NeedStructure extends Structure {
 		buildTyp = BuildTypes.Single;
 		myStructureTyp =	StructureTyp.Blocking;
 	}
-	@Override
-	public String GetID() {
-		return tempID;
-	}
 }

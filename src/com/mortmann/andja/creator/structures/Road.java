@@ -12,8 +12,4 @@ public class Road extends Structure {
 		myStructureTyp = StructureTyp.Pathfinding;
 		canBeUpgraded = true;
 	}
-	@Override
-	public String GetID() {
-		return tempID;
-	}
 }

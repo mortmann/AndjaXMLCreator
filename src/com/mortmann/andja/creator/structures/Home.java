@@ -20,8 +20,4 @@ public class Home extends Structure {
 		canTakeDamage = true;
 		maintenanceCost = 0;
 	}
-	@Override
-	public String GetID() {
-		return tempID;
-	}
 }

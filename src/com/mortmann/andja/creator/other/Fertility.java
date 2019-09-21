@@ -14,9 +14,7 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	public enum Climate {Cold,Middle,Warm};
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
-	public int ID;
-	@Attribute(required=false) 
-	public String tempID = "";	
+	public String ID;
 
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false) 
@@ -28,8 +26,8 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	public ArrayList<Climate> climates;
 	
 	@Override
-	public int compareTo(Fertility arg0) {
-		return Integer.compare(ID, arg0.ID);
+	public int compareTo(Fertility f) {
+		return ID.compareTo(f.ID);
 	}
 	@Override
 	public String toString() {
@@ -37,7 +35,7 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	}
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
