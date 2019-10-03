@@ -19,7 +19,7 @@
          <entry lang="German">Kanonenkugel</entry>
       </Name>
       <damageMultiplier>
-         <entry ArmorTyp="wooden wall">1.0</entry>
+         <entry ArmorTyp="woodenwall">1.0</entry>
          <entry ArmorTyp="leather">3.0</entry>
       </damageMultiplier>
       <spriteBaseName>cannonball</spriteBaseName>

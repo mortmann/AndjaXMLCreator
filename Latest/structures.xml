@@ -814,7 +814,6 @@
          <produceTime>0.0</produceTime>
          <maxOutputStorage>1</maxOutputStorage>
          <efficiency>1.0</efficiency>
-         <fertility>-1</fertility>
          <ageStages>0</ageStages>
       </growable>
       <growable ID="tree">
@@ -866,7 +865,6 @@
                <count>0</count>
             </Item>
          </output>
-         <fertility>-1</fertility>
          <ageStages>3</ageStages>
       </growable>
       <growable ID="hempfield">
@@ -917,7 +915,7 @@
                <count>0</count>
             </Item>
          </output>
-         <fertility>0</fertility>
+         <fertility>hemp</fertility>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="potatoefield">
@@ -968,7 +966,6 @@
                <count>1</count>
             </Item>
          </output>
-         <fertility>-1</fertility>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="sugarcanefield">
@@ -1019,7 +1016,7 @@
                <count>0</count>
             </Item>
          </output>
-         <fertility>8</fertility>
+         <fertility>sugarcone</fertility>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="orchard">
@@ -1070,7 +1067,6 @@
                <count>1</count>
             </Item>
          </output>
-         <fertility>-1</fertility>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="wheatfield">
@@ -1122,7 +1118,7 @@
                <count>1</count>
             </Item>
          </output>
-         <fertility>1</fertility>
+         <fertility>wheat</fertility>
          <ageStages>5</ageStages>
       </growable>
       <growable ID="hopvines">
@@ -1173,7 +1169,7 @@
                <count>0</count>
             </Item>
          </output>
-         <fertility>2</fertility>
+         <fertility>hop</fertility>
          <ageStages>2</ageStages>
       </growable>
    </growables>
@@ -2636,7 +2632,7 @@
          </buildingItems>
          <spriteBaseName>fort</spriteBaseName>
          <canBeBuildUnits length="1">
-            <Unit>ship</Unit>
+            <Unit>basicunit</Unit>
          </canBeBuildUnits>
          <buildTimeModifier>1.0</buildTimeModifier>
       </militarystructure>
@@ -2689,7 +2685,7 @@
          </buildingItems>
          <spriteBaseName>shipyard</spriteBaseName>
          <canBeBuildUnits length="1">
-            <Unit>1</Unit>
+            <Unit>ship</Unit>
          </canBeBuildUnits>
          <buildTimeModifier>1.0</buildTimeModifier>
       </militarystructure>

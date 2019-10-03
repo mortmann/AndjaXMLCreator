@@ -57,7 +57,7 @@
       <attackRange>1.0</attackRange>
       <damage>10.0</damage>
       <myDamageType>cannonball</myDamageType>
-      <myArmorType>wooden wall</myArmorType>
+      <myArmorType>woodenwall</myArmorType>
       <attackRate>1.0</attackRate>
       <speed>2.0</speed>
       <turnSpeed>1.0</turnSpeed>
