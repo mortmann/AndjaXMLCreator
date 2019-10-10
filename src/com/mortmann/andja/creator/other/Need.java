@@ -54,25 +54,27 @@ public class Need implements Tabable {
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		if(t instanceof Item){
-			if(t.GetID() == item.GetID()){
+			if(item!=null && t.GetID().equals(item.GetID())){
 				return this;
 			}
 		}
 		if(t instanceof NeedStructure){
-			for (String id : structures) {
-				if(t.GetID() == id){
-					return this;
+			if(structures!=null) {
+				for (String id : structures) {
+					if(t.GetID().equals(id)){
+						return this;
+					}
 				}
 			}
 		}
 		if(t instanceof NeedGroup){
-			if(t.GetID() == group){
+			if(t.GetID().equals(group)){
 				return this;
 			}
 		}
 		if(t instanceof PopulationLevel) {
 			for(String id : UsageAmounts.keySet()){
-				if(t.GetID() == id){
+				if(t.GetID().equals(id)){
 					return this;
 				}
 			}
@@ -89,5 +91,29 @@ public class Need implements Tabable {
 			return getClass().getSimpleName();
 		}
 		return Name.get(Language.English.toString());
+	}
+
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		if(t instanceof Item && item!=null){
+			if(ID.equals(item.GetID())){
+				item.ID = t.GetID();
+			}
+		}
+		if(t instanceof NeedStructure && structures!=null){
+			for(int i = 0; i<structures.length;i++ ) {
+				if(ID.equals(structures[i])){
+					 structures[i] = t.GetID();
+				}
+			}
+		}
+		if(t instanceof NeedGroup){
+			if(ID.equals(group)){
+				group = t.GetID();
+			}
+		}
+		if(t instanceof PopulationLevel) {
+			UsageAmounts.put(t.GetID(), UsageAmounts.remove(ID));
+		}
 	}
 }

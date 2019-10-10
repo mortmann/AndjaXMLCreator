@@ -6,6 +6,7 @@ import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Effect;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false,name="servicestructure")
 public class ServiceStructure extends Structure {
 	public enum ServiceTarget { All, Damageable, Military, Homes, Production, Service, NeedStructure, SpecificRange, City, None }
@@ -22,5 +23,40 @@ public class ServiceStructure extends Structure {
     @Element public int maxNumberOfWorker = 1;
     @Element public float workSpeed = 0.01f;
 	
+    @Override
+	public Tabable StructureDependsOnTabable(Tabable t) {
+		if(t.getClass().isAssignableFrom(Structure.class)&& specificRange!=null){
+			for(int i = 0; i < specificRange.length;i++ ) {
+				if(t.GetID().equals(specificRange[i])){
+					return this;
+				}
+			}
+		}
+		if(t.getClass() == Effect.class&& effectsOnTargets!=null){
+			for(int i = 0; i < effectsOnTargets.length;i++ ) {
+				if(t.GetID().equals(effectsOnTargets[i])){
+					return this;
+				}
+			}
+		}
+		return null;
+	}
+    @Override
+    public void StructureUpdateDependables(Tabable t, String ID) {
+    	if(t.getClass().isAssignableFrom(Structure.class)&& specificRange!=null){
+			for(int i = 0; i < specificRange.length;i++ ) {
+				if(ID.equals(specificRange[i])){
+					specificRange[i] = t.GetID();
+				}
+			}
+		}
+		if(t.getClass() == Effect.class&& effectsOnTargets!=null){
+			for(int i = 0; i < effectsOnTargets.length;i++ ) {
+				if(ID.equals(effectsOnTargets[i])){
+					effectsOnTargets[i] = t.GetID();
+				}
+			}
+		}
+	}
 	
 }

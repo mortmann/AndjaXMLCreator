@@ -437,7 +437,7 @@ public class WorkTab {
 			if(field.get(tab)!=null){
 				for(Class c : GameEvent.targetClasses) {
 					for(Field f : c.getFields()) {
-						if(f.getName() == (String)field.get(tab)) {
+						if(f.getName().equals((String)field.get(tab))) {
 							box.getSelectionModel().select(c.getSimpleName());
 							variablebox.getSelectionModel().select((String)field.get(tab));
 						}
@@ -511,14 +511,14 @@ public class WorkTab {
 		ComboBox<Tabable> box = new ComboBox<Tabable>(tabables);
 		if(oldArray[0] != ""){
 			String filter =oldArray[0];
-			FilteredList<Tabable> filterd = tabables.filtered(x-> x.GetID() == filter);
+			FilteredList<Tabable> filterd = tabables.filtered(x-> x.GetID().equals(filter));
 			if(filterd.size()>0)
 				box.getSelectionModel().select(tabables.indexOf(filterd.get(0)));
 		}
 		if(field.getAnnotation(FieldInfo.class)!=null){
 			if(field.getAnnotation(FieldInfo.class).required()){
 			    ObservableList<String> styleClass = box.getStyleClass();
-				if(oldArray[0] == ""){
+				if(oldArray[0].isEmpty()){
 					styleClass.add("combobox-error");
 				}
 				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
@@ -1165,7 +1165,7 @@ public class WorkTab {
 		if(old != null){
 			pos = old.length+1;
 			for (int i = 0; i < old.length; i++) {
-				if(old[i].GetID() == select.GetID() ){
+				if(old[i].GetID().equals(select.GetID()) ){
 					if(setup== false){
 						return;
 					}
@@ -1252,7 +1252,7 @@ public class WorkTab {
 		if(old != null){
 			pos = old.length+1;
 			for (int i = 0; i < old.length; i++) {
-				if( old[i] == select.GetID() ){
+				if( old[i].equals(select.GetID()) ){
 					if(setup== false){
 						return;
 					}

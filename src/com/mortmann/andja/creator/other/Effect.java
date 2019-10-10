@@ -63,4 +63,9 @@ public class Effect implements Tabable, Comparable<Effect> {
 	public String toString() {
 		return GetName();
 	}
+
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
+	}
 }

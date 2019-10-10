@@ -18,14 +18,32 @@ public abstract class OutputStructure extends Structure {
 
 	@ElementArray(entry="Item",required=false) public Item[] output;
 
-	protected Tabable OutputDependsOnTabable(Tabable t) {
-		if(t.getClass()==ItemXML.class){
+	@Override
+	protected Tabable StructureDependsOnTabable(Tabable t) {
+		if(t.getClass()==ItemXML.class&& output!=null){
 			for (Item item : output) {
-				if(item.GetID()==t.GetID()){
+				if(item.GetID().equals(t.GetID())){
 					return this;
 				}
 			}
 		}
-		return StructureDependsOnTabable(t);
+		return OutputStructureDependsOnTabable(t);
+	}
+	protected Tabable OutputStructureDependsOnTabable(Tabable t) {
+		return null;
+	}
+	@Override
+	public void StructureUpdateDependables(Tabable t, String ID) {
+		if(t.getClass()==ItemXML.class && output!=null){
+			for(int i = 0; i < output.length;i++ ) {
+				if(ID.equals( output[i].GetID() )){
+					output[i].ID = t.GetID();
+				}
+			}
+		}
+		OutputStructureUpdateDependables(t,ID);
+	}
+	public void OutputStructureUpdateDependables(Tabable t, String ID) {
+
 	}
 }

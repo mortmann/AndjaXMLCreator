@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ import com.mortmann.andja.creator.unitthings.Unit;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.MyInputHandler;
 import com.mortmann.andja.creator.util.Tabable;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.EventType;
@@ -83,9 +85,10 @@ public class GUI {
 	
 	public HashMap<Language,UITab> languageToLocalization;
 	public HashMap<Class, ObservableMap<String, ? extends Tabable>> classToClassObservableMap;
-
+	HashMap<Tabable,Tab> tabableToTab;
 	HashMap<Tab,Tabable> tabToTabable;
-	
+	HashMap<Tab,String> tabToID;
+
 	HashMap<Class,DataTab> classToDataTab;
 	
 	
@@ -100,9 +103,9 @@ public class GUI {
 		SetUpMenuBar();
 
 		new TestMapGenerator();
-		
+		tabToID = new HashMap<>();
         tabToTabable = new HashMap<>();
-
+        tabableToTab = new HashMap<>();
         idToStructures = FXCollections.observableHashMap();
         idToArmorType = FXCollections.observableHashMap();
         idToDamageType = FXCollections.observableHashMap();
@@ -239,7 +242,6 @@ public class GUI {
 			if(e.groupNeeds!=null)
 			for (NeedGroup u : e.groupNeeds) {
 				idToNeedGroup.put(u.GetID(), u);
-				u.ID = u.tempID;				
 			}
 
 			SaveNeeds();
@@ -251,7 +253,6 @@ public class GUI {
 			if(e.damageTypes!=null)
 				for (DamageType u : e.damageTypes) {
 					idToDamageType.put(u.GetID(), u);
-					u.ID = u.tempID;				
 				}
 			if(e.armorTypes!=null)
 				for (ArmorType u : e.armorTypes) {
@@ -374,6 +375,8 @@ public class GUI {
 		if(languageToLocalization==null)
 			return; // should only happen when MANUEL programmed changes saved on startup
 		UITab tab = languageToLocalization.get(lang);
+		if(tab==null)
+			return;
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		String filename ="localization-"+ lang +".xml";
         try {
@@ -393,6 +396,10 @@ public class GUI {
 	
 	
 	public void AddTab(Tabable c, Node content){
+		if(tabableToTab.containsKey(c)) {
+			workTabs.getSelectionModel().select(tabableToTab.get(c));
+			return;
+		}
 		Tab t = new Tab("Empty");
 		if(c!=null){
 			t.setText(c.GetName());
@@ -416,6 +423,8 @@ public class GUI {
 				workTabs.getTabs().remove(emptyTab);
 			}
 			tabToTabable.put(t, c);
+			tabableToTab.put(c, t);
+			tabToID.put(t, c.GetID());
 		} else {
 			emptyTab = t;
 		}
@@ -423,6 +432,9 @@ public class GUI {
 		workTabs.getSelectionModel().select(t);
 		t.setContent(content);
 		t.setOnClosed(x->{
+			tabToTabable.remove(t);
+			tabToID.remove(t);
+			tabableToTab.remove(c);
 			if(workTabs.getTabs().size()<1&&workTabs.getTabs().contains(emptyTab) == false){
 				AddTab(null,mainLayout);
 			}
@@ -603,15 +615,15 @@ public class GUI {
 	}
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
-		Tabable o = tabToTabable.get(curr);
-		if(o instanceof UITab) {
-			SaveLocalization(((UITab)o).language);
+		Tabable currTabable = tabToTabable.get(curr);
+		if(currTabable instanceof UITab) {
+			SaveLocalization(((UITab)currTabable).language);
 			curr.setText(curr.getText().replaceAll("\\*", ""));
 			return;
 		}
-		curr.setText(o.GetName());
+		curr.setText(currTabable.GetName());
 		//check if its filled out all required
-		ArrayList<Field> missingFields = CheckForMissingFields(o);
+		ArrayList<Field> missingFields = CheckForMissingFields(currTabable);
 		if(missingFields.isEmpty() == false){
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Missing requierd Data!");
@@ -625,23 +637,32 @@ public class GUI {
 			//its missing smth return error
 			return;
 		}
-		Tabable exist = doesIDexistForTabable(o.GetID(),o);
-		if(exist!=null && exist!=o){
+		HashSet<Tabable> allTabables = new HashSet<>();
+		for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
+			allTabables.addAll(map.values());
+		}
+		Tabable exist = doesIDexistForTabable(currTabable.GetID(),currTabable);
+		if(tabToID.get(curr)!=null && currTabable.GetID() != tabToID.get(curr)) {
+			//ID Changed so we need to change all references
+			//just go through all -- even tho it isnt optimal but easier for nows
+			for(Tabable t : allTabables) {
+				t.UpdateDependables(currTabable, tabToID.get(curr));
+			}
+			SaveData(); //changed stuff -- not gonna reload tabs
+		}
+		if(exist!=null && exist!=currTabable){
 			Alert a = new Alert(AlertType.CONFIRMATION);
 			a.setTitle("ID already exists!");
-			Tabable t = doesIDexistForTabable(o.GetID(),o);
-			HashSet<Tabable> allTabs = new HashSet<>();
-			for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
-				allTabs.addAll(map.values());
-			}
+//			Tabable t = doesIDexistForTabable(o.GetID(),o);
+			allTabables.removeIf(x->x.DependsOnTabable(currTabable)==null);
 
-			allTabs.removeIf(x->x.DependsOnTabable(t)==null);
+
 			String depends = "Other Structures depends on it!\nRemove dependencies from ";
-			if(allTabs.size()==0){
+			if(allTabables.size()==0){
 				depends="";
 			} else {
 				a.setAlertType(AlertType.ERROR);
-				for (Tabable st : allTabs) {
+				for (Tabable st : allTabables) {
 					depends +=st.toString() + ", ";
 				}
 				depends=depends.substring(0, depends.length()-2);
@@ -660,82 +681,83 @@ public class GUI {
 				return;
 			}
 		}
+		tabToID.put(curr, currTabable.GetID());
 		boolean saved=false;
-		if(o instanceof Structure){
-			if(((Structure)o).GetID().trim().isEmpty()){
+		if(currTabable instanceof Structure){
+			if(((Structure)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToStructures.put(((Structure)o).GetID(),((Structure)o));
+			idToStructures.put(((Structure)currTabable).GetID(),((Structure)currTabable));
 			saved = SaveStructures();
 		}
-		else if(o instanceof Item){
-			if(((Item)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof Item){
+			if(((Item)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToItem.put(((ItemXML)o).GetID(), ((ItemXML)o));
+			idToItem.put(((ItemXML)currTabable).GetID(), ((ItemXML)currTabable));
 			saved = SaveItems();
 		}
-		else if(o instanceof Fertility){
-			if(((Fertility)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof Fertility){
+			if(((Fertility)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToFertility.put(((Fertility)o).GetID(), ((Fertility)o));
+			idToFertility.put(((Fertility)currTabable).GetID(), ((Fertility)currTabable));
 			saved = SaveFertilities();
 		}
-		else if(o instanceof Unit){
-			if(((Unit)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof Unit){
+			if(((Unit)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToUnit.put(((Unit)o).GetID(), ((Unit)o));
+			idToUnit.put(((Unit)currTabable).GetID(), ((Unit)currTabable));
 			saved = SaveUnits();
 		}
-		else if(o instanceof DamageType){
-			if(((DamageType)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof DamageType){
+			if(((DamageType)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToDamageType.put(((DamageType)o).GetID(), ((DamageType)o));
+			idToDamageType.put(((DamageType)currTabable).GetID(), ((DamageType)currTabable));
 			saved = SaveCombat();
 		}
-		else if(o instanceof ArmorType){
-			if(((ArmorType)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof ArmorType){
+			if(((ArmorType)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToArmorType.put(((ArmorType)o).GetID(), ((ArmorType)o));
+			idToArmorType.put(((ArmorType)currTabable).GetID(), ((ArmorType)currTabable));
 			saved = SaveCombat();
 		}
-		else if(o instanceof Need){
-			if(((Need)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof Need){
+			if(((Need)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToNeed.put(((Need)o).GetID(), ((Need)o));
+			idToNeed.put(((Need)currTabable).GetID(), ((Need)currTabable));
 			saved = SaveNeeds();
 		}
-		else if(o instanceof NeedGroup){
-			if(((NeedGroup)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof NeedGroup){
+			if(((NeedGroup)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToNeedGroup.put(((NeedGroup)o).GetID(), ((NeedGroup)o));
+			idToNeedGroup.put(((NeedGroup)currTabable).GetID(), ((NeedGroup)currTabable));
 			saved = SaveNeeds();
 		}
-		else if(o instanceof PopulationLevel){
-			if(((PopulationLevel)o).LEVEL<=-1){
+		else if(currTabable instanceof PopulationLevel){
+			if(((PopulationLevel)currTabable).LEVEL<=-1){
 				return;
 			}
-			idToPopulationLevel.put(""+((PopulationLevel)o).LEVEL, ((PopulationLevel)o));
+			idToPopulationLevel.put(""+((PopulationLevel)currTabable).LEVEL, ((PopulationLevel)currTabable));
 			saved = SaveOthers();
 		}
-		else if(o instanceof Effect) {
-			if(((Effect)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof Effect) {
+			if(((Effect)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToEffect.put(((Effect)o).GetID(), ((Effect)o));
+			idToEffect.put(((Effect)currTabable).GetID(), ((Effect)currTabable));
 			saved = SaveEvents();
 		}
-		else if(o instanceof GameEvent) {
-			if(((GameEvent)o).GetID().trim().isEmpty()){
+		else if(currTabable instanceof GameEvent) {
+			if(((GameEvent)currTabable).GetID().trim().isEmpty()){
 				return;
 			}
-			idToGameEvent.put(((GameEvent)o).GetID(), ((GameEvent)o));
+			idToGameEvent.put(((GameEvent)currTabable).GetID(), ((GameEvent)currTabable));
 			saved = SaveEvents();
 		}
 		if(saved){
@@ -996,7 +1018,7 @@ public class GUI {
 			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
 			return null;
 		}
-		return null;
+		return (Tabable) classToClassObservableMap.get(valueSafe);
 	}
 //	public int getOneHigherThanMaxID(Tabable tab){
 //		if(Structure.class.isAssignableFrom(tab.getClass())){

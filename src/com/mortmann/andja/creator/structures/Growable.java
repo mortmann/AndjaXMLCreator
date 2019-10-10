@@ -5,6 +5,7 @@ import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Fertility;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
 public class Growable extends OutputStructure {
@@ -20,5 +21,16 @@ public class Growable extends OutputStructure {
 		myStructureTyp = StructureTyp.Free;
 		buildTyp = BuildTypes.Drag;
 		maxOutputStorage = 1;
+	}
+	protected Tabable OutputStructureDependsOnTabable(Tabable t) {
+		if(t.getClass() == Fertility.class && fertility.equals(t.GetID()))
+			return this;
+		return null;
+	}
+	@Override
+	public void OutputStructureUpdateDependables(Tabable t, String ID) {
+		if(t.getClass() == Fertility.class && fertility.equals(ID)) {
+			fertility = t.GetID();
+		}
 	}
 }

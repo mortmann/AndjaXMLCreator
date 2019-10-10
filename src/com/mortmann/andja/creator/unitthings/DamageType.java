@@ -15,8 +15,6 @@ public class DamageType implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public String ID;	
-	@Attribute(required=false) 
-	public String tempID = "";	
 
 	@FieldInfo(order=0,required=true,subType=String.class) @ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
@@ -27,7 +25,7 @@ public class DamageType implements Tabable {
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 	@Override
 	public String toString() {
@@ -35,6 +33,8 @@ public class DamageType implements Tabable {
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
+		if(damageMultiplier!=null && t.getClass() == ArmorType.class && damageMultiplier.containsKey(t.GetID()))
+			return this;
 		return null;
 	}
 	@Override
@@ -43,5 +43,10 @@ public class DamageType implements Tabable {
 			return getClass().getSimpleName();
 		}
 		return Name.get(Language.English.toString());
+	}
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		if(damageMultiplier!=null && t.getClass() == ArmorType.class && damageMultiplier.containsKey(t.GetID()))
+			damageMultiplier.put(t.GetID(), damageMultiplier.remove(ID));
 	}
 }

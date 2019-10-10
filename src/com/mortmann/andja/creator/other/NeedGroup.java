@@ -17,8 +17,6 @@ public class NeedGroup implements Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public String ID;
-	@Attribute(required=false) 
-	public String tempID = "";	
 
 	@FieldInfo(required=true,subType=String.class)
 	@ElementMap(key = "lang",attribute=true,required=false) 
@@ -41,12 +39,16 @@ public class NeedGroup implements Tabable {
 	}
 	@Override
 	public String GetID() {
-		return tempID;
+		return ID;
 	}
 
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		return null;
+	}
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
 	}
 
 }

@@ -41,4 +41,8 @@ public class ItemXML extends Item implements Tabable {
 		}
 		return Name.get(Language.English.toString());
 	}
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
+	}
 }

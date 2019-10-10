@@ -45,4 +45,8 @@ public class ArmorType implements Tabable {
 		}
 		return Name.get(Language.English.toString());
 	}
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
+	}
 }

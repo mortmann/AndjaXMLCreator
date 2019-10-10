@@ -39,4 +39,9 @@ public class PopulationLevel implements Tabable {
 		return null;
 	}
 
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
+	}
+
 }

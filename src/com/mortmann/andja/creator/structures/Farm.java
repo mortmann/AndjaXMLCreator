@@ -20,10 +20,18 @@ public class Farm extends OutputStructure {
 		this.canTakeDamage = true;
 	}
 	
-	public Tabable DependsOnTabable(Tabable t) {
-		if(t.GetID()==growable&&t.getClass()==Growable.class){
+	@Override
+	public Tabable OutputStructureDependsOnTabable(Tabable t) {
+		if(t.GetID().equals(growable)&&t.getClass()==Growable.class){
 			return this;
 		}
-		return OutputDependsOnTabable(t);
+		return null;
+	}
+
+	@Override
+	public void OutputStructureUpdateDependables(Tabable t, String ID) {
+		if(ID.equals(growable)&&t.getClass()==Growable.class){
+			growable = t.GetID();
+		}		
 	}
 }

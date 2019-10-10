@@ -61,19 +61,23 @@ public class Unit implements Tabable, Comparable<Unit> {
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
-		if(myArmorType==t.GetID()&&t.getClass()==ArmorType.class){
+		if(myArmorType.equals(t.GetID())&&t.getClass()==ArmorType.class){
 			return this;
 		}
-		if(myDamageType==t.GetID()&&t.getClass()==DamageType.class){
+		if(myDamageType.equals(t.GetID())&&t.getClass()==DamageType.class){
 			return this;
 		}
-		if(t.getClass()==ItemXML.class){
+		if(t.getClass()==ItemXML.class&&buildingItems!=null){
 			for (Item item : buildingItems) {
-				if(item.GetID()==t.GetID()){
+				if(item.GetID().equals(t.GetID())){
 					return this;
 				}
 			}
 		}
+		
+		return UnitDependsOnTabable(t);
+	}
+	public Tabable UnitDependsOnTabable(Tabable t) {
 		return null;
 	}
 	@Override
@@ -88,5 +92,25 @@ public class Unit implements Tabable, Comparable<Unit> {
 	public int compareTo(Unit u) {
 		return ID.compareTo(u.ID);
 	}
-	
+
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		if(myArmorType.equals(ID)&&t.getClass()==ArmorType.class){
+			myArmorType = t.GetID();
+		}
+		if(myDamageType.equals(ID)&&t.getClass()==DamageType.class){
+			myDamageType = t.GetID();
+		}
+		if(t.getClass()==ItemXML.class&&buildingItems!=null){
+			for(int i = 0; i < buildingItems.length;i++ ) {
+				if(ID.equals(buildingItems[i].GetID())){
+					buildingItems[i].ID = t.GetID();
+				}
+			}
+		}	
+		UnitUpdateDependables(t, ID);
+	}
+	public void UnitUpdateDependables(Tabable t, String ID) {
+		
+	}
 }

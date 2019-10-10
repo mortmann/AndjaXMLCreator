@@ -23,19 +23,25 @@ public class Production extends OutputStructure {
 		canTakeDamage = true;
 		maxNumberOfWorker = 1;
 	}
-	
-	protected Tabable StructureDependsOnTabable(Tabable t) {
-		if(t.getClass()==ItemXML.class){
+	@Override
+	protected Tabable OutputStructureDependsOnTabable(Tabable t) {
+		if(t.getClass()==ItemXML.class&& intake!=null){
 			for (Item item : intake) {
-				if(item.GetID()==t.GetID()){
+				if(item.GetID().equals(t.GetID())){
 					return this;
 				}
 			}
 		}
-		return OutputDependsOnTabable(t);
+		return null;
 	}
 	@Override
-	public Tabable DependsOnTabable(Tabable t) {
-		return StructureDependsOnTabable(t);
+	public void OutputStructureUpdateDependables(Tabable t, String ID) {
+		if(t.getClass()==ItemXML.class&& intake!=null){
+			for(int i = 0; i < intake.length;i++ ) {
+				if(ID.equals(intake[i].GetID())){
+					intake[i].ID = t.GetID();
+				}
+			}
+		}
 	}
 }

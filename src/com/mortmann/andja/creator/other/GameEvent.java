@@ -84,9 +84,11 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
-		for(int i = 0; i<effects.length;i++ ) {
-			if(t.GetID() == effects[i])
-				return this;
+		if(effects != null) {
+			for(int i = 0; i<effects.length;i++ ) {
+				if(t.GetID().equals(effects[i]))
+					return this;
+			}
 		}
 		return null;
 	}
@@ -98,5 +100,16 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	@Override
 	public String toString() {
 		return GetName();
+	}
+
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		if(effects != null) {
+			for(int i = 0; i<effects.length;i++ ) {
+				if(ID.equals(effects[i]))
+					effects[i] = t.GetID();
+			}
+		}
+		
 	}
 }

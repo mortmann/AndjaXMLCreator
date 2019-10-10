@@ -87,18 +87,35 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 		return ID;
 	}
 	protected Tabable StructureDependsOnTabable(Tabable t) {
-		if(t.getClass()==ItemXML.class){
-			for (Item item : buildingItems) {
-				if(item.GetID()==t.GetID()){
-					return this;
-				}
-			}
-		}
 		return null;
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
+		if(t.getClass()==ItemXML.class){
+			if(buildingItems!=null) {
+				for (Item item : buildingItems) {
+					if(item.GetID().equals(t.GetID())){
+						return this;
+					}
+				}
+			}
+		}
 		return StructureDependsOnTabable(t);
+	}
+
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		if(t.getClass()==ItemXML.class && buildingItems!=null){
+			for(int i = 0; i < buildingItems.length;i++ ) {
+				if(ID.equals(buildingItems[i].GetID())){
+					buildingItems[i].ID = t.GetID();
+				}
+			}
+		}
+		StructureUpdateDependables(t,ID);
+	}
+	public void StructureUpdateDependables(Tabable t, String ID) {
+
 	}
 	@Override
 	public String GetName() {

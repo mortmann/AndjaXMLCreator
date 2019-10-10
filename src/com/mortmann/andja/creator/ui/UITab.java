@@ -58,5 +58,9 @@ public class UITab implements Tabable {
 	public Tabable DependsOnTabable(Tabable t) {
 		return null;
 	}
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
+	}
 
 }

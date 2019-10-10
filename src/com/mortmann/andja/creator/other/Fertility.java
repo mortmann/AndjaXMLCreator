@@ -48,4 +48,8 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 		}
 		return Name.get(Language.English.toString());
 	}
+	@Override
+	public void UpdateDependables(Tabable t, String ID) {
+		
+	}
 }
