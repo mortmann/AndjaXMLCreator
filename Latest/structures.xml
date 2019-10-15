@@ -2311,7 +2311,7 @@
          <maxOutputStorage>5</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="2">
-            <Item ID="pig-meat">
+            <Item ID="pigmeat">
                <count>2</count>
             </Item>
             <Item ID="leather">

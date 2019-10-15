@@ -220,7 +220,6 @@ public class GUI {
 			for (ItemXML i : e.items) {
 				idToItem.put(i.GetID(), i);
 			}
-//			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -229,7 +228,6 @@ public class GUI {
 			for (Unit u : e.getAllUnits()) {
 				idToUnit.put(u.GetID(), u);
 			}
-//			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -258,7 +256,6 @@ public class GUI {
 				for (ArmorType u : e.armorTypes) {
 					idToArmorType.put(u.GetID(), u);
 				}
-//			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -268,7 +265,6 @@ public class GUI {
 				for (PopulationLevel u : e.populationLevels) {
 					idToPopulationLevel.put(""+u.LEVEL, u);
 				}
-//			serializer.write(e,new File( "items.xml" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -294,6 +290,29 @@ public class GUI {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        
+        HashSet<Tabable> allTabables = new HashSet<>();
+		for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
+			allTabables.addAll(map.values());
+		}
+//		ArrayList<ItemXML> items = new ArrayList<>(idToItem.values());
+//		for(ItemXML item : items) {
+//			if(item.ID.contains(" ") || item.ID.contains("´") || item.ID.contains("'") || item.ID.contains("-") ) {
+//				String newID = item.ID;
+//				String id = item.ID;
+//				newID = newID.replaceAll("[\\p\\s{Punct}&&[^_]]+", "");
+//				item.ID = newID;
+//				//ID Changed so we need to change all references
+//				//just go through all -- even tho it isnt optimal but easier for nows
+//				for(Tabable t : allTabables) {
+//					t.UpdateDependables(item, id);
+//				}
+//				System.out.println("Updated: " + id + " to " + newID);
+//				idToItem.remove(id);
+//				idToItem.put(newID, item);
+//			}
+//		}
+        System.out.println(".-	sweasdr_asdw 	 !e$$%67 ".replaceAll("[\\p{Punct}\\s&&[^_]]+", ""));
         SaveData();
 	}
 	public UITab LoadLocalization(Language language) {

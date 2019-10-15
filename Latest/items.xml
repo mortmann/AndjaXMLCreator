@@ -35,7 +35,7 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="better clothes">
+   <Item ID="betterclothes">
       <count>0</count>
       <Name>
          <entry lang="English">Better Clothes</entry>
@@ -413,7 +413,7 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="leather shoe">
+   <Item ID="leathershoe">
       <count>0</count>
       <Name>
          <entry lang="English">Leather Shoe</entry>
@@ -431,7 +431,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="luxury clothes">
+   <Item ID="luxuryclothes">
       <count>0</count>
       <Name>
          <entry lang="English">Luxury Clothes</entry>
@@ -440,7 +440,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="luxury cutlery">
+   <Item ID="luxurycutlery">
       <count>0</count>
       <Name>
          <entry lang="English">Luxury Cutlery</entry>
@@ -449,7 +449,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="luxury wood">
+   <Item ID="luxurywood">
       <count>0</count>
       <Name>
          <entry lang="English">Luxury Wood</entry>
@@ -467,7 +467,7 @@
       <type>Build</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="medicinal herbs">
+   <Item ID="medicinalherbs">
       <count>0</count>
       <Name>
          <entry lang="English">Medicinal Herbs</entry>
@@ -503,7 +503,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="perfume bottle">
+   <Item ID="perfumebottle">
       <count>0</count>
       <Name>
          <entry lang="English">Perfume Bottle</entry>
@@ -521,7 +521,7 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="pig-meat">
+   <Item ID="pigmeat">
       <count>0</count>
       <Name>
          <entry lang="English">Pig-Meat</entry>
@@ -566,7 +566,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="rough diamonds">
+   <Item ID="roughdiamonds">
       <count>0</count>
       <Name>
          <entry lang="English">Rough Diamonds</entry>
@@ -593,20 +593,20 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="sheep-wool cloth">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Sheep-Wool Cloth</entry>
-         <entry lang="German">Schafswolleleinen *1</entry>
-      </Name>
-      <type>Intermediate</type>
-      <decays>-1</decays>
-   </Item>
-   <Item ID="sheep´s wool">
+   <Item ID="sheepswool">
       <count>1</count>
       <Name>
          <entry lang="English">Sheep´s Wool</entry>
          <entry lang="German">Schafswolle</entry>
+      </Name>
+      <type>Intermediate</type>
+      <decays>-1</decays>
+   </Item>
+   <Item ID="sheepwoolcloth">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Sheep-Wool Cloth</entry>
+         <entry lang="German">Schafswolleleinen *1</entry>
       </Name>
       <type>Intermediate</type>
       <decays>-1</decays>
@@ -683,7 +683,7 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="tobacco products">
+   <Item ID="tobaccoproducts">
       <count>0</count>
       <Name>
          <entry lang="English">Tobacco Products</entry>
@@ -737,7 +737,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="wine grapes">
+   <Item ID="winegrapes">
       <count>0</count>
       <Name>
          <entry lang="English">Wine Grapes</entry>

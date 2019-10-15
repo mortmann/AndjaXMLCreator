@@ -26,7 +26,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -1577,7 +1580,18 @@ public class WorkTab {
 			    	    }
 					}
 				} else if(text instanceof TextField){
-					Tabable exist = GUI.Instance.doesIDexistForTabable(((TextField) text).textProperty().getValueSafe(), t);
+					String id = ((TextField) text).textProperty().getValueSafe();
+					//remove punctuations
+					if(id.matches("(?s).*[\\p{Punct}\\s&&[^_]]+.*")){
+						System.out.println("Char not allowed.");
+						Alert a = new Alert(AlertType.INFORMATION, "IDs should be simple and contain no duplicates for all types.", ButtonType.OK);
+						a.setTitle("Charakter not allowed.");
+						a.setHeaderText("ID cannot contain Punctuation, Whitespaces or Special Charakters.");
+						a.show();
+					}
+					id = id.replaceAll("[\\p{Punct}\\s&&[^_]]+", "");
+					((TextField) text).textProperty().set(id);
+					Tabable exist = GUI.Instance.doesIDexistForTabable(id, t);
 					if(exist!=null && exist!=t){
 						if(!styleClass.contains("text-field-warning")) {
 			    	        styleClass.add("text-field-warning");
