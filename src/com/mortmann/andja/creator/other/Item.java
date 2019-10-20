@@ -6,14 +6,15 @@ import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
-public class Item implements Comparable<Item>{
+public class Item implements Comparable<Tabable> {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public String ID;	
 
-	public enum ItemType {Build,Intermediate,Luxury}
+	public enum ItemType {Build,Intermediate,Luxury,Military}
 
 	@Element(required=false)
 	public int count;
@@ -28,10 +29,13 @@ public class Item implements Comparable<Item>{
 		return GUI.Instance.idToItem.get(ID).toString();
 	}
 	@Override
-	public int compareTo(Item i) {
-		return ID.compareTo(i.ID);
+	public int compareTo(Tabable i) {
+		return ID.compareTo(i.GetID());
 	}
 	public String GetID() {
 		return ID;
+	}
+	public ItemType getType() {
+		return ItemType.Build;
 	}
  }

@@ -14,5 +14,8 @@ public class Warehouse extends Market {
 		structureRange = 18;
 	}
 	
-	
+	@Override
+	public String GetButtonColor() {
+		return "#22a6b3";
+	}
 }

@@ -1,5 +1,6 @@
 package com.mortmann.andja.creator.unitthings;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.simpleframework.xml.Attribute;
@@ -11,11 +12,12 @@ import org.simpleframework.xml.Root;
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
+import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
-public class Unit implements Tabable, Comparable<Unit> {
+public class Unit implements Tabable, Comparable<Tabable> {
 	
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
@@ -89,8 +91,10 @@ public class Unit implements Tabable, Comparable<Unit> {
 		return Name.get(Language.English.toString());
 	}
 	@Override
-	public int compareTo(Unit u) {
-		return ID.compareTo(u.ID);
+	public int compareTo(Tabable o) {
+		if(Unit.class.isAssignableFrom(o.getClass()))
+			return Comparator.comparing(Unit::getClassName).thenComparing(Unit::getPopulationLevel).thenComparing(Unit::getPopulationCount).compare(this,(Unit) o);
+		return GetID().compareTo(o.GetID());
 	}
 
 	@Override
@@ -112,5 +116,19 @@ public class Unit implements Tabable, Comparable<Unit> {
 	}
 	public void UnitUpdateDependables(Tabable t, String ID) {
 		
+	}
+
+	@Override
+	public String GetButtonColor() {
+		return "#6ab04c";
+	}
+	public int getPopulationLevel() {
+		return populationLevel;
+	}
+	public int getPopulationCount() {
+		return populationCount;
+	}
+	public String getClassName() {
+		return getClass().getName();
 	}
 }

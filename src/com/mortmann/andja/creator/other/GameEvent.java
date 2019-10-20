@@ -28,7 +28,7 @@ import com.mortmann.andja.creator.util.Tabable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 @Root(strict=false,name="GameEvent")
-public class GameEvent implements Comparable<GameEvent>, Tabable {
+public class GameEvent implements Comparable<Tabable>, Tabable {
 	
 	public enum Target {
 	    World, Player, AllUnit, Ship, LandUnit, Island, City, 
@@ -94,8 +94,8 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 	}
 
 	@Override
-	public int compareTo(GameEvent ge) {
-		return ID.compareTo(ge.ID);
+	public int compareTo(Tabable ge) {
+		return ID.compareTo(ge.GetID());
 	}
 	@Override
 	public String toString() {
@@ -111,5 +111,10 @@ public class GameEvent implements Comparable<GameEvent>, Tabable {
 			}
 		}
 		
+	}
+
+	@Override
+	public String GetButtonColor() {
+		return null;
 	}
 }

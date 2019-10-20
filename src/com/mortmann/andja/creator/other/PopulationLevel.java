@@ -44,4 +44,14 @@ public class PopulationLevel implements Tabable {
 		
 	}
 
+	@Override
+	public String GetButtonColor() {
+		return null;
+	}
+
+	@Override
+	public int compareTo(Tabable o) {
+		return GetID().compareTo(o.GetID());
+	}
+
 }

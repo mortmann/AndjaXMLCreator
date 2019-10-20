@@ -49,4 +49,12 @@ public class DamageType implements Tabable {
 		if(damageMultiplier!=null && t.getClass() == ArmorType.class && damageMultiplier.containsKey(t.GetID()))
 			damageMultiplier.put(t.GetID(), damageMultiplier.remove(ID));
 	}
+	@Override
+	public String GetButtonColor() {
+		return null;
+	}
+	@Override
+	public int compareTo(Tabable o) {
+		return GetID().compareTo(o.GetID());
+	}
 }

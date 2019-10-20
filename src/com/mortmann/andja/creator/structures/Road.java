@@ -12,4 +12,9 @@ public class Road extends Structure {
 		myStructureTyp = StructureTyp.Pathfinding;
 		canBeUpgraded = true;
 	}
+
+	@Override
+	public String GetButtonColor() {
+		return "#95afc0";
+	}
 }

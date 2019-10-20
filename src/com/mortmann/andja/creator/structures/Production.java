@@ -44,4 +44,8 @@ public class Production extends OutputStructure {
 			}
 		}
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#4834d4";
+	}
 }

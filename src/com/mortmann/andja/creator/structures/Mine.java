@@ -13,5 +13,10 @@ public class Mine extends OutputStructure{
 		hasHitbox = true;
 		structureRange = 0;
 	}
+
+	@Override
+	public String GetButtonColor() {
+		return "#535c68";
+	}
 	
 }

@@ -20,4 +20,8 @@ public class Home extends Structure {
 		canTakeDamage = true;
 		maintenanceCost = 0;
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#f6e58d";
+	}
 }

@@ -116,4 +116,14 @@ public class Need implements Tabable {
 			UsageAmounts.put(t.GetID(), UsageAmounts.remove(ID));
 		}
 	}
+
+	@Override
+	public String GetButtonColor() {
+		return null;
+	}
+
+	@Override
+	public int compareTo(Tabable o) {
+		return ID.compareTo(o.GetID());
+	}
 }

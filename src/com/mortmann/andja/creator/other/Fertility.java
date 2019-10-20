@@ -10,7 +10,7 @@ import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(name="Fertility",strict=false)
-public class Fertility implements Tabable, Comparable<Fertility> {
+public class Fertility implements Tabable, Comparable<Tabable> {
 	public enum Climate {Cold,Middle,Warm};
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
@@ -26,8 +26,8 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	public ArrayList<Climate> climates;
 	
 	@Override
-	public int compareTo(Fertility f) {
-		return ID.compareTo(f.ID);
+	public int compareTo(Tabable f) {
+		return ID.compareTo(f.GetID());
 	}
 	@Override
 	public String toString() {
@@ -51,5 +51,9 @@ public class Fertility implements Tabable, Comparable<Fertility> {
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {
 		
+	}
+	@Override
+	public String GetButtonColor() {
+		return null;
 	}
 }

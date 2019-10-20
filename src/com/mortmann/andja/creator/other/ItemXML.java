@@ -1,16 +1,18 @@
 package com.mortmann.andja.creator.other;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.simpleframework.xml.*;
 
 import com.mortmann.andja.creator.GUI.Language;
+import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 
 @Root(name="Item",strict=false)
-public class ItemXML extends Item implements Tabable {
+public class ItemXML extends Item implements Tabable, Comparator<Tabable> {
 
 //	@Element public String EN_Name;
 //	@Element public String DE_Name;
@@ -44,5 +46,36 @@ public class ItemXML extends Item implements Tabable {
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {
 		
+	}
+	@Override
+	public String GetButtonColor() {
+		switch(type) {
+		case Build:
+			return "#3EB650";
+		case Intermediate:
+			return "#95afc0";
+		case Luxury:
+			return "#FCC133";
+		case Military:
+			return "#E12B38";
+		default:
+			return null;
+		}
+	}
+	@Override
+	public int compareTo(Tabable i) {
+		if(i instanceof ItemXML)
+			return Comparator.comparing(ItemXML::getType).thenComparing(ItemXML::GetID).compare(this,(ItemXML)i);;
+		return GetID().compareTo(i.GetID());
+	}
+	@Override
+	public int compare(Tabable o1, Tabable o2) {
+		if(o1 instanceof ItemXML && o2 instanceof ItemXML)
+			return ((ItemXML)o1).type.compareTo(((ItemXML)o2).type);
+		return o1.GetID().compareTo(o2.GetID());
+	}
+	@Override
+	public ItemType getType() {
+		return type;
 	}
 }

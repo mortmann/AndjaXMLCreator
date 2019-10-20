@@ -50,5 +50,13 @@ public class NeedGroup implements Tabable {
 	public void UpdateDependables(Tabable t, String ID) {
 		
 	}
+	@Override
+	public String GetButtonColor() {
+		return null;
+	}
+	@Override
+	public int compareTo(Tabable o) {
+		return ID.compareTo(o.GetID());
+	}
 
 }

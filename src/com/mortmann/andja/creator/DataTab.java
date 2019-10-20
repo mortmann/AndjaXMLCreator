@@ -1,6 +1,10 @@
 package com.mortmann.andja.creator;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.mortmann.andja.creator.util.NotClosableTab;
 import com.mortmann.andja.creator.util.Tabable;
 
@@ -83,6 +87,16 @@ public class DataTab<T extends Tabable> {
 		b.setMaxSize(100, 100);
 		b.setTooltip(new Tooltip(s.toString()));
 		b.setWrapText(true);
+		String color = valueAdded.GetButtonColor();
+		if(color!=null) {
+			Color c = Color.decode(color);
+		    double darkness = 1-(0.299* c.getRed() + 0.587*c.getGreen() + 0.114*c.getBlue())/255;
+			if(darkness>0.5)
+				b.setStyle("-fx-background-color: " + color +" !important" + "-fx-text-fill: white;");
+			else
+				b.setStyle("-fx-background-color: " + color +" !important");
+		}
+		
 		b.setId(s.toString().toLowerCase());
 //		b.setTextAlignment(TextAlignment.CENTER);
 		b.setTextOverrun(OverrunStyle.ELLIPSIS);
@@ -90,10 +104,12 @@ public class DataTab<T extends Tabable> {
 		
 	}
 	private void SetUPButtons(ObservableMap<String,T> map) {
-		ObservableList<String> l = FXCollections.observableArrayList(map.keySet());
-		FXCollections.sort(l);
-		for (String t : l) {
-			AddButton(map.get(t));
+		ArrayList<T> l = new ArrayList<T>(map.values());
+//		FXCollections.sort(l);
+		Collections.sort(l); 
+//		l.sorted();
+		for (T t : l) {
+			AddButton(t);
 		}
 		
 //		for (int i = 0; i < 200; i++) {

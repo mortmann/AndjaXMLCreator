@@ -19,4 +19,9 @@ public class Market extends OutputStructure {
 		canTakeDamage = true;
 		canBeUpgraded=true;
 	}
+
+	@Override
+	public String GetButtonColor() {
+		return "#7ed6df";
+	}
 }

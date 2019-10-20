@@ -31,4 +31,8 @@ public class Ship extends Unit {
 			}
 		}
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#4834d4";
+	}
 }

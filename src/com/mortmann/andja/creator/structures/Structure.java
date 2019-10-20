@@ -1,5 +1,6 @@
 package com.mortmann.andja.creator.structures;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.simpleframework.xml.Attribute;
@@ -16,7 +17,7 @@ import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
-public abstract class Structure implements Tabable, Comparable<Structure>  {
+public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	public enum BuildTypes {Drag, Path, Single};
 	public enum StructureTyp {Pathfinding, Blocking,Free};
 	public enum Direction {None, N, E, S, W};
@@ -71,16 +72,15 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	
-	public int compareTo(Structure str) {
-		int val = Integer.compare(populationLevel, str.populationLevel); // first order after Level
-		if(val == 0){
-			return Integer.compare(populationCount, str.populationCount); // if its the same then order count
+	public int compareTo(Tabable str) {
+		if(Structure.class.isAssignableFrom(str.getClass())) {
+			return Comparator.comparing(Structure::getClassName).thenComparing(Structure::getPopulationLevel).thenComparing(Structure::getPopulationCount).compare(this,(Structure) str);
 		}
-		return val;
+		return GetID().compareTo(str.GetID());
 	}	
 	@Override
 	public String toString() {
-		return ID+":"+ GetName();
+		return GetName();
 	}
 	@Override
 	public String GetID() {
@@ -102,7 +102,15 @@ public abstract class Structure implements Tabable, Comparable<Structure>  {
 		}
 		return StructureDependsOnTabable(t);
 	}
-
+	public int getPopulationLevel() {
+		return populationLevel;
+	}
+	public int getPopulationCount() {
+		return populationCount;
+	}
+	public String getClassName() {
+		return getClass().getName();
+	}
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {
 		if(t.getClass()==ItemXML.class && buildingItems!=null){

@@ -58,5 +58,9 @@ public class ServiceStructure extends Structure {
 			}
 		}
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#c7ecee";
+	}
 	
 }

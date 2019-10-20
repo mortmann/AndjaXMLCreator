@@ -26,8 +26,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import org.simpleframework.xml.Serializer;
@@ -291,10 +293,10 @@ public class GUI {
 			e.printStackTrace();
 		}
         
-        HashSet<Tabable> allTabables = new HashSet<>();
-		for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
-			allTabables.addAll(map.values());
-		}
+//        HashSet<Tabable> allTabables = new HashSet<>();
+//		for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
+//			allTabables.addAll(map.values());
+//		}
 //		ArrayList<ItemXML> items = new ArrayList<>(idToItem.values());
 //		for(ItemXML item : items) {
 //			if(item.ID.contains(" ") || item.ID.contains("´") || item.ID.contains("'") || item.ID.contains("-") ) {
@@ -312,8 +314,8 @@ public class GUI {
 //				idToItem.put(newID, item);
 //			}
 //		}
-        System.out.println(".-	sweasdr_asdw 	 !e$$%67 ".replaceAll("[\\p{Punct}\\s&&[^_]]+", ""));
-        SaveData();
+//        System.out.println(".-	sweasdr_asdw 	 !e$$%67 ".replaceAll("[\\p{Punct}\\s&&[^_]]+", ""));
+//        SaveData();
 	}
 	public UITab LoadLocalization(Language language) {
 		Serializer serializer = new Persister(new AnnotationStrategy());
@@ -627,9 +629,13 @@ public class GUI {
 	public ArrayList<Item> getItems() {
 		ArrayList<Item> al = new ArrayList<>();
 		for (ItemXML i : idToItem.values()) {
-			al.add(new Item(i));
+			al.add( new Item(i) );
 		}
-		Collections.sort(al);
+		al.sort(new Comparator<Item>(){
+            public int compare(Item i1,Item i2){
+    			return i1.GetID().compareTo(i2.GetID());
+
+          }});
 		return al;
 	}
 	public void SaveCurrentTab(){

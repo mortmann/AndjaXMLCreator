@@ -14,7 +14,7 @@ import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false,name="Effect")
-public class Effect implements Tabable, Comparable<Effect> {
+public class Effect implements Tabable, Comparable<Tabable> {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public String ID = "";	
@@ -56,7 +56,7 @@ public class Effect implements Tabable, Comparable<Effect> {
 	}
 
 	@Override
-	public int compareTo(Effect other) {
+	public int compareTo(Tabable other) {
 		return GetID().compareToIgnoreCase(other.GetID());
 	}
 	@Override
@@ -67,5 +67,10 @@ public class Effect implements Tabable, Comparable<Effect> {
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {
 		
+	}
+
+	@Override
+	public String GetButtonColor() {
+		return null;
 	}
 }

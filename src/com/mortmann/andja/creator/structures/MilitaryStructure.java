@@ -39,5 +39,9 @@ public class MilitaryStructure extends Structure{
 			}
 		}
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#eb4d4b";
+	}
 	
 }

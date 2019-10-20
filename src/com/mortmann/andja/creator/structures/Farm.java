@@ -34,4 +34,8 @@ public class Farm extends OutputStructure {
 			growable = t.GetID();
 		}		
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#3EB650";
+	}
 }

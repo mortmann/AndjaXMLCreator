@@ -33,4 +33,8 @@ public class Growable extends OutputStructure {
 			fertility = t.GetID();
 		}
 	}
+	@Override
+	public String GetButtonColor() {
+		return "#badc58";
+	}
 }
