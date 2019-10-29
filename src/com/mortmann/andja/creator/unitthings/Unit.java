@@ -46,6 +46,7 @@ public class Unit implements Tabable, Comparable<Tabable> {
 	@FieldInfo(required=true, IsEffectable=true) @Element public float speed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float aggroTime;   
+	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float projectileSpeed = 0; // only needed for things with projectiles
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 
