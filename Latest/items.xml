@@ -233,10 +233,10 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="gold">
+   <Item ID="goldingots">
       <count>0</count>
       <Name>
-         <entry lang="English">Gold</entry>
+         <entry lang="English">Gold Ingots</entry>
          <entry lang="German">Gold</entry>
       </Name>
       <type>Intermediate</type>
@@ -278,11 +278,11 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="hopfen">
+   <Item ID="hops">
       <count>0</count>
       <Name>
-         <entry lang="English">Hopfen</entry>
-         <entry lang="German">Hops</entry>
+         <entry lang="English">Hops</entry>
+         <entry lang="German">Hopfen</entry>
       </Name>
       <type>Intermediate</type>
       <decays>0</decays>
@@ -296,10 +296,10 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="ironingot">
+   <Item ID="ironingots">
       <count>0</count>
       <Name>
-         <entry lang="English">Iron Ingot</entry>
+         <entry lang="English">Iron Ingots</entry>
          <entry lang="German">Eisenrohling</entry>
       </Name>
       <type>Intermediate</type>
@@ -368,20 +368,20 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="pigmeat">
-      <count>0</count>
-      <Name>
-         <entry lang="English">Pig-Meat</entry>
-         <entry lang="German">Schweinefleisch</entry>
-      </Name>
-      <type>Intermediate</type>
-      <decays>-1</decays>
-   </Item>
    <Item ID="pike">
       <count>0</count>
       <Name>
          <entry lang="English">Pike</entry>
          <entry lang="German">Pikes</entry>
+      </Name>
+      <type>Intermediate</type>
+      <decays>-1</decays>
+   </Item>
+   <Item ID="pork">
+      <count>0</count>
+      <Name>
+         <entry lang="English">Pork</entry>
+         <entry lang="German">Schweinefleisch</entry>
       </Name>
       <type>Intermediate</type>
       <decays>-1</decays>
@@ -413,7 +413,7 @@
       <type>Intermediate</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="sheepswool">
+   <Item ID="sheepwool">
       <count>1</count>
       <Name>
          <entry lang="English">Sheep´s Wool</entry>
@@ -539,7 +539,7 @@
       <type>Luxury</type>
       <decays>-1</decays>
    </Item>
-   <Item ID="candleholder">
+   <Item ID="candleholders">
       <count>0</count>
       <Name>
          <entry lang="English">Candleholder</entry>

@@ -762,7 +762,7 @@
          <maxOutputStorage>0</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="1">
-            <Item ID="hopfen">
+            <Item ID="hops">
                <count>1</count>
             </Item>
          </output>
@@ -1165,7 +1165,7 @@
          <maxOutputStorage>1</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="1">
-            <Item ID="hopfen">
+            <Item ID="hops">
                <count>0</count>
             </Item>
          </output>
@@ -1398,7 +1398,7 @@
          <maxOutputStorage>0</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="1">
-            <Item ID="grain salt">
+            <Item ID="grainsalt">
                <count>1</count>
             </Item>
          </output>
@@ -2044,7 +2044,7 @@
          <maxOutputStorage>5</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="1">
-            <Item ID="ironingot">
+            <Item ID="ironingots">
                <count>1</count>
             </Item>
          </output>
@@ -2118,7 +2118,7 @@
             </Item>
          </output>
          <intake length="1">
-            <Item ID="grain salt">
+            <Item ID="grainsalt">
                <count>1</count>
             </Item>
          </intake>
@@ -2250,7 +2250,7 @@
             </Item>
          </output>
          <intake length="1">
-            <Item ID="ironingot">
+            <Item ID="ironingots">
                <count>1</count>
             </Item>
          </intake>
@@ -2311,7 +2311,7 @@
          <maxOutputStorage>5</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="2">
-            <Item ID="pigmeat">
+            <Item ID="pork">
                <count>2</count>
             </Item>
             <Item ID="leather">

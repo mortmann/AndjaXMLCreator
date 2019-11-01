@@ -638,6 +638,7 @@ public class GUI {
           }});
 		return al;
 	}
+	@SuppressWarnings("unlikely-arg-type")
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
 		Tabable currTabable = tabToTabable.get(curr);
@@ -668,6 +669,7 @@ public class GUI {
 		}
 		Tabable exist = doesIDexistForTabable(currTabable.GetID(),currTabable);
 		if(tabToID.get(curr)!=null && currTabable.GetID() != tabToID.get(curr)) {
+			classToClassObservableMap.get(currTabable.getClass()).remove(tabToID.get(curr));
 			//ID Changed so we need to change all references
 			//just go through all -- even tho it isnt optimal but easier for nows
 			for(Tabable t : allTabables) {

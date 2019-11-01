@@ -3,6 +3,7 @@ package com.mortmann.andja.creator;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import com.mortmann.andja.creator.util.NotClosableTab;
@@ -29,11 +30,11 @@ import javafx.scene.layout.VBox;
 public class DataTab<T extends Tabable> {
 	private ArrayList<Node> allNodeList;
 	private FlowPane flow;
-
+	private HashMap<T,Button> tabToButton;
 	public DataTab(String name, ObservableMap<String, T> map, TabPane tabs){
 		ScrollPane sp = new ScrollPane();
 		VBox v = new VBox();
-		
+		tabToButton = new HashMap<>();
 	    flow = new FlowPane();
 	    flow.setPadding(new Insets(2, 2, 2, 2));
 	    flow.setVgap(3);
@@ -43,11 +44,13 @@ public class DataTab<T extends Tabable> {
 			@Override
 			public void onChanged(javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
 				if(change.getValueAdded()==null){
+					RemoveButton(change.getValueRemoved());
 					return; // doin nothin for removed for now
 				}
 				AddButton(change.getValueAdded());
-				
+				SetUPButtons(map);
 			}
+
 		});
 		allNodeList = new ArrayList<>(flow.getChildren());
 		sp.setContent(flow);
@@ -77,6 +80,9 @@ public class DataTab<T extends Tabable> {
 		nct.setContent(v);
         tabs.getTabs().add(nct);
 	}
+	private void RemoveButton(T valueRemoved) {
+		flow.getChildren().remove(tabToButton.get(valueRemoved));
+	}
 	protected void AddButton(T valueAdded) {
 		Button b = new Button();
 		Tabable s = valueAdded;
@@ -101,9 +107,10 @@ public class DataTab<T extends Tabable> {
 //		b.setTextAlignment(TextAlignment.CENTER);
 		b.setTextOverrun(OverrunStyle.ELLIPSIS);
 		flow.getChildren().add(b);
-		
+		tabToButton.put(valueAdded, b);
 	}
-	private void SetUPButtons(ObservableMap<String,T> map) {
+	private void SetUPButtons(ObservableMap<String, T> map) {
+		flow.getChildren().clear();
 		ArrayList<T> l = new ArrayList<T>(map.values());
 //		FXCollections.sort(l);
 		Collections.sort(l); 
