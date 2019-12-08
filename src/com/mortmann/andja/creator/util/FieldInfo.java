@@ -20,6 +20,7 @@ public @interface FieldInfo {
     boolean IsEffectable() default false;
     boolean RequiresEffectable() default false;
 	boolean ignore() default false;
-
+	String First2DName() default "";
+	String Second2DName() default "";
 
 }

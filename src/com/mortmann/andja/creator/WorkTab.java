@@ -14,6 +14,7 @@ import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.structures.*;
+import com.mortmann.andja.creator.structures.Structure.TileType;
 import com.mortmann.andja.creator.unitthings.*;
 import com.mortmann.andja.creator.util.*;
 
@@ -54,8 +55,10 @@ public class WorkTab {
 	GridPane enumGrid;
 	GridPane languageGrid;
 	GridPane otherGrid;
+	
+	private GridPane UpdateTileTypeArrayPane;
 
-	Tabable obj;
+	Tabable myTabable;
 	private boolean newTabable;
 	
 	public WorkTab(Tabable t, boolean newTabable){
@@ -111,7 +114,7 @@ public class WorkTab {
 
         Class c = t.getClass();
 		Field fld[] = c.getFields();
-		obj = t;
+		myTabable = t;
 		Arrays.sort(fld,new OrderEr());
         for (int i = 0; i < fld.length; i++) {
             FieldInfo info = fld[i].getAnnotation(FieldInfo.class);
@@ -122,31 +125,31 @@ public class WorkTab {
         		compare = info.compareType();
         	}
             if(compare == Boolean.TYPE){
-            	booleanGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	booleanGrid.add(CreateBooleanSetter(fld[i].getName(),fld[i],myTabable), 0, i);
             }
             else if(compare == Float.TYPE) {
-            	floatGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	floatGrid.add(CreateFloatSetter(fld[i].getName(),fld[i],myTabable), 0, i);
             }
             else if(compare == Integer.TYPE) {
             	if(fld[i].getAnnotation(FieldInfo.class)!=null){
             		FieldInfo fi = fld[i].getAnnotation(FieldInfo.class);
                 	if(fi.subType() == People.class){
-                		intGrid.add(CreateEnumIntSetter(fld[i].getName(),fld[i],obj,People.class), 0, i);
+                		intGrid.add(CreateEnumIntSetter(fld[i].getName(),fld[i],myTabable,People.class), 0, i);
                 		continue;
                 	}
             	}
-            	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],myTabable), 0, i);
             }
             else if(compare ==  String.class) {
             	if(info!=null&&info.longtext()){
-                	stringGrid.add(CreateLongStringSetter(fld[i].getName(),fld[i],obj), 0, i);
+                	stringGrid.add(CreateLongStringSetter(fld[i].getName(),fld[i],myTabable), 0, i);
             	} else {
-                	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],obj), 0, i);
+                	stringGrid.add(CreateStringSetter(fld[i].getName(),fld[i],myTabable), 0, i);
             	}
             }
             else if(compare.isEnum()) {
             	//This is for all enums makes it way easier in the future to create new ones and removes need to add smth here
-            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],obj,compare), 0, i);
+            	enumGrid.add(CreateEnumSetter(fld[i].getName(),fld[i],myTabable,compare), 0, i);
             }
             else if(compare == ArrayList.class) {
             	if(fld[i].getAnnotation(FieldInfo.class)==null){
@@ -159,17 +162,17 @@ public class WorkTab {
             		continue;
             	}
             	if(fi.subType() == Climate.class){
-            		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Climate.class), 0, i);
+            		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],myTabable,Climate.class), 0, i);
             	}
             	if(fi.subType() == Target.class){
-            		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],obj,Target.class), 0, i);
+            		enumGrid.add(CreateEnumArraySetter(fld[i].getName(),fld[i],myTabable,Target.class), 0, i);
             	}
         	}
             else if(compare == Item[].class) {
-            	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],obj), 0, i);
+            	otherGrid.add(CreateItemArraySetter(fld[i].getName(),fld[i],myTabable), 0, i);
             }
             else if(compare == Item.class) {
-            	otherGrid.add(CreateItemSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	otherGrid.add(CreateItemSetter(fld[i].getName(),fld[i],myTabable), 0, i);
             }
             else if(compare == HashMap.class) { 
             	if(fld[i].getAnnotation(FieldInfo.class)==null){
@@ -182,64 +185,67 @@ public class WorkTab {
             		continue;
             	}
             	if(fi.subType()==DamageType.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToDamageType), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],myTabable,GUI.Instance.idToDamageType), 0, i);
             		continue;
             	} 
             	if(fi.subType()==ArmorType.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToArmorType), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],myTabable,GUI.Instance.idToArmorType), 0, i);
             		continue;
             	} 
             	if(fi.subType()==PopulationLevel.class){
-            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],obj,GUI.Instance.idToPopulationLevel), 0, i);
+            		otherGrid.add(CreateClassToFloatSetter(fld[i].getName(),fld[i],myTabable,GUI.Instance.idToPopulationLevel), 0, i);
             		continue;
             	}
             	if(fi.subType()==String.class){
-                	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],obj), 0, i);
+                	languageGrid.add(CreateLanguageSetter(fld[i].getName(),fld[i],myTabable), 0, i);
                 	continue;
             	} 
             	if(fi.mainType() == Target.class && fi.subType()==Integer.class){		
-            		otherGrid.add(CreateEffectableToTabableSetter(fld[i].getName(), fld[i], obj), 0, i);
+            		otherGrid.add(CreateEffectableToTabableSetter(fld[i].getName(), fld[i], myTabable), 0, i);
                 	continue;
             	} 
             }
             else if(compare == Fertility.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Fertility.class,GUI.Instance.idToFertility), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,Fertility.class,GUI.Instance.idToFertility), 0, i);
             }
             else if(compare == NeedGroup.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,NeedGroup.class,GUI.Instance.idToNeedGroup), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,NeedGroup.class,GUI.Instance.idToNeedGroup), 0, i);
             }
             else if(compare == PopulationLevel.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,PopulationLevel.class,GUI.Instance.idToPopulationLevel), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,PopulationLevel.class,GUI.Instance.idToPopulationLevel), 0, i);
             }
             else if(compare == Growable.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,Growable.class,GUI.Instance.idToStructures), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,Growable.class,GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == NeedStructure.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,NeedStructure.class,GUI.Instance.idToStructures), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,NeedStructure.class,GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == DamageType.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,DamageType.class,GUI.Instance.idToDamageType), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,DamageType.class,GUI.Instance.idToDamageType), 0, i);
             }
             else if(compare == ArmorType.class) { 
-            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],obj,ArmorType.class,GUI.Instance.idToArmorType), 0, i);
+            	otherGrid.add(CreateTabableSetter(fld[i].getName(),fld[i],myTabable,ArmorType.class,GUI.Instance.idToArmorType), 0, i);
             }
             else if(compare == float[].class){
-            	otherGrid.add(CreateFloatArraySetter(fld[i].getName(),fld[i],obj), 0, i);
+            	otherGrid.add(CreateFloatArraySetter(fld[i].getName(),fld[i],myTabable), 0, i);
             }
             else if(compare == Unit[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Unit[].class, GUI.Instance.idToUnit), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],myTabable, Unit[].class, GUI.Instance.idToUnit), 0, i);
             }
             else if(compare == Effect[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Effect[].class, GUI.Instance.idToEffect), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],myTabable, Effect[].class, GUI.Instance.idToEffect), 0, i);
             }
             else if(compare == NeedStructure[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, NeedStructure[].class, GUI.Instance.idToStructures), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],myTabable, NeedStructure[].class, GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == Structure[].class){                
-            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],obj, Structure[].class, GUI.Instance.idToStructures), 0, i);
+            	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],myTabable, Structure[].class, GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == Tabable.class && info.RequiresEffectable()) {
-            	otherGrid.add(CreateEffectableSetter(fld[i].getName(),fld[i],obj), 0, i);
+            	otherGrid.add(CreateEffectableSetter(fld[i].getName(),fld[i],myTabable), 0, i);
+            }
+            else if(compare == TileType[][].class) {
+            	otherGrid.add(CreateEnumTwoDimensionalArraySetter(fld[i].getName(), fld[i], myTabable, TileType.class), 0, i);
             }
             else {
                 System.out.println("Variable Name is: " + fld[i].getName() +" : " + compare );
@@ -1516,6 +1522,85 @@ public class WorkTab {
 		
 		return grid;
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public<E extends Enum<E>> GridPane CreateEnumTwoDimensionalArraySetter(String name, Field field, Tabable m, Class<E>  enumClass) {
+		FieldInfo fi = field.getAnnotation(FieldInfo.class);
+		Field firstField;
+		Field secondField;
+		int first = 0;
+		int second = 0;
+		
+		try {
+			firstField = m.getClass().getField(fi.First2DName());
+			secondField = m.getClass().getField(fi.Second2DName());
+			first = firstField.getInt(m);
+			second = secondField.getInt(m);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		ObservableList<Enum> names = FXCollections.observableArrayList();
+		for (Enum e : EnumSet.allOf(enumClass)) {
+			  names.add(e);
+		}
+		GridPane grid = new GridPane();
+		if(enumClass == TileType.class) {
+			UpdateTileTypeArrayPane = grid;
+		}
+		
+		grid.add(new Label(name), 0, 0);	
+		for (int x = 0; x < first; x++) {
+			for (int y = 0; y < second; y++) {
+				int dx = x;
+				int dy = y;
+				ComboBox<Enum> box = new ComboBox<Enum>(names);
+				box.setMaxWidth(Double.MAX_VALUE);
+				grid.add(box, 1+x, 1+y);
+				try {
+					if(field.get(m)!=null){
+						
+						box.getSelectionModel().select(((E[][])field.get(m))[dx][dy]);
+						
+					}
+				} catch (Exception e1) {
+				} 
+				int tf = first;
+				int ts = second;
+				box.setOnAction(de-> {
+					try {
+						try {
+							if(field.get(m)==null) {
+								field.set(m,(E[][])Array.newInstance(enumClass, tf, ts));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						} 
+						E[][] d2a = (E[][]) field.get(m);
+						d2a[dx][dy] = (E) box.getValue();
+						field.set(m, d2a);
+						
+						for(int i=0; i<d2a.length; i++) {
+					        for(int j=0; j<d2a[i].length; j++) {
+					            if(d2a[i][j]==EnumSet.allOf(enumClass).toArray()[0])
+									field.set(m, null);
+					        }
+					    }
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			);
+			}
+		}
+//		ColumnConstraints col1 = new ColumnConstraints();
+//        col1.setMinWidth(150);
+//        ColumnConstraints col2 = new ColumnConstraints();
+//        col2.setMinWidth(100);
+//        col2.setHgrow(Priority.ALWAYS);
+//        grid.getColumnConstraints().addAll(col1,col2);
+			
+		
+		return grid;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public<T> T[] removeElementFromArray(T[] a, int del) {
@@ -1642,7 +1727,18 @@ public class WorkTab {
 	}
 
 	public Tabable getTabable() {
-		return obj;
+		return myTabable;
 	}
-
+	public void UpdateFields() {
+		if(UpdateTileTypeArrayPane!= null) {
+			try {
+				int num = otherGrid.getChildren().indexOf(UpdateTileTypeArrayPane);
+				otherGrid.getChildren().remove(UpdateTileTypeArrayPane);
+				Field f = myTabable.getClass().getField("buildTileTypes");
+		    	otherGrid.add(CreateEnumTwoDimensionalArraySetter(f.getName(), f, myTabable, TileType.class), 0, num);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

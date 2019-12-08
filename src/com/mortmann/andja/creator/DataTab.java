@@ -86,7 +86,8 @@ public class DataTab<T extends Tabable> {
 	protected void AddButton(T valueAdded) {
 		Button b = new Button();
 		Tabable s = valueAdded;
-		b.setOnAction(x->GUI.Instance.AddTab(s,new WorkTab(s,false).getScrollPaneContent()));
+		
+		b.setOnAction(x->{WorkTab wt = new WorkTab(s,false); GUI.Instance.AddTab(s,wt.getScrollPaneContent(),wt);});
 		b.setText((String) s.toString());
 		b.setMinSize(100, 100);
 		b.setPrefSize(100, 100);

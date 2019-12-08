@@ -24,7 +24,8 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	public enum ExtraUI { None, Range, Upgrade, Efficiency };
 	public enum ExtraBuildUI { None, Range, Efficiency };
 	public enum BuildRestriktions { Land, Shore, Mountain };
-	
+	public enum TileType { NoRestriction, BuildLand, /*Ocean,*/ Shore, Cliff, Water, Dirt, Grass, Stone, Desert, Steppe, Jungle, Mountain };
+
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public String ID;	
@@ -49,7 +50,8 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 
 	@FieldInfo(required=true) @Element public int tileWidth;
 	@FieldInfo(required=true) @Element public int tileHeight;
-
+	@FieldInfo(required=false, First2DName="tileWidth",Second2DName="tileHeight") @ElementArray(required=false) public TileType[][] buildTileTypes;
+	
 	@Element(required=false) public boolean canRotate = true;
 	@Element(required=false) public boolean canBeBuildOver = false;
 	@Element(required=false) public boolean canBeUpgraded = false;

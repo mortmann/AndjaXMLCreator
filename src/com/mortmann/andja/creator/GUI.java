@@ -92,7 +92,7 @@ public class GUI {
 	HashMap<Tab,String> tabToID;
 
 	HashMap<Class,DataTab> classToDataTab;
-	
+	HashMap<Tabable,WorkTab> tabableToWorkTab; 
 	
 	public void start(Stage primaryStage) {
         Instance = this;
@@ -106,6 +106,7 @@ public class GUI {
 
 		new TestMapGenerator();
 		tabToID = new HashMap<>();
+		tabableToWorkTab = new HashMap<>();
         tabToTabable = new HashMap<>();
         tabableToTab = new HashMap<>();
         idToStructures = FXCollections.observableHashMap();
@@ -162,7 +163,7 @@ public class GUI {
 
 		workTabs = new TabPane();
 		workTabs.setMaxHeight(Double.MAX_VALUE);
-		AddTab(null,mainLayout);
+		AddTab(null,mainLayout,null);
 		
         GridPane hb = new GridPane();
         hb.add(dataTabs,0,0);
@@ -416,12 +417,14 @@ public class GUI {
 	}
 	
 	
-	public void AddTab(Tabable c, Node content){
+	public void AddTab(Tabable c, Node content, WorkTab workTab){
 		if(tabableToTab.containsKey(c)) {
 			workTabs.getSelectionModel().select(tabableToTab.get(c));
 			return;
 		}
 		Tab t = new Tab("Empty");
+		if(c!=null)
+			tabableToWorkTab.put(c, workTab);
 		if(c!=null){
 			t.setText(c.GetName());
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -435,7 +438,7 @@ public class GUI {
 				}
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.isPresent() && result.get() == ButtonType.OK) {
-					
+					tabableToWorkTab.remove(c);
 				} else {
 					x.consume();
 				}
@@ -457,7 +460,7 @@ public class GUI {
 			tabToID.remove(t);
 			tabableToTab.remove(c);
 			if(workTabs.getTabs().size()<1&&workTabs.getTabs().contains(emptyTab) == false){
-				AddTab(null,mainLayout);
+				AddTab(null,mainLayout,null);
 			}
 		});
 	}
@@ -588,7 +591,7 @@ public class GUI {
 					return;
 			}
 		}
-		AddTab(tab, tab.scroll);
+		AddTab(tab, tab.scroll, null);
 		languageToLocalization.put(l, tab);
 //		Stage langWindow = new Stage();
 //		VBox box = new VBox();
@@ -621,7 +624,7 @@ public class GUI {
 	private void ClassAction(Class c){
 		try {
 			WorkTab my = new WorkTab((Tabable) c.getConstructor().newInstance(),true);
-			AddTab(my.getTabable(),my.getScrollPaneContent());
+			AddTab(my.getTabable(),my.getScrollPaneContent(),my);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -638,7 +641,6 @@ public class GUI {
           }});
 		return al;
 	}
-	@SuppressWarnings("unlikely-arg-type")
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
 		Tabable currTabable = tabToTabable.get(curr);
@@ -647,6 +649,9 @@ public class GUI {
 			curr.setText(curr.getText().replaceAll("\\*", ""));
 			return;
 		}
+		if(tabableToWorkTab.get(currTabable)!=null)
+			tabableToWorkTab.get(currTabable).UpdateFields();
+		
 		curr.setText(currTabable.GetName());
 		//check if its filled out all required
 		ArrayList<Field> missingFields = CheckForMissingFields(currTabable);

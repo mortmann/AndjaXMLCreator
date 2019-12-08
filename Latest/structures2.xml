@@ -1247,15 +1247,11 @@
          <hasHitbox>true</hasHitbox>
          <maxHealth>25.0</maxHealth>
          <structureRange>0</structureRange>
-         <populationLevel>0</populationLevel>
+         <populationLevel>1</populationLevel>
          <populationCount>0</populationCount>
          <structureLevel>0</structureLevel>
          <tileWidth>2</tileWidth>
          <tileHeight>3</tileHeight>
-         <buildTileTypes length="2">
-            <tileType length="3">BuildLand, Mountain, Mountain</tileType>
-            <tileType length="3">BuildLand, Mountain, Mountain</tileType>
-         </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>false</canBeUpgraded>
@@ -2354,12 +2350,6 @@
          <structureLevel>0</structureLevel>
          <tileWidth>4</tileWidth>
          <tileHeight>4</tileHeight>
-         <buildTileTypes length="4">
-            <tileType length="4">Shore, Shore, Shore, Shore</tileType>
-            <tileType length="4">BuildLand, BuildLand, BuildLand, BuildLand</tileType>
-            <tileType length="4">BuildLand, BuildLand, BuildLand, BuildLand</tileType>
-            <tileType length="4">BuildLand, BuildLand, BuildLand, BuildLand</tileType>
-         </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgraded>true</canBeUpgraded>
