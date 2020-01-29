@@ -14,7 +14,7 @@ public class Market extends OutputStructure {
 		tileWidth = 4;
 		tileHeight = 4;
 		buildTyp = BuildTypes.Single;
-		myStructureTyp = StructureTyp.Blocking;
+		structureTyp = StructureTyp.Blocking;
 		structureRange = 18;
 		canTakeDamage = true;
 		canBeUpgraded=true;

@@ -14,7 +14,7 @@ public class Farm extends OutputStructure {
 	@FieldInfo(order = 0, required = true, IsEffectable=true) @Element(required=false) public int neededHarvestToProduce = 5;
 	
 	public Farm(){
-		myStructureTyp = StructureTyp.Blocking;
+		structureTyp = StructureTyp.Blocking;
 		buildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		this.canTakeDamage = true;

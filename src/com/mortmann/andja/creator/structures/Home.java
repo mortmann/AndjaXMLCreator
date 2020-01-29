@@ -14,7 +14,7 @@ public class Home extends Structure {
 		tileWidth = 3;
 		tileHeight = 3;
 		buildTyp = BuildTypes.Drag;
-		myStructureTyp =	StructureTyp.Blocking;
+		structureTyp =	StructureTyp.Blocking;
 		structureRange = 0;
 		hasHitbox = true;
 		canTakeDamage = true;

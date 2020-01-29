@@ -12,14 +12,14 @@ public class Production extends OutputStructure {
 	public enum InputTyp { AND, OR };
 	
 	@FieldInfo(required=false)@ElementArray(entry="Item",required=false) public Item[] intake;
-	@FieldInfo(required=false)@Element(required=false) public InputTyp myInputTyp;
+	@FieldInfo(required=false)@Element(required=false) public InputTyp inputTyp;
 	
 	public Production(){
 		maxOutputStorage = 5; // hardcoded 5 ? need this to change?
 		hasHitbox = true;
-		myStructureTyp = StructureTyp.Blocking;
+		structureTyp = StructureTyp.Blocking;
 		buildTyp = BuildTypes.Single;
-		myInputTyp = InputTyp.AND;
+		inputTyp = InputTyp.AND;
 		canTakeDamage = true;
 		maxNumberOfWorker = 1;
 	}

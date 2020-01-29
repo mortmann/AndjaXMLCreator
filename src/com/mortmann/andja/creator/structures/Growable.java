@@ -18,7 +18,7 @@ public class Growable extends OutputStructure {
 		maxNumberOfWorker = 0;
 		tileWidth = 1;
 		tileHeight = 1;
-		myStructureTyp = StructureTyp.Free;
+		structureTyp = StructureTyp.Free;
 		buildTyp = BuildTypes.Drag;
 		maxOutputStorage = 1;
 	}

@@ -40,8 +40,8 @@ public class Unit implements Tabable, Comparable<Tabable> {
 	@FieldInfo(required=true, IsEffectable=true) @Element float aggroTimer=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRange=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float damage=10;
-	@FieldInfo(order = 0,compareType=DamageType.class) @Element public String myDamageType;
-	@FieldInfo(order = 0,compareType=ArmorType.class) @Element public String myArmorType;
+	@FieldInfo(order = 0,compareType=DamageType.class) @Element public String damageType;
+	@FieldInfo(order = 0,compareType=ArmorType.class) @Element public String armorType;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRate=1;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float speed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second
@@ -64,10 +64,10 @@ public class Unit implements Tabable, Comparable<Tabable> {
 	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
-		if(myArmorType.equals(t.GetID())&&t.getClass()==ArmorType.class){
+		if(armorType.equals(t.GetID())&&t.getClass()==ArmorType.class){
 			return this;
 		}
-		if(myDamageType.equals(t.GetID())&&t.getClass()==DamageType.class){
+		if(damageType.equals(t.GetID())&&t.getClass()==DamageType.class){
 			return this;
 		}
 		if(t.getClass()==ItemXML.class&&buildingItems!=null){
@@ -100,11 +100,11 @@ public class Unit implements Tabable, Comparable<Tabable> {
 
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {
-		if(myArmorType.equals(ID)&&t.getClass()==ArmorType.class){
-			myArmorType = t.GetID();
+		if(armorType.equals(ID)&&t.getClass()==ArmorType.class){
+			armorType = t.GetID();
 		}
-		if(myDamageType.equals(ID)&&t.getClass()==DamageType.class){
-			myDamageType = t.GetID();
+		if(damageType.equals(ID)&&t.getClass()==DamageType.class){
+			damageType = t.GetID();
 		}
 		if(t.getClass()==ItemXML.class&&buildingItems!=null){
 			for(int i = 0; i < buildingItems.length;i++ ) {

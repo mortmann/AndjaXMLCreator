@@ -8,7 +8,7 @@ public class Mine extends OutputStructure{
 	public Mine(){
 		tileWidth = 2;
 		tileHeight = 3;
-		myStructureTyp = StructureTyp.Blocking;
+		structureTyp = StructureTyp.Blocking;
 		buildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		structureRange = 0;

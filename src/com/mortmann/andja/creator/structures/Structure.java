@@ -65,7 +65,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@Element(required=false) public int buildCost;
 
 	@Element(required=false) public BuildTypes buildTyp =  BuildTypes.Single;
-	@Element(required=false) public StructureTyp myStructureTyp = StructureTyp.Blocking;
+	@Element(required=false) public StructureTyp structureTyp = StructureTyp.Blocking;
 	@Element(required=false) public ExtraUI extraUITyp = ExtraUI.None;
 	@Element(required=false) public ExtraBuildUI extraBuildUITyp = ExtraBuildUI.None;
 	@Element(required=false) public BuildRestriktions hasToBuildOnRestriktion;
