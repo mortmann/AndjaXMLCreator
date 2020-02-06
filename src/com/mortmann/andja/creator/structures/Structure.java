@@ -32,7 +32,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
-	@FieldInfo(required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> HoverOver;
+	@FieldInfo(required=false,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> HoverOver;
 	@FieldInfo(subType=String.class) @ElementMap(key = "lang",required=false) public HashMap<String,String> Short;
 	
 	@Element(required=false) public boolean canBeBuild = true;
@@ -68,7 +68,6 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@Element(required=false) public StructureTyp structureTyp = StructureTyp.Blocking;
 	@Element(required=false) public ExtraUI extraUITyp = ExtraUI.None;
 	@Element(required=false) public ExtraBuildUI extraBuildUITyp = ExtraBuildUI.None;
-	@Element(required=false) public BuildRestriktions hasToBuildOnRestriktion;
 	
 	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
 

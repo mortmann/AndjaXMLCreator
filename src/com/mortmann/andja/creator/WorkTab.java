@@ -238,7 +238,7 @@ public class WorkTab {
             else if(compare == NeedStructure[].class){                
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],myTabable, NeedStructure[].class, GUI.Instance.idToStructures), 0, i);
             }
-            else if(compare == Structure[].class){                
+            else if(compare == Structure[].class){    
             	otherGrid.add(CreateTabableArraySetter(fld[i].getName(),fld[i],myTabable, Structure[].class, GUI.Instance.idToStructures), 0, i);
             }
             else if(compare == Tabable.class && info.RequiresEffectable()) {
@@ -461,16 +461,17 @@ public class WorkTab {
 		return grid;
 	}
 
-	@SuppressWarnings("rawtypes") 
+	@SuppressWarnings({ "rawtypes", "unchecked" }) 
 	private<T extends Tabable> Node CreateTabableArraySetter(String name, Field field, Tabable m, Class tabableClass, ObservableMap<String, T> obsMapTabable) {
 		ObservableList<Tabable> tabables = FXCollections.observableArrayList();
 		tabables.addAll(obsMapTabable.values());
 
 		Class singleItemClass = tabableClass.getComponentType();
-
-		if(singleItemClass != null && Structure.class.isAssignableFrom(singleItemClass)) {
+		if(singleItemClass != null && Structure.class.isAssignableFrom(singleItemClass) ) {
 			//if its a structure we need only THAT type of structure in the list so we need to filter the rest out.
-			tabables.removeIf(p-> p.getClass() != singleItemClass);
+			tabables.removeIf(p->{
+				return singleItemClass.isAssignableFrom(p.getClass())==false;
+			});
 		} 
 		obsMapTabable.addListener(new MapChangeListener<String,Tabable>(){
 			@Override

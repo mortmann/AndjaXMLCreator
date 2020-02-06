@@ -14,12 +14,12 @@ public class MilitaryStructure extends Structure{
 	public MilitaryStructure() {
 		
 	}
-	@FieldInfo(required=true,compareType=Unit[].class) @ElementArray(entry="Unit",required=true) public String[] canBeBuildUnits;
+	@FieldInfo(required=true,compareType=Unit[].class) @ElementArray(entry="Unit",required=false) public String[] canBeBuildUnits;
 
-	@FieldInfo(required = true, IsEffectable=true)@Element public float buildTimeModifier;
-	@FieldInfo(required = true, IsEffectable=true)@Element public int buildQueueLength = 1;
-	@FieldInfo(required = false, IsEffectable=true)@Element public DamageType damageType;
-	@FieldInfo(required = false, IsEffectable=true)@Element public int damage;
+	@FieldInfo(required = true, IsEffectable=true)@Element(required=false) public float buildTimeModifier;
+	@FieldInfo(required = true, IsEffectable=true)@Element(required=false) public int buildQueueLength = 1;
+	@FieldInfo(required = false, IsEffectable=true)@Element(required=false) public DamageType damageType;
+	@FieldInfo(required = false, IsEffectable=true)@Element(required=false) public int damage;
 	@Override
 	public Tabable StructureDependsOnTabable(Tabable t) {
 		if(t.getClass().isAssignableFrom(Unit.class)){

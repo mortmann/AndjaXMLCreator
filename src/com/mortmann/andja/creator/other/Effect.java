@@ -9,6 +9,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
+import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
@@ -42,7 +43,7 @@ public class Effect implements Tabable, Comparable<Tabable> {
 
 	@Override
 	public String GetName() {
-		return Name + ": " +targets + " => " + nameOfVariable + " -> " + change;
+		return Name == null? "Effect" : Name.get(Language.English.toString()) + ": " +targets + " => " + nameOfVariable + " -> " + change;
 	}
 
 	@Override

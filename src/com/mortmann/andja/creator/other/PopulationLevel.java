@@ -8,8 +8,11 @@ import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI.Language;
+import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
+
+import sun.util.logging.PlatformLogger.Level;
 
 @Root(strict=false,name="PopulationLevel")
 public class PopulationLevel implements Tabable {
@@ -35,7 +38,10 @@ public class PopulationLevel implements Tabable {
 	public String GetID() {
 		return ""+LEVEL;
 	}
-
+	@Override
+	public String toString() {
+		return (People.values()[LEVEL]).toString();
+	}
 	@Override
 	public Tabable DependsOnTabable(Tabable t) {
 		return null;

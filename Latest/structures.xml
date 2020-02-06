@@ -35,7 +35,6 @@
          <structureTyp>Pathfinding</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>dirtroad</spriteBaseName>
       </road>
       <road ID="stoneroad">
@@ -73,7 +72,6 @@
          <structureTyp>Pathfinding</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="0"/>
          <spriteBaseName>stoneroad</spriteBaseName>
       </road>
@@ -112,7 +110,6 @@
          <structureTyp>Pathfinding</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="1">
             <Item ID="brick">
                <count>2</count>
@@ -155,7 +152,6 @@
          <structureTyp>Pathfinding</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>marbelroad</spriteBaseName>
       </road>
    </roads>
@@ -205,7 +201,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>5</count>
@@ -264,7 +259,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>Efficiency</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="1">
             <Item ID="wood">
                <count>10</count>
@@ -320,7 +314,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>10</count>
@@ -379,7 +372,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>15</count>
@@ -438,7 +430,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>6</count>
@@ -497,7 +488,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>3</count>
@@ -559,7 +549,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>6</count>
@@ -618,7 +607,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>4</count>
@@ -680,7 +668,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>3</count>
@@ -742,7 +729,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>7</count>
@@ -767,6 +753,63 @@
             </Item>
          </output>
          <growable>hopvines</growable>
+         <neededHarvestToProduce>5</neededHarvestToProduce>
+      </farm>
+      <farm ID="spiceplantation">
+         <Name>
+            <entry lang="English">Spice Plantation</entry>
+            <entry lang="German">Gewürzplantage</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Produces Spice.</entry>
+            <entry lang="German">Produziert Gewürze.</entry>
+         </Description>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <maxHealth>200.0</maxHealth>
+         <structureRange>0</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>2500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>2</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <maintenanceCost>25</maintenanceCost>
+         <buildCost>1000</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="3">
+            <Item ID="wood">
+               <count>15</count>
+            </Item>
+            <Item ID="tools">
+               <count>10</count>
+            </Item>
+            <Item ID="stone">
+               <count>5</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>spiceplantation</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>30.0</produceTime>
+         <maxOutputStorage>0</maxOutputStorage>
+         <efficiency>1.0</efficiency>
+         <output length="1">
+            <Item ID="spice">
+               <count>1</count>
+            </Item>
+         </output>
+         <growable>spicefield</growable>
          <neededHarvestToProduce>5</neededHarvestToProduce>
       </farm>
    </farms>
@@ -806,7 +849,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>hempfield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -857,7 +899,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>farmland</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -902,7 +943,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="0"/>
          <spriteBaseName>tree</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -953,7 +993,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>potatoefield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1003,7 +1042,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>orchard</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1053,7 +1091,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>sugarcanefield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1104,7 +1141,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="0"/>
          <spriteBaseName>wheatfield</spriteBaseName>
          <contactRange>0.0</contactRange>
@@ -1156,7 +1192,6 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <spriteBaseName>hopvines</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1170,6 +1205,52 @@
             </Item>
          </output>
          <fertility>hop</fertility>
+         <ageStages>2</ageStages>
+      </growable>
+      <growable ID="spicefield">
+         <Name>
+            <entry lang="English">Spicefield</entry>
+            <entry lang="German">Gewürzefeld</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Grows Spices.</entry>
+            <entry lang="German">Gewürze werden hier angebaut.</entry>
+         </Description>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <maxHealth>10.0</maxHealth>
+         <structureRange>0</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>2500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>1</tileWidth>
+         <tileHeight>1</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>true</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <maintenanceCost>0</maintenanceCost>
+         <buildCost>100</buildCost>
+         <buildTyp>Drag</buildTyp>
+         <structureTyp>Free</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <spriteBaseName>spicefield</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>false</forMarketplace>
+         <maxNumberOfWorker>0</maxNumberOfWorker>
+         <produceTime>0.0</produceTime>
+         <maxOutputStorage>1</maxOutputStorage>
+         <efficiency>1.0</efficiency>
+         <output length="1">
+            <Item ID="spice">
+               <count>1</count>
+            </Item>
+         </output>
+         <fertility>spices</fertility>
          <ageStages>2</ageStages>
       </growable>
    </growables>
@@ -1209,7 +1290,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>3</count>
@@ -1268,7 +1348,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Mountain</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>0</count>
@@ -1325,7 +1404,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Mountain</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>10</count>
@@ -1382,7 +1460,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Mountain</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>12</count>
@@ -1444,7 +1521,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>10</count>
@@ -1490,7 +1566,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="tools">
                <count>7</count>
@@ -1536,7 +1611,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="tools">
                <count>15</count>
@@ -1546,6 +1620,239 @@
             </Item>
          </buildingItems>
          <spriteBaseName>inn</spriteBaseName>
+      </needstructure>
+      <needstructure ID="cityguardpost">
+         <Name>
+            <entry lang="English">City ​​Guard Post</entry>
+            <entry lang="German">Stadtwache</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Provides a central for the city guard which makes the surrounding area safer.</entry>
+            <entry lang="German">Bietet der Stadtwache eine Stelle von der sie aus die Umgebung sicherer macht.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">City Guard</entry>
+            <entry lang="German">Stadtwache</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <maxHealth>400.0</maxHealth>
+         <structureRange>20</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>1000</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>4</tileWidth>
+         <tileHeight>5</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>true</canStartBurning>
+         <maintenanceCost>30</maintenanceCost>
+         <buildCost>4000</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="3">
+            <Item ID="wood">
+               <count>20</count>
+            </Item>
+            <Item ID="stone">
+               <count>60</count>
+            </Item>
+            <Item ID="tools">
+               <count>10</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>cityguardpost</spriteBaseName>
+      </needstructure>
+      <needstructure ID="washhouse">
+         <Name>
+            <entry lang="English">Wash House</entry>
+            <entry lang="German">Waschhaus</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Provides a public space to wash their clothes.</entry>
+            <entry lang="German">Bietet einen öfflichen Platz um die Wäsche zu waschen.</entry>
+         </Description>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <maxHealth>550.0</maxHealth>
+         <structureRange>20</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>1500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>3</tileWidth>
+         <tileHeight>4</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>true</canStartBurning>
+         <maintenanceCost>40</maintenanceCost>
+         <buildCost>5500</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="3">
+            <Item ID="wood">
+               <count>10</count>
+            </Item>
+            <Item ID="tools">
+               <count>15</count>
+            </Item>
+            <Item ID="stone">
+               <count>10</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>washhouse</spriteBaseName>
+      </needstructure>
+      <needstructure ID="bathhouse">
+         <Name>
+            <entry lang="English">Bath House</entry>
+            <entry lang="German">Badehaus</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Provides public swimming spaces.</entry>
+            <entry lang="German">Bietet öffentliche Schwimmmöglichkeiten.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Bath House</entry>
+            <entry lang="German">Badehaus</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <maxHealth>500.0</maxHealth>
+         <structureRange>30</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>1500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>6</tileWidth>
+         <tileHeight>6</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>true</canStartBurning>
+         <maintenanceCost>45</maintenanceCost>
+         <buildCost>5000</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="2">
+            <Item ID="wood">
+               <count>15</count>
+            </Item>
+            <Item ID="stone">
+               <count>10</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>bathhouse</spriteBaseName>
+      </needstructure>
+      <needstructure ID="school">
+         <Name>
+            <entry lang="English">School</entry>
+            <entry lang="German">Schule</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Provides education for children.</entry>
+            <entry lang="German">Bietet Bildung für Kinder.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">School</entry>
+            <entry lang="German">Schule</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <maxHealth>550.0</maxHealth>
+         <structureRange>32</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>1750</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>4</tileWidth>
+         <tileHeight>4</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>true</canStartBurning>
+         <maintenanceCost>100</maintenanceCost>
+         <buildCost>6000</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="2">
+            <Item ID="wood">
+               <count>25</count>
+            </Item>
+            <Item ID="brick">
+               <count>30</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>school</spriteBaseName>
+      </needstructure>
+      <needstructure ID="arena">
+         <Name>
+            <entry lang="English">Arena</entry>
+            <entry lang="German">Arena</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Place where fights and other amusements can be found.</entry>
+            <entry lang="German">Platz wo Kämpfe und andere Bespaßungen stattfinden können.</entry>
+         </Description>
+         <HoverOver>
+            <entry lang="English">Arena</entry>
+            <entry lang="German">Arena</entry>
+         </HoverOver>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <maxHealth>800.0</maxHealth>
+         <structureRange>22</structureRange>
+         <populationLevel>2</populationLevel>
+         <populationCount>1500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>5</tileWidth>
+         <tileHeight>6</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>true</canStartBurning>
+         <maintenanceCost>70</maintenanceCost>
+         <buildCost>9000</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="4">
+            <Item ID="wood">
+               <count>30</count>
+            </Item>
+            <Item ID="tools">
+               <count>30</count>
+            </Item>
+            <Item ID="stone">
+               <count>20</count>
+            </Item>
+            <Item ID="brick">
+               <count>20</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>arena</spriteBaseName>
       </needstructure>
    </needstructures>
    <productions>
@@ -1584,7 +1891,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Shore</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>3</count>
@@ -1642,7 +1948,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>15</count>
@@ -1705,7 +2010,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>20</count>
@@ -1768,7 +2072,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>5</count>
@@ -1837,7 +2140,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>10</count>
@@ -1896,7 +2198,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>5</count>
@@ -1962,7 +2263,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>10</count>
@@ -2028,7 +2328,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>8</count>
@@ -2097,7 +2396,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>12</count>
@@ -2163,7 +2461,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>6</count>
@@ -2229,7 +2526,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>5</count>
@@ -2295,7 +2591,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>10</count>
@@ -2324,6 +2619,64 @@
          </output>
          <intake length="1">
             <Item ID="pig">
+               <count>2</count>
+            </Item>
+         </intake>
+         <inputTyp>AND</inputTyp>
+      </production>
+      <production ID="ropery">
+         <Name>
+            <entry lang="English">Ropery</entry>
+            <entry lang="German">Seilerei</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Creates Ropes.</entry>
+            <entry lang="German">Stellt Seile her.</entry>
+         </Description>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>true</hasHitbox>
+         <maxHealth>500.0</maxHealth>
+         <structureRange>15</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>1500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>3</tileWidth>
+         <tileHeight>3</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>true</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <maintenanceCost>30</maintenanceCost>
+         <buildCost>2500</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="2">
+            <Item ID="wood">
+               <count>10</count>
+            </Item>
+            <Item ID="tools">
+               <count>5</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>ropery</spriteBaseName>
+         <contactRange>0.0</contactRange>
+         <forMarketplace>true</forMarketplace>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <produceTime>30.0</produceTime>
+         <maxOutputStorage>5</maxOutputStorage>
+         <efficiency>1.0</efficiency>
+         <output length="1">
+            <Item ID="sail">
+               <count>1</count>
+            </Item>
+         </output>
+         <intake length="1">
+            <Item ID="hemp">
                <count>2</count>
             </Item>
          </intake>
@@ -2372,7 +2725,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>Range</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Shore</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>3</count>
@@ -2427,7 +2779,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>Upgrade</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="1">
             <Item ID="wood">
                <count>2</count>
@@ -2473,7 +2824,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>Upgrade</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>1</count>
@@ -2522,7 +2872,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>Upgrade</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>1</count>
@@ -2574,7 +2923,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>Upgrade</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="4">
             <Item ID="wood">
                <count>1</count>
@@ -2631,7 +2979,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Shore</hasToBuildOnRestriktion>
          <buildingItems length="3">
             <Item ID="wood">
                <count>10</count>
@@ -2648,6 +2995,8 @@
             <Unit>ship</Unit>
          </canBeBuildUnits>
          <buildTimeModifier>1.0</buildTimeModifier>
+         <buildQueueLength>1</buildQueueLength>
+         <damage>0</damage>
       </militarystructure>
       <militarystructure ID="fort">
          <Name>
@@ -2684,7 +3033,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="tools">
                <count>10</count>
@@ -2698,6 +3046,8 @@
             <Unit>basicunit</Unit>
          </canBeBuildUnits>
          <buildTimeModifier>1.0</buildTimeModifier>
+         <buildQueueLength>1</buildQueueLength>
+         <damage>0</damage>
       </militarystructure>
    </militarystructures>
    <servicestructures>
@@ -2736,7 +3086,6 @@
          <structureTyp>Blocking</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <hasToBuildOnRestriktion>Land</hasToBuildOnRestriktion>
          <buildingItems length="2">
             <Item ID="wood">
                <count>5</count>
@@ -2746,6 +3095,57 @@
             </Item>
          </buildingItems>
          <spriteBaseName>firewell</spriteBaseName>
+         <targets>Damageable</targets>
+         <function>RemoveEffect</function>
+         <effectsOnTargets length="1">
+            <Effect>fire</Effect>
+         </effectsOnTargets>
+         <maxNumberOfWorker>1</maxNumberOfWorker>
+         <workSpeed>0.01</workSpeed>
+      </servicestructure>
+      <servicestructure ID="firebrigade">
+         <Name>
+            <entry lang="English">Fire Brigade</entry>
+            <entry lang="German">Feuerwehr</entry>
+         </Name>
+         <Description>
+            <entry lang="English">Worker can use it to faster than a well to put out fires.</entry>
+            <entry lang="German">Arbeiter können damit schneller als mit dem Brunnen Feuer löschen.</entry>
+         </Description>
+         <canBeBuild>true</canBeBuild>
+         <isWalkable>false</isWalkable>
+         <hasHitbox>false</hasHitbox>
+         <maxHealth>250.0</maxHealth>
+         <structureRange>24</structureRange>
+         <populationLevel>1</populationLevel>
+         <populationCount>1500</populationCount>
+         <structureLevel>0</structureLevel>
+         <tileWidth>2</tileWidth>
+         <tileHeight>4</tileHeight>
+         <canRotate>true</canRotate>
+         <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgraded>false</canBeUpgraded>
+         <canTakeDamage>false</canTakeDamage>
+         <mustFrontBuildDir>None</mustFrontBuildDir>
+         <canStartBurning>false</canStartBurning>
+         <maintenanceCost>100</maintenanceCost>
+         <buildCost>2500</buildCost>
+         <buildTyp>Single</buildTyp>
+         <structureTyp>Blocking</structureTyp>
+         <extraUITyp>None</extraUITyp>
+         <extraBuildUITyp>None</extraBuildUITyp>
+         <buildingItems length="3">
+            <Item ID="tools">
+               <count>15</count>
+            </Item>
+            <Item ID="wood">
+               <count>5</count>
+            </Item>
+            <Item ID="stone">
+               <count>15</count>
+            </Item>
+         </buildingItems>
+         <spriteBaseName>firebrigade</spriteBaseName>
          <targets>Damageable</targets>
          <function>RemoveEffect</function>
          <effectsOnTargets length="1">
