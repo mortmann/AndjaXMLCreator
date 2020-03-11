@@ -133,4 +133,50 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 		}
 		return Name.get(Language.English.toString());
 	}
+	
+	public static int CalculateMidPointCircleTileCount(int radius, int centerWidth, int centerHeight) {
+		int numberOfTiles = 0;
+		int center_x = radius;
+        int center_y = radius;
+        int P = (5 - radius * 4) / 4;
+        int circle_x = 0;
+        int circle_y = radius;
+        
+        do {
+            //Fill the circle 
+            for (int actual_x = center_x - circle_x; actual_x <= center_x + circle_x; actual_x++) {
+                //-----
+                int actual_y = center_y + circle_y;
+                if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
+                	numberOfTiles++;
+                //-----
+                actual_y = center_y - circle_y;
+                if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
+                	numberOfTiles++;
+            }
+            for (int actual_x = center_x - circle_y; actual_x <= center_x + circle_y; actual_x++) {
+                //-----
+                int actual_y = center_y + circle_x;
+                if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
+                	numberOfTiles++;
+                //-----
+                actual_y = center_y - circle_x;
+                if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
+                	numberOfTiles++;
+            }
+            if (P < 0) {
+                P += 2 * circle_x + 1;
+            }
+            else {
+                P += 2 * (circle_x - circle_y) + 1;
+                circle_y--;
+            }
+            circle_x++;
+        } while (circle_x <= circle_y);
+        return numberOfTiles;
+    }
+    private static boolean CircleCheck(int radius, int centerHeight, int actual_y) {
+        return (centerHeight > 0 && actual_y >= radius && actual_y < radius + centerHeight) == false;
+    }
+	
 }
