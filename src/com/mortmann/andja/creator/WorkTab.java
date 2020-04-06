@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
-
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.other.Fertility.Climate;
@@ -55,9 +54,9 @@ public class WorkTab {
 	GridPane enumGrid;
 	GridPane languageGrid;
 	GridPane otherGrid;
-	
+	HashMap<Method,Label> updateMethodLabel;
 	private GridPane UpdateTileTypeArrayPane;
-
+	HashMap<String, Node> variableToNode;
 	Tabable myTabable;
 	private boolean newTabable;
 	
@@ -98,6 +97,8 @@ public class WorkTab {
         scrollPaneContent.setContent(mainGrid);
         scrollPaneContent.setMaxHeight(Double.MAX_VALUE);
         scrollPaneContent.setMaxWidth(Double.MAX_VALUE);
+        
+        variableToNode = new HashMap<String, Node>();
         ClassAction(t);
 	}
 	
@@ -138,7 +139,9 @@ public class WorkTab {
                 		continue;
                 	}
             	}
-            	intGrid.add(CreateIntSetter(fld[i].getName(),fld[i],myTabable), 0, i);
+            	Node node = CreateIntSetter(fld[i].getName(),fld[i],myTabable);
+            	variableToNode.put(fld[i].getName(), node);
+            	intGrid.add(node, 0, i);
             }
             else if(compare ==  String.class) {
             	if(info!=null&&info.longtext()){
@@ -251,8 +254,57 @@ public class WorkTab {
                 System.out.println("Variable Name is: " + fld[i].getName() +" : " + compare );
             }
         }         
-       
-        
+		Method[] methods = c.getMethods();
+		for (Method m : methods) {
+			MethodInfo mi = m.getAnnotation(MethodInfo.class);
+			if (mi == null)
+				continue;
+			if(updateMethodLabel==null)
+				updateMethodLabel = new HashMap();
+			GridPane grid = new GridPane();
+			ColumnConstraints col1 = new ColumnConstraints();
+	        col1.setMinWidth(150);
+	        ColumnConstraints col2 = new ColumnConstraints();
+	        col2.setMinWidth(75);
+	        grid.getColumnConstraints().addAll(col1,col2);
+	        String name = m.getName();
+	        if(mi.Title()!=null&&mi.Title().isBlank()==false)
+	        	name = mi.Title();
+			grid.add(new Label(name), 0, 0);
+			Label result = new Label("NaN");
+			try {
+				result.setText(m.invoke(t).toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			updateMethodLabel.put(m, result);
+			grid.add(result, 1, 0);
+			if(mi.BelongingVariable()!=null&&mi.BelongingVariable().isBlank()==false) {
+				if(variableToNode.containsKey(mi.BelongingVariable())==false) {
+					System.out.println("ERROR -- Beloning Variable is missing in the variable map. " + mi.BelongingVariable());
+					return;
+				}
+		        col1.setMinWidth(75);
+				Node node = variableToNode.get(mi.BelongingVariable());
+				if(node instanceof GridPane) {
+					GridPane gp = ((GridPane)node);
+					gp.add(grid,1,gp.getRowCount());
+				}
+				continue;
+			}
+			Class returnType = m.getReturnType();
+			if (returnType == int.class) {
+				intGrid.add(grid, 0, intGrid.getRowCount() + 1);
+			} else if (returnType == float.class) {
+				floatGrid.add(grid, 0, floatGrid.getRowCount() + 1);
+			} else if (returnType == String.class) {
+				stringGrid.add(grid, 0, stringGrid.getRowCount() + 1);
+			} else if (returnType == Enum.class) {
+				enumGrid.add(grid, 0, enumGrid.getRowCount() + 1);
+			} else {
+				otherGrid.add(grid, 0, otherGrid.getRowCount() + 1);
+			}
+		}
 	}
 	@SuppressWarnings({ "unchecked" })
 	private Node CreateEffectableToTabableSetter(String name, Field field, Tabable tab) {
@@ -631,7 +683,7 @@ public class WorkTab {
 		box.setOnAction(x->{
 			try {
 				if(field.isAnnotationPresent(FieldInfo.class)&&field.getAnnotation(FieldInfo.class).compareType()==Item.class){
-						field.set(tab, box.getValue().GetID());
+					field.set(tab, box.getValue().GetID());
 				} else {
 					field.set(tab, box.getValue());
 				}
@@ -657,8 +709,6 @@ public class WorkTab {
 
 	///NEEDS FIELDINFO ARRAYPOS
 	private Node CreateFloatArraySetter(String name, Field field, Tabable tab) {
-		System.out.println("CreateFloatArraySetter!");
-
 		GridPane grid = new GridPane();
 		FieldInfo fi = field.getDeclaredAnnotation(FieldInfo.class);
 		if(fi==null||fi.arraypos().isEnum()==false){
@@ -688,9 +738,8 @@ public class WorkTab {
 		}
 		String[] names = temp;
 		for (int i = 0; i < names.length; i++) {
-			System.out.println(names[i] + " " + i);
 			grid.add(new Label(names[i]), 0, i);
-			NumberTextField ntf = new NumberTextField(true);
+			NumberTextField ntf = new NumberTextField(true,fi.Minimum(),fi.Maximum());
 			CheckIfRequired(ntf, field, tab);
 			if(val!=null){
 				ntf.setText(val[i]+"");
@@ -720,6 +769,7 @@ public class WorkTab {
 	@SuppressWarnings("unchecked")
 	private<T extends Tabable> Node CreateClassToFloatSetter(String name, Field field, Tabable t, ObservableMap<String,T> hash) {
 		GridPane grid = new GridPane();
+		FieldInfo fi = field.getAnnotation(FieldInfo.class);
 		int row=0;
 		try {
 			HashMap<String, Float> h = (HashMap<String, Float>) field.get(t);
@@ -737,7 +787,7 @@ public class WorkTab {
 					//but for now there is no good way to get row index
 					Tabable tab = change.getValueAdded();
 					grid.add(new Label(tab.toString()), 0, row);
-					NumberTextField ntf = new NumberTextField(true);
+					NumberTextField ntf = new NumberTextField(true,fi.Minimum(),fi.Maximum());
 					CheckIfRequired(ntf, field, tab);
 					ntf.textProperty().addListener(new ChangeListener<String>() {
 						@Override
@@ -760,7 +810,7 @@ public class WorkTab {
 			});
 			for (Tabable tab : hash.values()) {
 				grid.add(new Label(tab.toString()), 0, row);
-				NumberTextField ntf = new NumberTextField(true);
+				NumberTextField ntf = new NumberTextField(true,fi.Minimum(),fi.Maximum());
 				try {
 					if(h.containsKey(tab.GetID()))
 						ntf.setText((Float) h.get(tab.GetID())+"");
@@ -906,7 +956,8 @@ public class WorkTab {
 						listpane.add(children.get(i+1), 1, i);
 					}
 					if(list.size()==0){
-						if(box.getStyle().contains("combobox-error")==false){
+						FieldInfo fi = field.getAnnotation(FieldInfo.class);
+						if(fi!=null&&fi.required()&&box.getStyle().contains("combobox-error")==false){
 							box.getStyleClass().add("combobox-error");
 						}
 					}
@@ -938,20 +989,14 @@ public class WorkTab {
 		});
 		strs.removeIf(x->x.getClass().equals(str)==false);
 		ComboBox<Tabable> box = new ComboBox<Tabable>(strs);
-		
-		if(field.getAnnotation(FieldInfo.class)!=null){
-			if(field.getAnnotation(FieldInfo.class).required()){
-			    ObservableList<String> styleClass = box.getStyleClass();
-			    
+		CheckIfRequired(box, field, m);
+		FieldInfo fi = field.getAnnotation(FieldInfo.class);
+	    ObservableList<String> styleClass = box.getStyleClass();
+		if(fi!=null){
+			if(fi.required()){
 			    styleClass.add("combobox-error");
 				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
-					String i = "";
-					try {
-						i =  ((String) field.get(m));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					if(obsMapTabable.containsKey(i) == false){
+					if(newValue==null||obsMapTabable.containsKey(newValue.GetID()) == false){
 			    	    if(!styleClass.contains("combobox-error")) {
 			    	        styleClass.add("combobox-error");
 			    	    }
@@ -969,6 +1014,8 @@ public class WorkTab {
 		grid.add(box, 1, 0);
 		Button b =new Button("X");
 		b.setOnAction(x->{
+    	    if(fi!=null&&fi.required()&&styleClass.contains("combobox-error")==false)
+    	    	styleClass.add("combobox-error");
 			box.getSelectionModel().clearSelection();
 		});
 		grid.add(b, 2, 0);	
@@ -1161,14 +1208,11 @@ public class WorkTab {
 	private void OnItemSelect(GridPane listpane, Field field, Tabable m, Item select,boolean setup){
 		//get existing field if null or not
 		Item[] old = null;
-		Integer rows = 0;
+		Integer rows = listpane.getRowCount();
 		try {
 			old = (Item[]) field.get(m); 
-			Method method = listpane.getClass().getDeclaredMethod("getNumberOfRows");
-			method.setAccessible(true);
-			rows = (Integer) method.invoke(listpane);
 		} catch (Exception e1) {
-//			System.out.println(e1);
+			System.out.println(e1);
 		}
 		//if null we start at pos 1 else insert at length+1
 		int pos = 1;
@@ -1183,10 +1227,18 @@ public class WorkTab {
 				}
 			}
 		}
+		
+		FieldInfo fi = field.getAnnotation(FieldInfo.class);
 		// Name of Item
 		Label l = new Label(select.toString());
+		float max = Integer.MAX_VALUE;
+		float min = Integer.MIN_VALUE;
+		if(fi!=null) {
+			max = fi.Maximum();
+			min = fi.Minimum();
+		}
 		//Amount field
-		NumberTextField count = new NumberTextField(3);
+		NumberTextField count = new NumberTextField(3,min,max);
 		CheckIfRequired(count, field, m);
 
 		count.setMaxWidth(35);
@@ -1199,6 +1251,7 @@ public class WorkTab {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				UpdateMethods(count,m);
 			}
 		});
 		// Remove Button
@@ -1248,12 +1301,9 @@ public class WorkTab {
 	private<T extends Tabable> void OnArrayClassSelect(GridPane listpane, Field field, Tabable m, T select,boolean setup){
 		//get existing field if null or not
 		String[] old = null;
-		Integer rows = 0;
+		int rows = listpane.getRowCount();
 		try {
 			old = (String[]) field.get(m); 
-			Method method = listpane.getClass().getDeclaredMethod("getNumberOfRows");
-			method.setAccessible(true);
-			rows = (Integer) method.invoke(listpane);
 		} catch (Exception e1) {
 			System.out.println(e1);
 		}
@@ -1330,6 +1380,7 @@ public class WorkTab {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				UpdateMethods(box,m);
 	        }
 	        });
 		grid.add(box, 0, 0);	
@@ -1344,8 +1395,14 @@ public class WorkTab {
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setMinWidth(75);
         grid.getColumnConstraints().addAll(col1,col2);
-		
-		NumberTextField box = new NumberTextField(true);
+		FieldInfo fi = field.getAnnotation(FieldInfo.class);
+		float max = Integer.MAX_VALUE;
+        float min = Integer.MIN_VALUE;
+        if(fi!=null) {
+        	max = fi.Maximum();
+        	min = fi.Maximum();
+        }
+		NumberTextField box = new NumberTextField(true,min,max);
 		CheckIfRequired(box, field, str);
 
 		grid.add(new Label(name), 0, 0);	
@@ -1367,6 +1424,7 @@ public class WorkTab {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				UpdateMethods(box,str);
 			}
 		});
 		return grid;
@@ -1379,11 +1437,16 @@ public class WorkTab {
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setMinWidth(75);
         grid.getColumnConstraints().addAll(col1,col2);
-		
-		NumberTextField box = new NumberTextField();
+        FieldInfo info = field.getAnnotation(FieldInfo.class);
+        float max = Integer.MAX_VALUE;
+        float min = Integer.MIN_VALUE;
+        if(info!=null) {
+        	max = info.Maximum();
+        	min = info.Maximum();
+        }
+		NumberTextField box = new NumberTextField(min,max);
 		CheckIfRequired(box, field, str);
 		// NEEDED FOR POPULATIONSLEVEL!
-        FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info != null && info.id() && newTabable){
 			try {
 				System.out.println("CURRENTLY NOT SUPPORTED");
@@ -1410,6 +1473,7 @@ public class WorkTab {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				UpdateMethods(box,str);
 			}
 		});
 		return grid;
@@ -1445,6 +1509,7 @@ public class WorkTab {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				UpdateMethods(box,str);
 			}
 		});
 		grid.add(new Label(name), 0, 0);	
@@ -1478,6 +1543,7 @@ public class WorkTab {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				UpdateMethods(box,str);
 			}
 		});
 		grid.add(new Label(name), 0, 0);	
@@ -1530,7 +1596,6 @@ public class WorkTab {
 		Field secondField;
 		int first = 0;
 		int second = 0;
-		
 		try {
 			firstField = m.getClass().getField(fi.First2DName());
 			secondField = m.getClass().getField(fi.Second2DName());
@@ -1592,14 +1657,6 @@ public class WorkTab {
 			);
 			}
 		}
-//		ColumnConstraints col1 = new ColumnConstraints();
-//        col1.setMinWidth(150);
-//        ColumnConstraints col2 = new ColumnConstraints();
-//        col2.setMinWidth(100);
-//        col2.setHgrow(Priority.ALWAYS);
-//        grid.getColumnConstraints().addAll(col1,col2);
-			
-		
 		return grid;
 	}
 	
@@ -1636,6 +1693,22 @@ public class WorkTab {
 		}
 	    return newA;
 	}
+	private void UpdateMethods(Node node,Tabable t) {
+		UpdateFields();
+		if(updateMethodLabel==null)
+    		return;
+    	for(Method m : updateMethodLabel.keySet()) {
+	    	MethodInfo mi = m.getAnnotation(MethodInfo.class);
+			if(mi==null)
+				continue;
+			try {
+				updateMethodLabel.get(m).setText(m.invoke(t).toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+    }
+
 	private void CheckIfRequired(Node text,Field field,Tabable t){
         FieldInfo info = field.getAnnotation(FieldInfo.class);
         if(info == null || info.required() == false){
@@ -1643,7 +1716,6 @@ public class WorkTab {
         }
 	    ObservableList<String> styleClass = text.getStyleClass();
 	    
-	    styleClass.add("text-field-error");
 		StringProperty temp = null;
 	    if(text instanceof TextField){
 	    	temp = ((TextField) text).textProperty();
@@ -1651,6 +1723,9 @@ public class WorkTab {
 	    else if(text instanceof TextArea){
 	    	temp = ((TextArea) text).textProperty();
 	    }
+	    if(temp==null)
+	    	return;
+	    styleClass.add("text-field-error");
 	    StringProperty sp = temp;
 	    sp.addListener((arg0, oldValue, newValue) -> {		
 			if(info.id()){
@@ -1719,6 +1794,7 @@ public class WorkTab {
         });
 		
 	}
+
 	public ScrollPane getScrollPaneContent() {
 		return scrollPaneContent;
 	}

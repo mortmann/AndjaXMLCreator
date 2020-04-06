@@ -44,7 +44,7 @@
       <popCount>0</popCount>
       <group>food</group>
    </Need>
-   <Need ID="spice?">
+   <Need ID="spice">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
          <entry Level="1">2.4564285</entry>

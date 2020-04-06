@@ -14,7 +14,7 @@ public abstract class OutputStructure extends Structure {
 	@FieldInfo(required = true, IsEffectable=true) @Element public int maxNumberOfWorker = 1;
 	@FieldInfo(required = true, IsEffectable=true) @Element public float produceTime = 0;
 	@FieldInfo(required = true, IsEffectable=true) @Element(required=false) public int maxOutputStorage;
-	@FieldInfo(required = true, IsEffectable=true) @Element(required=false) public float efficiency = 1f;
+	@FieldInfo(required = true, IsEffectable=true,Minimum = 0) @Element(required=false) public float efficiency = 1f;
 
 	@ElementArray(entry="Item",required=false) public Item[] output;
 

@@ -7,6 +7,7 @@ import org.simpleframework.xml.ElementList;
 
 import com.mortmann.andja.creator.other.Need;
 import com.mortmann.andja.creator.other.NeedGroup;
+import com.mortmann.andja.creator.util.MethodInfo;
 
 public class Needs {
 	public Needs(Collection<Need> ns,Collection<NeedGroup> ngs) {

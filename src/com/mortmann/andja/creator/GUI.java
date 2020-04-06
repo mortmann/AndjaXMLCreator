@@ -1041,10 +1041,14 @@ public class GUI {
 //		}
 //		return classToClassObservableMap.get(c).containsKey(id) ? classToClassObservableMap.get(c).get(id) : null;
 	}
+	
 	public Tabable doesIDexistForTabable(String valueSafe, Tabable tab) {
 		Class c = tab.getClass();
 		if(Structure.class.isAssignableFrom(c)){
 			c = Structure.class;
+		}
+		if(Unit.class.isAssignableFrom(c)){
+			c = Unit.class;
 		}
 		if(classToClassObservableMap.containsKey(c) == false) {
 			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
@@ -1101,6 +1105,9 @@ public class GUI {
 		}
 		if(Structure.class.isAssignableFrom(classTabable))
 			classTabable = Structure.class;
+		if(Unit.class.isAssignableFrom(classTabable)){
+			classTabable = Unit.class;
+		}
 		return classToClassObservableMap.get(classTabable);
 	}
 

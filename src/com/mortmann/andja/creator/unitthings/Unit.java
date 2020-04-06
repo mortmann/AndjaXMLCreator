@@ -43,6 +43,7 @@ public class Unit implements Tabable, Comparable<Tabable> {
 	@FieldInfo(order = 0,compareType=DamageType.class) @Element public String damageType;
 	@FieldInfo(order = 0,compareType=ArmorType.class) @Element public String armorType;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRate=1;
+	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float buildRange=1;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float speed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float aggroTime;   

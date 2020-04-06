@@ -10,6 +10,7 @@ import org.simpleframework.xml.Root;
 import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.structures.NeedStructure;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.MethodInfo;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false,name="Need")
@@ -126,4 +127,16 @@ public class Need implements Tabable {
 	public int compareTo(Tabable o) {
 		return ID.compareTo(o.GetID());
 	}
+	@MethodInfo(Title = "Ton used per 1000")
+	public String TonUsedPer100() {
+		if(structures!=null&&structures.length==1)
+			return "NaN";
+		String used = "";
+		for(String s : UsageAmounts.keySet()) {
+			used += s + ":" + (UsageAmounts.get(s) * 1000);
+			used += "|";
+		}
+		return used;
+	}
+	
 }

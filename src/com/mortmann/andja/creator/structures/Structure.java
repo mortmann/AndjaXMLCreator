@@ -2,7 +2,7 @@ package com.mortmann.andja.creator.structures;
 
 import java.util.Comparator;
 import java.util.HashMap;
-
+import java.util.HashSet;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
@@ -14,7 +14,9 @@ import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.Need.People;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.MethodInfo;
 import com.mortmann.andja.creator.util.Tabable;
+import com.mortmann.andja.creator.util.Vector2;
 
 @Root(strict=false)
 public abstract class Structure implements Tabable, Comparable<Tabable>  {
@@ -46,7 +48,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	
 	@FieldInfo(required=true,subType=People.class)@Element public int populationLevel = -1;
 	@FieldInfo(required=true)@Element public int populationCount = -1;
-	@Element(required=false) public int structureLevel = 0;
+	@FieldInfo(IsEffectable=false) @Element(required=false) public int structureLevel = 0;
 
 	@FieldInfo(required=true) @Element public int tileWidth;
 	@FieldInfo(required=true) @Element public int tileHeight;
@@ -62,7 +64,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@Element(required=false) public boolean canStartBurning = false;
  
 	@FieldInfo(IsEffectable=true) @Element(required=false) public int maintenanceCost;
-	@Element(required=false) public int buildCost;
+	@FieldInfo(IsEffectable=true) @Element(required=false) public int buildCost;
 
 	@Element(required=false) public BuildTypes buildTyp =  BuildTypes.Single;
 	@Element(required=false) public StructureTyp structureTyp = StructureTyp.Blocking;
@@ -135,34 +137,33 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	}
 	
 	public static int CalculateMidPointCircleTileCount(int radius, int centerWidth, int centerHeight) {
-		int numberOfTiles = 0;
+        HashSet<Vector2> vecs = new HashSet<Vector2>();
 		int center_x = radius;
         int center_y = radius;
         int P = (5 - radius * 4) / 4;
         int circle_x = 0;
         int circle_y = radius;
-        
         do {
             //Fill the circle 
             for (int actual_x = center_x - circle_x; actual_x <= center_x + circle_x; actual_x++) {
                 //-----
                 int actual_y = center_y + circle_y;
                 if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
-                	numberOfTiles++;
+                	vecs.add(new Vector2(actual_x, actual_y));
                 //-----
                 actual_y = center_y - circle_y;
                 if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
-                	numberOfTiles++;
+                	vecs.add(new Vector2(actual_x,actual_y));
             }
             for (int actual_x = center_x - circle_y; actual_x <= center_x + circle_y; actual_x++) {
                 //-----
                 int actual_y = center_y + circle_x;
                 if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
-                	numberOfTiles++;
+                	vecs.add(new Vector2(actual_x,actual_y));
                 //-----
                 actual_y = center_y - circle_x;
                 if (CircleCheck(radius, centerWidth, actual_x) || CircleCheck(radius, centerHeight, actual_y))
-                	numberOfTiles++;
+                	vecs.add(new Vector2(actual_x,actual_y));
             }
             if (P < 0) {
                 P += 2 * circle_x + 1;
@@ -173,10 +174,53 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
             }
             circle_x++;
         } while (circle_x <= circle_y);
-        return numberOfTiles;
+        return vecs.size();
     }
+	
+	public int CalculateEvcenCircle(float radius, float centerWidth, float centerHeight) {
+		HashSet<Vector2> vecs = new HashSet<Vector2>();
+        for (float x = -radius + 0.5f; x <= radius - 0.5f; x++) {
+            for (float y = -radius + 0.5f; y <= radius - 0.5f; y++) {
+                if (-centerWidth / 2 <= x && centerWidth / 2 >= x && -centerHeight / 2 <= y && centerHeight / 2 >= y) {
+                    continue;
+                }
+                if (CircleDistance(x, y, 1) <= radius-1f) {
+                	vecs.add(new Vector2(x, y));
+                }
+            }
+        }
+        return vecs.size();
+	}
+
+	public int CalculateEllipse(float radius_x, float radius_y, float centerWidth, float centerHeight) {
+        float r_x = centerWidth % 2 == 0 ? 0.5f : 0;
+        float r_y = centerHeight % 2 == 0 ? 0.5f : 0;
+
+        float ratio = radius_x / radius_y;
+		HashSet<Vector2> vecs = new HashSet<Vector2>();
+        for (float x = -radius_x + r_x; x <= radius_x - r_x; x++) {
+            for (float y = -radius_y + r_y; y <= radius_y - r_y; y++) {
+                if (-centerWidth / 2 <= x && centerWidth / 2 >= x && -centerHeight / 2 <= y && centerHeight / 2 >= y) {
+                    continue;
+                }
+                if (CircleDistance(x, y, ratio) <= radius_x - (r_x+r_y)) {
+                	vecs.add(new Vector2(x, y));
+                }
+            }
+        }
+        return vecs.size();
+	}
+	static float CircleDistance(float x, float y, float ratio) {
+		return (float) Math.floor(Math.sqrt((Math.pow(y* ratio, 2)) + Math.pow(x, 2)));
+	}
     private static boolean CircleCheck(int radius, int centerHeight, int actual_y) {
         return (centerHeight > 0 && actual_y >= radius && actual_y < radius + centerHeight) == false;
     }
-	
+    @MethodInfo(BelongingVariable = "structureRange",Title="Range Tile Count")
+	public int InRangeTiles() {
+    	if(tileWidth%2==0&&tileHeight%2==0) {
+    		return CalculateEvcenCircle(structureRange, tileWidth, tileHeight);
+    	}
+		return CalculateMidPointCircleTileCount(structureRange, tileWidth, tileHeight);
+	}
 }

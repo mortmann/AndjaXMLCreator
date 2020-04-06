@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldInfo {
 	boolean required() default false;
-    int order() default Integer.MAX_VALUE;
+    int order() default 500;
 	Class compareType() default void.class;
 	Class mainType() default void.class;
 	Class subType() default void.class;
@@ -22,5 +22,6 @@ public @interface FieldInfo {
 	boolean ignore() default false;
 	String First2DName() default "";
 	String Second2DName() default "";
-
+	float Minimum() default Integer.MIN_VALUE;
+	float Maximum() default Integer.MAX_VALUE;
 }

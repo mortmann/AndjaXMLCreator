@@ -24,4 +24,5 @@ public class Home extends Structure {
 	public String GetButtonColor() {
 		return "#f6e58d";
 	}
+	
 }

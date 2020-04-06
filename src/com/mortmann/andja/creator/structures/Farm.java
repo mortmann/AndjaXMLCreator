@@ -5,15 +5,15 @@ import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.MethodInfo;
 import com.mortmann.andja.creator.util.Tabable;
-import com.sun.javafx.scene.control.skin.RadioButtonSkin;
 
 @Root(strict=false)
 public class Farm extends OutputStructure {
 	
 	@FieldInfo(order = 0 ,compareType=Growable.class , required = true) @Element(required=false) public String growable;
 
-	@FieldInfo(order = 0, required = true, IsEffectable=true) @Element(required=false) public int neededHarvestToProduce = 5;
+	@FieldInfo(order = 0, required = true, IsEffectable=true) @Element(required=false) public int neededHarvestToProduce = 1;
 	
 	public Farm(){
 		structureTyp = StructureTyp.Blocking;
@@ -40,9 +40,17 @@ public class Farm extends OutputStructure {
 	public String GetButtonColor() {
 		return "#3EB650";
 	}
-	public int CalculatePPM() {
-		float tileCount = CalculateMidPointCircleTileCount(structureRange, tileWidth, tileHeight);
+	
+	
+	@MethodInfo(Title = "Produce per Minute")
+	public float CalculatePPM() {
+		float tileCount = InRangeTiles();
 		Growable grow = (Growable)GUI.Instance.idToStructures.get(growable);
-		return (int) ((((tileCount / (float)neededHarvestToProduce) * grow.produceTime) / 60f) / produceTime);
+		if(grow==null||produceTime * efficiency <= 0|| grow.produceTime<=0 || output==null || output.length==0)
+			return 0;
+		if(produceTime*efficiency>=grow.produceTime)
+			return 60f/produceTime;
+		float ppm = Math.min(60f/(neededHarvestToProduce*produceTime*efficiency),((tileCount / (float)neededHarvestToProduce)*(60f/grow.produceTime)));
+		return ppm / output[0].count;
 	}
 }

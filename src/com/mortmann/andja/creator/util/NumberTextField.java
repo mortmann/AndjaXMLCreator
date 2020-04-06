@@ -4,7 +4,8 @@ import javafx.scene.control.TextField;
 
 public class NumberTextField extends TextField {
 	int maxLength = 0;
-	int maxNumber = -1;
+	float minNumber = Float.MIN_VALUE;
+	float maxNumber = Float.MAX_VALUE;
 	boolean isFloat = false;
 	
 	public NumberTextField(int maxLength) {
@@ -16,16 +17,18 @@ public class NumberTextField extends TextField {
 		this.maxLength = maxLength; 
 		this.isFloat = isFloat;
 	}
-	public NumberTextField(boolean isFloat) {
+	public NumberTextField(boolean isFloat, float Min, float Max) {
 		super();
 		this.isFloat = isFloat;
+		minNumber = Min;
+		maxNumber = Max;
 	}
-	public NumberTextField(int maxLength, int maxNumber) {
+	public NumberTextField(int maxLength, float maxNumber) {
 		super();
 		this.maxLength = maxLength; 
 		this.maxNumber = maxNumber;
 	}
-	public NumberTextField(String s,int maxLength, int maxNumber) {
+	public NumberTextField(String s,int maxLength, float maxNumber) {
 		super(s);
 		this.maxLength = maxLength; 
 		this.maxNumber = maxNumber;
@@ -39,6 +42,15 @@ public class NumberTextField extends TextField {
 	public NumberTextField(String s,int maxLength) {
 		super(s);
 		this.maxLength = maxLength; 
+	}
+	public NumberTextField(float minimum, float maximum) {
+		minNumber = minimum;
+		maxNumber = maximum;
+	}
+	public NumberTextField(int maxLength, float minimum, float maximum) {
+		this.maxLength = maxLength; 
+		minNumber = minimum;
+		maxNumber = maximum;
 	}
 	@Override
 	public void replaceText(int start, int end, String text) {
@@ -70,8 +82,11 @@ public class NumberTextField extends TextField {
 	                super.replaceText(start, end, cutInsertedText);
 	            }
 	            // Limit the Textfield Number-Value when maximum is given
-	            if(maxNumber!=-1 && GetFloatValue()>maxNumber){
+	            if(GetFloatValue()>maxNumber){
 	            	setText(maxNumber+"");
+	            }
+	            if(GetFloatValue()<minNumber){
+	            	setText(minNumber+"");
 	            }
 	        }
 
