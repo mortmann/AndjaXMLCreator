@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 import org.simpleframework.xml.*;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(name="Fertility",strict=false)
@@ -31,7 +31,7 @@ public class Fertility implements Tabable, Comparable<Tabable> {
 	}
 	@Override
 	public String toString() {
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	@Override
 	public String GetID() {
@@ -46,7 +46,7 @@ public class Fertility implements Tabable, Comparable<Tabable> {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {

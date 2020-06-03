@@ -48,4 +48,5 @@ public class Production extends OutputStructure {
 	public String GetButtonColor() {
 		return "#4834d4";
 	}
+	
 }

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mortmann.andja.creator.util.NotClosableTab;
 import com.mortmann.andja.creator.util.Tabable;
@@ -69,7 +68,7 @@ public class DataTab<T extends Tabable> {
 					return;
 				}
 				ObservableList<Node> ns = FXCollections.observableArrayList(allNodeList);
-				ns.removeIf(x->x.getId().contains(search.getText().toLowerCase())==false);
+				ns.removeIf(x->x.getId().toLowerCase().contains(search.getText().toLowerCase())==false);
 				flow.getChildren().clear();
 				flow.getChildren().addAll(ns);
 			}
@@ -87,7 +86,7 @@ public class DataTab<T extends Tabable> {
 		Button b = new Button();
 		Tabable s = valueAdded;
 		
-		b.setOnAction(x->{WorkTab wt = new WorkTab(s,false); GUI.Instance.AddTab(s,wt.getScrollPaneContent(),wt);});
+		b.setOnAction(x->{GUI.Instance.AddWorkTab(s, false);});
 		b.setText((String) s.toString());
 		b.setMinSize(100, 100);
 		b.setPrefSize(100, 100);

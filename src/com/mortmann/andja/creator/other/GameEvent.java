@@ -8,7 +8,6 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.structures.Growable;
 import com.mortmann.andja.creator.structures.Home;
 import com.mortmann.andja.creator.structures.Market;
@@ -23,6 +22,7 @@ import com.mortmann.andja.creator.structures.Warehouse;
 import com.mortmann.andja.creator.unitthings.Ship;
 import com.mortmann.andja.creator.unitthings.Unit;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 
 import javafx.collections.FXCollections;
@@ -74,7 +74,7 @@ public class GameEvent implements Comparable<Tabable>, Tabable {
 		if(Name==null||Name.isEmpty()){
 			return ID + " : " + getClass().getSimpleName();
 		}
-		return ID + " : " +Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 
 	@Override

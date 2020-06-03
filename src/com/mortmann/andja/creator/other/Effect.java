@@ -9,9 +9,9 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false,name="Effect")
@@ -43,7 +43,7 @@ public class Effect implements Tabable, Comparable<Tabable> {
 
 	@Override
 	public String GetName() {
-		return Name == null? "Effect" : Name.get(Language.English.toString()) + ": " +targets + " => " + nameOfVariable + " -> " + change;
+		return Name == null? "Effect" : Name.get(Settings.CurrentLanguage.toString());
 	}
 
 	@Override
@@ -72,6 +72,15 @@ public class Effect implements Tabable, Comparable<Tabable> {
 
 	@Override
 	public String GetButtonColor() {
-		return null;
+		switch(classification) {
+		case Negativ:
+			return "#E12B38";
+		case Neutral:
+			return null;
+		case Positiv:
+			return "#3EB650";
+		default:
+			return null;
+		}
 	}
 }

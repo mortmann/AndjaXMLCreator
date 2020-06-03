@@ -1,4 +1,4 @@
-<UI>
+<UI language="English">
    <element name="Right Canvas">
       <element name="CityInventory">
          <textelement name="CityInfoToggle"/>
@@ -64,13 +64,16 @@
    <element name="Layout">
       <element name="Prices">
          <textelement name="Sell">
-            <text>test</text>
-            <hoverOver>test</hoverOver>
+            <text>Sell</text>
+            <hoverOver>How much you sell 1t for.</hoverOver>
          </textelement>
-         <textelement name="Buy"/>
+         <textelement name="Buy">
+            <text>Buy</text>
+            <hoverOver>How much you pay for 1t.</hoverOver>
+         </textelement>
       </element>
    </element>
-   <element class="com.mortmann.andja.creator.ui.UIElementText" name="Health"/>
+   <textelement name="Health"/>
    <element name="OffWorldMarket">
       <element name="OFFWORLD-Panel">
          <textelement name="Delete"/>
@@ -373,5 +376,5 @@
          </element>
       </element>
    </element>
-   <element class="com.mortmann.andja.creator.ui.UIElementText" name="*Back"/>
+   <textelement name="*Back"/>
 </UI>

@@ -9,11 +9,10 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
-import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false)
@@ -90,7 +89,7 @@ public class Unit implements Tabable, Comparable<Tabable> {
 			System.out.println("Name is empty!");
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	@Override
 	public int compareTo(Tabable o) {

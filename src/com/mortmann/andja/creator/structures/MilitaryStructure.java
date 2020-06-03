@@ -4,7 +4,6 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.other.Effect;
 import com.mortmann.andja.creator.unitthings.*;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;

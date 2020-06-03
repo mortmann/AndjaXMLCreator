@@ -5,9 +5,8 @@ import java.util.HashMap;
 
 import org.simpleframework.xml.*;
 
-import com.mortmann.andja.creator.GUI.Language;
-import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 
 
@@ -41,7 +40,7 @@ public class ItemXML extends Item implements Tabable, Comparator<Tabable> {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {

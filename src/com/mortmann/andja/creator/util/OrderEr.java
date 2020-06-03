@@ -11,12 +11,12 @@ public class OrderEr implements Comparator<Field> {
         // nulls last
         if (or1 != null && or2 != null) {
             return or1.order() - or2.order();
-        } else
+        } 
         if (or1 != null && or2 == null) {
-            return -1;
-        } else
+            return Integer.MIN_VALUE + or1.order();
+        } 
         if (or1 == null && or2 != null) {
-            return 1;
+            return Integer.MAX_VALUE - or2.order();
         }
         return o1.getName().compareTo(o2.getName());
     }

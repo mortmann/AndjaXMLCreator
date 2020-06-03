@@ -1,8 +1,6 @@
-package com.mortmann.andja.creator.util;
+package com.mortmann.andja.creator.util.history;
 
-import javafx.scene.control.TextField;
-
-public class NumberTextField extends TextField {
+public class NumberTextField extends TextFieldHistory {
 	int maxLength = 0;
 	float minNumber = Float.MIN_VALUE;
 	float maxNumber = Float.MAX_VALUE;

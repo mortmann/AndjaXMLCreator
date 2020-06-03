@@ -22,6 +22,7 @@
       <damageType>slashing</damageType>
       <armorType>leather</armorType>
       <attackRate>1.0</attackRate>
+      <buildRange>1.0</buildRange>
       <speed>3.0</speed>
       <turnSpeed>180.0</turnSpeed>
       <aggroTime>0.0</aggroTime>
@@ -59,12 +60,13 @@
       <maintenancecost>25</maintenancecost>
       <maximumHealth>1250.0</maximumHealth>
       <aggroTimer>1.0</aggroTimer>
-      <attackRange>1.0</attackRange>
+      <attackRange>10.0</attackRange>
       <damage>10.0</damage>
       <damageType>cannonball</damageType>
       <armorType>woodenwall</armorType>
-      <attackRate>1.0</attackRate>
-      <speed>2.0</speed>
+      <attackRate>15.0</attackRate>
+      <buildRange>1.0</buildRange>
+      <speed>3.5</speed>
       <turnSpeed>1.0</turnSpeed>
       <aggroTime>0.0</aggroTime>
       <projectileSpeed>15.0</projectileSpeed>

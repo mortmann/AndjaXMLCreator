@@ -9,12 +9,12 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
-import com.mortmann.andja.creator.other.Need.People;
+import com.mortmann.andja.creator.other.PopulationLevel;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.MethodInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.Vector2;
 
@@ -29,10 +29,10 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	public enum TileType { NoRestriction, BuildLand, /*Ocean,*/ Shore, Cliff, Water, Dirt, Grass, Stone, Desert, Steppe, Jungle, Mountain };
 
 	@Attribute
-	@FieldInfo(order=0,required=true,id=true)
+	@FieldInfo(order=-1,required=true,id=true)
 	public String ID;	
 
-	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
+	@FieldInfo(order=1,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
 	@FieldInfo(required=false,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> HoverOver;
 	@FieldInfo(subType=String.class) @ElementMap(key = "lang",required=false) public HashMap<String,String> Short;
@@ -46,7 +46,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 
 	@FieldInfo(IsEffectable=true) @Element(required=false) public int structureRange = 0;
 	
-	@FieldInfo(required=true,subType=People.class)@Element public int populationLevel = -1;
+	@FieldInfo(required=true,subType=PopulationLevel.class)@Element public int populationLevel = -1;
 	@FieldInfo(required=true)@Element public int populationCount = -1;
 	@FieldInfo(IsEffectable=false) @Element(required=false) public int structureLevel = 0;
 
@@ -133,7 +133,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	
 	public static int CalculateMidPointCircleTileCount(int radius, int centerWidth, int centerHeight) {

@@ -4,12 +4,12 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI;
+import com.mortmann.andja.creator.util.history.TextAreaHistory;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -64,10 +64,10 @@ public class UIElementText extends UIElement {
         col2.setMinWidth(200);
         col2.setMaxWidth(300);
         grid.getColumnConstraints().addAll(col1,col2);
-		TextArea textField = new TextArea();
+		TextAreaHistory  textField = new TextAreaHistory();
 		textField.setMaxHeight(65);
 		if(text!=null && isText){
-			textField.setText(text);
+			textField.setStartText(text);
 		} else 
 		if(hoverOver!=null) {
 			textField.setText(hoverOver);
@@ -79,7 +79,7 @@ public class UIElementText extends UIElement {
 					text = textField.getText();
 				else
 					hoverOver = textField.getText();
-				GUI.Instance.changedCurrentTab();
+				GUI.Instance.changedCurrentTab(true);
 				CheckMissing();
 			}
 		});

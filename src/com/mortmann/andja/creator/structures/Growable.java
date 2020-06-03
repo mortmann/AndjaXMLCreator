@@ -10,6 +10,7 @@ import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false)
 public class Growable extends OutputStructure {
 	@FieldInfo(order = 0,compareType=Fertility.class) @Element(required = false) public String fertility;
+	@FieldInfo @Element(required=false) public String harvestSound;
 
 	@FieldInfo(required=true) @Element public int ageStages = 2;
 	public Growable(){

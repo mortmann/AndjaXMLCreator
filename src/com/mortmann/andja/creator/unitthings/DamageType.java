@@ -7,8 +7,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false)
 public class DamageType implements Tabable {
@@ -42,7 +42,7 @@ public class DamageType implements Tabable {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	@Override
 	public void UpdateDependables(Tabable t, String ID) {

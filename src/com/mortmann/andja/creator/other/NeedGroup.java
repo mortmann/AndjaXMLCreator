@@ -7,8 +7,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.util.FieldInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
 
 @Root(strict=false,name="NeedGroup")
@@ -28,14 +28,14 @@ public class NeedGroup implements Tabable {
 
 	@Override
 	public String toString() {
-		return ID +":"+ Name.get(Language.English.toString());
+		return GetName();
 	}
 	@Override
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 	@Override
 	public String GetID() {

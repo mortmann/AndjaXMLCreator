@@ -1,21 +1,29 @@
 package com.mortmann.andja.creator.other;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
-import com.mortmann.andja.creator.GUI.Language;
+import com.mortmann.andja.creator.GUI;
+import com.mortmann.andja.creator.structures.Home;
 import com.mortmann.andja.creator.structures.NeedStructure;
+import com.mortmann.andja.creator.structures.OutputStructure;
+import com.mortmann.andja.creator.structures.Structure;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.MethodInfo;
+import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
+import com.mortmann.andja.creator.util.Vector2;
 
 @Root(strict=false,name="Need")
 public class Need implements Tabable {
-	public enum People {Peasent,Citizen,Patrician,Nobleman}
+	public final float UseTickTime = 60f;
 	
 	@ElementMap(key = "Level",attribute=true,required=false) 
 	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
@@ -36,10 +44,10 @@ public class Need implements Tabable {
 	@Element(required=false)
 	public String[] structures;
 	
-	@FieldInfo(required=true)
+	@FieldInfo(required=true,subType=PopulationLevel.class)
 	@Element(required=false)
 	public int startLevel;
-	@FieldInfo(required=true,subType=People.class)
+	@FieldInfo(required=true)
 	@Element(required=false)
 	public int popCount;
 	
@@ -84,14 +92,14 @@ public class Need implements Tabable {
 	}
 	@Override
 	public String toString() {
-		return ID +":"+ Name.get(Language.English.toString());
+		return GetName();
 	}
 	@Override
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Language.English.toString());
+		return Name.get(Settings.CurrentLanguage.toString());
 	}
 
 	@Override
@@ -120,6 +128,10 @@ public class Need implements Tabable {
 
 	@Override
 	public String GetButtonColor() {
+		if(item == null && structures != null)
+			return "#f0932b";
+		if(item != null && structures == null)
+			return "#7ed6df";
 		return null;
 	}
 
@@ -128,15 +140,61 @@ public class Need implements Tabable {
 		return ID.compareTo(o.GetID());
 	}
 	@MethodInfo(Title = "Ton used per 1000")
-	public String TonUsedPer100() {
-		if(structures!=null&&structures.length==1)
+	public String TonUsedPer1000() {
+		if(structures!=null&&structures.length>=1)
+			return "NaN";
+		if(item==null)
 			return "NaN";
 		String used = "";
 		for(String s : UsageAmounts.keySet()) {
-			used += s + ":" + (UsageAmounts.get(s) * 1000);
-			used += "|";
+			double value = UsageAmounts.get(s) * 1000d;
+			value = Math.round(value * 10000d) / 10000d;
+			used += GUI.Instance.idToPopulationLevel.get(s) + ":" + value;
+			used += "\n";
 		}
-		return used;
+		return used; 
 	}
-	
+	@MethodInfo(Title = "Structure needed per 1000")
+	public String StructuresPer1000() {
+		if(structures!=null&&structures.length>=1) {
+			ArrayList<Structure> homes = GUI.Instance.getStructureList(Home.class);
+			System.out.println(homes.size());
+			if(homes.size()==0) {
+				return "No Homes.";
+			}
+			ArrayList<Structure> needS = GUI.Instance.getStructureList(NeedStructure.class);
+			needS.removeIf(x->Arrays.asList(structures).contains(x.GetID())==false);
+			String counts="";
+			for(Structure nS : needS) {
+				for(int i = 0; i <= GUI.Instance.idToPopulationLevel.size(); i++) {
+					int level = i;
+					Optional<Structure> home = homes.stream().filter(x->x.populationLevel == level).findFirst();
+					if(home.isEmpty())
+						continue;
+					counts = nS.GetName()+":\n";
+					Vector2 size = new Vector2(home.get().tileWidth,home.get().tileHeight);
+					int tiles = (int) (size.x * size.y);
+					float rangeTiles = nS.InRangeTiles();
+					counts += GUI.Instance.idToPopulationLevel.get(i+"").GetName() + ": ";
+					counts += size + " " + rangeTiles/(tiles+1.5f) + " \n";
+
+				}
+			}
+			return counts;
+		}
+		if(item == null)
+			return "Undefined";
+		String used = "";
+		for(OutputStructure structure : GUI.Instance.GetOutputStructures(item)) {
+			used += structure.GetName() + "\n";
+			used += structure.CalculateNeededPerNeedPer1000();
+		}
+		for(String s : UsageAmounts.keySet()) {
+			double value = UsageAmounts.get(s) * 1000d;
+			value = Math.round(value * 10000d) / 10000d;
+			used += GUI.Instance.idToPopulationLevel.get(s) + ":" + value;
+			used += "\n";
+		}
+		return used; 
+	}
 }

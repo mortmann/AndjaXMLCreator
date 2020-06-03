@@ -358,7 +358,13 @@ VBox > .split-menu-button.last > .arrow-button {
 .menu-item:focused .arrow {
 	-fx-background-color: #333333;
 }
+.label-menu-item .label{
+      -fx-text-alignment:center; 
+}
 
+.label-menu-item .label .text{
+      -fx-text-alignment:center; 
+}
 .check-menu-item:checked:hover > .left-container > .check,
 .check-menu-item:checked:focused > .left-container > .check,
 .radio-menu-item:checked:hover > .left-container > .radio,
