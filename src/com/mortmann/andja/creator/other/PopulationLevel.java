@@ -21,6 +21,7 @@ public class PopulationLevel implements Tabable {
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
 	@FieldInfo(order=0,required=true) @Element(required=false) public String iconSpriteName;
+	@FieldInfo(order=0,required=true) @Element(required=false) public int taxPerPerson = 1;
 
 	//List of Dependend Need Group will be calculated inside of the Prototype Controller
 	

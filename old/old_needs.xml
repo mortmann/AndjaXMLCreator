@@ -44,6 +44,9 @@
          <entry lang="English">Salt?</entry>
          <entry lang="German">Salz?</entry>
       </Name>
+      <item ID="salt">
+         <count>0</count>
+      </item>
       <startLevel>1</startLevel>
       <popCount>0</popCount>
       <group>food</group>

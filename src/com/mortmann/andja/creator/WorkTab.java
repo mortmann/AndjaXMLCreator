@@ -344,7 +344,7 @@ public class WorkTab extends Tab {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Node CreateTabableIntSetter(String name, Field field, Tabable myTabable, Class tabClass) {
+	private Node CreateTabableIntSetter(String name, Field field, Tabable t, Class tabClass) {
 		ArrayList<Tabable> allList = GUI.Instance.getTabableList(tabClass);
 		GridPane grid = new  GridPane();
 		ObservableList<Tabable> strs = FXCollections.observableArrayList(allList);
@@ -403,7 +403,7 @@ public class WorkTab extends Tab {
 					if(box.getValue()==null){
 						return;
 					}
-					field.set(myTabable, Integer.getInteger(box.getValue().GetID()));
+					field.set(myTabable, Integer.valueOf(box.getValue().GetID()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -503,8 +503,8 @@ public class WorkTab extends Tab {
 				for(Class c : GameEvent.targetClasses) {
 					for(Field f : c.getFields()) {
 						if(f.getName().equals((String)field.get(tab))) {
-							box.getSelectionModel().select(c.getSimpleName());
-							variablebox.getSelectionModel().select((String)field.get(tab));
+							box.SetValueIgnoreChange(c.getSimpleName());
+							variablebox.SetValueIgnoreChange((String)field.get(tab));
 						}
 					}
 				}
@@ -1334,18 +1334,10 @@ public class WorkTab extends Tab {
 	    	    }
 	        } else
 			if(text instanceof NumberTextField){
-				if(((NumberTextField) text).isFloat()==false){
-					if(((NumberTextField) text).GetIntValue()>=0){
-						if(styleClass.contains("text-field-error")) {
-			    	        styleClass.remove("text-field-error");
-			    	    }
-					}
-				} else {
-					if(((NumberTextField) text).GetFloatValue()>=0){
-						if(styleClass.contains("text-field-error")) {
-			    	        styleClass.remove("text-field-error");
-			    	    }
-					}
+				if(((NumberTextField) text).IsValidEntry()){
+					if(styleClass.contains("text-field-error")) {
+		    	        styleClass.remove("text-field-error");
+		    	    }
 				}
 			} else {
 	        	if(styleClass.contains("text-field-error")) {

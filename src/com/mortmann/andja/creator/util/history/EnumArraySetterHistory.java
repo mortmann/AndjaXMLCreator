@@ -23,6 +23,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 	private ComboBoxHistory<Enum> box;
 	Field field;
 	Tabable tabable;
+	boolean ignoreChange = false;
 
 	public EnumArraySetterHistory(String name, Field field, Tabable tabable, Class<E> class1) {
 		ObservableList<Enum> names = FXCollections.observableArrayList();
@@ -57,6 +58,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 			oldArray = new ArrayList<E>();
 		} else {
 			for(int i = 0; i<oldArray.size();i++){
+				ignoreChange = true;
 				OnEnumSelect(box,listpane,field,tabable,oldArray.get(i),true);
 			}
 		}
@@ -160,6 +162,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 	@Override
 	public void Do(Object change) {
 		for(E e : (E[]) change){
+			ignoreChange = true;
 			OnEnumSelect(box, listpane, field,tabable, e,true);
 		}
 		if (changeListeners != null) {
@@ -172,6 +175,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 	@Override
 	public void Undo(Object change) {
 		for(E e : (E[]) change){
+			ignoreChange = true;
 			OnEnumSelect(box, listpane, field,tabable, e,true);
 		}		
 		if (changeListeners != null) {
@@ -183,6 +187,10 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 
 	@Override
 	public void OnChange(Object change, Object old) {
+		if(ignoreChange) {
+			ignoreChange = false;
+			return;
+		}
 		ChangeHistory.AddChange(this, change, old); 
 		if (changeListeners != null) {
 			for (ChangeListenerHistory c : changeListeners) {

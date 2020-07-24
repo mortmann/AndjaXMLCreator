@@ -51,7 +51,15 @@ public class ComboBoxHistory<T> extends ComboBox<T> implements Changeable {
 			System.out.println("Wrong type given to ComboBox");
 		}	
 	}
-
+	@SuppressWarnings("unchecked")
+	public void SetValueIgnoreChange(Object change) {
+		try {
+			ignoreChange = true;
+			getSelectionModel().select((T)change);
+		} catch(Exception e) {
+			System.out.println("Wrong type given to ComboBox");
+		}	
+	}
 	@Override
 	public void Undo(Object change) {
 		ignoreChange = true;

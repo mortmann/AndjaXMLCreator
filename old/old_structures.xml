@@ -1335,7 +1335,7 @@
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <maxHealth>50.0</maxHealth>
-         <structureRange>20</structureRange>
+         <structureRange>18</structureRange>
          <populationLevel>0</populationLevel>
          <populationCount>0</populationCount>
          <structureLevel>1</structureLevel>

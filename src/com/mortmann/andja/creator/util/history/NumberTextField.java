@@ -141,4 +141,10 @@ public class NumberTextField extends TextFieldHistory {
 	public boolean isFloat() {
 		return isFloat;
 	}
+	public boolean IsValidEntry() {
+		if(isFloat) {
+			return GetFloatValue()!=0;
+		}
+		return GetIntValue()>0;
+	}
 }
