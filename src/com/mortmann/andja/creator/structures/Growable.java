@@ -30,7 +30,7 @@ public class Growable extends OutputStructure {
 	}
 	@Override
 	public void OutputStructureUpdateDependables(Tabable t, String ID) {
-		if(t.getClass() == Fertility.class && fertility.equals(ID)) {
+		if(t.getClass() == Fertility.class && fertility != null && fertility.equals(ID)) {
 			fertility = t.GetID();
 		}
 	}

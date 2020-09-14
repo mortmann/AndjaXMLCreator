@@ -54,7 +54,9 @@ public class Need implements Tabable {
 	@FieldInfo(required=true,compareType=NeedGroup.class)
 	@Element(required=false)
 	public String group;
-	
+	@FieldInfo(required=true)
+	@Element(required=false)
+	public boolean hasToReachPerRoad;
 	@Override
 	public String GetID() {
 		return ID;

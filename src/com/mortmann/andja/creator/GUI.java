@@ -43,6 +43,9 @@ import java.util.Optional;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
+
+import com.mortmann.andja.creator.gamesettings.GameSettings;
+import com.mortmann.andja.creator.gamesettings.GenerationInfo;
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.saveclasses.BaseSave;
 import com.mortmann.andja.creator.saveclasses.CombatTypes;
@@ -101,7 +104,7 @@ public class GUI {
 	
 	public HashMap<Language,UITab> languageToLocalization;
 	public HashMap<Class, ObservableMap<String, ? extends Tabable>> classToClassObservableMap;
-	
+	public HashMap<Class, GameSettings> gameSettingsClassToTab;
 	HashMap<Tabable,Tab> tabableToTab;
 	HashMap<Tab,Tabable> tabToTabable;
 	HashMap<Tab,String> tabToID;
@@ -401,6 +404,8 @@ public class GUI {
 		for(ClassAction ac : ClassActions) {
 			if(ac.type == ClassType.Localization)
 				continue;
+			if(ac.type == ClassType.GameSettings)
+				continue;
 			if(ac.Class == null)
 				continue;
 			if(typeToFlow.containsKey(ac.type) == false) {
@@ -454,6 +459,8 @@ public class GUI {
 		for(Language l : Language.values()) {
 			ClassActions.add(new ClassAction(ClassAction.ClassType.Localization, l.toString(), l));
 		}
+		
+		ClassActions.add(new ClassAction(ClassAction.ClassType.GameSettings, GenerationInfo.class.getSimpleName(), GenerationInfo.class));
 
 		HashMap<ClassAction.ClassType,Menu> typeToMenu = new HashMap<>();
 		for(ClassAction action : ClassActions) {
@@ -470,8 +477,13 @@ public class GUI {
 				Label l = (Label) typeToMenu.get(action.type).getGraphic();
 				label.setMinWidth(l.getWidth());
 			});
-			if(action.Class != null) {
-				item.setOnAction(x->{DoClassAction(action.Class);});
+			
+			if(action.Class != null ) {
+				if(action.type != ClassAction.ClassType.GameSettings) {
+					item.setOnAction(x->{DoClassAction(action.Class);});
+				} else {
+					item.setOnAction(x->{DoGameSettingAction(action.Class);});
+				}
 			} else {
 				item.setOnAction(x->{LocalizationAction(action.language);});
 			}
@@ -479,6 +491,30 @@ public class GUI {
 		}
 		
 		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
+	}
+	private void DoGameSettingAction(Class class1) {
+		if(class1 != GenerationInfo.class) {
+			System.out.println("ERROR -- not supported.");
+			return;
+		}
+		if(gameSettingsClassToTab == null)
+			gameSettingsClassToTab = new HashMap<Class, GameSettings>();
+		if(workTabs.getTabs().contains(emptyTab)){
+			workTabs.getTabs().remove(emptyTab);
+		}
+		GenerationInfo tab = GenerationInfo.Load();
+		ChangeHistory.AddObject(tab);
+		if(tab == null)
+			return;
+		for(Tabable t : tabToTabable.values()) {
+			if(t.getClass() == class1) {
+				return;
+			}
+		}
+		workTabs.getTabs().add(tab);
+		workTabs.getSelectionModel().select(tab);
+		gameSettingsClassToTab.put(class1, tab);
+		
 	}
 	private Settings ShowSettings() {
 		LoadSettings();
@@ -578,8 +614,16 @@ public class GUI {
 		for(Language l : Language.values()) {
 			SaveLocalization(l);
 		}
+		SaveGameSettings();
 	}
 	
+	private void SaveGameSettings() {
+		if(gameSettingsClassToTab == null)
+			return;
+		for (GameSettings settings : gameSettingsClassToTab.values()) {
+			settings.Save();
+		}
+	}
 	private boolean SaveOthers() {
 		Others o = new Others(idToPopulationLevel.values());
 		return o.Save();
@@ -601,7 +645,7 @@ public class GUI {
 		return f.Save();
 	}
 	private boolean SaveItems() {
-		Items i = new Items();
+		Items i = new Items(idToItem.values());
 		return i.Save();
 	}
 	private boolean SaveStructures() {
@@ -626,6 +670,12 @@ public class GUI {
 		if(currTabable instanceof UITab) {
 			SaveLocalization(((UITab)currTabable).language);
 			ChangeHistory.ObjectSaved(currTabable);
+			curr.setText(curr.getText().replaceAll("\\*", ""));
+			return;
+		}
+		if(curr instanceof GameSettings) {
+			((GameSettings)curr).Save();
+			ChangeHistory.ObjectSaved(curr);
 			curr.setText(curr.getText().replaceAll("\\*", ""));
 			return;
 		}
@@ -819,18 +869,22 @@ public class GUI {
 		return exist!=null && originalToTemporary.get(exist)!=tab;
 	}
 	
-	public void RemoveWorkTab(Tab tab, Tabable tabable) {
+	public void RemoveTab(Tab tab, Object object) {
 		tabToTabable.remove(tab);
 		tabToID.remove(tab);
-		tabableToTab.remove(tabable);
-		ChangeHistory.RemoveObject(tabable, true);
+		if(object instanceof Tabable) {
+			tabableToTab.remove((Tabable)object);
+		}
+		ChangeHistory.RemoveObject(object, true);
 		if(workTabs.getTabs().size()<1&&workTabs.getTabs().contains(emptyTab) == false){
 			AddEmptyTab();
 		}
 	}
 
 	public void UpdateCurrentTab() {
-		tabableToWorkTab.get(tabToTabable.get(workTabs.getSelectionModel().getSelectedItem())).UpdateMethods(null);
+		Tab tab = workTabs.getSelectionModel().getSelectedItem();
+		if(tabToTabable.containsKey(tab))
+			tabableToWorkTab.get(tabToTabable.get(tab)).UpdateMethods(null);
 	}
 	
 	public ObservableMap<String, ? extends Tabable> GetObservableList(Class classTabable) {

@@ -92,13 +92,4 @@
          <Climate>Cold</Climate>
       </climates>
    </Fertility>
-   <Fertility ID="sugarcane">
-      <Name>
-         <entry lang="English">Sugarcane</entry>
-         <entry lang="German">Zuckerrohr</entry>
-      </Name>
-      <climates>
-         <Climate>Warm</Climate>
-      </climates>
-   </Fertility>
 </fertilities>

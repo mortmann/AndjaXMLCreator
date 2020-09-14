@@ -25,6 +25,7 @@ public class TextAreaHistory extends TextArea implements Changeable {
 
 	private void Setup() {
 		ignoreChange = true;
+		
 		textProperty().addListener(new ChangeListener<String>() {
 	        public void changed(ObservableValue<? extends String> ov,
 	        		String old_val, String new_val) {

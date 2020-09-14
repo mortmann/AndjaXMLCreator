@@ -25,6 +25,9 @@ public class Fertility implements Tabable, Comparable<Tabable> {
 	@FieldInfo(required=true,subType=Climate.class)@ElementList(required=false,entry="Climate")
 	public ArrayList<Climate> climates;
 	
+	@FieldInfo(order=0,required=true)
+	public float percentageOfIslands;
+
 	@Override
 	public int compareTo(Tabable f) {
 		return ID.compareTo(f.GetID());

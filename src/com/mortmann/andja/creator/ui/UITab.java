@@ -76,7 +76,7 @@ public class UITab extends Tab implements Tabable  {
 			}
 		});
 		setOnClosed(ac->{
-			GUI.Instance.RemoveWorkTab(this,this);
+			GUI.Instance.RemoveTab(this,this);
 		});
 	}
 	public UITab() {

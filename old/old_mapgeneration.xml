@@ -1,0 +1,189 @@
+<generationInfos>
+   <islandSizes>
+      <islandSize size="VerySmall">
+         <fertilityRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </fertilityRange>
+         <resourceRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </resourceRange>
+      </islandSize>
+      <islandSize size="Small">
+         <fertilityRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </fertilityRange>
+         <resourceRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </resourceRange>
+      </islandSize>
+      <islandSize size="Medium">
+         <fertilityRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </fertilityRange>
+         <resourceRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </resourceRange>
+      </islandSize>
+      <islandSize size="Large">
+         <fertilityRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </fertilityRange>
+         <resourceRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </resourceRange>
+      </islandSize>
+      <islandSize size="VeryLarge">
+         <fertilityRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </fertilityRange>
+         <resourceRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </resourceRange>
+      </islandSize>
+      <islandSize size="Other">
+         <fertilityRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </fertilityRange>
+         <resourceRange>
+            <lower>0</lower>
+            <upper>0</upper>
+         </resourceRange>
+      </islandSize>
+   </islandSizes>
+   <resources>
+      <resource ID="ironore">
+         <StartSize>VerySmall</StartSize>
+         <sizeResourceRange>
+            <entry resourceRange="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="VerySmall">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Small">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Large">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="VeryLarge">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+         </sizeResourceRange>
+      </resource>
+      <resource ID="stone">
+         <StartSize>VerySmall</StartSize>
+         <sizeResourceRange>
+            <entry resourceRange="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="VerySmall">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Small">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Large">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="VeryLarge">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+         </sizeResourceRange>
+      </resource>
+      <resource ID="grainsalt">
+         <StartSize>VerySmall</StartSize>
+         <sizeResourceRange>
+            <entry resourceRange="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="VerySmall">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Small">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Large">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry resourceRange="VeryLarge">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+         </sizeResourceRange>
+      </resource>
+   </resources>
+</generationInfos>

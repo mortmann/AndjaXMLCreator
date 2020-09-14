@@ -6,7 +6,6 @@ import java.util.EnumSet;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.util.FieldInfo;
-import com.mortmann.andja.creator.util.Tabable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -22,10 +21,10 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 	private GridPane listpane;
 	private ComboBoxHistory<Enum> box;
 	Field field;
-	Tabable tabable;
+	Object tabable;
 	boolean ignoreChange = false;
 
-	public EnumArraySetterHistory(String name, Field field, Tabable tabable, Class<E> class1) {
+	public EnumArraySetterHistory(String name, Field field, Object tabable, Class<E> class1) {
 		ObservableList<Enum> names = FXCollections.observableArrayList();
 		for (E e : EnumSet.allOf(class1)) {
 			  names.add(e);
@@ -59,7 +58,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 		} else {
 			for(int i = 0; i<oldArray.size();i++){
 				ignoreChange = true;
-				OnEnumSelect(box,listpane,field,tabable,oldArray.get(i),true);
+				OnEnumSelect(box,listpane,field,tabable,oldArray.get(i),i);
 			}
 		}
 		if(field.getAnnotation(FieldInfo.class)!=null){
@@ -80,7 +79,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 		ScrollPane sp = new ScrollPane();
 		// Action on selection
 		box.setOnAction(x -> {
-			OnEnumSelect(box,listpane,field,tabable,(E)box.getSelectionModel().getSelectedItem(),false);
+			OnEnumSelect(box,listpane,field,tabable,(E)box.getSelectionModel().getSelectedItem(),-1);
 		});
 	    sp.setStyle("-fx-background-color:transparent;");
 		sp.setContent(listpane);
@@ -88,8 +87,16 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 		sp.setFitToWidth(true);
 		add(sp, 3, oldArray.size()+1);
 	}
-
-	private void OnEnumSelect(ComboBoxHistory box,GridPane listpane, Field field, Tabable tab, E e, boolean setup) {
+	/**
+	 * 
+	 * @param box
+	 * @param listpane
+	 * @param field
+	 * @param tab
+	 * @param e
+	 * @param setupPos if not setup of this set it to smaller than 0 else give it the index in the array
+	 */
+	private void OnEnumSelect(ComboBoxHistory box,GridPane listpane, Field field, Object tab, E e, int setupPos) {
         ArrayList<E> old = null;
 		try {
 			old = (ArrayList<E>) field.get(tab); 
@@ -97,7 +104,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 			old = new ArrayList<>();
 //			System.out.println(e1);
 		}
-		if(old != null && old.contains(e) && setup== false){
+		if(old != null && old.contains(e) && setupPos < 0){
 			return;
 		}
 		if(old == null){
@@ -117,7 +124,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 		
 		try {
 			ArrayList<E> tempList = new ArrayList<E>(old);
-			if(setup==false){
+			if(setupPos<0){
 				old.add(e);
 			}
 			OnChange(new ArrayList<E>(old), tempList);
@@ -154,8 +161,13 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		listpane.add(l, 0, old.size());
-		listpane.add(b, 2, old.size());
+		if(setupPos < 0) {
+			listpane.add(l, 0, old.size());
+			listpane.add(b, 2, old.size());
+		} else {
+			listpane.add(l, 0, setupPos);
+			listpane.add(b, 2, setupPos);
+		}
 	}
 	
 	
@@ -163,7 +175,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 	public void Do(Object change) {
 		for(E e : (E[]) change){
 			ignoreChange = true;
-			OnEnumSelect(box, listpane, field,tabable, e,true);
+			OnEnumSelect(box, listpane, field,tabable, e,-1);
 		}
 		if (changeListeners != null) {
 			for (ChangeListenerHistory c : changeListeners) {
@@ -176,7 +188,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 	public void Undo(Object change) {
 		for(E e : (E[]) change){
 			ignoreChange = true;
-			OnEnumSelect(box, listpane, field,tabable, e,true);
+			OnEnumSelect(box, listpane, field,tabable, e,-1);
 		}		
 		if (changeListeners != null) {
 			for (ChangeListenerHistory c : changeListeners) {

@@ -6,7 +6,7 @@ import com.mortmann.andja.creator.GUI.Language;
 public class ClassAction {
 	public enum ClassType { 
 		Structure("Structure"), Unit("Unit Stuff"), Others("Other Stuff"), 
-		Event("Event Stuff"), Localization("Localizations");
+		Event("Event Stuff"), Localization("Localizations"), GameSettings("GameSettings");
 		String Title;
 		@Override
 		public String toString() {

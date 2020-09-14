@@ -24,4 +24,5 @@ public @interface FieldInfo {
 	String Second2DName() default "";
 	float Minimum() default Integer.MIN_VALUE;
 	float Maximum() default Integer.MAX_VALUE;
+	boolean fixed() default false;
 }

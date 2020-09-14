@@ -104,7 +104,6 @@ public class DataTab<T extends Tabable> {
 		}
 		
 		b.setId(s.toString().toLowerCase());
-//		b.setTextAlignment(TextAlignment.CENTER);
 		b.setTextOverrun(OverrunStyle.ELLIPSIS);
 		flow.getChildren().add(b);
 		tabToButton.put(valueAdded, b);
@@ -112,24 +111,10 @@ public class DataTab<T extends Tabable> {
 	private void SetUPButtons(ObservableMap<String, T> map) {
 		flow.getChildren().clear();
 		ArrayList<T> l = new ArrayList<T>(map.values());
-//		FXCollections.sort(l);
 		Collections.sort(l); 
-//		l.sorted();
 		for (T t : l) {
 			AddButton(t);
 		}
 		
-//		for (int i = 0; i < 200; i++) {
-//			String s = i+"-sadasdsdasda";
-//			Button b = new Button(s);
-//			b.setMinSize(100, 100);
-//			b.setMaxSize(100, 100);
-//			b.setTooltip(new Tooltip(s));
-//			b.setWrapText(true);
-//			b.setId(i+"test");
-//			b.setTextAlignment(TextAlignment.CENTER);
-//			b.setTextOverrun(OverrunStyle.WORD_ELLIPSIS);
-//			flow.getChildren().add( b );
-//		}		
 	}
 }
