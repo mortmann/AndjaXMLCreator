@@ -23,6 +23,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,7 +82,7 @@ import javafx.event.EventType;
 
 @SuppressWarnings("rawtypes")
 public class GUI {
-	public enum Language {English, German}
+	public static String[] Languages = null;
 	public static GUI Instance;
 	public Stage mainWindow;
 	private Scene scene;
@@ -102,7 +103,7 @@ public class GUI {
 	public ObservableMap<String, Effect> idToEffect;
 	private ObservableMap<String, GameEvent> idToGameEvent;
 	
-	public HashMap<Language,UITab> languageToLocalization;
+	public HashMap<String,UITab> languageToLocalization;
 	public HashMap<Class, ObservableMap<String, ? extends Tabable>> classToClassObservableMap;
 	public HashMap<Class, GameSettings> gameSettingsClassToTab;
 	HashMap<Tabable,Tab> tabableToTab;
@@ -121,7 +122,7 @@ public class GUI {
         scene = new Scene(new VBox(),1600,900);
         scene.getStylesheets().add("bootstrap3.css");
 		mainWindow = primaryStage;
-		
+		Languages = BaseSave.GetLocalizationFileNames();
 		
 		new ChangeHistory();
 
@@ -317,10 +318,10 @@ public class GUI {
 //        System.out.println(".-	sweasdr_asdw 	 !e$$%67 ".replaceAll("[\\p{Punct}\\s&&[^_]]+", ""));
 //        SaveData();
 	}
-	public UITab LoadLocalization(Language language) {
+	public UITab LoadLocalization(String language) {
 		return UITab.Load(language);
 	}
-	public void SaveLocalization(Language lang) {
+	public void SaveLocalization(String lang) {
 		if(languageToLocalization==null)
 			return; // should only happen when MANUEL programmed changes saved on startup
 		UITab tab = languageToLocalization.get(lang);
@@ -455,9 +456,9 @@ public class GUI {
 		MenuItem exit = new MenuItem("Exit");
 		exit.setOnAction(x->{ System.exit(0); });
 		f.getItems().addAll(files,export,settings,line,exit); 
-
-		for(Language l : Language.values()) {
-			ClassActions.add(new ClassAction(ClassAction.ClassType.Localization, l.toString(), l));
+		
+		for(String l : Languages) {
+			ClassActions.add(new ClassAction(ClassAction.ClassType.Localization, l, l));
 		}
 		
 		ClassActions.add(new ClassAction(ClassAction.ClassType.GameSettings, GenerationInfo.class.getSimpleName(), GenerationInfo.class));
@@ -560,9 +561,19 @@ public class GUI {
 		}
 		File folder = new File(BaseSave.saveFilePath);
 		File[] listOfFiles = folder.listFiles();
-		for(File f : listOfFiles) {
-			try {
-				Path newPath = Paths.get(Settings.exportPath, f.getName());
+		try {
+			for(File f : listOfFiles) {
+				Path newPath = null;
+				String ext = f.getName().substring(f.getName().indexOf("."));
+				if(ext.equalsIgnoreCase(BaseSave.GameStateExtension)) {
+					newPath = Paths.get(Settings.exportPath, "GameState", f.getName());
+				} else
+				if(ext.equalsIgnoreCase(BaseSave.LocalizationExtension)) {
+					newPath = Paths.get(Settings.exportPath, "Localizations", f.getName());
+				} else {
+					System.out.println("Unkown File " + f.getName());
+					continue;
+				}
 				File file = newPath.toFile();
 				if(file.exists()) {
 					Path backUP = Paths.get(Settings.exportPath, BaseSave.backuppath, f.getName());
@@ -576,14 +587,27 @@ public class GUI {
 				    file.delete();
 				}
 			    Files.copy(Paths.get(f.getPath()), newPath);
-			} catch (IOException e) {
-			    e.printStackTrace();
+
+			
 			}
-		}
-		
+		} catch (IOException e) {
+			e.printStackTrace();
+		    Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Failure!");
+			alert.setHeaderText("Export failed:");
+			alert.setContentText(e.getCause().getLocalizedMessage());
+			alert.showAndWait();
+		    return;
+		} 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Success!");
+		alert.setHeaderText("Export was successfully executed!");
+		alert.setContentText("Export to\n" + Settings.exportPath);
+		alert.showAndWait();
+
 	}
 
-	private void LocalizationAction(Language l) {
+	private void LocalizationAction(String l) {
 		if(workTabs.getTabs().contains(emptyTab)){
 			workTabs.getTabs().remove(emptyTab);
 		}
@@ -593,10 +617,11 @@ public class GUI {
 			return;
 		for(Tabable t : tabToTabable.values()) {
 			if(t instanceof UITab) {
-				if(((UITab)t).language == l)
+				if(((UITab)t).language.contentEquals(l.toString()))
 					return;
 			}
 		}
+		tabToTabable.put(tab, tab);
 		workTabs.getTabs().add(tab);
 		workTabs.getSelectionModel().select(tab);
 		languageToLocalization.put(l, tab);
@@ -611,7 +636,7 @@ public class GUI {
 		SaveNeeds();
 		SaveOthers();
 		SaveEvents();
-		for(Language l : Language.values()) {
+		for(String l : languageToLocalization.keySet()) {
 			SaveLocalization(l);
 		}
 		SaveGameSettings();
@@ -883,6 +908,8 @@ public class GUI {
 
 	public void UpdateCurrentTab() {
 		Tab tab = workTabs.getSelectionModel().getSelectedItem();
+		if(tab instanceof UITab)
+			return;
 		if(tabToTabable.containsKey(tab))
 			tabableToWorkTab.get(tabToTabable.get(tab)).UpdateMethods(null);
 	}
@@ -948,6 +975,9 @@ public class GUI {
 
 	public boolean doesIDexistForTabable(int value, Tabable t) {
 		return doesIDexistForTabable(value+"", t);
+	}
+	public Scene getScene() {
+		return scene;
 	}
 	
 }

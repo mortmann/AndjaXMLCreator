@@ -1,6 +1,7 @@
 package com.mortmann.andja.creator.saveclasses;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +19,8 @@ public abstract class BaseSave {
 	public static final String backuppath = "old/";
 	public static final String tempNamePrefix ="temp_";
 	public static final String oldNamePrefix ="old_";
+	public static final String GameStateExtension = ".xml";
+	public static final String LocalizationExtension = ".loc";
 
 	public static boolean Save(String fileName, Object object) {
 		Serializer serializer = new Persister(new AnnotationStrategy());
@@ -58,4 +61,17 @@ public abstract class BaseSave {
 		return Save(GetSaveFileName(), this);
 	}
 	public abstract String GetSaveFileName();
+	public static String[] GetLocalizationFileNames() {
+		File[] files = Paths.get(saveFilePath).toFile().listFiles(new FilenameFilter() {
+		    @Override
+		    public boolean accept(File dir, String name) {
+		        return name.endsWith("-ui.loc");
+		    }
+		});
+		String[] langs = new String[files.length];
+		for (int i = 0; i < langs.length; i++) {
+			langs[i] = files[i].getName().split("-")[0];
+		}
+		return langs;
+	}
 }

@@ -8,6 +8,7 @@ import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Transient;
 import org.simpleframework.xml.ElementListUnion;
 
+import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 
@@ -48,21 +49,30 @@ public class UIElement {
 	}
 
 	public void SetUIElementText(String key, String type) {
+		boolean standard = type.equalsIgnoreCase("text") || type.equalsIgnoreCase("hover");
 		UIElement child = GetUIElement(key);
 		if(childs==null) {
 			childs = new ArrayList<>();
 		}
-		if(child == null) {
-			child = new UIElementText(key,this);
-		}
-		else {
-			childs.removeIf(x->x.name.equalsIgnoreCase(key));
-			child = new UIElementText(key,this,child);
+		if(standard) {
+			if(child == null) {
+			}
+			else {
+				childs.removeIf(x->x.name.equalsIgnoreCase(key));
+			}
+		} else {
+			if(child == null) {
+				child = new UISingleString(key,this);
+			}
+			else {
+				childs.removeIf(x->x.name.equalsIgnoreCase(key));
+				child = new UISingleString(key,this,child);
+			}
 		}
 		childs.add(child);
 	}
 	
-	public TitledPane GetPane() {
+	public Node GetPane() {
 		gridpane = new GridPane();
 		title = new TitledPane(name, gridpane);
 
@@ -128,4 +138,6 @@ public class UIElement {
 		}
 		childs.addAll(newChilds);
 	}
+	
+
 }

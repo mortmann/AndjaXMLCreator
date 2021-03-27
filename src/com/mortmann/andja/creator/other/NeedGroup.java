@@ -35,7 +35,7 @@ public class NeedGroup implements Tabable {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
 		}
-		return Name.get(Settings.CurrentLanguage.toString());
+		return Name.get(Settings.CurrentLanguage);
 	}
 	@Override
 	public String GetID() {

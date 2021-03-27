@@ -55,8 +55,8 @@
          <hasHitbox>false</hasHitbox>
          <maxHealth>50.0</maxHealth>
          <structureRange>0</structureRange>
-         <populationLevel>0</populationLevel>
-         <populationCount>1</populationCount>
+         <populationLevel>1</populationLevel>
+         <populationCount>0</populationCount>
          <structureLevel>1</structureLevel>
          <tileWidth>1</tileWidth>
          <tileHeight>1</tileHeight>
@@ -94,7 +94,7 @@
          <maxHealth>50.0</maxHealth>
          <structureRange>0</structureRange>
          <populationLevel>0</populationLevel>
-         <populationCount>2</populationCount>
+         <populationCount>0</populationCount>
          <structureLevel>2</structureLevel>
          <tileWidth>1</tileWidth>
          <tileHeight>1</tileHeight>
@@ -135,8 +135,8 @@
          <hasHitbox>false</hasHitbox>
          <maxHealth>50.0</maxHealth>
          <structureRange>0</structureRange>
-         <populationLevel>0</populationLevel>
-         <populationCount>3</populationCount>
+         <populationLevel>1</populationLevel>
+         <populationCount>0</populationCount>
          <structureLevel>3</structureLevel>
          <tileWidth>1</tileWidth>
          <tileHeight>1</tileHeight>
@@ -532,7 +532,7 @@
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <maxHealth>50.0</maxHealth>
-         <structureRange>0</structureRange>
+         <structureRange>4</structureRange>
          <populationLevel>1</populationLevel>
          <populationCount>0</populationCount>
          <structureLevel>0</structureLevel>
@@ -830,7 +830,7 @@
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <maxHealth>200.0</maxHealth>
-         <structureRange>0</structureRange>
+         <structureRange>4</structureRange>
          <populationLevel>1</populationLevel>
          <populationCount>2500</populationCount>
          <structureLevel>0</structureLevel>
@@ -1305,7 +1305,7 @@
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
          <maxNumberOfWorker>0</maxNumberOfWorker>
-         <produceTime>0.0</produceTime>
+         <produceTime>20.0</produceTime>
          <maxOutputStorage>1</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="1">
@@ -1480,11 +1480,11 @@
          <forMarketplace>true</forMarketplace>
          <maxNumberOfWorker>1</maxNumberOfWorker>
          <produceTime>35.0</produceTime>
-         <maxOutputStorage>0</maxOutputStorage>
+         <maxOutputStorage>5</maxOutputStorage>
          <efficiency>1.0</efficiency>
          <output length="1">
             <Item ID="ironore">
-               <count>0</count>
+               <count>1</count>
             </Item>
          </output>
       </mine>

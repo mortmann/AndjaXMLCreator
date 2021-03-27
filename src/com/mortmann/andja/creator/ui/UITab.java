@@ -1,56 +1,62 @@
 package com.mortmann.andja.creator.ui;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.ElementListUnion;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 
 import com.mortmann.andja.creator.GUI;
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.saveclasses.BaseSave;
 import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.history.ChangeHistory;
+import com.mortmann.andja.creator.util.history.TextAreaHistory;
 
 import javafx.geometry.VPos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
-@Root(strict=false,name="UI")
+@Root(strict=false,name="UILanguageLocalizations")
 public class UITab extends Tab implements Tabable  {
-	@ElementListUnion ({
-        @ElementList(required=false,entry="element", inline=true, type=UIElement.class),
-        @ElementList(required=false,entry="textelement", inline=true, type=UIElementText.class)
-    })
-	public ArrayList<UIElement> elements = new ArrayList<>();
+//	@ElementListUnion ({
+//        @ElementList(required=false,entry="element", inline=true, type=UIElement.class),
+//        @ElementList(required=false,entry="textelement", inline=true, type=UIElementText.class)
+//    })
+//	public ArrayList<UIElement> elements = new ArrayList<>();
+	@ElementList(name="localizationData", entry = "translationData")
+	ArrayList<TranslationData> translations;
+	ArrayList<TextAreaHistory> tabList = new ArrayList<TextAreaHistory>();
 	public GridPane grid;
 	public ScrollPane scroll;
-	public Language language;
-	public UITab(HashMap<String, UIElement> map,Language lang) {
+	@Attribute
+	public String language;
+	public UITab(ArrayList<TranslationData> translations,String lang) {
 		language = lang;
-		this.elements = new ArrayList<>(map.values());
+		this.translations = translations;
 		int x = 0;
 		int y = 0;
 		grid = new GridPane();
 		grid.setGridLinesVisible(true);
-		for(String name : map.keySet()) {
-			TitledPane tp = map.get(name).GetPane();
+		for(TranslationData td : translations) {
+			Node tp = new UIElementText(td).GetPane(tabList);
+			tp.setUserData(td);
 			GridPane.setValignment(tp, VPos.TOP);
 			grid.add(tp,x,y);
 			x++;
-			if(x==2) {
+			if(x==3) {
 				x = 0;
 				y ++;
 			}
@@ -108,73 +114,47 @@ public class UITab extends Tab implements Tabable  {
 	
 
 	public boolean Save(){
-		return BaseSave.Save("localization-"+ language +".xml", this);
+		return BaseSave.Save(""+ language +"-ui.loc", this);
 	}
 	
-	public static UITab Load(Language language) {
+	public static UITab Load(String language) {
 		Serializer serializer = new Persister(new AnnotationStrategy());
-		String filename ="localization-"+ language +".xml";
+		
+		String filename =""+ language +"-ui.loc";
+		UITab empty = new UITab();
+		try {
+			empty = serializer.read(empty, Paths.get("Empty-ui.loc").toFile());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
         UITab tab = new UITab();
 		try {
 			tab = serializer.read(tab, Paths.get(BaseSave.saveFilePath, filename).toFile());
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			tab = new UITab(new HashMap<>(), language);
+			tab = new UITab(new ArrayList<TranslationData>(), language);
 		}    
-		HashMap<String,UIElement> missing = LoadMissingUIData(language);
-		if(missing == null)
-			return tab;
-		HashMap<String,UIElement> inTab = new HashMap<>(); 
-		for(UIElement element : tab.elements) {
-			inTab.put(element.name, element);
-		}
-		for(String name : missing.keySet()) {
-			if(inTab.containsKey(name)) {
-				inTab.get(name).AddMissing(missing.get(name).childs);
-			} else {
-				inTab.put(name, missing.get(name));
+		HashSet<TranslationData> datas = new HashSet<>(tab.translations);
+		if(empty != null) {
+			for(TranslationData data : empty.translations) {
+				if(datas.contains(data) == false)
+					tab.translations.add(data);
 			}
 		}
-		return new UITab(inTab, language);
+		tab.translations = (ArrayList<TranslationData>) tab.translations.stream().sorted((object1, object2) -> object1.id.compareTo(object2.id)).
+                collect(Collectors.toList());;
+		return new UITab(tab.translations, language);
 	}
-	public static HashMap<String,UIElement> LoadMissingUIData(Language language) {
-		AnnotationStrategy as = new AnnotationStrategy();
-		Serializer serializer = new Persister(as);
-		ArrayList<String> strings = new ArrayList<>();		
-		UILanguageLocalizations missings = new UILanguageLocalizations();
-		try {
-			serializer.read(missings, new File("Missing-UI-Localization-"+language));
-		} catch (Exception e) {
-			return null;
+
+	public void onTabInput() {
+		Scene s = GUI.Instance.getScene();
+		Node n = s.focusOwnerProperty().get();
+		if(n instanceof TextAreaHistory) {
+			int index = tabList.indexOf(n);
+			if(index == -1)
+				return;
+			tabList.get((index + 1) % tabList.size()).requestFocus();
 		}
-		strings.addAll(missings.missingLocalization);
-		HashMap<String,UIElement> map = new HashMap<>();
-		for(String s : strings) {
-			String[] parts = s.split("/");
-			UIElement element = new UIElement(null,null);
-			String key = parts[0];
-			if(map.containsKey(key)) {
-				element = map.get(key);
-			} else {
-				if(parts.length>2)
-					element = new UIElement(key,null);
-				else
-					element = new UIElementText(key,null);
-				map.put(key,element);
-			}
-			if(parts.length<=2) //when it is max 2 -> its already end node 
-				continue;
-			
-			for (int i = 1; i < parts.length; i++) {
-				key = parts[i];
-				if( i == parts.length-2){
-					element.SetUIElementText(key,parts[i+1]);
-					break;
-				} else {
-					element = element.GetUIElement(key);
-				}
-			}
-		}
-		return map;
 	}
+	
 }

@@ -10,7 +10,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Optional;
 
-import com.mortmann.andja.creator.GUI.Language;
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.GameEvent.Target;
@@ -834,10 +833,7 @@ public class WorkTab extends Tab {
 		col2.setMinWidth(50);
 		grid.getColumnConstraints().addAll(col1, col2);
 
-		ArrayList<Language> langes = new ArrayList<>();
-		for (Language e : EnumSet.allOf(Language.class)) {
-			langes.add(e);
-		}
+		ArrayList<String> langes = new ArrayList<>(Arrays.asList(GUI.Languages));
 		grid.add(new Label(field.getName()), 0, 0);
 
 		for (int i = 0; i < langes.size(); i++) {

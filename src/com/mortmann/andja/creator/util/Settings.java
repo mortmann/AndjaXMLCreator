@@ -8,7 +8,6 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI;
-import com.mortmann.andja.creator.GUI.Language;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
@@ -35,7 +34,7 @@ public class Settings {
 	@Element(required = false)
 	public static String exportPath = "./";
 	@Element(required = false)
-	public static Language CurrentLanguage = Language.English;
+	public static String CurrentLanguage = "English";
 	
 	public static void ShowSettingsDialog() {
 		Dialog<Settings> dialog = new Dialog<>();
@@ -86,7 +85,8 @@ public class Settings {
 
 		Label languageLabel = new Label("Language");
 		grid.add(languageLabel, 0, 1);
-		ComboBox<Language> languageBox = new ComboBox<Language>(FXCollections.observableArrayList(Language.values()));
+		
+		ComboBox<String> languageBox = new ComboBox<String>(FXCollections.observableArrayList(GUI.Languages));
 		languageBox.getSelectionModel().select(CurrentLanguage);
 		languageBox.setMinWidth(((100f-percentage) / 100f)*500f);
 		grid.add(languageBox, 1, 1);

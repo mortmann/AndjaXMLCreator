@@ -1,7 +1,8 @@
 package com.mortmann.andja.creator.ui;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.util.history.TextAreaHistory;
@@ -9,53 +10,40 @@ import com.mortmann.andja.creator.util.history.TextAreaHistory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
-@Root(strict=false,name="text")
-public class UIElementText extends UIElement {
+public class UIElementText {
+	enum StringType { Text, HoverOver, Value}
+	TranslationData data;
 	
-	@Element(required=false) public String text;
-	@Element(required=false) public String hoverOver;
+	private GridPane gridpane;
 	
-	public UIElementText(String name, UIElement parent) {
-		super(name,parent);
+	private ArrayList<TextAreaHistory> tabList;
+	TextAreaHistory last;
+	public UIElementText(TranslationData data) {
+		this.data = data;
 	}
-	public UIElementText(String name, UIElement parent ,UIElement element) {
-		super(name,parent);
-		childs = element.childs;
-	}
-	@Override
-	public TitledPane GetPane() {
+	
+	public Node GetPane(ArrayList<TextAreaHistory> tabList) {
+		this.tabList = tabList;
 		gridpane = new GridPane();
-		gridpane.add(GetStringSetter(true),0,0);
-		gridpane.add(GetStringSetter(false),0,1);
-		
-		title = new TitledPane(name, gridpane);
-		if(childs != null) {
-			int x = 0;
-			int y = 2;
-			for(UIElement ui : childs) {
-				gridpane.add(ui.GetPane(),x,y);
-				x++;
-				if(x==3) {
-					x = 0;
-					y ++;
-				}
-			}
+		gridpane.add(new Label(data.id), 0, 0);
+		if(data.onlyHoverOver == null || data.onlyHoverOver == false) {
+			gridpane.add(GetStringSetter(StringType.Text , -1),0,1);
 		}
-		
-		title.setExpanded(false);
+		gridpane.add(GetStringSetter(StringType.HoverOver, -1),0,2);
+		if(data.valueCount != null && data.valueCount>0) {
+			gridpane.add(GetStringArraySetter(), 0, 3);
+		}
 		CheckMissing();
-		
-		return title;
+		return gridpane;
 	}
-	public UIElementText() {
-		
-	}
-	private GridPane GetStringSetter(boolean isText) {
+	private Node GetStringArraySetter() {
 		GridPane grid = new  GridPane();
 		ColumnConstraints col1 = new ColumnConstraints();
         col1.setMinWidth(100);
@@ -64,51 +52,126 @@ public class UIElementText extends UIElement {
         col2.setMinWidth(200);
         col2.setMaxWidth(300);
         grid.getColumnConstraints().addAll(col1,col2);
-		TextAreaHistory  textField = new TextAreaHistory();
+        if(data.values!= null) {
+	        for (int i = 0; i < data.values.length; i++) {
+	        	grid.add(GetStringSetter(StringType.Value, i), 0,i);
+			}
+		}
+        Button button = new Button("+ Value");
+        button.setOnAction(s -> {
+        	int value = 0;
+        	if(data.values != null) {
+        		value = data.values.length;
+        		if(value == data.valueCount) {
+        			return;
+        		}
+        		data.values = Arrays.copyOf(data.values, value+1); 
+        	} else {
+        		data.values = new String[1];
+        	}
+        	grid.add(GetStringSetter(StringType.Value, value), 0, value);
+        	if(value+1 == data.valueCount) {
+    			gridpane.getChildren().remove(button);
+    		}
+//        	grid.getChildren().remove(button);
+//        	grid.add(button, 0, grid.getRowCount()+1);
+        });
+        GridPane.setHalignment(button, HPos.CENTER);
+        gridpane.add(button, 0, gridpane.getRowCount()+1);
+		return grid;
+	}
+
+	public UIElementText() {
+		
+	}
+	private GridPane GetStringSetter(StringType strType, int valueIndex) {
+		GridPane grid = new  GridPane();
+		ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMinWidth(100);
+        col1.setMaxWidth(100);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMinWidth(200);
+        col2.setMaxWidth(275);
+        grid.getColumnConstraints().addAll(col1,col2);
+		TextAreaHistory textField = new TextAreaHistory();
+		if(last == null)
+			tabList.add(textField);
+		else {
+			int index = tabList.indexOf(last);
+			tabList.add(index+1, textField);
+		}
+		last = textField;
 		textField.setMaxHeight(65);
-		if(text!=null && isText){
-			textField.setStartText(text);
-		} else 
-		if(hoverOver!=null) {
-			textField.setText(hoverOver);
+		switch (strType) {
+			case HoverOver:
+				if(data.hoverOverTranslation!=null) {
+					textField.setText(data.hoverOverTranslation);
+				}
+				break;
+			case Text:
+				if(data.translation !=null){
+					textField.setStartText(data.translation);
+				}
+				break;
+			case Value:
+				if(data.values[valueIndex] !=null){
+					textField.setStartText(data.values[valueIndex]);
+				}
+				break;
+			default:
+				break;
 		}
 		textField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(isText)
-					text = textField.getText();
-				else
-					hoverOver = textField.getText();
+				switch (strType) {
+					case HoverOver:
+						data.hoverOverTranslation = textField.getText();	
+						break;
+					case Text:					
+						data.translation = textField.getText();	
+						break;
+					case Value:
+						data.values[valueIndex] = textField.getText();	
+						break;
+					default:
+						break;
+				}
 				GUI.Instance.changedCurrentTab(true);
 				CheckMissing();
 			}
 		});
-		if(isText) 
-			grid.add(new Label("Text"), 0, 0);	
-		else
-			grid.add(new Label("HoverOver"),0, 0);	
-
-		
+		switch (strType) {
+			case HoverOver:
+				grid.add(new Label("HoverOver"),0, 0);	
+				break;
+			case Text:					
+				grid.add(new Label("Text"), 0, 0);	
+				break;
+			case Value:
+				grid.add(new Label("Value " + (valueIndex+1)),0, 0);	
+				break;
+			default:
+				break;
+		}
 		grid.add(textField, 1, 0);	
 		return grid;
 	}
 	
 	public void CheckMissing() {
 		if(IsMissing()) {
-		    ObservableList<String> styleClass = title.getStyleClass();
+		    ObservableList<String> styleClass = gridpane.getStyleClass();
 		    if(styleClass.contains("titledpane-error")==false)
 		    	styleClass.add("titledpane-error");
 		} else {
-		    ObservableList<String> styleClass = title.getStyleClass();
+		    ObservableList<String> styleClass = gridpane.getStyleClass();
 		    if(styleClass.contains("titledpane-error"))
 		    	styleClass.removeIf(x->x.equals("titledpane-error"));
 		}
-		if(parent!=null)
-			parent.UpdateMissing();
 	}
-	@Override
 	public boolean IsMissing() {
-		return text == null || hoverOver == null || text.isEmpty() || hoverOver.isEmpty();
+		return  (data.onlyHoverOver != null && data.onlyHoverOver == false) && (data.translation == null||data.translation.isBlank()) 
+				|| data.hoverOverTranslation == null || data.hoverOverTranslation.isBlank();
 	}
 	
 }
