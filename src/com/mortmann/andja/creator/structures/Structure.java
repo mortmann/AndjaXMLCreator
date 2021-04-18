@@ -63,7 +63,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 
 	@Element(required=false) public boolean canStartBurning = false;
  
-	@FieldInfo(IsEffectable=true) @Element(required=false) public int maintenanceCost;
+	@FieldInfo(IsEffectable=true) @Element(required=false) public int upkeepCost;
 	@FieldInfo(IsEffectable=true) @Element(required=false) public int buildCost;
 
 	@Element(required=false) public BuildTypes buildTyp =  BuildTypes.Single;

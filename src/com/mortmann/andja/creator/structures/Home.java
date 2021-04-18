@@ -18,7 +18,7 @@ public class Home extends Structure {
 		structureRange = 0;
 		hasHitbox = true;
 		canTakeDamage = true;
-		maintenanceCost = 0;
+		upkeepCost = 0;
 	}
 	@Override
 	public String GetButtonColor() {

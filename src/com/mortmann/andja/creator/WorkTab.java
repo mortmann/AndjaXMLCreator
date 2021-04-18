@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import com.mortmann.andja.creator.other.*;
-import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.structures.*;
 import com.mortmann.andja.creator.structures.Structure.TileType;

@@ -9,6 +9,7 @@ public class NeedStructure extends Structure {
 	public NeedStructure(){
 		buildTyp = BuildTypes.Single;
 		structureTyp =	StructureTyp.Blocking;
+		hasHitbox = true;
 	}
 
 	@Override

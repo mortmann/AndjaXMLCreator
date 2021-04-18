@@ -23,6 +23,9 @@ public class ServiceStructure extends Structure {
     @Element public int maxNumberOfWorker = 1;
     @Element public float workSpeed = 0.01f;
 	
+    public ServiceStructure() {
+		hasHitbox = true;
+	}
     @Override
 	public Tabable StructureDependsOnTabable(Tabable t) {
 		if(t.getClass().isAssignableFrom(Structure.class)&& specificRange!=null){

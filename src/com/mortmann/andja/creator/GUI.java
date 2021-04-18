@@ -23,8 +23,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;

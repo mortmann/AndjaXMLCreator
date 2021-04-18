@@ -16,11 +16,9 @@ import org.simpleframework.xml.core.Persister;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.other.Item;
-import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.saveclasses.BaseSave;
 import com.mortmann.andja.creator.structures.Mine;
 import com.mortmann.andja.creator.structures.Structure;
-import com.mortmann.andja.creator.structures.Structure.TileType;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.OrderEr;
 import com.mortmann.andja.creator.util.Range;
