@@ -134,7 +134,9 @@ public class NumberTextField extends TextFieldHistory {
             
             // Compute the text that should normally be in the textfield now
             String finalText = currentText.substring(0, start) + text + currentText.substring(end);
-            
+            if(finalText.startsWith("-")) {
+            	finalText = finalText.substring(1, finalText.length());
+            }
             // If the max length is not excedeed
             int numberOfexceedingCharacters = finalText.length() - this.getMaxLength();
             if (numberOfexceedingCharacters <= 0) {
