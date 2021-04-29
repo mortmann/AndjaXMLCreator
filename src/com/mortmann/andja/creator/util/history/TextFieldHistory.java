@@ -45,7 +45,8 @@ public class TextFieldHistory extends TextField implements Changeable {
 	
 	public void setStartText(String value) {
 		ignoreChange = true;
-		setText(value);
+		if(value != null)
+			setText(value);
 	}
 	
 	@Override

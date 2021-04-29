@@ -10,6 +10,7 @@ public class NeedStructure extends Structure {
 		buildTyp = BuildTypes.Single;
 		structureTyp =	StructureTyp.Blocking;
 		hasHitbox = true;
+		canTakeDamage = true;
 	}
 
 	@Override

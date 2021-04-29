@@ -31,7 +31,7 @@ public class Effect implements Tabable, Comparable<Tabable> {
 	@Element(required=false) public boolean unique;
 	@FieldInfo(order = 0, required = true, RequiresEffectable = true, compareType=Tabable.class) 
 	@Element(required=false) public String nameOfVariable; // what does it change
-	@FieldInfo(order = 1, required = true) @Element(required=false)public float change; // how it changes the Variable?
+	@FieldInfo(order = 1, required = true, Minimum = -100000000, Maximum = 100000000) @Element(required=false)public float change; // how it changes the Variable?
 	@ElementList(required=false,entry="Target")@FieldInfo(required=true,subType=Target.class)public ArrayList<Target> targets; // what it can target
 	@Element(required=false) @FieldInfo(order = 3) public EffectTypes addType;
 	@Element(required=false) @FieldInfo(order = 1) public EffectModifier modifierType;

@@ -930,7 +930,7 @@ public class WorkTab extends Tab {
 		float min = Integer.MIN_VALUE;
 		if (fi != null) {
 			max = fi.Maximum();
-			min = fi.Maximum();
+			min = fi.Minimum();
 		}
 		NumberTextField box = new NumberTextField(true, min, max);
 		CheckIfRequired(box, field, tabable);
@@ -973,7 +973,7 @@ public class WorkTab extends Tab {
 		float min = Integer.MIN_VALUE;
 		if (info != null) {
 			max = info.Maximum();
-			min = info.Maximum();
+			min = info.Minimum();
 		}
 		NumberTextField box = new NumberTextField(min, max);
 		variableToChangeable.put(field.getName(), box);

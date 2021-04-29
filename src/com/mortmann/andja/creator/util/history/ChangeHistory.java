@@ -16,6 +16,8 @@ public class ChangeHistory {
 		changes.put(object , oh);
 	}
 	public static void AddChange(Changeable changeable, Object change, Object old) {
+		if(changes.containsKey(CurrentTab) == false)
+			return;
 		Change last = new Change(changeable,change, old);
 		changes.get(CurrentTab).AddChange(last);
 		GUI.Instance.changedCurrentTab(changes.get(CurrentTab).SavedChanges());
