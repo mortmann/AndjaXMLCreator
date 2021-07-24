@@ -6,6 +6,7 @@ import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.Need;
+import com.mortmann.andja.creator.unitthings.Worker;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.MethodInfo;
 import com.mortmann.andja.creator.util.Tabable;
@@ -18,8 +19,8 @@ public abstract class OutputStructure extends Structure {
 	@FieldInfo(required = true, IsEffectable=true) @Element public float produceTime = 0;
 	@FieldInfo(required = true, IsEffectable=true) @Element(required=false) public int maxOutputStorage;
 	@FieldInfo(required = true, IsEffectable=true,Minimum = 0) @Element(required=false) public float efficiency = 1f;
-	@FieldInfo @Element(required=false) public String workerWorkSound;
-	@FieldInfo @Element(required=false) public String workSound;
+	@FieldInfo(order = 0, compareType=Worker.class) @Element(required=false) public String workerID;
+
 
 	@ElementArray(entry="Item",required=false) public Item[] output;
 
@@ -65,27 +66,32 @@ public abstract class OutputStructure extends Structure {
 			}
 			
 			for(Need need : needs) {
-				String singleNeed = "";
-				if(need.UsageAmounts==null) {
-					singleNeed +="MISSING USAGEAMOUNTS " + need.GetName();
-					continue;
-				}
-				for(String s : need.UsageAmounts.keySet()) {
-					singleNeed += "\t"+ GUI.Instance.idToPopulationLevel.get(s) + ":";
-					if(out.count*produceTime*efficiency != 0) {
-						double value = ((double)need.UsageAmounts.get(s)) * 1000d * (double)out.count * (double)produceTime * (double)efficiency;
-						value = Math.round(value * 10000d) / 10000d;
-						value /= 60d;
-						singleNeed += "\t"+ value;//(need.UsageAmounts.get(s) * 1000 * 60) / ((out.count*produceTime*efficiency));
-					}
-					else 
-						singleNeed += "\t UNDEFINED";
-					singleNeed += "\n";
-				}			
 				calculated += "\n";
-				calculated += singleNeed;
+				calculated += PerNeedNeeded(need, out);
 			}
 		}
 		return calculated;
 	}
+	
+	public String PerNeedNeeded(Need need, Item out) {
+		String singleNeed = "";
+		if(need.UsageAmounts==null) {
+			singleNeed +="MISSING USAGEAMOUNTS " + need.GetName();
+			return singleNeed;
+		}
+		for(String s : need.UsageAmounts.keySet()) {
+			singleNeed += "\t"+ GUI.Instance.idToPopulationLevel.get(s) + ":";
+			if(out.count*produceTime*efficiency > 0) {
+				double production = (double)out.count * (60d/(double)produceTime) * (double)efficiency;
+				double value = ((double)need.UsageAmounts.get(s) * 1000) / production;
+				value = Math.round(value * 10000d) / 10000d;
+				singleNeed += "\t"+ value;
+			}
+			else 
+				singleNeed += "\t UNDEFINED";
+			singleNeed += "\n";
+		}		
+		return singleNeed;
+	}
+	
 }

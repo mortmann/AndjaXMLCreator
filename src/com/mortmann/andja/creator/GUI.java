@@ -23,6 +23,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -38,6 +39,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
@@ -61,6 +63,7 @@ import com.mortmann.andja.creator.unitthings.ArmorType;
 import com.mortmann.andja.creator.unitthings.DamageType;
 import com.mortmann.andja.creator.unitthings.Ship;
 import com.mortmann.andja.creator.unitthings.Unit;
+import com.mortmann.andja.creator.unitthings.Worker;
 import com.mortmann.andja.creator.util.ClassAction;
 import com.mortmann.andja.creator.util.ClassAction.ClassType;
 import com.mortmann.andja.creator.util.FieldInfo;
@@ -99,8 +102,9 @@ public class GUI {
 	public ObservableMap<String, NeedGroup> idToNeedGroup;
 	public ObservableMap<String, PopulationLevel> idToPopulationLevel;
 	public ObservableMap<String, Effect> idToEffect;
-	private ObservableMap<String, GameEvent> idToGameEvent;
-	
+	public ObservableMap<String, GameEvent> idToGameEvent;
+	public ObservableMap<String, Worker> idToWorker;
+
 	public HashMap<String,UITab> languageToLocalization;
 	public HashMap<Class, ObservableMap<String, ? extends Tabable>> classToClassObservableMap;
 	public HashMap<Class, GameSettings> gameSettingsClassToTab;
@@ -143,7 +147,8 @@ public class GUI {
         idToPopulationLevel = FXCollections.observableHashMap();
         idToEffect = FXCollections.observableHashMap();
         idToGameEvent = FXCollections.observableHashMap();
-        
+        idToWorker = FXCollections.observableHashMap();
+
         classToClassObservableMap = new HashMap<>();
         
         //FOR NEW Type of Class add a idToObject Map 
@@ -158,6 +163,8 @@ public class GUI {
         classToClassObservableMap.put(PopulationLevel.class, idToPopulationLevel);
         classToClassObservableMap.put(Effect.class, idToEffect);
         classToClassObservableMap.put(GameEvent.class, idToGameEvent);
+        classToClassObservableMap.put(Worker.class, idToWorker);
+
         //Then add a class Action for it
         ClassActions = new ArrayList<ClassAction>();
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Structure, "Production", Production.class));
@@ -176,6 +183,7 @@ public class GUI {
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Unit, "ServiceStructure", Ship.class));
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Unit, "ArmorType", ArmorType.class));
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Unit, "DamageType", DamageType.class));
+		ClassActions.add(new ClassAction(ClassAction.ClassType.Unit, "Worker", Worker.class));
 
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Others, "Item", ItemXML.class));
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Others, "Fertility", Fertility.class));
@@ -213,6 +221,8 @@ public class GUI {
         classToDataTab.put(Effect.class, d10);
         DataTab<GameEvent> d11 = new DataTab<>("GameEvent", idToGameEvent, dataTabs);
         classToDataTab.put(GameEvent.class, d11);
+        DataTab<Worker> d12 = new DataTab<>("Worker",idToWorker, dataTabs);
+        classToDataTab.put(Worker.class, d12);
 
 		workTabs = new TabPane();
 		workTabs.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -286,7 +296,7 @@ public class GUI {
 	private void LoadData(){
 		Structures.Load(idToStructures);
 		Items.Load(idToItem);
-		UnitSave.Load(idToUnit);
+		UnitSave.Load(idToUnit, idToWorker);
 		Fertilities.Load(idToFertility);
 		Needs.Load(idToNeed, idToNeedGroup);
 		Events.Load(idToEffect, idToGameEvent);
@@ -656,7 +666,7 @@ public class GUI {
 		return n.Save();
 	}
 	private boolean SaveUnits() {
-		UnitSave us = new UnitSave(idToUnit.values()); 
+		UnitSave us = new UnitSave(idToUnit.values(), idToWorker.values()); 
 		return us.Save();
 	}
 	private boolean SaveCombat() {
@@ -730,7 +740,13 @@ public class GUI {
 			allTabables.addAll(map.values());
 		}
 		if(tabToID.get(curr)!=null && currTabable.GetID() != tabToID.get(curr)) {
-			classToClassObservableMap.get(currTabable.getClass()).remove(tabToID.get(curr));
+			if(Structure.class.isAssignableFrom(currTabable.getClass())) {
+				classToClassObservableMap.get(Structure.class).remove(tabToID.get(curr));
+			} else if(Unit.class.isAssignableFrom(currTabable.getClass())) {
+				classToClassObservableMap.get(Unit.class).remove(tabToID.get(curr));
+			} else {
+				classToClassObservableMap.get(currTabable.getClass()).remove(tabToID.get(curr));
+			}
 			//ID Changed so we need to change all references
 			//just go through all -- even tho it isnt optimal but easier for nows
 			for(Tabable t : allTabables) {
@@ -771,6 +787,7 @@ public class GUI {
 			}
 		}
 		tabToID.put(curr, currTabable.GetID());
+		
 		if(currTabable.GetID().trim().isEmpty()){
 			return;
 		}
@@ -819,6 +836,13 @@ public class GUI {
 			idToGameEvent.put(((GameEvent)currTabable).GetID(), ((GameEvent)currTabable));
 			saved = SaveEvents();
 		}
+		else if(currTabable instanceof Worker) {
+			idToWorker.put(((Worker)currTabable).GetID(), ((Worker)currTabable));
+			saved = SaveUnits();
+		}
+		else {
+			System.out.println("Missing save for " + currTabable.GetName());
+		}
 		if(saved)
 			ChangeHistory.ObjectSaved(currTabable);
 		if(ChangeHistory.IsSaved(currTabable) && saved){
@@ -841,14 +865,28 @@ public class GUI {
 				Object o = field.get(t);
 				if(o == null){
 					missings.add(field);
+					continue;
+				}
+				if(field.getType().isAssignableFrom(ArrayList.class)) {
+					if(((ArrayList)o).contains(null)||((ArrayList)o).contains("")) {
+						missings.add(field);
+						continue;
+					}
+				}
+				if(field.getType() == HashMap.class) {
+					if(((HashMap)o).values().contains(null)||((HashMap)o).values().contains("")) {
+						missings.add(field);
+						continue;
+					}
 				}
 				if(field.getType()==Integer.class){
 					if((int)o==-1){
 						missings.add(field);
+						continue;
 					}
 				}
 				if(Collection.class.isAssignableFrom(field.getType())){
-					if(((Collection)o).isEmpty()){
+					if(((Collection)o).isEmpty()||((Collection)o).contains(null)){
 						missings.add(field);
 					}
 				}
@@ -937,8 +975,9 @@ public class GUI {
 		ArrayList<Structure> all = new ArrayList<>(idToStructures.values());
 		all.removeIf(x->x instanceof OutputStructure == false);
 		@SuppressWarnings("unchecked")
-		ArrayList<OutputStructure> outs = (ArrayList)all;//new ArrayList<>(all.to);
-		outs.removeIf(x-> x.output == null || Arrays.asList(x.output).stream().anyMatch(y->y.GetID() == item.GetID()) == false);
+		ArrayList<OutputStructure> outs = (ArrayList)all;
+		outs = (ArrayList<OutputStructure>) outs.stream()
+				.filter(x->x.output != null && Arrays.stream(x.output).anyMatch(y->y.ID.contentEquals(item.ID))).collect(Collectors.toList());
 		return outs;
 	}
 	public ArrayList<Structure> getStructureList(Class class1) {
@@ -947,6 +986,7 @@ public class GUI {
 		list.removeIf(x->x.getClass()!=class1);
 		return list;
 	}
+	
 	public ArrayList<Tabable> getTabableList(Class class1) {
 		return new ArrayList<>(classToClassObservableMap.get(class1).values());
 	}

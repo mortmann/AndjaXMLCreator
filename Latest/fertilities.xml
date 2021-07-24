@@ -64,6 +64,15 @@
          <Climate>Middle</Climate>
       </climates>
    </Fertility>
+   <Fertility ID="tobacco">
+      <Name>
+         <entry lang="Deutsch">Tabak</entry>
+         <entry lang="English">Tobacco</entry>
+      </Name>
+      <climates>
+         <Climate>Warm</Climate>
+      </climates>
+   </Fertility>
    <Fertility ID="spices">
       <Name>
          <entry lang="English">Spices</entry>

@@ -205,6 +205,12 @@ zu dem nächst niedrigeren.</hoverOverTranslation>
             <string>UI Canvas/Center/Diplomacy/Decisions/Title/</string>
          </uiElements>
       </translationData>
+      <translationData id="DiplomacyTitle">
+         <translation>Diplomatie</translation>
+         <uiElements>
+            <string>UI Canvas/Center/Diplomacy/Title/</string>
+         </uiElements>
+      </translationData>
       <translationData id="DiscardUnsaved">
          <translation>Wollen Sie jeglichen ungespeicherten Fortschritt verwerfen.</translation>
          <uiElements>
@@ -494,6 +500,24 @@ Pass auf welche du nutzt, denn Sie können</hoverOverTranslation>
             <string>UI Canvas/PauseMenu/DarkLayer/Menu/SoundPanel/Content/VerticalLayoutGroup/Music/Label/</string>
          </uiElements>
       </translationData>
+      <translationData id="NeedInRange">
+         <translation>In Reichweite</translation>
+         <uiElements>
+            <string>%Need/</string>
+         </uiElements>
+      </translationData>
+      <translationData id="NeedLocked">
+         <translation>Gesperrt</translation>
+         <uiElements>
+            <string>%Need/</string>
+         </uiElements>
+      </translationData>
+      <translationData id="NeedNotInRange">
+         <translation>Nicht in Reichweite</translation>
+         <uiElements>
+            <string>%Need/</string>
+         </uiElements>
+      </translationData>
       <translationData id="NewGame">
          <translation>Neues Spiel</translation>
          <hoverOverTranslation>Starte ein neues Spiel und passe dieses an.</hoverOverTranslation>
@@ -773,8 +797,14 @@ diese in Reichweite ist.</hoverOverTranslation>
       <translationData id="StaticLanguageVariables/And">
          <translation>Und</translation>
       </translationData>
+      <translationData id="StaticLanguageVariables/BuildCost">
+         <translation>Baukosten</translation>
+      </translationData>
       <translationData id="StaticLanguageVariables/Empty">
          <translation>Leer</translation>
+      </translationData>
+      <translationData id="StaticLanguageVariables/Locked">
+         <translation>Gesperrt</translation>
       </translationData>
       <translationData id="StaticLanguageVariables/Off">
          <translation>Aus</translation>
@@ -784,6 +814,9 @@ diese in Reichweite ist.</hoverOverTranslation>
       </translationData>
       <translationData id="StaticLanguageVariables/Or">
          <translation>Oder</translation>
+      </translationData>
+      <translationData id="StaticLanguageVariables/Upkeep">
+         <translation>Unterhaltskosten</translation>
       </translationData>
       <translationData id="TextureQuality">
          <translation>Texture Qualität</translation>

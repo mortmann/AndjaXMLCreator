@@ -1,7 +1,5 @@
 package com.mortmann.andja.creator.saveclasses;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,57 +14,56 @@ import com.mortmann.andja.creator.unitthings.*;
 
 import javafx.collections.ObservableMap;
 
-@Root(name="units")
+@Root(name = "units")
 public class UnitSave extends BaseSave {
 	static String FileName = "units.xml";
+	@ElementList(name = "units", inline = true)
+	public ArrayList<Unit> units;
+	@ElementList(name = "ships", inline = true)
+	public ArrayList<Ship> ships;
+	@ElementList(name = "workers", inline = true, required = false)
+	public ArrayList<Worker> workers;
 
-	public UnitSave(){}
-	public UnitSave(Collection<Unit> values) {
+	public UnitSave() {
+	}
+
+	public UnitSave(Collection<Unit> values, Collection<Worker> workers) {
+		this.workers = new ArrayList<Worker>(workers);
 		units = new ArrayList<>();
 		ships = new ArrayList<>();
-		for(Unit u : values){
-			if(u instanceof Ship){
+		for (Unit u : values) {
+			if (u instanceof Ship) {
 				ships.add((Ship) u);
-			} 
-			else if( u instanceof Unit) {
+			} else if (u instanceof Unit) {
 				units.add(u);
 			}
-			
+
 		}
 	}
-
-	@ElementList(name="units", inline=true)
-	public ArrayList<Unit> units;
-	@ElementList(name="ships", inline=true)
-	public ArrayList<Ship> ships;
-	@SuppressWarnings("unchecked")
 
 	public ArrayList<Unit> getAllUnits() {
-		ArrayList<Unit> units = new ArrayList<>();
-		for (Field f : this.getClass().getFields()) {
-			if(Modifier.isStatic(f.getModifiers()))
-				continue;
-			try {
-				units.addAll((Collection<? extends Unit>) f.get(this));
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		return units;
+		ArrayList<Unit> sunits = new ArrayList<>();
+		sunits.addAll(ships);
+		sunits.addAll(units);
+		return sunits;
 	}
-	public static void Load(ObservableMap<String, Unit> idToUnit) {
+
+	public static void Load(ObservableMap<String, Unit> idToUnit, ObservableMap<String, Worker> idToWorker) {
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		try {
 			UnitSave e = serializer.read(UnitSave.class, Paths.get(saveFilePath, FileName).toFile());
 			for (Unit u : e.getAllUnits()) {
 				idToUnit.put(u.GetID(), u);
 			}
+			if (e.workers != null)
+				for (Worker u : e.workers) {
+					idToWorker.put(u.GetID(), u);
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public String GetSaveFileName() {
 		return FileName;

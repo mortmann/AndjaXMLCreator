@@ -1,6 +1,8 @@
 package com.mortmann.andja.creator.util.history;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.mortmann.andja.creator.GUI;
 
@@ -8,11 +10,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.skin.ComboBoxListViewSkin;
+import javafx.scene.input.KeyCode;
 
 public class ComboBoxHistory<T> extends ComboBox<T> implements Changeable {
     private ArrayList<UndoListener> listeners = new ArrayList<UndoListener>();
 	boolean ignoreChange = false;
-
+	private String keysTyped = "";
+	long lastTyped;
 	public ComboBoxHistory() {
 		super();
 		Setup();
@@ -28,9 +34,42 @@ public class ComboBoxHistory<T> extends ComboBox<T> implements Changeable {
 		getSelectionModel().selectedItemProperty().addListener(new ChangeListener<T>() {
 	        public void changed(ObservableValue<? extends T> ov,
 	        		T old_val, T new_val) {
-	        	OnChange(old_val, new_val);
+	        	OnChange(new_val, old_val);
 	        }
         });
+		setOnKeyPressed((event)->{
+			if(isShowing()) {
+	            if(event.getCode().isLetterKey()) {
+	            	if(System.currentTimeMillis() - lastTyped > 1000) {
+	            		keysTyped = "";
+	            	}
+	                keysTyped += event.getCode().getName();
+	                Optional<String> os = getItems().stream().map(symbol -> symbol.toString())
+	                        .filter(symbol -> symbol.startsWith(keysTyped))
+	                        .findFirst();
+	                if (os.isPresent()) {
+						int ind = getItems().stream().map(symbol -> symbol.toString()).collect(Collectors.toList()).indexOf(os.get());
+	                    @SuppressWarnings({ "unchecked", "rawtypes" })
+						ListView<String> lv = (ListView) ((ComboBoxListViewSkin) getSkin()).getPopupContent();
+	                    lv.getFocusModel().focus(ind);
+	                    lv.scrollTo(ind);
+	                    lastTyped = System.currentTimeMillis();
+	                } else {
+	                	keysTyped = keysTyped.substring(0, keysTyped.length() - 1);
+	                }
+	            }
+	            else if(event.getCode() == KeyCode.BACK_SPACE) {
+	                if(keysTyped.length() > 0) {
+	                	keysTyped = keysTyped.substring(0, keysTyped.length() - 1);
+	                }
+	            }
+	        }
+		});
+		showingProperty().addListener((observable, oldValue, newValue) -> {
+	        if(isShowing() == false) {
+	        	keysTyped = "";
+	        }
+	    });
 	}
 
 	@Override
@@ -102,5 +141,7 @@ public class ComboBoxHistory<T> extends ComboBox<T> implements Changeable {
 	public interface UndoListener {
 		public void OnUndo(Object Change);
 	}
-	
+	public void SetupDone() {
+		ignoreChange = false;
+	}
 }

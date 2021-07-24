@@ -1,48 +1,48 @@
 <Other>
    <PopulationLevel LEVEL="0">
       <Name>
-         <entry lang="English">Peasent</entry>
-         <entry lang="German">Bauer</entry>
+         <entry lang="Deutsch">Bauer</entry>
+         <entry lang="English">Peasant</entry>
       </Name>
       <Description>
+         <entry lang="Deutsch">Arme Bauern.</entry>
          <entry lang="English">Poor farmers and agricultural workers.</entry>
-         <entry lang="German">Arme Bauern.</entry>
       </Description>
-      <iconSpriteName>peasent</iconSpriteName>
+      <iconSpriteName>peasant</iconSpriteName>
       <taxPerPerson>1</taxPerPerson>
    </PopulationLevel>
    <PopulationLevel LEVEL="1">
       <Name>
+         <entry lang="Deutsch">Bürger</entry>
          <entry lang="English">Citizen</entry>
-         <entry lang="German">Bürger</entry>
       </Name>
       <Description>
+         <entry lang="Deutsch">&quot;Mittlere Klasse&quot;</entry>
          <entry lang="English">&quot;middle class&quot;</entry>
-         <entry lang="German">&quot;Mittlere Klasse&quot;</entry>
       </Description>
       <iconSpriteName>citizen</iconSpriteName>
       <taxPerPerson>1</taxPerPerson>
    </PopulationLevel>
    <PopulationLevel LEVEL="2">
       <Name>
+         <entry lang="Deutsch">Patrizier</entry>
          <entry lang="English">Patrician</entry>
-         <entry lang="German">Patrizier</entry>
       </Name>
       <Description>
+         <entry lang="Deutsch">Gewerbe besitzende Klasse.</entry>
          <entry lang="English">Business class.</entry>
-         <entry lang="German">Gewerbe besitzende Klasse.</entry>
       </Description>
       <iconSpriteName>patrician</iconSpriteName>
       <taxPerPerson>1</taxPerPerson>
    </PopulationLevel>
    <PopulationLevel LEVEL="3">
       <Name>
+         <entry lang="Deutsch">Adliger</entry>
          <entry lang="English">Nobleman</entry>
-         <entry lang="German">Adliger</entry>
       </Name>
       <Description>
+         <entry lang="Deutsch">Höchste Klasse der Einwohner.</entry>
          <entry lang="English">Highest ranking class.</entry>
-         <entry lang="German">Höchste Klasse der Einwohner.</entry>
       </Description>
       <iconSpriteName>nobleman</iconSpriteName>
       <taxPerPerson>1</taxPerPerson>

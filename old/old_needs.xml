@@ -1,21 +1,21 @@
 <needs>
-   <Need ID="alcohol">
+   <Need ID="visioncorrection">
       <UsageAmounts>
-         <entry Level="0">0.002</entry>
-         <entry Level="1">2.5E-4</entry>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
          <entry Level="2">5.0E-4</entry>
-         <entry Level="3">1.0E-4</entry>
+         <entry Level="3">6.0E-4</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">Alcohol</entry>
-         <entry lang="German">Alkohol</entry>
+         <entry lang="Deutsch">Optisches Hilfsmittel</entry>
+         <entry lang="English">Vision Correction</entry>
       </Name>
-      <item ID="liquor">
+      <item ID="goggles">
          <count>0</count>
       </item>
-      <startLevel>1</startLevel>
-      <popCount>0</popCount>
-      <group>beverages</group>
+      <startLevel>2</startLevel>
+      <startPopulationCount>1100</startPopulationCount>
+      <group>luxury</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
    <Need ID="education">
@@ -26,51 +26,160 @@
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
+         <entry lang="Deutsch">Bildung</entry>
          <entry lang="English">Education</entry>
-         <entry lang="German">Bildung</entry>
       </Name>
-      <structures length="1">school</structures>
+      <structures length="1">
+         <id>school</id>
+      </structures>
+      <structures2 length="1">
+         <string>school</string>
+      </structures2>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>0</startPopulationCount>
       <group>education</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
-   <Need ID="salt">
+   <Need ID="taste">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
-         <entry Level="1">2.2035713</entry>
-         <entry Level="2">2.584524</entry>
-         <entry Level="3">2.3095238</entry>
+         <entry Level="1">0.003</entry>
+         <entry Level="2">0.004</entry>
+         <entry Level="3">0.005</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">Salt?</entry>
-         <entry lang="German">Salz?</entry>
+         <entry lang="Deutsch">Geschmack</entry>
+         <entry lang="English">Taste</entry>
       </Name>
-      <item ID="salt">
+      <item ID="spice">
          <count>0</count>
       </item>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
-      <group>food</group>
+      <startPopulationCount>2500</startPopulationCount>
+      <group>luxury</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
-   <Need ID="spice?">
+   <Need ID="cutlery">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
-         <entry Level="1">2.4564285</entry>
-         <entry Level="2">3.0754762</entry>
-         <entry Level="3">2.6904762</entry>
+         <entry Level="1">9.0E-4</entry>
+         <entry Level="2">7.0E-4</entry>
+         <entry Level="3">7.0E-4</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">Spice?</entry>
-         <entry lang="German">Gewürz?</entry>
+         <entry lang="Deutsch">Besteck</entry>
+         <entry lang="English">Cutlery</entry>
       </Name>
+      <item ID="cutlery">
+         <count>0</count>
+      </item>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>850</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="redmeat">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.001</entry>
+         <entry Level="3">0.0015</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Rotes Fleisch</entry>
+         <entry lang="English">Red Meat</entry>
+      </Name>
+      <item ID="beef">
+         <count>0</count>
+      </item>
+      <startLevel>2</startLevel>
+      <startPopulationCount>750</startPopulationCount>
       <group>food</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
-   <Need ID="monument">
+   <Need ID="performingart">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">1.0</entry>
+         <entry Level="3">1.0</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Darstellende Kunst</entry>
+         <entry lang="English">Performing Art</entry>
+      </Name>
+      <structures length="1">
+         <id>theater</id>
+      </structures>
+      <structures2 length="1">
+         <string>theater</string>
+      </structures2>
+      <startLevel>2</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>entertainment</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="smell">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Geruch</entry>
+         <entry lang="English">Smell</entry>
+      </Name>
+      <item ID="perfume">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="cheese">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.001</entry>
+         <entry Level="2">0.002</entry>
+         <entry Level="3">0.003</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Käse</entry>
+         <entry lang="English">Cheese</entry>
+      </Name>
+      <item ID="cheese">
+         <count>0</count>
+      </item>
+      <startLevel>1</startLevel>
+      <startPopulationCount>750</startPopulationCount>
+      <group>food</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="guards">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">1.0</entry>
+         <entry Level="2">1.0</entry>
+         <entry Level="3">1.0</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Wachen</entry>
+         <entry lang="English">Guards</entry>
+      </Name>
+      <structures length="1">
+         <id>cityguardpost</id>
+      </structures>
+      <structures2 length="1">
+         <string>cityguardpost</string>
+      </structures2>
+      <startLevel>1</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>security</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="banking">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
          <entry Level="1">0.0</entry>
@@ -78,12 +187,297 @@
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">MONUMENT</entry>
-         <entry lang="German">MONUMENT</entry>
+         <entry lang="Deutsch">Bankgeschäfte</entry>
+         <entry lang="English">Banking</entry>
       </Name>
+      <structures length="1">
+         <id>bank</id>
+      </structures>
+      <structures2 length="1">
+         <string>bank</string>
+      </structures2>
+      <startLevel>3</startLevel>
+      <startPopulationCount>1700</startPopulationCount>
+      <group>community</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="swimming">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">1.0</entry>
+         <entry Level="3">1.0</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Schwimmen</entry>
+         <entry lang="English">Swimming</entry>
+      </Name>
+      <structures length="1">
+         <id>bathhouse</id>
+      </structures>
+      <structures2 length="1">
+         <string>bathhouse</string>
+      </structures2>
+      <startLevel>2</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>entertainment</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="smoking">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.001</entry>
+         <entry Level="2">0.002</entry>
+         <entry Level="3">0.003</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Rauchen</entry>
+         <entry lang="English">Smoking</entry>
+      </Name>
+      <item ID="tobaccoproducts">
+         <count>0</count>
+      </item>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>0</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="exaltedfashion">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Erhabene Mode</entry>
+         <entry lang="English">Exalted Fashion</entry>
+      </Name>
+      <item ID="luxuryclothes">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>1600</startPopulationCount>
+      <group>clothing</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="Sweet">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Süß</entry>
+         <entry lang="English">Sweet</entry>
+      </Name>
+      <item ID="sweets">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>2800</startPopulationCount>
       <group>food</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="barber">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">1.0</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Friseur</entry>
+         <entry lang="English">Barber</entry>
+      </Name>
+      <structures length="1">
+         <id>barbershop</id>
+      </structures>
+      <structures2 length="1">
+         <string>barbershop</string>
+      </structures2>
+      <startLevel>3</startLevel>
+      <startPopulationCount>2400</startPopulationCount>
+      <group>community</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="belief">
+      <UsageAmounts>
+         <entry Level="0">1.0</entry>
+         <entry Level="1">1.0</entry>
+         <entry Level="2">1.0</entry>
+         <entry Level="3">1.0</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Glauben</entry>
+         <entry lang="English">Belief</entry>
+      </Name>
+      <structures length="3">
+         <id>chapel</id>
+         <id>church</id>
+         <id>cathedral</id>
+      </structures>
+      <structures2 length="3">
+         <string>chapel</string>
+         <string>church</string>
+         <string>cathedral</string>
+      </structures2>
+      <startLevel>1</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>belief</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="alcohol">
+      <UsageAmounts>
+         <entry Level="0">0.002</entry>
+         <entry Level="1">2.5E-4</entry>
+         <entry Level="2">5.0E-4</entry>
+         <entry Level="3">1.0E-4</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Alkohol</entry>
+         <entry lang="English">Alcohol</entry>
+      </Name>
+      <item ID="liquor">
+         <count>0</count>
+      </item>
+      <startLevel>1</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>beverages</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="coziness">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Gemütlichkeit</entry>
+         <entry lang="English">Coziness</entry>
+      </Name>
+      <item ID="carpets">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>3100</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="expensivecutlery">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.001</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Teures Besteck</entry>
+         <entry lang="English">Expensive Cutlery</entry>
+      </Name>
+      <item ID="luxurycutlery">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>3500</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="preservative">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.001</entry>
+         <entry Level="2">0.002</entry>
+         <entry Level="3">0.003</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Konservierungsstoff</entry>
+         <entry lang="English">Preservative</entry>
+      </Name>
+      <item ID="salt">
+         <count>0</count>
+      </item>
+      <startLevel>1</startLevel>
+      <startPopulationCount>750</startPopulationCount>
+      <group>food</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="bread">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.006</entry>
+         <entry Level="2">0.0015</entry>
+         <entry Level="3">0.003</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Brot</entry>
+         <entry lang="English">Bread</entry>
+      </Name>
+      <item ID="bread">
+         <count>0</count>
+      </item>
+      <startLevel>1</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>food</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="steadylight">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.0023</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Dauerlicht</entry>
+         <entry lang="English">Steady Light</entry>
+      </Name>
+      <item ID="lampoil">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>500</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="reading">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.002</entry>
+         <entry Level="3">0.003</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Lesen</entry>
+         <entry lang="English">Reading</entry>
+      </Name>
+      <item ID="books">
+         <count>0</count>
+      </item>
+      <startLevel>2</startLevel>
+      <startPopulationCount>1900</startPopulationCount>
+      <group>entertainment</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="fittingclothes">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.002</entry>
+         <entry Level="3">0.001</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Gemütliche Kleider</entry>
+         <entry lang="English">Fitting Clothes</entry>
+      </Name>
+      <item ID="betterclothes">
+         <count>0</count>
+      </item>
+      <startLevel>2</startLevel>
+      <startPopulationCount>1400</startPopulationCount>
+      <group>clothing</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
    <Need ID="clean">
@@ -94,12 +488,19 @@
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
+         <entry lang="Deutsch">Sauberkeit</entry>
          <entry lang="English">Clean</entry>
-         <entry lang="German">Sauberkeit</entry>
       </Name>
-      <structures length="1">bathhouse</structures>
+      <structures length="2">
+         <id>bathhouse</id>
+         <id>washhouse</id>
+      </structures>
+      <structures2 length="2">
+         <string>bathhouse</string>
+         <string>washhouse</string>
+      </structures2>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>0</startPopulationCount>
       <group>luxury</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -111,14 +512,14 @@
          <entry Level="3">0.0016</entry>
       </UsageAmounts>
       <Name>
+         <entry lang="Deutsch">Nahrung</entry>
          <entry lang="English">Food</entry>
-         <entry lang="German">Nahrung</entry>
       </Name>
       <item ID="fish">
          <count>0</count>
       </item>
       <startLevel>0</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>0</startPopulationCount>
       <group>food</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -130,31 +531,113 @@
          <entry Level="3">2.5E-4</entry>
       </UsageAmounts>
       <Name>
+         <entry lang="Deutsch">Bekleidung</entry>
          <entry lang="English">Clothes</entry>
-         <entry lang="German">Bekleidung</entry>
       </Name>
       <item ID="hempclothes">
          <count>0</count>
       </item>
-      <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startLevel>0</startLevel>
+      <startPopulationCount>0</startPopulationCount>
       <group>clothing</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
-   <Need ID="security">
+   <Need ID="highereducation">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
          <entry Level="1">0.0</entry>
-         <entry Level="2">1.0</entry>
+         <entry Level="2">0.0</entry>
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">Security</entry>
-         <entry lang="German">Sicherkeit</entry>
+         <entry lang="Deutsch">Höhere Bildung</entry>
+         <entry lang="English">Higher Education</entry>
       </Name>
+      <structures length="1">
+         <id>university</id>
+      </structures>
+      <structures2 length="1">
+         <string>university</string>
+      </structures2>
+      <startLevel>3</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>education</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="drink">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.001</entry>
+         <entry Level="2">0.002</entry>
+         <entry Level="3">0.003</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Trunk</entry>
+         <entry lang="English">Drink</entry>
+      </Name>
+      <item ID="beer">
+         <count>0</count>
+      </item>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
-      <group>food</group>
+      <startPopulationCount>1500</startPopulationCount>
+      <group>beverages</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="bodycare">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0015</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Körperpflege</entry>
+         <entry lang="English">Body Care</entry>
+      </Name>
+      <item ID="soap">
+         <count>0</count>
+      </item>
+      <startLevel>2</startLevel>
+      <startPopulationCount>850</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="socialstatus">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Sozialstatus </entry>
+         <entry lang="English">Social Status</entry>
+      </Name>
+      <item ID="jewelry">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>2500</startPopulationCount>
+      <group>luxury</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="light">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.001</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Licht</entry>
+         <entry lang="English">Light</entry>
+      </Name>
+      <item ID="candleholders">
+         <count>0</count>
+      </item>
+      <startLevel>2</startLevel>
+      <startPopulationCount>1600</startPopulationCount>
+      <group>luxury</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
    <Need ID="companionship">
@@ -165,46 +648,78 @@
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
+         <entry lang="Deutsch">Gemeinschaft</entry>
          <entry lang="English">Companionship </entry>
-         <entry lang="German">Gemeinschaft</entry>
       </Name>
-      <structures length="1">marketplace</structures>
+      <structures length="1">
+         <id>marketplace</id>
+      </structures>
+      <structures2 length="1">
+         <string>marketplace</string>
+      </structures2>
       <startLevel>0</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>0</startPopulationCount>
       <group>community</group>
-      <hasToReachPerRoad>false</hasToReachPerRoad>
+      <hasToReachPerRoad>true</hasToReachPerRoad>
    </Need>
-   <Need ID="luxury">
+   <Need ID="coffee">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
          <entry Level="1">0.0</entry>
-         <entry Level="2">0.0</entry>
-         <entry Level="3">4.8809524</entry>
+         <entry Level="2">0.001</entry>
+         <entry Level="3">0.002</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">Luxury</entry>
-         <entry lang="German">Luxus</entry>
+         <entry lang="Deutsch">Kaffee</entry>
+         <entry lang="English">Coffee</entry>
       </Name>
+      <item ID="coffee">
+         <count>0</count>
+      </item>
+      <startLevel>2</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>beverages</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="meat">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.003</entry>
+         <entry Level="2">0.004</entry>
+         <entry Level="3">0.005</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Fleisch</entry>
+         <entry lang="English">Meat</entry>
+      </Name>
+      <item ID="pork">
+         <count>0</count>
+      </item>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>1500</startPopulationCount>
       <group>food</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
-   <Need ID="belief">
+   <Need ID="debt">
       <UsageAmounts>
          <entry Level="0">0.0</entry>
          <entry Level="1">0.0</entry>
-         <entry Level="2">0.0</entry>
+         <entry Level="2">1.0</entry>
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
-         <entry lang="English">Belief</entry>
-         <entry lang="German">Glauben</entry>
+         <entry lang="Deutsch">Gerechtigkeit</entry>
+         <entry lang="English">Justice</entry>
       </Name>
-      <structures length="1">chapel</structures>
-      <startLevel>1</startLevel>
-      <popCount>0</popCount>
-      <group>belief</group>
+      <structures length="1">
+         <id>debtorsprison</id>
+      </structures>
+      <structures2 length="1">
+         <string>debtorsprison</string>
+      </structures2>
+      <startLevel>2</startLevel>
+      <startPopulationCount>0</startPopulationCount>
+      <group>security</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
    <Need ID="fun">
@@ -215,75 +730,99 @@
          <entry Level="3">1.0</entry>
       </UsageAmounts>
       <Name>
+         <entry lang="Deutsch">Spaß</entry>
          <entry lang="English">Fun</entry>
-         <entry lang="German">Spaß</entry>
       </Name>
-      <structures length="1">arena</structures>
+      <structures length="1">
+         <id>arena</id>
+      </structures>
+      <structures2 length="1">
+         <string>arena</string>
+      </structures2>
       <startLevel>1</startLevel>
-      <popCount>0</popCount>
+      <startPopulationCount>0</startPopulationCount>
       <group>entertainment</group>
+      <hasToReachPerRoad>false</hasToReachPerRoad>
+   </Need>
+   <Need ID="wine">
+      <UsageAmounts>
+         <entry Level="0">0.0</entry>
+         <entry Level="1">0.0</entry>
+         <entry Level="2">0.0</entry>
+         <entry Level="3">0.002</entry>
+      </UsageAmounts>
+      <Name>
+         <entry lang="Deutsch">Wein</entry>
+         <entry lang="English">Wine</entry>
+      </Name>
+      <item ID="wine">
+         <count>0</count>
+      </item>
+      <startLevel>3</startLevel>
+      <startPopulationCount>2000</startPopulationCount>
+      <group>beverages</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
    <NeedGroup ID="beverages">
       <Name>
+         <entry lang="Deutsch">Getränke</entry>
          <entry lang="English">Beverages</entry>
-         <entry lang="German">Getränke</entry>
       </Name>
       <importanceLevel>1.3</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="security">
       <Name>
+         <entry lang="Deutsch">Sicherheit</entry>
          <entry lang="English">Security</entry>
-         <entry lang="German">Sicherheit</entry>
       </Name>
       <importanceLevel>1.2</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="education">
       <Name>
+         <entry lang="Deutsch">Bildung</entry>
          <entry lang="English">Education</entry>
-         <entry lang="German">Bildung</entry>
       </Name>
       <importanceLevel>0.9</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="entertainment">
       <Name>
+         <entry lang="Deutsch">Unterhaltung</entry>
          <entry lang="English">Entertainment</entry>
-         <entry lang="German">Unterhaltung</entry>
       </Name>
       <importanceLevel>1.0</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="luxury">
       <Name>
+         <entry lang="Deutsch">Luxus</entry>
          <entry lang="English">Luxury</entry>
-         <entry lang="German">Luxus</entry>
       </Name>
       <importanceLevel>1.0</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="clothing">
       <Name>
+         <entry lang="Deutsch">Bekleidung</entry>
          <entry lang="English">Clothing</entry>
-         <entry lang="German">Bekleidung</entry>
       </Name>
       <importanceLevel>1.2</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="community">
       <Name>
+         <entry lang="Deutsch">Gemeinschaft</entry>
          <entry lang="English">Community</entry>
-         <entry lang="German">Gemeinschaft</entry>
       </Name>
       <importanceLevel>1.0</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="belief">
       <Name>
+         <entry lang="Deutsch">Relegion</entry>
          <entry lang="English">Belief</entry>
-         <entry lang="German">Relegion</entry>
       </Name>
       <importanceLevel>1.5</importanceLevel>
    </NeedGroup>
    <NeedGroup ID="food">
       <Name>
+         <entry lang="Deutsch">Nahrung</entry>
          <entry lang="English">Food</entry>
-         <entry lang="German">Nahrung</entry>
       </Name>
       <importanceLevel>1.5</importanceLevel>
    </NeedGroup>

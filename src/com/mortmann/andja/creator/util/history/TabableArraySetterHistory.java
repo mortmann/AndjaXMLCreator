@@ -1,7 +1,9 @@
 package com.mortmann.andja.creator.util.history;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.WorkTab;
@@ -41,6 +43,27 @@ public class TabableArraySetterHistory<T extends Tabable> extends GridPane imple
 				return singleItemClass.isAssignableFrom(p.getClass())==false;
 			});
 		} 
+		
+		if(field.isAnnotationPresent(FieldInfo.class)) {
+			FieldInfo fi = field.getAnnotation(FieldInfo.class);
+			if(fi.ComperatorMethod().isBlank() == false) {
+				try {
+					java.lang.reflect.Method method = tabable.getClass().getMethod(fi.ComperatorMethod());
+					tabables.sort((Comparator<? super Tabable>) method.invoke(tabable));
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		obsMapTabable.addListener(new MapChangeListener<String,Tabable>(){
 			@Override
 			public void onChanged(
@@ -159,12 +182,13 @@ public class TabableArraySetterHistory<T extends Tabable> extends GridPane imple
 		// Remove Button
 		Button b = new Button("X");
 		// set the press button action
-		int remove = pos;
+//		int remove = pos;
 		b.setOnAction(s -> {
 			try {
 				// get array
 				String[] array = (String[]) field.get(m);
 				// remove the label and button
+				int remove = GridPane.getRowIndex(l);
 				listpane.getChildren().removeAll(l, b);
 				ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
 				listpane.getChildren().clear();
@@ -173,7 +197,7 @@ public class TabableArraySetterHistory<T extends Tabable> extends GridPane imple
 					listpane.add(children.get(i + 1), 1, i);
 				}
 				// remove this value and set the array in class
-				field.set(m, WorkTab.removeElementFromArray(array, remove - 1));
+				field.set(m, WorkTab.removeElementFromArray(array, remove));
 				OnChange(array, field.get(tabable));
 
 			} catch (Exception e1) {

@@ -34,7 +34,7 @@ public class UISingleString extends UIElement {
         col1.setMinWidth(100);
         col1.setMaxWidth(100);
         gridpane.getColumnConstraints().addAll(col1);
-		TextAreaHistory  textField = new TextAreaHistory();
+		TextAreaHistory textField = new TextAreaHistory();
 		textField.setMaxHeight(65);
 		textField.setStartText(value);
 		textField.textProperty().addListener(new ChangeListener<String>() {

@@ -11,14 +11,17 @@ import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false,name="militarystructure")
 public class MilitaryStructure extends Structure{
 	public MilitaryStructure() {
-		
+		hasHitbox = true;
 	}
 	@FieldInfo(required=true,compareType=Unit[].class) @ElementArray(entry="Unit",required=false) public String[] canBeBuildUnits;
 
 	@FieldInfo(required = true, IsEffectable=true)@Element(required=false) public float buildTimeModifier;
 	@FieldInfo(required = true, IsEffectable=true)@Element(required=false) public int buildQueueLength = 1;
 	@FieldInfo(required = false, IsEffectable=true)@Element(required=false) public DamageType damageType;
-	@FieldInfo(required = false, IsEffectable=true)@Element(required=false) public int damage;
+	@FieldInfo(required = false, IsEffectable=true)@Element(required=false) public float damage;
+	@FieldInfo(required = true, IsEffectable=true)@Element(required=false) public float attackRate;
+	@FieldInfo(required = true, IsEffectable=true)@Element(required=false) public float attackRange;
+    @FieldInfo(required = true, IsEffectable=true)@Element(required=false) public float projectileSpeed;
 	@Override
 	public Tabable StructureDependsOnTabable(Tabable t) {
 		if(t.getClass().isAssignableFrom(Unit.class)){

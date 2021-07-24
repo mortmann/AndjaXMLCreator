@@ -105,7 +105,7 @@ public class UIElementText {
 		switch (strType) {
 			case HoverOver:
 				if(data.hoverOverTranslation!=null) {
-					textField.setText(data.hoverOverTranslation);
+					textField.setStartText(data.hoverOverTranslation);
 				}
 				break;
 			case Text:
@@ -170,8 +170,11 @@ public class UIElementText {
 		}
 	}
 	public boolean IsMissing() {
-		return  (data.onlyHoverOver != null && data.onlyHoverOver == false) && (data.translation == null||data.translation.isBlank()) 
-				|| data.hoverOverTranslation == null || data.hoverOverTranslation.isBlank();
+		return  (data.onlyHoverOver == null || data.onlyHoverOver == false) 
+				&& (data.translation == null||data.translation.isBlank()||data.translation.equals("[**Missing**]")) 
+				|| 
+				(data.onlyHoverOver != null && data.onlyHoverOver) 
+				&& (data.hoverOverTranslation == null || data.hoverOverTranslation.isBlank() || data.hoverOverTranslation.equals("[**Missing**]"));
 	}
 	
 }

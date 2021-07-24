@@ -312,6 +312,8 @@ public class GenerationInfo extends Tab implements GameSettings {
 				finalRange.upper = upper.GetIntValue();
 			}
 		}, true);
+		lower.unsetIgnoreFlag();
+		upper.unsetIgnoreFlag();
 		grid.add(upper, 3, 1);
 		return grid;
 	}

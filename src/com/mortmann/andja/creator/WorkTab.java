@@ -2,6 +2,7 @@ package com.mortmann.andja.creator;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +41,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
@@ -47,6 +50,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.util.Callback;
 
 public class WorkTab extends Tab {
 	ScrollPane scrollPaneContent;
@@ -262,7 +266,10 @@ public class WorkTab extends Tab {
 			} else if (compare == ArmorType.class) {
 				otherGrid.add(CreateTabableSetter(fld[i].getName(), fld[i], myTabable, ArmorType.class,
 						GUI.Instance.idToArmorType), 0, i);
-			} else if (compare == float[].class) {
+			} else if (compare == Worker.class) {
+				otherGrid.add(CreateTabableSetter(fld[i].getName(), fld[i], myTabable, Worker.class,
+						GUI.Instance.idToWorker), 0, i);
+			}  else if (compare == float[].class) {
 				otherGrid.add(CreateFloatArraySetter(fld[i].getName(), fld[i], myTabable), 0, i);
 			} else if (compare == Unit[].class) {
 				otherGrid.add(CreateTabableArraySetter(fld[i].getName(), fld[i], myTabable, Unit[].class,
@@ -395,6 +402,7 @@ public class WorkTab extends Tab {
 			}
 		} catch (Exception e1) {
 		}
+		box.SetupDone();
 
 		box.setOnAction(x -> {
 			try {
@@ -507,6 +515,7 @@ public class WorkTab extends Tab {
 			}
 		} catch (Exception e1) {
 		}
+		box.SetupDone();
 		grid.add(variablebox, 1, 1);
 		return grid;
 	}
@@ -550,10 +559,11 @@ public class WorkTab extends Tab {
 				e.printStackTrace();
 			}
 		});
-
+		box.SetupDone();
 		return grid;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Node CreateItemSetter(String name, Field field, Tabable tab) {
 		GridPane grid = new GridPane();
 		ObservableList<Item> its = FXCollections.observableArrayList();
@@ -569,7 +579,27 @@ public class WorkTab extends Tab {
 				its.add(i);
 			}
 		});
+		if(field.isAnnotationPresent(FieldInfo.class)) {
+			FieldInfo fi = field.getAnnotation(FieldInfo.class);
+			if(fi.ComperatorMethod().isBlank() == false) {
+				try {
+					java.lang.reflect.Method method = tab.getClass().getMethod(fi.ComperatorMethod());
+					its.sort((Comparator<? super Item>) method.invoke(tab));
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		ComboBoxHistory<Item> box = new ComboBoxHistory<Item>(its);
+		box.setCellFactory(Utility.GetItemListView());
 		try {
 			if (field.get(tab) != null) {
 				// if error i changed from GUI.Instance.idToItem.get(field.get(tab)) to just
@@ -605,6 +635,8 @@ public class WorkTab extends Tab {
 			box.getSelectionModel().clearSelection();
 		});
 		grid.add(b, 2, 0);
+		box.SetupDone();
+
 		return grid;
 	}
 
@@ -639,6 +671,7 @@ public class WorkTab extends Tab {
 			} else {
 				ntf.setText("");
 			}
+			ntf.unsetIgnoreFlag();
 			int pos = i;
 			ntf.AddChangeListener(new ChangeListenerHistory() {
 				@Override
@@ -662,8 +695,7 @@ public class WorkTab extends Tab {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends Tabable> Node CreateClassToFloatSetter(String name, Field field, Tabable t,
-			ObservableMap<String, T> hash) {
+	private <T extends Tabable> Node CreateClassToFloatSetter(String name, Field field, Tabable t, ObservableMap<String, T> hash) {
 		GridPane grid = new GridPane();
 		ColumnConstraints col1 = new ColumnConstraints();
 		col1.setMinWidth(75);
@@ -676,6 +708,13 @@ public class WorkTab extends Tab {
 			HashMap<String, Float> h = (HashMap<String, Float>) field.get(t);
 			if (h == null) {
 				h = new HashMap<>();
+			}
+			if(fi.PresetDefaultForHashMapTabable()) {
+				for(String tID : hash.keySet()) {
+					if(h.containsKey(tID)==false) {
+						h.put(tID, 0f);
+					}
+				}
 			}
 			hash.addListener(new MapChangeListener<String, T>() {
 				@Override
@@ -705,6 +744,7 @@ public class WorkTab extends Tab {
 							}
 						}
 					}, true);
+					ntf.unsetIgnoreFlag();
 					row++;
 				}
 
@@ -718,6 +758,7 @@ public class WorkTab extends Tab {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+				ntf.unsetIgnoreFlag();
 				ntf.AddChangeListener(new ChangeListenerHistory() {
 					@Override
 					public void changed(Object arg0, Object arg1, boolean newChange) {
@@ -756,8 +797,11 @@ public class WorkTab extends Tab {
 		obsMapTabable.addListener(new MapChangeListener<String, T>() {
 			@Override
 			public void onChanged(javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
-				if (change.getValueAdded() != null)
-					strs.add(change.getValueAdded());
+				
+				if (change.getValueAdded() != null) {
+					if(change.getValueAdded().getClass().equals(str))
+						strs.add(change.getValueAdded());
+				}
 				if (change.getValueRemoved() != null)
 					strs.remove(change.getValueRemoved());
 			}
@@ -768,6 +812,7 @@ public class WorkTab extends Tab {
 		CheckIfRequired(box, field, m);
 		FieldInfo fi = field.getAnnotation(FieldInfo.class);
 		ObservableList<String> styleClass = box.getStyleClass();
+
 		if (fi != null) {
 			if (fi.required()) {
 				styleClass.add("combobox-error");
@@ -785,6 +830,31 @@ public class WorkTab extends Tab {
 
 			}
 		}
+		box.setCellFactory(new Callback<ListView<Tabable>, ListCell<Tabable>>() {
+			@Override
+			public ListCell<Tabable> call(ListView<Tabable> view) {
+				return new ListCell<Tabable>(){
+
+                    @Override
+                    public void updateSelected(boolean selected) {
+                        super.updateSelected(selected);
+                    }
+
+                    @Override
+                    protected void updateItem(Tabable item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(empty){
+                            return;
+                        }
+                        setText(item.toString());
+                        setStyle("-fx-text-fill: black; -fx-background-color: " +getItem().GetButtonColor()+";");
+                    }
+
+                };					
+            }
+
+		});
+
 		box.setMaxWidth(Double.MAX_VALUE);
 		grid.add(new Label(name), 0, 0);
 		grid.add(box, 1, 0);
@@ -849,6 +919,7 @@ public class WorkTab extends Tab {
 				((TextAreaHistory) t).setIgnoreFlag();
 
 				temp = ((TextAreaHistory) t).textProperty();
+				((TextAreaHistory) t).setIgnoreFlag();
 			} else {
 				t = new TextFieldHistory();
 				t.prefWidth(400);
@@ -867,7 +938,12 @@ public class WorkTab extends Tab {
 			} catch (Exception e1) {
 
 			}
-
+			if(t instanceof TextFieldHistory) {
+				((TextFieldHistory) t).unsetIgnoreFlag();
+			}
+			if(t instanceof TextAreaHistory) {
+				((TextAreaHistory) t).unsetIgnoreFlag();
+			}
 			((Changeable) t).AddChangeListener(new ChangeListenerHistory() {
 				@Override
 				public void changed(Object arg0, Object arg1, boolean newChange) {
@@ -939,12 +1015,13 @@ public class WorkTab extends Tab {
 		grid.add(box, 1, 0);
 		try {
 			if (field.get(tabable) != null) {
+				box.setIgnoreFlag();
 				box.setStartText(field.get(tabable).toString());
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
+		box.unsetIgnoreFlag();
 		box.AddChangeListener(new ChangeListenerHistory() {
 			@Override
 			public void changed(Object arg0, Object arg1, boolean newChange) {
@@ -975,10 +1052,10 @@ public class WorkTab extends Tab {
 			max = info.Maximum();
 			min = info.Minimum();
 		}
-		NumberTextField box = new NumberTextField(min, max);
-		variableToChangeable.put(field.getName(), box);
+		NumberTextField ntf = new NumberTextField(min, max);
+		variableToChangeable.put(field.getName(), ntf);
 
-		CheckIfRequired(box, field, str);
+		CheckIfRequired(ntf, field, str);
 		// NEEDED FOR POPULATIONSLEVEL!
 		if (info != null && info.id() && newTabable) {
 			try {
@@ -1000,24 +1077,25 @@ public class WorkTab extends Tab {
 
 		try {
 			if (field.get(str) != null) {
-				box.setStartText((Integer) field.get(str) + "");
+				ntf.setStartText((Integer) field.get(str) + "");
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		grid.add(new Label(name), 0, 0);
-		grid.add(box, 1, 0);
-		box.AddChangeListener(new ChangeListenerHistory() {
+		grid.add(ntf, 1, 0);
+		ntf.AddChangeListener(new ChangeListenerHistory() {
 			@Override
 			public void changed(Object arg0, Object arg1, boolean newChange) {
 				try {
-					field.setInt(str, box.GetIntValue());
+					field.setInt(str, ntf.GetIntValue());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				UpdateMethods(box);
+				UpdateMethods(ntf);
 			}
 		}, true);
+		ntf.unsetIgnoreFlag();
 		return grid;
 	}
 
@@ -1092,7 +1170,7 @@ public class WorkTab extends Tab {
 		}, true);
 		grid.add(new Label(name), 0, 0);
 		grid.add(box, 1, 0);
-
+		box.unsetIgnoreFlag();
 		return grid;
 	}
 
@@ -1130,6 +1208,7 @@ public class WorkTab extends Tab {
 				e.printStackTrace();
 			}
 		});
+		box.SetupDone();
 
 		return grid;
 	}
@@ -1177,7 +1256,13 @@ public class WorkTab extends Tab {
 		try {
 			if (field.get(m) != null) {
 				E[][] d2a = (E[][]) field.get(m);
-				if (first != d2a.length || second != d2a[0].length) {
+				int currSecond = 0;
+				for (int i = 0; i < d2a.length; i++) {
+					if(d2a[i] != null)
+						currSecond = d2a[i].length;
+				}
+				
+				if (first != d2a.length || second != currSecond) {
 					E[][] temp = (E[][]) Array.newInstance(enumClass, first, second);
 					for (int x = 0; x < Math.min(d2a.length, first); x++) {
 						for (int y = 0; y < Math.min(d2a[x].length, second); y++) {
@@ -1233,10 +1318,12 @@ public class WorkTab extends Tab {
 						e.printStackTrace();
 					}
 				});
+				box.SetupDone();
 			}
 		}
 		return grid;
 	}
+
 
 	@SuppressWarnings("unchecked")
 	public static <T> T[] removeElementFromArray(T[] a, int del) {
@@ -1244,7 +1331,6 @@ public class WorkTab extends Tab {
 			return (T[]) Array.newInstance(a.getClass().getComponentType(), 0);
 		}
 		T[] newA = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length - 1);
-//	    System.arraycopy(newA,0,a,del,a.length-1-del);
 		int newI = 0;// new array pos
 		for (int i = 0; i < a.length; i++) { // increase old array pos
 			if (i == del) { // its the one to copy -> skip

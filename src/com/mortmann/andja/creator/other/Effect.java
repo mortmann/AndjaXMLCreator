@@ -27,7 +27,8 @@ public class Effect implements Tabable, Comparable<Tabable> {
 	public enum EffectClassification { Negativ, Neutral, Positiv }
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
-	
+	@FieldInfo(subType=String.class,required=true,longtext=true)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Description;
+
 	@Element(required=false) public boolean unique;
 	@FieldInfo(order = 0, required = true, RequiresEffectable = true, compareType=Tabable.class) 
 	@Element(required=false) public String nameOfVariable; // what does it change
@@ -41,6 +42,11 @@ public class Effect implements Tabable, Comparable<Tabable> {
 	@Element(required=false) public String uiSpriteName;
 	@Element(required=false) public String onMapSpriteName;
 
+	@Element(required=false) public boolean canSpread;
+	@Element(required=false) public float spreadProbability;
+	@Element(required=false) public int spreadTileRange = 1;
+
+	
 	@Override
 	public String GetName() {
 		return Name == null? "Effect" : Name.get(Settings.CurrentLanguage.toString());

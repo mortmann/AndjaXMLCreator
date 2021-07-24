@@ -11,6 +11,8 @@ import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
+import com.mortmann.andja.creator.other.PopulationLevel;
+import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Settings;
 import com.mortmann.andja.creator.util.Tabable;
@@ -24,17 +26,18 @@ public class Unit implements Tabable, Comparable<Tabable> {
 
 	@FieldInfo(required=true) public float buildTime = 1f;
 
-	@Element public int populationLevel = 0;
-	@Element public int populationCount = 0;
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(required = false, key = "lang",attribute=true) public HashMap<String,String> Description;
-
-	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
-	@Element(required=false) public int buildcost;
 	
+	@Element @FieldInfo(subType=PopulationLevel.class) public int populationLevel = 0;
+	@Element public int populationCount = 0;
+	@ElementArray(entry="Item",required=false)@FieldInfo(ComperatorMethod = "SortBuildItem") public Item[] buildingItems;
+	@Element(required=false) public int buildCost;
+	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public int upkeepCost;
+	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
+
 	@FieldInfo(required = true, IsEffectable=true) @Element public int inventoryPlaces;
 	@FieldInfo(required = true, IsEffectable=true) @Element public int inventorySize;
-	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public int upkeepCost;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float maximumHealth;
 	@FieldInfo(required=true, IsEffectable=true) @Element float aggroTimer=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRange=1f;
@@ -47,8 +50,8 @@ public class Unit implements Tabable, Comparable<Tabable> {
 	@FieldInfo(required=true, IsEffectable=true) @Element public float turnSpeed;   // Tiles per second
 	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float aggroTime;   
 	@FieldInfo(required=true, IsEffectable=true) @Element(required=false) public float projectileSpeed = 0; // only needed for things with projectiles
+	@Element(required=false) public boolean canBeBuild = true;
 
-	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 
 	public Unit(){
 		
@@ -131,5 +134,20 @@ public class Unit implements Tabable, Comparable<Tabable> {
 	}
 	public String getClassName() {
 		return getClass().getName();
+	}
+	
+	public Comparator<Item> SortBuildItem() {
+		return new Comparator<Item>(){
+			@Override
+			public int compare(Item o1, Item o2) {
+				if(o1.getType() == ItemType.Build && o2.getType() == ItemType.Build)
+					return -o1.ID.compareTo(o2.ID);
+				if(o1.getType() == ItemType.Build)
+					return -1;
+				if(o2.getType() == ItemType.Build)
+					return 1;
+				return 0;
+			}
+		};
 	}
 }

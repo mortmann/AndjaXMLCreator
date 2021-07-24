@@ -5,6 +5,7 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Effect;
+import com.mortmann.andja.creator.unitthings.Worker;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
 @Root(strict=false,name="servicestructure")
@@ -22,7 +23,8 @@ public class ServiceStructure extends Structure {
 	public String[] effectsOnTargets;
     @Element public int maxNumberOfWorker = 1;
     @Element public float workSpeed = 0.01f;
-	
+	@FieldInfo(order = 0, compareType=Worker.class) @Element(required=false) public String workerID;
+
     public ServiceStructure() {
 		hasHitbox = true;
 	}

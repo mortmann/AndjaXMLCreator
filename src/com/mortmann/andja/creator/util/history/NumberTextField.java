@@ -5,6 +5,7 @@ import java.util.function.UnaryOperator;
 import javafx.application.Platform;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 public class NumberTextField extends TextFieldHistory {
@@ -78,33 +79,63 @@ public class NumberTextField extends TextFieldHistory {
 	}
 	
 	void AddValidator() {
-		UnaryOperator<Change> integerFilter = change -> {
-	    	String newText = change.getControlNewText();
-	    	if(newText.isBlank()) {
-	    		change.setText("0");
-	    	}
-	    	if(newText.matches("0[0-9]")) {
-                change.setRange(0, 1);
-                change.setCaretPosition(change.getCaretPosition()-1);
-                change.setAnchor(change.getAnchor()-1);
-	    	}
-            if (newText.matches("-?[0-9]*") || isFloat && newText.matches("[-]?[0-9]*(\\.[0-9]*)?")) { 
-                return change;
-            } else if ("-".equals(change.getText()) ) {
-                if (change.getControlText().startsWith("-")) {
-                    change.setText("");
-                    change.setRange(0, 1);
-                    change.setCaretPosition(change.getCaretPosition()-2);
-                    change.setAnchor(change.getAnchor()-2);
-                    return change;
-                } else {
-                    change.setRange(0, 0);
-                    return change;
-                }
-            }
-		    return null;
-		};
-		setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter));
+		if(isFloat == false) {
+			UnaryOperator<Change> integerFilter = change -> {
+		    	String newText = change.getControlNewText();
+		    	if(newText.isBlank()) {
+		    		change.setText("0");
+		    	}
+		    	if(newText.matches("0[0-9]")) {
+	                change.setRange(0, 1);
+	                change.setCaretPosition(change.getCaretPosition()-1);
+	                change.setAnchor(change.getAnchor()-1);
+		    	}
+	            if (newText.matches("-?[0-9]*")) { 
+	                return change;
+	            } else if ("-".equals(change.getText()) ) {
+	                if (change.getControlText().startsWith("-")) {
+	                    change.setText("");
+	                    change.setRange(0, 1);
+	                    change.setCaretPosition(change.getCaretPosition()-2);
+	                    change.setAnchor(change.getAnchor()-2);
+	                    return change;
+	                } else {
+	                    change.setRange(0, 0);
+	                    return change;
+	                }
+	            }
+			    return null;
+			};
+			setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter));
+		} else {
+			UnaryOperator<Change> floatFilter = change -> {
+		    	String newText = change.getControlNewText();
+		    	if(newText.isBlank()) {
+		    		change.setText("0");
+		    	}
+		    	if(newText.matches("0[0-9]")) {
+	                change.setRange(0, 1);
+	                change.setCaretPosition(change.getCaretPosition()-1);
+	                change.setAnchor(change.getAnchor()-1);
+		    	}
+	            if (newText.matches("[-]?[0-9]*(\\.[0-9]*)?")) { 
+	                return change;
+	            } else if ("-".equals(change.getText()) ) {
+	                if (change.getControlText().startsWith("-")) {
+	                    change.setText("");
+	                    change.setRange(0, 1);
+	                    change.setCaretPosition(change.getCaretPosition()-2);
+	                    change.setAnchor(change.getAnchor()-2);
+	                    return change;
+	                } else {
+	                    change.setRange(0, 0);
+	                    return change;
+	                }
+	            }
+			    return change;
+			};
+			setTextFormatter(new TextFormatter<Float>(new FloatStringConverter(), 0f, floatFilter));
+		}
 		AddChangeListener(new ChangeListenerHistory() {
 			@Override
 			public void changed(Object old, Object changed, boolean newChange) {
@@ -125,8 +156,8 @@ public class NumberTextField extends TextFieldHistory {
 	@Override
 	public void replaceText(int start, int end, String text) {
 		 if (this.getMaxLength() <= 0) {
-	            // Default behavior, in case of no max length
-	            super.replaceText(start, end, text);
+            // Default behavior, in case of no max length
+            super.replaceText(start, end, text);
         }
         else {
             // Get the text in the textfield, before the user enters something
@@ -164,7 +195,7 @@ public class NumberTextField extends TextFieldHistory {
 				e.printStackTrace();
 			}
 		}
-		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()){
+		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()||this.getText().contentEquals("-")){
 			return 0;
 		}
 		try {
@@ -175,7 +206,7 @@ public class NumberTextField extends TextFieldHistory {
 	}
 	
 	public float GetFloatValue(){
-		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()){
+		if(this.getText()==null||this.getText()==""||this.getText().trim().isEmpty()||this.getText().contentEquals("-")){
 			return 0;
 		}
 		return Float.parseFloat(this.getText().trim());
@@ -192,5 +223,8 @@ public class NumberTextField extends TextFieldHistory {
 			return GetFloatValue()!=0;
 		}
 		return GetIntValue()>0;
+	}
+	public boolean getIgnoreFlag() {
+		return ignoreChange;
 	}
 }

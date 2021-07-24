@@ -1,7 +1,9 @@
 package com.mortmann.andja.creator.util.history;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.WorkTab;
@@ -9,6 +11,7 @@ import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
+import com.mortmann.andja.creator.util.Utility;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,9 +31,11 @@ public class ItemArraySetterHistory extends GridPane implements Changeable {
 	Tabable tabable;
 	WorkTab tab;
 
+	@SuppressWarnings("unchecked")
 	public ItemArraySetterHistory(String name, Field field, Tabable tabable, WorkTab tab) {
 		ObservableList<Item> its = FXCollections.observableArrayList();
 		its.addAll(GUI.Instance.getItems());
+		
 		GUI.Instance.idToItem.addListener(new MapChangeListener<String, ItemXML>() {
 			@Override
 			public void onChanged(
@@ -74,6 +79,26 @@ public class ItemArraySetterHistory extends GridPane implements Changeable {
 		}
 
 		ComboBoxHistory<Item> box = new ComboBoxHistory<Item>(its);
+		if(field.isAnnotationPresent(FieldInfo.class)) {
+			FieldInfo fi = field.getAnnotation(FieldInfo.class);
+			if(fi.ComperatorMethod().isBlank() == false) {
+				try {
+					java.lang.reflect.Method method = tabable.getClass().getMethod(fi.ComperatorMethod());
+					its.sort((Comparator<? super Item>) method.invoke(tabable));
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		box.setCellFactory(Utility.GetItemListView());
 		if (field.getAnnotation(FieldInfo.class) != null) {
 			if (field.getAnnotation(FieldInfo.class).required()) {
 				ObservableList<String> styleClass = box.getStyleClass();
@@ -141,7 +166,7 @@ public class ItemArraySetterHistory extends GridPane implements Changeable {
 		// Name of Item
 		Label l = new Label(select.toString());
 		float max = Integer.MAX_VALUE;
-		float min = Integer.MIN_VALUE;
+		float min = 0;
 		if (fi != null) {
 			max = fi.Maximum();
 			min = fi.Minimum();
@@ -166,11 +191,13 @@ public class ItemArraySetterHistory extends GridPane implements Changeable {
 		// Remove Button
 		Button b = new Button("X");
 		// set the press button action
-		int remove = pos;
+//		int remove = pos;
 		b.setOnAction(s -> {
 			try {
 				// get array
 				Item[] array = (Item[]) field.get(m);
+				int remove = GridPane.getRowIndex(l);
+				System.out.println("remove " + remove);
 				// remove the label and button
 				listpane.getChildren().removeAll(l, b, count);
 				ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
@@ -208,6 +235,7 @@ public class ItemArraySetterHistory extends GridPane implements Changeable {
 		listpane.add(l, 0, rows);
 		listpane.add(count, 1, rows);
 		listpane.add(b, 2, rows);
+		count.unsetIgnoreFlag();
 	}
 
 	@Override

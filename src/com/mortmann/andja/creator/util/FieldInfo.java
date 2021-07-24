@@ -25,4 +25,7 @@ public @interface FieldInfo {
 	float Minimum() default Integer.MIN_VALUE;
 	float Maximum() default Integer.MAX_VALUE;
 	boolean fixed() default false;
+	//is for ordering the combobox for builditems
+	String ComperatorMethod() default "";
+	boolean PresetDefaultForHashMapTabable() default false;
 }

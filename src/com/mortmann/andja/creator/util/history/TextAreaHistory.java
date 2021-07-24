@@ -19,7 +19,6 @@ public class TextAreaHistory extends TextArea implements Changeable {
     final TextArea myTextArea = this;
 	public TextAreaHistory(String content) {
 		super(content);
-		ignoreChange = true;
 		Setup();
 	}
 	
@@ -28,11 +27,10 @@ public class TextAreaHistory extends TextArea implements Changeable {
 	}
 
 	private void Setup() {
-		ignoreChange = true;
 		textProperty().addListener(new ChangeListener<String>() {
 	        public void changed(ObservableValue<? extends String> ov,
 	        		String old_val, String new_val) {
-	        	OnChange(old_val, new_val);
+	        	OnChange(new_val, old_val);
 	        }
         });
 		addEventFilter(KeyEvent.ANY, e -> {
@@ -43,7 +41,6 @@ public class TextAreaHistory extends TextArea implements Changeable {
             	e.consume();
         });	
 		addEventFilter(KeyEvent.KEY_RELEASED, new TabAndEnterHandler());
-		
 	}
 
 	@Override
@@ -74,7 +71,6 @@ public class TextAreaHistory extends TextArea implements Changeable {
 	public void setStartText(String value) {
 		ignoreChange = true;
 		setText(value);
-		
 	}
 
 	@Override
@@ -82,7 +78,7 @@ public class TextAreaHistory extends TextArea implements Changeable {
 		if(ignoreChange) {
 			ignoreChange = false;
 			return;
-		}
+		}		
 		ChangeHistory.AddChange(this, change, old); 
 		if (changeListeners != null) {
 			for (ChangeListenerHistory c : changeListeners) {
@@ -105,7 +101,9 @@ public class TextAreaHistory extends TextArea implements Changeable {
 	public void setIgnoreFlag() {
 		ignoreChange = true;
 	}
-
+	public void unsetIgnoreFlag() {
+		ignoreChange = false;
+	}
 	class TabAndEnterHandler implements EventHandler<KeyEvent> {
         private KeyEvent recodedEvent;
 
@@ -119,11 +117,11 @@ public class TextAreaHistory extends TextArea implements Changeable {
           if (parent != null) {
             switch (event.getCode()) {
               case TAB:
-  				event.consume();
   				if(t instanceof UITab) {
+  					event.consume();
   					((UITab)t).onTabInput();
+  	                event.consume();
   				}
-                event.consume();
                 break;
 			default:
 				break;

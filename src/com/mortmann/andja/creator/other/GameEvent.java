@@ -29,7 +29,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 @Root(strict=false,name="GameEvent")
 public class GameEvent implements Comparable<Tabable>, Tabable {
-	
+    public enum EventType { Weather, City, Structure, Quest, Disaster, Other }
+
 	public enum Target {
 	    World, Player, AllUnit, Ship, LandUnit, Island, City, 
 	    AllStructure, DamagableStructure,
@@ -49,13 +50,16 @@ public class GameEvent implements Comparable<Tabable>, Tabable {
 	@Attribute
 	@FieldInfo(order=0,required=true,id=true)
 	public String ID;	
+	@Element(required = false)
+	@FieldInfo(order=0,required=true,id=true)
+	public EventType type;	
 
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) 
 	public HashMap<String,String> Description;
-	@FieldInfo(required=false,mainType=Target.class, subType=String.class)
+	@FieldInfo(required=false, mainType=Target.class, subType=String.class)
 	@ElementMap(required=false, key = "target",entry="range",attribute=true) 
 	public HashMap<Target, String[]> specialRange;
 

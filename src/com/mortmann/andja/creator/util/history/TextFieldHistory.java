@@ -21,10 +21,12 @@ public class TextFieldHistory extends TextField implements Changeable {
 		Setup();
 	}
 	void Setup(){
+		ignoreChange = true;
 		textProperty().addListener(new ChangeListener<String>() {
 	        public void changed(ObservableValue<? extends String> ov,
 	        		String old_val, String new_val) {
-	        	OnChange(old_val, new_val);
+	        		
+	        	OnChange(new_val, old_val);
 	        }
         });
 		addEventFilter(KeyEvent.ANY, e -> {
@@ -82,7 +84,7 @@ public class TextFieldHistory extends TextField implements Changeable {
 		if(ignoreChange) {
 			ignoreChange = false;
 			return;
-		}
+		}		
 		ChangeHistory.AddChange(this, change, old); 
 		if (changeListeners != null) {
 			for (ChangeListenerHistory c : changeListeners) {
@@ -103,5 +105,8 @@ public class TextFieldHistory extends TextField implements Changeable {
 	}
 	public void setIgnoreFlag() {
 		ignoreChange = true;
+	}
+	public void unsetIgnoreFlag() {
+		ignoreChange = false;
 	}
 }

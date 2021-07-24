@@ -2,15 +2,17 @@ package com.mortmann.andja.creator.other;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Optional;
-
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.GUI;
+import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.structures.Home;
 import com.mortmann.andja.creator.structures.NeedStructure;
 import com.mortmann.andja.creator.structures.OutputStructure;
@@ -26,7 +28,7 @@ public class Need implements Tabable {
 	public final float UseTickTime = 60f;
 	
 	@ElementMap(key = "Level",attribute=true,required=false) 
-	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class)
+	@FieldInfo(order = 0, required=true, subType=PopulationLevel.class, PresetDefaultForHashMapTabable = true)
 	public HashMap<String,Float> UsageAmounts;
 
 	@Attribute
@@ -37,19 +39,18 @@ public class Need implements Tabable {
 	@ElementMap(key = "lang",attribute=true,required=false) 
 	public HashMap<String,String> Name;
 
-	@FieldInfo(required=false)
+	@FieldInfo(required=false, ComperatorMethod = "SortNeedItem")
 	@Element(required=false)
 	public Item item;
-	@FieldInfo(required=false,compareType=NeedStructure[].class)
-	@Element(required=false)
+	@FieldInfo(required=false,compareType=NeedStructure[].class, ComperatorMethod = "SortNeedStructure")
+	@ElementArray(required=false, entry = "id")
 	public String[] structures;
-	
 	@FieldInfo(required=true,subType=PopulationLevel.class)
 	@Element(required=false)
 	public int startLevel;
 	@FieldInfo(required=true)
 	@Element(required=false)
-	public int popCount;
+	public int startPopulationCount;
 	
 	@FieldInfo(required=true,compareType=NeedGroup.class)
 	@Element(required=false)
@@ -57,6 +58,8 @@ public class Need implements Tabable {
 	@FieldInfo(required=true)
 	@Element(required=false)
 	public boolean hasToReachPerRoad;
+	
+	
 	@Override
 	public String GetID() {
 		return ID;
@@ -100,6 +103,9 @@ public class Need implements Tabable {
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
 			return getClass().getSimpleName();
+		}
+		if(item != null) {
+			return Name.get(Settings.CurrentLanguage.toString()) + " " + item.ID;
 		}
 		return Name.get(Settings.CurrentLanguage.toString());
 	}
@@ -147,6 +153,8 @@ public class Need implements Tabable {
 			return "NaN";
 		if(item==null)
 			return "NaN";
+		if(UsageAmounts == null)
+			return "NaN";
 		String used = "";
 		for(String s : UsageAmounts.keySet()) {
 			double value = UsageAmounts.get(s) * 1000d;
@@ -156,11 +164,12 @@ public class Need implements Tabable {
 		}
 		return used; 
 	}
+
+	
 	@MethodInfo(Title = "Structure needed per 1000")
 	public String StructuresPer1000() {
 		if(structures!=null&&structures.length>=1) {
 			ArrayList<Structure> homes = GUI.Instance.getStructureList(Home.class);
-			System.out.println(homes.size());
 			if(homes.size()==0) {
 				return "No Homes.";
 			}
@@ -186,17 +195,60 @@ public class Need implements Tabable {
 		}
 		if(item == null)
 			return "Undefined";
+		if(UsageAmounts == null)
+			return "NaN";
 		String used = "";
 		for(OutputStructure structure : GUI.Instance.GetOutputStructures(item)) {
 			used += structure.GetName() + "\n";
-			used += structure.CalculateNeededPerNeedPer1000();
+			for(Item i : structure.output) {
+				if(i.ID.contentEquals(item.ID) == false)
+					continue;
+				used += structure.PerNeedNeeded(this, i);
+			}
 		}
-		for(String s : UsageAmounts.keySet()) {
-			double value = UsageAmounts.get(s) * 1000d;
-			value = Math.round(value * 10000d) / 10000d;
-			used += GUI.Instance.idToPopulationLevel.get(s) + ":" + value;
-			used += "\n";
-		}
+
 		return used; 
+	}
+	
+	public Comparator<Structure> SortNeedStructure() {
+		return new Comparator<Structure>(){
+			@Override
+			public int compare(Structure o1, Structure o2) {
+				if(o1 instanceof NeedStructure == false && o2 instanceof NeedStructure == false)
+					return o1.ID.compareTo(o2.ID);
+				if(o1 instanceof NeedStructure && o2 instanceof NeedStructure) {
+					if(o1.populationLevel == o2.populationLevel) {
+						if(o1.populationCount == o2.populationCount) {
+							return -10 + o1.ID.compareTo(o2.ID);
+						} else {
+							return ((Integer)o1.populationCount).compareTo(o2.populationCount);
+						}
+					} else {
+						return ((Integer)o1.populationLevel).compareTo(o2.populationLevel);
+					}
+				}
+				if(o1 instanceof NeedStructure)
+					return -1;
+				if(o2 instanceof NeedStructure)
+					return 1;
+				return 1;
+			};
+		};
+	}
+	public Comparator<Item> SortNeedItem() {
+		return new Comparator<Item>(){
+			@Override
+			public int compare(Item o1, Item o2) {
+				if(o1.getType() != ItemType.Luxury && o2.getType() != ItemType.Luxury)
+					return o1.ID.compareTo(o2.ID);
+				if(o1.getType() == ItemType.Luxury && o2.getType() == ItemType.Luxury)
+					return -10 + o1.ID.compareTo(o2.ID);
+				if(o1.getType() == ItemType.Luxury)
+					return -1;
+				if(o2.getType() == ItemType.Luxury)
+					return 1;
+				return 1;
+			}
+		};
 	}
 }

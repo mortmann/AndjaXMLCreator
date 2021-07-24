@@ -52,18 +52,7 @@ public class ItemXML extends Item implements Tabable, Comparator<Tabable> {
 
 	@Override
 	public String GetButtonColor() {
-		switch (type) {
-		case Build:
-			return "#3EB650";
-		case Intermediate:
-			return "#95afc0";
-		case Luxury:
-			return "#FCC133";
-		case Military:
-			return "#E12B38";
-		default:
-			return null;
-		}
+		return getButtonColor(type);
 	}
 
 	@Override

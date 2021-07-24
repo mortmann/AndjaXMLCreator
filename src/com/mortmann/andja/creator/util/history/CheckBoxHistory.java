@@ -16,7 +16,7 @@ public class CheckBoxHistory extends CheckBox implements Changeable {
 		ignoreChange = true;
 		selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-				OnChange(old_val, new_val);
+	        	OnChange(new_val, old_val);
 			}
 		});
 	}

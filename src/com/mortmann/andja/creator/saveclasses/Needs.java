@@ -9,6 +9,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 
+import com.mortmann.andja.creator.GUI;
 import com.mortmann.andja.creator.other.Need;
 import com.mortmann.andja.creator.other.NeedGroup;
 

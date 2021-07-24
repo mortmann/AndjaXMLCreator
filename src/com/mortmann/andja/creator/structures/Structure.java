@@ -12,6 +12,7 @@ import org.simpleframework.xml.Root;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.PopulationLevel;
+import com.mortmann.andja.creator.other.Item.ItemType;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.MethodInfo;
 import com.mortmann.andja.creator.util.Settings;
@@ -59,8 +60,6 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@Element(required=false) public boolean canBeUpgraded = false;
 	@Element(required=false) public boolean canTakeDamage = false;
 
-	@Element(required=false) public Direction mustFrontBuildDir = Direction.None; 
-
 	@Element(required=false) public boolean canStartBurning = false;
  
 	@FieldInfo(IsEffectable=true) @Element(required=false) public int upkeepCost;
@@ -71,7 +70,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@Element(required=false) public ExtraUI extraUITyp = ExtraUI.None;
 	@Element(required=false) public ExtraBuildUI extraBuildUITyp = ExtraBuildUI.None;
 	
-	@ElementArray(entry="Item",required=false) public Item[] buildingItems;
+	@ElementArray(entry="Item",required=false)@FieldInfo(ComperatorMethod = "SortBuildItem") public Item[] buildingItems;
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	
@@ -222,5 +221,20 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
     		return CalculateEvcenCircle(structureRange, tileWidth, tileHeight);
     	}
 		return CalculateMidPointCircleTileCount(structureRange, tileWidth, tileHeight);
+	}
+    
+    public Comparator<Item> SortBuildItem() {
+		return new Comparator<Item>(){
+			@Override
+			public int compare(Item o1, Item o2) {
+				if(o1.getType() == ItemType.Build && o2.getType() == ItemType.Build)
+					return -o1.ID.compareTo(o2.ID);
+				if(o1.getType() == ItemType.Build)
+					return -1;
+				if(o2.getType() == ItemType.Build)
+					return 1;
+				return 0;
+			}
+		};
 	}
 }
