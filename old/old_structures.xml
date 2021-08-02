@@ -6494,7 +6494,7 @@
          </output>
          <intake length="1">
             <Item ID="roughdiamonds">
-               <count>0</count>
+               <count>1</count>
             </Item>
          </intake>
          <inputTyp>AND</inputTyp>

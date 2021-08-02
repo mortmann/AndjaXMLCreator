@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Optional;
@@ -24,14 +26,13 @@ import com.mortmann.andja.creator.util.OrderEr;
 import com.mortmann.andja.creator.util.Range;
 import com.mortmann.andja.creator.util.Size;
 import com.mortmann.andja.creator.util.history.ChangeHistory;
-import com.mortmann.andja.creator.util.history.ChangeListenerHistory;
 import com.mortmann.andja.creator.util.history.ComboBoxHistory;
 import com.mortmann.andja.creator.util.history.EnumArraySetterHistory;
-import com.mortmann.andja.creator.util.history.NumberTextField;
 
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -40,6 +41,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -50,10 +52,13 @@ import javafx.scene.layout.Priority;
 public class GenerationInfo extends Tab implements GameSettings {
 	@FieldInfo(required = false, subType = IslandSize.class)
 	@ElementList(required = false, entry = "islandSize")
-	ArrayList<IslandSize> islandSizes;
+	static ArrayList<IslandSize> islandSizes;
 	@FieldInfo(required = false, subType = Resource.class)
 	@ElementList(required = false, entry = "resource")
-	ArrayList<Resource> resources;
+	static ArrayList<Resource> resources;
+	@FieldInfo(required = false, subType = SpawnStructure.class)
+	@ElementList(required = false, entry = "structure")
+	static ArrayList<SpawnStructure> structures;
 	
 	private ArrayList<Mine> mines;
 	private ScrollPane scroll;
@@ -63,10 +68,8 @@ public class GenerationInfo extends Tab implements GameSettings {
 	public GenerationInfo() {
 		
 	}
-	public GenerationInfo(ArrayList<Resource> resources, ArrayList<IslandSize> islandSizes) {
-		Setup(resources, islandSizes);
-	}
-	private void Setup(ArrayList<Resource> loadResources, ArrayList<IslandSize> loadIslandSizes) {
+	
+	private void Setup() {
 		GUI.Instance.idToStructures.addListener(new MapChangeListener<String, Structure>(){
 			@Override
 			public void onChanged(Change<? extends String, ? extends Structure> change) {
@@ -78,19 +81,15 @@ public class GenerationInfo extends Tab implements GameSettings {
 				}
 			}
 		});
-		if(loadResources == null) {
+		if(resources == null) {
 			resources = new ArrayList<Resource>();
-		} else {
-			resources = loadResources;
-		}
-		if(loadIslandSizes == null) {
+		} 
+		if(islandSizes == null) {
 			islandSizes = new ArrayList<IslandSize>();
 			for(Size s : Size.values()) {
 				islandSizes.add(new IslandSize(s));
 			}
-		} else {
-			islandSizes = loadIslandSizes;
-		}
+		} 
 		mines = new ArrayList<Mine>();
 		//dumbest thing ever -- why java why -- is there no easy way to do this?
 		ArrayList<Mine> temps = new ArrayList<Mine>();
@@ -125,6 +124,31 @@ public class GenerationInfo extends Tab implements GameSettings {
 		}
 		grid.add(IslandSizePaneTP, 0, 0);
 		grid.add(ResourcesPaneTP, 0, 1);
+		TitledPane SpawnStructurePaneTP = new TitledPane("Spawn Structure", ResourcesPane);
+		FlowPane spsFlow = new FlowPane();
+		SpawnStructurePaneTP.setContent(spsFlow);
+		if(structures != null)
+			structures.sort(new Comparator<SpawnStructure>() {
+				@Override
+				public int compare(SpawnStructure o1, SpawnStructure o2) {
+					return o1.ID.compareTo(o2.ID);
+				}
+			});
+//		for (SpawnStructure sps : structures) {
+//			AddSpawnStructure(spsFlow, sps);
+//		}
+		GUI.Instance.idToSpawnStructure.addListener(new MapChangeListener<String, SpawnStructure>() {
+
+			@Override
+			public void onChanged(Change<? extends String, ? extends SpawnStructure> change) {
+				if(change.wasAdded()) {
+					AddSpawnStructure(spsFlow, change.getValueAdded());
+				} else {
+					
+				}
+			}
+		});
+		grid.add(SpawnStructurePaneTP, 0, 2);
 		
 		setOnCloseRequest(ac->{
 			if(ChangeHistory.IsSaved(this)){
@@ -145,6 +169,23 @@ public class GenerationInfo extends Tab implements GameSettings {
 			GUI.Instance.RemoveTab(this,this);
 		});
 
+	}
+
+	private void AddSpawnStructure(FlowPane spsFlow, SpawnStructure sps) {
+		GridPane spsgrid = new GridPane();
+		Button openSPS = new Button(sps.ID);
+		openSPS.setOnAction(x->{
+			GUI.Instance.AddWorkTab(sps, false);
+		});
+		spsgrid.add(openSPS, 0, 0);
+		Button deleteSPS = new Button("X");
+		spsgrid.add(deleteSPS, 1, 0);
+		deleteSPS.setOnAction(x-> {
+			spsFlow.getChildren().remove(spsgrid);
+			structures.remove(sps);
+			GUI.Instance.idToSpawnStructure.remove(sps.ID);
+		});
+		spsFlow.getChildren().add(spsgrid);
 	}
 	
 	private Node AddIslandSize(IslandSize size) {
@@ -167,7 +208,7 @@ public class GenerationInfo extends Tab implements GameSettings {
         		compare = info.compareType();
         	}
             if(compare == Range.class) {
-            	pane.add(CreateRangeSetter(field.getName(), field, size, false), 0, i);
+            	pane.add(Range.CreateSetter(field.getName(), field, size, false), 0, i);
             }
         }
         return btp;
@@ -188,7 +229,7 @@ public class GenerationInfo extends Tab implements GameSettings {
 		for (int i = 0; i < sizes.length; i++) {	
 			if(value.containsKey(sizes[i]) == false)
 				value.put(sizes[i], new Range());
-			pane.add(CreateRangeSetter(sizes[i].name(), field, value.get(sizes[i]), true), 0, i);
+			pane.add(Range.CreateSetter(sizes[i].name(), field, value.get(sizes[i]), true), 0, i);
 		}
 
 		return btp;
@@ -214,7 +255,7 @@ public class GenerationInfo extends Tab implements GameSettings {
         		compare = info.compareType();
         	}
             if(compare == Range.class) {
-            	CreateRangeSetter(field.getName(), field, resource, false);
+            	Range.CreateSetter(field.getName(), field, resource, false);
             }
             if (compare == ArrayList.class) {
 				if (info == null) {
@@ -245,6 +286,7 @@ public class GenerationInfo extends Tab implements GameSettings {
 
         return btp;
 	}
+	
 	private void RemoveMineResource(Mine mine) {
 		mines.remove(mine);
 		for(Item item : mine.output) {
@@ -272,52 +314,7 @@ public class GenerationInfo extends Tab implements GameSettings {
 	private<E extends Enum<E>> Node CreateEnumArraySetter(String name, Field field,Object object, Class<E> class1) {
 		return new EnumArraySetterHistory(name, field, object, class1);
 	}
-	private Node CreateRangeSetter(String name, Field field, Object object, boolean objectIsRange) {
-		Range range = null;
-		if(objectIsRange == false) {
-			try {
-				range = (Range) field.get(object);
-				if(range == null) {
-					range = new Range();
-				}
-				field.set(object,range);
-			} catch (Exception e) {
-			} 
-		} else {
-			range = (Range) object;
-		}
-		
-		Range finalRange = range;
-		ColumnConstraints col = new ColumnConstraints();
-		col.setMinWidth(50);
-		col.setHgrow(Priority.ALWAYS);
-		GridPane grid = new GridPane();
-		grid.getColumnConstraints().addAll(col, col, col);
-
-		grid.add(new Label(name), 0, 0);
-		grid.add(new Label("Lower:"), 0, 1);
-		NumberTextField lower = new NumberTextField(range.lower+"");
-		lower.AddChangeListener(new ChangeListenerHistory() {
-			@Override
-			public void changed(Object old, Object changed, boolean newChange) {
-				finalRange.lower = lower.GetIntValue();
-			}
-		}, true);
-		grid.add(lower, 1, 1);
-		grid.add(new Label("Upper:"), 2, 1);
-		NumberTextField upper = new NumberTextField(range.upper+"");
-		upper.AddChangeListener(new ChangeListenerHistory() {
-			@Override
-			public void changed(Object old, Object changed, boolean newChange) {
-				finalRange.upper = upper.GetIntValue();
-			}
-		}, true);
-		lower.unsetIgnoreFlag();
-		upper.unsetIgnoreFlag();
-		grid.add(upper, 3, 1);
-		return grid;
-	}
-
+	
 	public <E extends Enum<E>> GridPane CreateEnumSetter(String name, Field field, Object m, Class<E> class1) {
 		ObservableList<Enum> names = FXCollections.observableArrayList();
 		for (Enum e : EnumSet.allOf(class1)) {
@@ -354,20 +351,29 @@ public class GenerationInfo extends Tab implements GameSettings {
 
 		return grid;
 	}
-	public static GenerationInfo Load() {
+	public static GenerationInfo Load(ObservableMap<String, SpawnStructure> idToSpawnStructure) {
 		Serializer serializer = new Persister(new AnnotationStrategy());
 		String filename ="mapgeneration.xml";
 		GenerationInfo tab = new GenerationInfo();
 		try {
-			GenerationInfo temp = serializer.read(tab, Paths.get(BaseSave.saveFilePath, filename).toFile());
-			tab = new GenerationInfo(temp.resources, temp.islandSizes);
+			serializer.read(tab, Paths.get(BaseSave.saveFilePath, filename).toFile());
+			tab.Setup();
+			if(structures != null)
+				for(SpawnStructure sps : structures) {
+					idToSpawnStructure.put(sps.GetID(), sps);
+				}
+//			tab = new GenerationInfo(temp.resources, temp.islandSizes);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			tab = new GenerationInfo(null,null);
+			tab = new GenerationInfo();
+			tab.Setup();
 		}    
 		return tab;
 	}
 	public boolean Save(){
 		return BaseSave.Save("mapgeneration.xml", this);
+	}
+	public void setSpawnStructures(Collection<SpawnStructure> values) {
+		structures = new ArrayList<>(values);
 	}
 }

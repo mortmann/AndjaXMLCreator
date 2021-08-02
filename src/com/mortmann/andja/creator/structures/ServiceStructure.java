@@ -30,7 +30,7 @@ public class ServiceStructure extends Structure {
 	}
     @Override
 	public Tabable StructureDependsOnTabable(Tabable t) {
-		if(t.getClass().isAssignableFrom(Structure.class)&& specificRange!=null){
+		if(Structure.class.isAssignableFrom(t.getClass())&& specificRange!=null){
 			for(int i = 0; i < specificRange.length;i++ ) {
 				if(t.GetID().equals(specificRange[i])){
 					return this;

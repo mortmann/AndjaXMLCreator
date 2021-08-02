@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import com.mortmann.andja.creator.other.*;
+import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.GameEvent.Target;
 import com.mortmann.andja.creator.structures.*;
 import com.mortmann.andja.creator.structures.Structure.TileType;
@@ -160,7 +161,6 @@ public class WorkTab extends Tab {
 		Arrays.sort(fld, new OrderEr());
 		for (int i = 0; i < fld.length; i++) {
 			FieldInfo info = fld[i].getAnnotation(FieldInfo.class);
-
 			if (info != null && info.ignore())
 				continue;
 			Class compare = fld[i].getType();
@@ -196,16 +196,7 @@ public class WorkTab extends Tab {
 							"[ERROR] This type " + fld[i].getName() + " of field needs a fieldinfo-subtype declared!");
 					continue;
 				}
-//				if (info.subType() == void.class) {
-//					System.out.println("[ERROR] This type " + fld[i].getName() + " of field needs a subtype declared!");
-//					continue;
-//				}
-//				if (info.subType() == Climate.class) {
 				enumGrid.add(CreateEnumArraySetter(fld[i].getName(), fld[i], myTabable, info.subType()), 0, i);
-//				}
-//				if (info.subType() == Target.class) {
-//					enumGrid.add(CreateEnumArraySetter(fld[i].getName(), fld[i], myTabable, Target.class), 0, i);
-//				}
 			} else if (compare == Item[].class) {
 				otherGrid.add(CreateItemArraySetter(fld[i].getName(), fld[i], myTabable), 0, i);
 			} else if (compare == Item.class) {
@@ -237,8 +228,12 @@ public class WorkTab extends Tab {
 							GUI.Instance.idToPopulationLevel), 0, i);
 					continue;
 				}
-				if (info.subType() == String.class) {
+				if (info.subType() == String.class && info.mainType() == void.class) {
 					languageGrid.add(CreateLanguageSetter(fld[i].getName(), fld[i], myTabable), 0, i);
+					continue;
+				}
+				if (info.subType() == String.class && info.mainType() == Climate.class) {
+					stringGrid.add(CreateEnumStringMapSetter(fld[i].getName(), fld[i], myTabable, Climate.class), 0, i);
 					continue;
 				}
 				if (info.mainType() == Target.class && info.subType() == Integer.class) {
@@ -256,6 +251,9 @@ public class WorkTab extends Tab {
 						GUI.Instance.idToPopulationLevel), 0, i);
 			} else if (compare == Growable.class) {
 				otherGrid.add(CreateTabableSetter(fld[i].getName(), fld[i], myTabable, Growable.class,
+						GUI.Instance.idToStructures), 0, i);
+			} else if (compare == Structure.class) {
+				otherGrid.add(CreateTabableSetter(fld[i].getName(), fld[i], myTabable, Structure.class,
 						GUI.Instance.idToStructures), 0, i);
 			} else if (compare == NeedStructure.class) {
 				otherGrid.add(CreateTabableSetter(fld[i].getName(), fld[i], myTabable, NeedStructure.class,
@@ -789,11 +787,17 @@ public class WorkTab extends Tab {
 		return new EnumArraySetterHistory(name, field, tabable, class1);
 	}
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private <T extends Tabable> Node CreateTabableSetter(String name, Field field, Tabable m, Class str,
 			ObservableMap<String, T> obsMapTabable) {
 		GridPane grid = new GridPane();
 		ObservableList<Tabable> strs = FXCollections.observableArrayList(obsMapTabable.values());
+		strs.sort((Comparator<? super Tabable>) new Comparator<T>() {
+			@Override
+			public int compare(T o1, T o2) {
+				return o1.GetID().compareTo(o2.GetID());
+			}
+		});
 		obsMapTabable.addListener(new MapChangeListener<String, T>() {
 			@Override
 			public void onChanged(javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
@@ -807,7 +811,7 @@ public class WorkTab extends Tab {
 			}
 
 		});
-		strs.removeIf(x -> x.getClass().equals(str) == false);
+		strs.removeIf(x -> str.isAssignableFrom(x.getClass()) == false);
 		ComboBoxHistory<Tabable> box = new ComboBoxHistory<Tabable>(strs);
 		CheckIfRequired(box, field, m);
 		FieldInfo fi = field.getAnnotation(FieldInfo.class);
@@ -962,10 +966,58 @@ public class WorkTab extends Tab {
 			grid.add(t, 1, i + 1);
 
 		}
+		return grid;
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private<E extends Enum<E>> Node CreateEnumStringMapSetter(String name, Field field, Tabable str, Class<E> class1) {
+		GridPane grid = new GridPane();
+		ObservableList<Enum> names = FXCollections.observableArrayList();
+		for (Enum e : EnumSet.allOf(class1)) {
+			names.add(e);
+		}
+
+		ColumnConstraints col1 = new ColumnConstraints();
+		col1.setMinWidth(150);
+		ColumnConstraints col2 = new ColumnConstraints();
+		col2.setMinWidth(50);
+		grid.getColumnConstraints().addAll(col1, col2);
+
+		grid.add(new Label(field.getName()), 0, 0);
+
+		for (int i = 0; i < names.size(); i++) {
+			grid.add(new Label(names.get(i).toString()), 0, i + 1);
+			TextFieldHistory t = new TextFieldHistory();
+			CheckIfRequired(t, field, str);
+			int num = i;
+			try {
+				HashMap<E, String> h = (HashMap<E, String>) field.get(str);
+				if (h != null) {
+					t.setStartText(h.get(names.get(i)));
+				}
+			} catch (Exception e1) {
+
+			}
+			((Changeable) t).AddChangeListener(new ChangeListenerHistory() {
+				@Override
+				public void changed(Object arg0, Object arg1, boolean newChange) {
+					try {
+						HashMap<E, String> h = (HashMap<E, String>) field.get(str);
+						if (h == null) {
+							h = new HashMap<>();
+						}
+						h.put((E) names.get(num), t.getText());
+						field.set(str, h);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}, true);
+			grid.add(t, 1, i + 1);
+
+		}
 
 		return grid;
 	}
-
 	private Node CreateItemArraySetter(String name, Field field, Tabable tabable) {
 		return new ItemArraySetterHistory(name, field, tabable, this);
 	}

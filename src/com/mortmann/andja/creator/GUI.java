@@ -47,6 +47,7 @@ import org.simpleframework.xml.core.Persister;
 
 import com.mortmann.andja.creator.gamesettings.GameSettings;
 import com.mortmann.andja.creator.gamesettings.GenerationInfo;
+import com.mortmann.andja.creator.gamesettings.SpawnStructure;
 import com.mortmann.andja.creator.other.*;
 import com.mortmann.andja.creator.saveclasses.BaseSave;
 import com.mortmann.andja.creator.saveclasses.CombatTypes;
@@ -89,7 +90,7 @@ public class GUI {
 	private Scene scene;
 	TabPane workTabs;
 	TabPane dataTabs;
-
+	GenerationInfo generationInfoTab;
 	Tab emptyTab;
 	Tab addTab;
 	public ObservableMap<String,Structure> idToStructures;
@@ -104,6 +105,7 @@ public class GUI {
 	public ObservableMap<String, Effect> idToEffect;
 	public ObservableMap<String, GameEvent> idToGameEvent;
 	public ObservableMap<String, Worker> idToWorker;
+	public ObservableMap<String, SpawnStructure> idToSpawnStructure;
 
 	public HashMap<String,UITab> languageToLocalization;
 	public HashMap<Class, ObservableMap<String, ? extends Tabable>> classToClassObservableMap;
@@ -148,7 +150,8 @@ public class GUI {
         idToEffect = FXCollections.observableHashMap();
         idToGameEvent = FXCollections.observableHashMap();
         idToWorker = FXCollections.observableHashMap();
-
+        idToSpawnStructure = FXCollections.observableHashMap();
+        
         classToClassObservableMap = new HashMap<>();
         
         //FOR NEW Type of Class add a idToObject Map 
@@ -164,6 +167,7 @@ public class GUI {
         classToClassObservableMap.put(Effect.class, idToEffect);
         classToClassObservableMap.put(GameEvent.class, idToGameEvent);
         classToClassObservableMap.put(Worker.class, idToWorker);
+        classToClassObservableMap.put(SpawnStructure.class, idToSpawnStructure);
 
         //Then add a class Action for it
         ClassActions = new ArrayList<ClassAction>();
@@ -194,9 +198,13 @@ public class GUI {
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Event, "Effect", Effect.class));
 		ClassActions.add(new ClassAction(ClassAction.ClassType.Event, "GameEvent", GameEvent.class));
 		
+		ClassActions.add(new ClassAction(ClassAction.ClassType.GameSettings, GenerationInfo.class.getSimpleName(), GenerationInfo.class));
+		ClassActions.add(new ClassAction(ClassAction.ClassType.GameSettings, SpawnStructure.class.getSimpleName(), SpawnStructure.class));
+
+		
 		SetUpMenuBar();
         LoadData();
-        
+
         classToDataTab = new HashMap<>();
         dataTabs = new TabPane();
         DataTab<Structure> d1 = new DataTab<>("Structures",idToStructures, dataTabs);
@@ -223,7 +231,9 @@ public class GUI {
         classToDataTab.put(GameEvent.class, d11);
         DataTab<Worker> d12 = new DataTab<>("Worker",idToWorker, dataTabs);
         classToDataTab.put(Worker.class, d12);
-
+        DataTab<SpawnStructure> d13 = new DataTab<>("SpawnStructure",idToSpawnStructure, dataTabs);
+        classToDataTab.put(Worker.class, d13);
+        
 		workTabs = new TabPane();
 		workTabs.setOnMouseClicked(new EventHandler<MouseEvent>(){
 	          @Override
@@ -302,6 +312,8 @@ public class GUI {
 		Events.Load(idToEffect, idToGameEvent);
 		CombatTypes.Load(idToArmorType, idToDamageType);
 		Others.Load(idToPopulationLevel);
+		generationInfoTab = GenerationInfo.Load(idToSpawnStructure);
+
 //        HashSet<Tabable> allTabables = new HashSet<>();
 //		for(ObservableMap<String, ? extends Tabable> map : classToClassObservableMap.values()) {
 //			allTabables.addAll(map.values());
@@ -469,7 +481,6 @@ public class GUI {
 			ClassActions.add(new ClassAction(ClassAction.ClassType.Localization, l, l));
 		}
 		
-		ClassActions.add(new ClassAction(ClassAction.ClassType.GameSettings, GenerationInfo.class.getSimpleName(), GenerationInfo.class));
 
 		HashMap<ClassAction.ClassType,Menu> typeToMenu = new HashMap<>();
 		for(ClassAction action : ClassActions) {
@@ -502,6 +513,10 @@ public class GUI {
 		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
 	}
 	private void DoGameSettingAction(Class class1) {
+		if(class1 != null && Tabable.class.isAssignableFrom(class1)) {
+			DoClassAction(class1);
+			return;
+		}
 		if(class1 != GenerationInfo.class) {
 			System.out.println("ERROR -- not supported.");
 			return;
@@ -511,18 +526,17 @@ public class GUI {
 		if(workTabs.getTabs().contains(emptyTab)){
 			workTabs.getTabs().remove(emptyTab);
 		}
-		GenerationInfo tab = GenerationInfo.Load();
-		ChangeHistory.AddObject(tab);
-		if(tab == null)
+		ChangeHistory.AddObject(generationInfoTab);
+		if(generationInfoTab == null)
 			return;
 		for(Tabable t : tabToTabable.values()) {
 			if(t.getClass() == class1) {
 				return;
 			}
 		}
-		workTabs.getTabs().add(tab);
-		workTabs.getSelectionModel().select(tab);
-		gameSettingsClassToTab.put(class1, tab);
+		workTabs.getTabs().add(generationInfoTab);
+		workTabs.getSelectionModel().select(generationInfoTab);
+		gameSettingsClassToTab.put(class1, generationInfoTab);
 		
 	}
 	private Settings ShowSettings() {
@@ -685,10 +699,12 @@ public class GUI {
 		Structures s = new Structures(idToStructures.values());
 		return s.Save();
 	}
+	
 	private boolean SaveEvents() {
 		Events e = new Events(idToEffect.values(), idToGameEvent.values());
 		return e.Save();
 	}
+	
 	@SuppressWarnings("unchecked")
 	private void DoClassAction(Class c){
 		try {
@@ -697,6 +713,7 @@ public class GUI {
 			e.printStackTrace();
 		} 
 	}
+	
 	public void SaveCurrentTab(){
 		Tab curr = GetCurrentTab();
 		Tabable currTabable = tabToTabable.get(curr);
@@ -840,6 +857,11 @@ public class GUI {
 			idToWorker.put(((Worker)currTabable).GetID(), ((Worker)currTabable));
 			saved = SaveUnits();
 		}
+		else if(currTabable instanceof SpawnStructure) {
+			idToSpawnStructure.put(((SpawnStructure)currTabable).GetID(), ((SpawnStructure)currTabable));
+			generationInfoTab.setSpawnStructures(idToSpawnStructure.values());
+			generationInfoTab.Save();
+		}
 		else {
 			System.out.println("Missing save for " + currTabable.GetName());
 		}
@@ -910,6 +932,7 @@ public class GUI {
 			GetCurrentTab().setText("*"+GetCurrentTab().getText());
 		}
 	}
+	
 	public Tab GetCurrentTab(){
 		return workTabs.getSelectionModel().getSelectedItem();
 	}
@@ -971,6 +994,7 @@ public class GUI {
 		all.removeIf(n->n.item == null||n.item.GetID().contentEquals(output.GetID())==false);
 		return all.toArray(new Need[all.size()]);
 	}
+	
 	public ArrayList<OutputStructure> GetOutputStructures(Item item) {
 		ArrayList<Structure> all = new ArrayList<>(idToStructures.values());
 		all.removeIf(x->x instanceof OutputStructure == false);
@@ -980,6 +1004,7 @@ public class GUI {
 				.filter(x->x.output != null && Arrays.stream(x.output).anyMatch(y->y.ID.contentEquals(item.ID))).collect(Collectors.toList());
 		return outs;
 	}
+	
 	public ArrayList<Structure> getStructureList(Class class1) {
 		ArrayList<Structure> list = new ArrayList<>();
 		list.addAll(idToStructures.values());
@@ -990,6 +1015,7 @@ public class GUI {
 	public ArrayList<Tabable> getTabableList(Class class1) {
 		return new ArrayList<>(classToClassObservableMap.get(class1).values());
 	}
+	
 	public ArrayList<Unit> getUnits() {
 		ArrayList<Unit> al = new ArrayList<>();
 		for (Unit u : idToUnit.values()) {
@@ -998,6 +1024,7 @@ public class GUI {
 		Collections.sort(al);
 		return al;
 	}
+	
 	public ArrayList<Item> getItems() {
 		ArrayList<Item> al = new ArrayList<>();
 		for (ItemXML i : idToItem.values()) {
@@ -1014,6 +1041,7 @@ public class GUI {
 	public boolean doesIDexistForTabable(int value, Tabable t) {
 		return doesIDexistForTabable(value+"", t);
 	}
+	
 	public Scene getScene() {
 		return scene;
 	}

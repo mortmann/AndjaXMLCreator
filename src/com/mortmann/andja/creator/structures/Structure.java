@@ -9,6 +9,7 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
+import com.mortmann.andja.creator.other.Fertility.Climate;
 import com.mortmann.andja.creator.other.Item;
 import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.other.PopulationLevel;
@@ -73,6 +74,8 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@ElementArray(entry="Item",required=false)@FieldInfo(ComperatorMethod = "SortBuildItem") public Item[] buildingItems;
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
+	
+	@FieldInfo(order=1,required=false, subType = String.class, mainType = Climate.class) @ElementMap(required=false, attribute = true) public HashMap<Climate, String> climateSpriteModifier;
 	
 	public int compareTo(Tabable str) {
 		if(Structure.class.isAssignableFrom(str.getClass())) {
