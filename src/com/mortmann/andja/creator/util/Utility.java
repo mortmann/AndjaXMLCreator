@@ -4,6 +4,8 @@ import com.mortmann.andja.creator.other.Item;
 
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
 public class Utility {
@@ -39,4 +41,14 @@ public class Utility {
 
 		};
 	}
+	
+	public static TitledPane wrapPaneInTitledPane(String Name, Pane pane, boolean collapsible) {
+		TitledPane btp = new TitledPane(Name, pane);
+		btp.setExpanded(true);
+		btp.setCollapsible(collapsible);
+		btp.setMaxHeight(Double.MAX_VALUE);
+		return btp;
+	}
+
+	
 }

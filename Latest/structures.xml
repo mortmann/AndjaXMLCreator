@@ -6773,7 +6773,7 @@
          <efficiency>1.0</efficiency>
          <workerID>roadcarrier</workerID>
          <takeOverStartGoal>100.0</takeOverStartGoal>
-         <tradeItemCount>0</tradeItemCount>
+         <tradeItemCount>4</tradeItemCount>
       </warehouse>
       <warehouse ID="warehouse2">
          <Name>

@@ -12,6 +12,8 @@ public class ChangeHistory {
 		changes = new HashMap<Object, ObjectHistory>();
 	}
 	public static void AddObject(Object object) {
+		if(object == null)
+			return;
 		ObjectHistory oh = new ObjectHistory(object);
 		changes.put(object , oh);
 	}
@@ -23,10 +25,14 @@ public class ChangeHistory {
 		GUI.Instance.changedCurrentTab(changes.get(CurrentTab).SavedChanges());
 	}
 	public static void Undo() {
+		if(changes.containsKey(CurrentTab) == false)
+			return;
 		changes.get(CurrentTab).Undo();
 		GUI.Instance.changedCurrentTab(changes.get(CurrentTab).SavedChanges());
 	}
 	public static void Do() {
+		if(changes.containsKey(CurrentTab) == false)
+			return;
 		changes.get(CurrentTab).Do();
 		GUI.Instance.changedCurrentTab(changes.get(CurrentTab).SavedChanges());
 	}
@@ -36,18 +42,26 @@ public class ChangeHistory {
 		}
 	}
 	public static boolean RemoveObject(Object object, boolean forceDelete) {
+		if(object == null)
+			return true;
 		if(changes.get(object).SavedChanges() && forceDelete == false)
 			return false;
 		changes.remove(object);
 		return true;
 	}
 	public static boolean IsSaved(Object object) {
+		if(changes.containsKey(CurrentTab) == false)
+			return true;
 		return changes.get(object).SavedChanges();
 	}
 	public static void ObjectSaved(Object object) {
+		if(changes.containsKey(CurrentTab) == false)
+			return;
 		changes.get(object).Saved();
 	}
 	public static void CustomTextFix(Object input, String text) {
+		if(changes.containsKey(CurrentTab) == false)
+			return;
 		changes.get(CurrentTab).CustomTextFix(input, text);
 		GUI.Instance.changedCurrentTab(changes.get(CurrentTab).SavedChanges());
 	}

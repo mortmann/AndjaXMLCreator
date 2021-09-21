@@ -22,7 +22,7 @@ public class Others extends BaseSave {
 		populationLevels = new ArrayList<>(values);
 	}
 	public Others(){}
-	@ElementList(name="PopulationLevels", inline=true)
+	@ElementList(name="PopulationLevels")
 	public ArrayList<PopulationLevel> populationLevels;
 	
 	public static void Load(ObservableMap<String, PopulationLevel> idToPopulationLevel) {

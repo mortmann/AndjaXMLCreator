@@ -127,6 +127,10 @@ unsaved changes?</translation>
          <hoverOverTranslation>Create and customize Islands.
 Save them so you can play them or share them.</hoverOverTranslation>
       </translationData>
+      <translationData id="EditorLoading">
+         <translation>Loading Editor...</translation>
+         <hoverOverTranslation>Have fun creating islands.</hoverOverTranslation>
+      </translationData>
       <translationData id="Expanses">
          <translation>Expanses</translation>
          <hoverOverTranslation>How much all Structures cost to maintain.</hoverOverTranslation>
@@ -138,6 +142,22 @@ Save them so you can play them or share them.</hoverOverTranslation>
       <translationData id="Fastest">
          <hoverOverTranslation>Fastest Gamespeed</hoverOverTranslation>
          <onlyHoverOver>true</onlyHoverOver>
+      </translationData>
+      <translationData id="FogOfWar">
+         <translation>Fog Of War</translation>
+         <hoverOverTranslation>Hides either not in range and/or unexplored things.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FogOfWarStyle/Always">
+         <translation>Always</translation>
+         <hoverOverTranslation>Hides not in range and unexplored things.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FogOfWarStyle/Off">
+         <translation>Off</translation>
+         <hoverOverTranslation>Everthing is always visible.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FogOfWarStyle/Unknown">
+         <translation>Unkown</translation>
+         <hoverOverTranslation>Hides only unexplored map.</hoverOverTranslation>
       </translationData>
       <translationData id="Framelimiter">
          <translation>Framelimit</translation>
@@ -186,8 +206,15 @@ Save them so you can play them or share them.</hoverOverTranslation>
          <hoverOverTranslation>Health Points</hoverOverTranslation>
          <onlyHoverOver>true</onlyHoverOver>
       </translationData>
+      <translationData id="Height">
+         <translation>Height</translation>
+         <hoverOverTranslation>How big the map is.</hoverOverTranslation>
+      </translationData>
       <translationData id="High">
          <translation>High</translation>
+      </translationData>
+      <translationData id="Hint">
+         <translation>Hint</translation>
       </translationData>
       <translationData id="Hotkey">
          <translation>Hotkey</translation>
@@ -205,17 +232,17 @@ Save them so you can play them or share them.</hoverOverTranslation>
          <hoverOverTranslation>Further Informations</hoverOverTranslation>
          <onlyHoverOver>true</onlyHoverOver>
       </translationData>
-      <translationData id="InformationType/UnitUnderAttack">
-         <translation>Your Unit $0 is under attack.</translation>
-         <hoverOverTranslation>Unit $0 is under attack by $1</hoverOverTranslation>
+      <translationData id="InformationType/DiplomacyChange">
+         <translation>$0</translation>
+         <hoverOverTranslation>$0 and $1 now at $2</hoverOverTranslation>
       </translationData>
       <translationData id="InformationType/StructureUnderAttack">
          <translation>Your Structure $0 is under attack.</translation>
          <hoverOverTranslation>Structure $0 is under attack by $1</hoverOverTranslation>
       </translationData>
-      <translationData id="InformationType/DiplomacyChange">
-         <translation>$0</translation>
-         <hoverOverTranslation>$0 and $1 now at $2</hoverOverTranslation>
+      <translationData id="InformationType/UnitUnderAttack">
+         <translation>Your Unit $0 is under attack.</translation>
+         <hoverOverTranslation>Unit $0 is under attack by $1</hoverOverTranslation>
       </translationData>
       <translationData id="IslandClimate">
          <translation>Island Climate</translation>
@@ -255,6 +282,9 @@ Save them so you can play them or share them.</hoverOverTranslation>
       <translationData id="Loading">
          <translation>Loading</translation>
          <hoverOverTranslation>Press to load selected savefile.</hoverOverTranslation>
+      </translationData>
+      <translationData id="LoadingGameTitle">
+         <translation>Loading...</translation>
       </translationData>
       <translationData id="Low">
          <translation>Low</translation>
@@ -334,6 +364,10 @@ Be careful what you use, because it can break the game.</hoverOverTranslation>
          <translation>People</translation>
          <hoverOverTranslation>How many live in this City.</hoverOverTranslation>
       </translationData>
+      <translationData id="Pirate">
+         <translation>Pirate</translation>
+         <hoverOverTranslation>Enables or disables pirates in the game.</hoverOverTranslation>
+      </translationData>
       <translationData id="PraisePlayer">
          <translation>Praise the Player</translation>
          <hoverOverTranslation>Praise the Player to try to increase your Favour.</hoverOverTranslation>
@@ -390,6 +424,12 @@ before it can be applied.</hoverOverTranslation>
       <translationData id="SecondaryKey">
          <translation>Secondary</translation>
          <hoverOverTranslation>Second key todo the action.</hoverOverTranslation>
+      </translationData>
+      <translationData id="Seed">
+         <translation>Seed</translation>
+         <hoverOverTranslation>Decides how the map is generated.
+Share this code with others, so they can play the same map.
+Important: All should have the same configuration (mods).</hoverOverTranslation>
       </translationData>
       <translationData id="Sell">
          <hoverOverTranslation>Sell Item</hoverOverTranslation>
@@ -457,6 +497,10 @@ you currently have no City.</hoverOverTranslation>
       <translationData id="StaticLanguageVariables/Empty">
          <translation>Empty</translation>
       </translationData>
+      <translationData id="StaticLanguageVariables/FlyingTrader">
+         <translation>Flying TTrader</translation>
+         <hoverOverTranslation>Trades with everyone and want&apos;s to make a lot of cash.</hoverOverTranslation>
+      </translationData>
       <translationData id="StaticLanguageVariables/Locked">
          <translation>Locked</translation>
       </translationData>
@@ -473,6 +517,10 @@ you currently have no City.</hoverOverTranslation>
       <translationData id="StaticLanguageVariables/Or">
          <translation>Or</translation>
       </translationData>
+      <translationData id="StaticLanguageVariables/Pirate">
+         <translation>Pirate</translation>
+         <hoverOverTranslation>Hates everyone that isn&apos;t a pirate and will not stop until they have everything you have.</hoverOverTranslation>
+      </translationData>
       <translationData id="StaticLanguageVariables/Speed">
          <translation>Movement Speed</translation>
          <hoverOverTranslation>How fast this unit can move.</hoverOverTranslation>
@@ -480,6 +528,9 @@ you currently have no City.</hoverOverTranslation>
       <translationData id="StaticLanguageVariables/Upkeep">
          <translation>Upkeep</translation>
          <hoverOverTranslation>How much it costs to keep it around.</hoverOverTranslation>
+      </translationData>
+      <translationData id="StaticLanguageVariables/World">
+         <translation>World</translation>
       </translationData>
       <translationData id="TextureQuality">
          <translation>Texture Quality</translation>
@@ -512,6 +563,10 @@ you currently have no City.</hoverOverTranslation>
       </translationData>
       <translationData id="Warning">
          <translation>Warning</translation>
+      </translationData>
+      <translationData id="Width">
+         <translation>Width</translation>
+         <hoverOverTranslation>How big the map is.</hoverOverTranslation>
       </translationData>
       <translationData id="Yes">
          <translation>Yes.</translation>

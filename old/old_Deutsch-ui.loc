@@ -103,6 +103,23 @@ zu dem nächst niedrigeren.</hoverOverTranslation>
       <translationData id="DiplomacyTitle">
          <translation>Diplomatie</translation>
       </translationData>
+      <translationData id="DiplomacyType/Alliance">
+         <translation>Allianz</translation>
+         <hoverOverTranslation>Beide Seiten versprechen dem anderen zur Seite zustehen.</hoverOverTranslation>
+      </translationData>
+      <translationData id="DiplomacyType/Neutral">
+         <translation>Neutral</translation>
+         <hoverOverTranslation>Keinerlei Stand zu dieser Person.</hoverOverTranslation>
+      </translationData>
+      <translationData id="DiplomacyType/TradeAgreement">
+         <translation>Handelsabkommen</translation>
+         <hoverOverTranslation>Beide können miteinander handeln.</hoverOverTranslation>
+      </translationData>
+      <translationData id="DiplomacyType/War">
+         <translation>Krieg</translation>
+         <hoverOverTranslation>Greife Gegner an und verteidige deine Städe.
+Vorsicht vor Allianzen deines Gegners.</hoverOverTranslation>
+      </translationData>
       <translationData id="DiscardUnsaved">
          <translation>Wollen Sie jeglichen ungespeicherten Fortschritt verwerfen.</translation>
       </translationData>
@@ -122,6 +139,22 @@ Speichere und spiel diese oder teile Sie mit anderen.</hoverOverTranslation>
       <translationData id="Fastest">
          <hoverOverTranslation>Schnellste Spielgeschwindigkeit</hoverOverTranslation>
          <onlyHoverOver>true</onlyHoverOver>
+      </translationData>
+      <translationData id="FogOfWar">
+         <translation>Nebel des Krieges</translation>
+         <hoverOverTranslation>Versteckt Unbekanntes und/oder nicht in Sichtweite.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FogOfWarStyle/Always">
+         <translation>Immer</translation>
+         <hoverOverTranslation>Versteckt alles was nicht in Sichtweite ist oder unerforscht ist.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FogOfWarStyle/Off">
+         <translation>Aus</translation>
+         <hoverOverTranslation>Man sieht immer alles.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FogOfWarStyle/Unknown">
+         <translation>Unbekannt</translation>
+         <hoverOverTranslation>Versteckt nur unerforschte Map.</hoverOverTranslation>
       </translationData>
       <translationData id="Framelimiter">
          <translation>Bildrate</translation>
@@ -170,8 +203,15 @@ Speichere und spiel diese oder teile Sie mit anderen.</hoverOverTranslation>
          <hoverOverTranslation>Lebenspunkte</hoverOverTranslation>
          <onlyHoverOver>true</onlyHoverOver>
       </translationData>
+      <translationData id="Height">
+         <translation>Höhe</translation>
+         <hoverOverTranslation>Bestimmt die Größe der Karte.</hoverOverTranslation>
+      </translationData>
       <translationData id="High">
          <translation>Hoch</translation>
+      </translationData>
+      <translationData id="Hint">
+         <translation>Tipp</translation>
       </translationData>
       <translationData id="Hotkey">
          <translation>Hotkey</translation>
@@ -188,6 +228,18 @@ Speichere und spiel diese oder teile Sie mit anderen.</hoverOverTranslation>
       <translationData id="Information">
          <hoverOverTranslation>Weitere Informationen</hoverOverTranslation>
          <onlyHoverOver>true</onlyHoverOver>
+      </translationData>
+      <translationData id="InformationType/DiplomacyChange">
+         <translation>$0</translation>
+         <hoverOverTranslation>$0 und $1 sind jetzt auf dem Stand $2 zu einander.</hoverOverTranslation>
+      </translationData>
+      <translationData id="InformationType/StructureUnderAttack">
+         <translation>$0 wird angegriffen</translation>
+         <hoverOverTranslation>Dein Gebäude $0 wird von $1 angegriffen.</hoverOverTranslation>
+      </translationData>
+      <translationData id="InformationType/UnitUnderAttack">
+         <translation>$0 wird angegriffen</translation>
+         <hoverOverTranslation>Deine Einheit $0 ist unter Beschuss von $1.</hoverOverTranslation>
       </translationData>
       <translationData id="IslandClimate">
          <translation>Inselklima</translation>
@@ -227,6 +279,9 @@ Speichere und spiel diese oder teile Sie mit anderen.</hoverOverTranslation>
       <translationData id="Loading">
          <translation>Lade</translation>
          <hoverOverTranslation>Klicke hier um deinen Speicherfortschritt zu fortsetzen.</hoverOverTranslation>
+      </translationData>
+      <translationData id="LoadingGameTitle">
+         <translation>Ladevorgang...</translation>
       </translationData>
       <translationData id="Low">
          <translation>Niedrig</translation>
@@ -306,6 +361,10 @@ Pass auf welche du nutzt, denn Sie können</hoverOverTranslation>
          <translation>Einwohner</translation>
          <hoverOverTranslation>Wieviele Einwohner diese Stadt hat.</hoverOverTranslation>
       </translationData>
+      <translationData id="Pirate">
+         <translation>Pirate</translation>
+         <hoverOverTranslation>De/aktiviert den Pirate im Spiel.</hoverOverTranslation>
+      </translationData>
       <translationData id="PraisePlayer">
          <translation>Lobe diesen Spieler</translation>
          <hoverOverTranslation>Versuche deine Gunst mit diesem Spieler zu verbessern.</hoverOverTranslation>
@@ -362,6 +421,13 @@ um diese anzuwenden.</hoverOverTranslation>
       <translationData id="SecondaryKey">
          <translation>Sekundär</translation>
          <hoverOverTranslation>Zweite Taste die die Aktion ausführt.</hoverOverTranslation>
+      </translationData>
+      <translationData id="Seed">
+         <translation>Seed</translation>
+         <hoverOverTranslation>Bestimmt wie die Karte generiert wird.
+Teile diese mit anderen, damit diese dieselbe
+Karte spielen können.
+Wichtig: alle müssen die selbe Konfiguration (mods) haben.</hoverOverTranslation>
       </translationData>
       <translationData id="Sell">
          <hoverOverTranslation>Verkaufe Gut</hoverOverTranslation>
@@ -431,6 +497,9 @@ diese in Reichweite ist.</hoverOverTranslation>
       <translationData id="StaticLanguageVariables/Empty">
          <translation>Leer</translation>
       </translationData>
+      <translationData id="StaticLanguageVariables/FlyingTrader">
+         <translation>Fliegender Händler</translation>
+      </translationData>
       <translationData id="StaticLanguageVariables/Locked">
          <translation>Gesperrt</translation>
       </translationData>
@@ -447,12 +516,18 @@ diese in Reichweite ist.</hoverOverTranslation>
       <translationData id="StaticLanguageVariables/Or">
          <translation>Oder</translation>
       </translationData>
+      <translationData id="StaticLanguageVariables/Pirate">
+         <translation>Pirate</translation>
+      </translationData>
       <translationData id="StaticLanguageVariables/Speed">
          <translation>Geschwindigkeit</translation>
          <hoverOverTranslation>Wie schnell diese Einheit sich fortbewegen kann.</hoverOverTranslation>
       </translationData>
       <translationData id="StaticLanguageVariables/Upkeep">
          <translation>Unterhaltskosten</translation>
+      </translationData>
+      <translationData id="StaticLanguageVariables/World">
+         <translation>Welt</translation>
       </translationData>
       <translationData id="TextureQuality">
          <translation>Texture Qualität</translation>
@@ -485,6 +560,10 @@ diese in Reichweite ist.</hoverOverTranslation>
       </translationData>
       <translationData id="Warning">
          <translation>Warnung!</translation>
+      </translationData>
+      <translationData id="Width">
+         <translation>Breite</translation>
+         <hoverOverTranslation>Bestimmt die Größe der Karte.</hoverOverTranslation>
       </translationData>
       <translationData id="Yes">
          <translation>Ja.</translation>

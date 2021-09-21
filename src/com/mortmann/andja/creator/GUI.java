@@ -280,8 +280,10 @@ public class GUI {
 		((VBox) scene.getRoot()).getChildren().addAll(hb);
 		VBox.setVgrow(workTabs, Priority.ALWAYS);
 		mainWindow.setOnCloseRequest(x->{
+			if(workTabs == null)
+				return;
 			for(Tab t : workTabs.getTabs()){
-				if(t.getText().contains("*")==false){
+				if(t == null || t.getText().contains("*")==false){
 					continue;
 				}
 				Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -475,12 +477,22 @@ public class GUI {
 		SeparatorMenuItem line = new SeparatorMenuItem();
 		MenuItem exit = new MenuItem("Exit");
 		exit.setOnAction(x->{ System.exit(0); });
-		f.getItems().addAll(files,export,settings,line,exit); 
+		files.setOnAction(x->{SaveData();});
+		f.getItems().addAll(files, export,settings,line,exit); 
 		
 		for(String l : Languages) {
 			ClassActions.add(new ClassAction(ClassAction.ClassType.Localization, l, l));
 		}
 		
+		Menu view = new Menu("View");
+		MenuItem poplevelthingies = new MenuItem("Things per Level");
+		view.getItems().addAll(poplevelthingies);
+		view.setOnAction(x->{ 
+			PopulationLevelThingsTab tab = new PopulationLevelThingsTab();
+			workTabs.getTabs().add(tab); 
+			workTabs.getSelectionModel().select(tab); 
+		});
+        menuBar.getMenus().add(view);
 
 		HashMap<ClassAction.ClassType,Menu> typeToMenu = new HashMap<>();
 		for(ClassAction action : ClassActions) {

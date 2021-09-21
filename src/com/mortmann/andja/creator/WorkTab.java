@@ -49,7 +49,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.util.Callback;
 
@@ -82,16 +81,16 @@ public class WorkTab extends Tab {
 		enumGrid = new GridPane();
 		this.newTabable = newTabable;
 		mainGrid.setGridLinesVisible(true);
-		mainGrid.add(wrapPaneInTitledPane("Integer", intGrid), 0, 0);
-		mainGrid.add(wrapPaneInTitledPane("Boolean", booleanGrid), 1, 0);
-		mainGrid.add(wrapPaneInTitledPane("Float", floatGrid), 2, 0);
-		mainGrid.add(wrapPaneInTitledPane("Enum", enumGrid), 0, 2);
-		TitledPane string = wrapPaneInTitledPane("String", stringGrid);
+		mainGrid.add(Utility.wrapPaneInTitledPane("Integer", intGrid, false), 0, 0);
+		mainGrid.add(Utility.wrapPaneInTitledPane("Boolean", booleanGrid, false), 1, 0);
+		mainGrid.add(Utility.wrapPaneInTitledPane("Float", floatGrid, false), 2, 0);
+		mainGrid.add(Utility.wrapPaneInTitledPane("Enum", enumGrid, false), 0, 2);
+		TitledPane string = Utility.wrapPaneInTitledPane("String", stringGrid, false);
 		mainGrid.add(string, 0, 1);
-		TitledPane other = wrapPaneInTitledPane("Other", otherGrid);
+		TitledPane other = Utility.wrapPaneInTitledPane("Other", otherGrid, false);
 		GridPane.setColumnSpan(other, 2);
 		mainGrid.add(other, 1, 1);
-		TitledPane language = wrapPaneInTitledPane("Language", languageGrid);
+		TitledPane language = Utility.wrapPaneInTitledPane("Language", languageGrid, false);
 		mainGrid.add(language, 1, 2);
 		GridPane.setColumnSpan(language, 2);
 
@@ -141,15 +140,6 @@ public class WorkTab extends Tab {
 				}
 			}, false);
 		}
-	}
-
-	private TitledPane wrapPaneInTitledPane(String Name, Pane pane) {
-		TitledPane btp = new TitledPane(Name, pane);
-
-		btp.setExpanded(true);
-		btp.setCollapsible(false);
-		btp.setMaxHeight(Double.MAX_VALUE);
-		return btp;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

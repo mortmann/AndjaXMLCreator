@@ -33,7 +33,7 @@ public class GameEvent implements Comparable<Tabable>, Tabable {
 
 	public enum Target {
 	    World, Player, AllUnit, Ship, LandUnit, Island, City, 
-	    AllStructure, DamagableStructure,
+	    AllStructure, DamagableStructure, BurnableStructure,
 	    RoadStructure, NeedStructure, MilitaryStructure, HomeStructure,
 	    ServiceStructure, GrowableStructure, OutputStructure, MarketStructure, 
 	    WarehouseStructure, MineStructure, FarmStructure, ProductionStructure
