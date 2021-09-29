@@ -28,6 +28,7 @@ import com.mortmann.andja.creator.util.history.EnumArraySetterHistory;
 import com.mortmann.andja.creator.util.history.ItemArraySetterHistory;
 import com.mortmann.andja.creator.util.history.NumberTextField;
 import com.mortmann.andja.creator.util.history.TabableArraySetterHistory;
+import com.mortmann.andja.creator.util.history.TabableToFloatSetterHistory;
 import com.mortmann.andja.creator.util.history.TextAreaHistory;
 import com.mortmann.andja.creator.util.history.TextFieldHistory;
 
@@ -216,6 +217,11 @@ public class WorkTab extends Tab {
 				if (info.subType() == PopulationLevel.class) {
 					otherGrid.add(CreateClassToFloatSetter(fld[i].getName(), fld[i], myTabable,
 							GUI.Instance.idToPopulationLevel), 0, i);
+					continue;
+				}
+				if (info.subType() == ItemXML.class) {
+					otherGrid.add(CreateTabableToFloatSetter(fld[i].getName(), fld[i], myTabable,
+							GUI.Instance.idToItem), 0, i);
 					continue;
 				}
 				if (info.subType() == String.class && info.mainType() == void.class) {
@@ -1011,7 +1017,11 @@ public class WorkTab extends Tab {
 	private Node CreateItemArraySetter(String name, Field field, Tabable tabable) {
 		return new ItemArraySetterHistory(name, field, tabable, this);
 	}
-
+	
+	private Node CreateTabableToFloatSetter(String name, Field field, Tabable tabable, ObservableMap<String, ? extends Tabable> hash) {
+		return new TabableToFloatSetterHistory(name, field, tabable, this, hash);
+	}
+	
 	public GridPane CreateBooleanSetter(String name, Field field, Tabable m) {
 		GridPane grid = new GridPane();
 		CheckBoxHistory box = new CheckBoxHistory(name);

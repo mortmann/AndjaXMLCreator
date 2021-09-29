@@ -71,7 +71,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	@Element(required=false) public ExtraUI extraUITyp = ExtraUI.None;
 	@Element(required=false) public ExtraBuildUI extraBuildUITyp = ExtraBuildUI.None;
 	
-	@ElementArray(entry="Item",required=false)@FieldInfo(ComperatorMethod = "SortBuildItem") public Item[] buildingItems;
+	@ElementArray(entry="Item",required=false) @FieldInfo(ComperatorMethod = "SortBuildItem") public Item[] buildingItems;
 
 	@FieldInfo(order=0,required=true) @Element(required=false) public String spriteBaseName;
 	

@@ -1,20 +1,25 @@
 package com.mortmann.andja.creator.structures;
 
+import java.util.HashMap;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
+import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
 import com.mortmann.andja.creator.other.Effect;
+import com.mortmann.andja.creator.other.ItemXML;
 import com.mortmann.andja.creator.unitthings.Worker;
 import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.Tabable;
+
 @Root(strict=false,name="servicestructure")
 public class ServiceStructure extends Structure {
 	public enum ServiceTarget { All, Damageable, Military, Homes, Production, Service, NeedStructure, SpecificRange, City, None }
 	public enum ServiceFunction { None, Repair, AddEffect, RemoveEffect, PreventEffect }
 
-	@Element public ServiceTarget targets = ServiceTarget.All;
-    @Element public ServiceFunction function;
+	@Element(required=false) public ServiceTarget targets = ServiceTarget.All;
+    @Element(required=false) public ServiceFunction function;
     @FieldInfo(required=false,compareType=Structure[].class) 
 	@ElementArray(entry="Structure",required=false) 
     public String[] specificRange = null;
@@ -24,7 +29,11 @@ public class ServiceStructure extends Structure {
     @Element public int maxNumberOfWorker = 1;
     @Element public float workSpeed = 0.01f;
 	@FieldInfo(order = 0, compareType=Worker.class) @Element(required=false) public String workerID;
+	@FieldInfo(order=0,required=false,subType=ItemXML.class) 
+	@ElementMap(key = "Item",required=false) 
+	public HashMap<String, Float> Usages;
 
+	
     public ServiceStructure() {
 		hasHitbox = true;
 	}

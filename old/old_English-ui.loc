@@ -127,6 +127,10 @@ unsaved changes?</translation>
          <hoverOverTranslation>Create and customize Islands.
 Save them so you can play them or share them.</hoverOverTranslation>
       </translationData>
+      <translationData id="EditorLoading">
+         <translation>Loading Editor...</translation>
+         <hoverOverTranslation>Have fun creating islands.</hoverOverTranslation>
+      </translationData>
       <translationData id="Expanses">
          <translation>Expanses</translation>
          <hoverOverTranslation>How much all Structures cost to maintain.</hoverOverTranslation>
@@ -154,6 +158,12 @@ Save them so you can play them or share them.</hoverOverTranslation>
       <translationData id="FogOfWarStyle/Unknown">
          <translation>Unkown</translation>
          <hoverOverTranslation>Hides only unexplored map.</hoverOverTranslation>
+      </translationData>
+      <translationData id="FollowUnit">
+         <translation>[**Missing**]</translation>
+         <hoverOverTranslation>Toggle Follow Unit</hoverOverTranslation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+         <onlyHoverOver>true</onlyHoverOver>
       </translationData>
       <translationData id="Framelimiter">
          <translation>Framelimit</translation>
@@ -240,6 +250,11 @@ Save them so you can play them or share them.</hoverOverTranslation>
          <translation>Your Unit $0 is under attack.</translation>
          <hoverOverTranslation>Unit $0 is under attack by $1</hoverOverTranslation>
       </translationData>
+      <translationData id="IsActive">
+         <translation>[**Missing**]</translation>
+         <valueIsMainTranslation>true</valueIsMainTranslation>
+         <valueCount>2</valueCount>
+      </translationData>
       <translationData id="IslandClimate">
          <translation>Island Climate</translation>
          <hoverOverTranslation>To which climate the island corresponds.</hoverOverTranslation>
@@ -284,6 +299,38 @@ Save them so you can play them or share them.</hoverOverTranslation>
       </translationData>
       <translationData id="Low">
          <translation>Low</translation>
+      </translationData>
+      <translationData id="MapErrorMessage/CanNotBuildHere">
+         <translation>Cannot build here.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/CanNotDestroy">
+         <translation>Cannot be destroyed.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/Missing">
+         <translation>Missing things.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/NoSpace">
+         <translation>Not enough space here.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/NotEnoughMoney">
+         <translation>Not enough money.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/NotEnoughResources">
+         <translation>Not enough resources.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/NotInCity">
+         <translation>Must be placed inside of city bounds.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
+      </translationData>
+      <translationData id="MapErrorMessage/NotInRange">
+         <translation>Must be placed inside the range of selected unit.</translation>
+         <valueIsMainTranslation>false</valueIsMainTranslation>
       </translationData>
       <translationData id="MasterSoundVolume">
          <translation>Master Volume</translation>

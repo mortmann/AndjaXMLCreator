@@ -33,10 +33,11 @@ public class UIElementText {
 		this.tabList = tabList;
 		gridpane = new GridPane();
 		gridpane.add(new Label(data.id), 0, 0);
-		if(data.onlyHoverOver == null || data.onlyHoverOver == false) {
-			gridpane.add(GetStringSetter(StringType.Text , -1),0,1);
+		if((data.valueIsMainTranslation == null || data.valueIsMainTranslation == false) 
+			&& (data.onlyToolTip == null || data.onlyToolTip == false)) {
+			gridpane.add(GetStringSetter(StringType.Text , -1), 0, 1);
 		}
-		gridpane.add(GetStringSetter(StringType.HoverOver, -1),0,2);
+		gridpane.add(GetStringSetter(StringType.HoverOver, -1), 0, 2);
 		if(data.valueCount != null && data.valueCount>0) {
 			gridpane.add(GetStringArraySetter(), 0, 3);
 		}
@@ -56,7 +57,9 @@ public class UIElementText {
 	        for (int i = 0; i < data.values.length; i++) {
 	        	grid.add(GetStringSetter(StringType.Value, i), 0,i);
 			}
-		}
+	        if(data.values.length == data.valueCount) 
+	        	return grid;
+		} 
         Button button = new Button("+ Value");
         button.setOnAction(s -> {
         	int value = 0;
@@ -104,8 +107,8 @@ public class UIElementText {
 		textField.setMaxHeight(65);
 		switch (strType) {
 			case HoverOver:
-				if(data.hoverOverTranslation!=null) {
-					textField.setStartText(data.hoverOverTranslation);
+				if(data.toolTipTranslation!=null) {
+					textField.setStartText(data.toolTipTranslation);
 				}
 				break;
 			case Text:
@@ -126,7 +129,7 @@ public class UIElementText {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				switch (strType) {
 					case HoverOver:
-						data.hoverOverTranslation = textField.getText();	
+						data.toolTipTranslation = textField.getText();	
 						break;
 					case Text:					
 						data.translation = textField.getText();	
@@ -169,12 +172,13 @@ public class UIElementText {
 		    	styleClass.removeIf(x->x.equals("titledpane-error"));
 		}
 	}
+
 	public boolean IsMissing() {
-		return  (data.onlyHoverOver == null || data.onlyHoverOver == false) 
-				&& (data.translation == null||data.translation.isBlank()||data.translation.equals("[**Missing**]")) 
-				|| 
-				(data.onlyHoverOver != null && data.onlyHoverOver) 
-				&& (data.hoverOverTranslation == null || data.hoverOverTranslation.isBlank() || data.hoverOverTranslation.equals("[**Missing**]"));
+		if(data.onlyToolTip != null && data.onlyToolTip)
+			return data.toolTipTranslation == null || data.toolTipTranslation.isBlank() || data.toolTipTranslation.equals("[**Missing**]");
+		if(data.valueIsMainTranslation != null && data.valueIsMainTranslation)
+			return data.values == null || Arrays.stream(data.values).anyMatch(s-> s == null || s.isEmpty() || s.equals("[**Missing**]"));
+		return (data.translation == null||data.translation.isBlank()||data.translation.equals("[**Missing**]")); 
 	}
 	
 }
