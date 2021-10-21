@@ -27,5 +27,7 @@ public @interface FieldInfo {
 	boolean fixed() default false;
 	//is for ordering the combobox for builditems
 	String ComperatorMethod() default "";
+	//TODO: implement for more than tabable array setter
+	String FilterMethod() default ""; 
 	boolean PresetDefaultForHashMapTabable() default false;
 }

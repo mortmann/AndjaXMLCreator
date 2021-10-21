@@ -47,11 +47,12 @@ public class Farm extends OutputStructure {
 		float tileCount = InRangeTiles();
 		Growable grow = (Growable)GUI.Instance.idToStructures.get(growable);
         float neededWorkerRatio = maxNumberOfWorker / neededHarvestToProduce; 
+        float perWorker = neededHarvestToProduce / maxNumberOfWorker; 
 		if(grow==null||produceTime * efficiency <= 0|| grow.produceTime<=0 || output==null || output.length==0)
 			return 0;
 		if(maxNumberOfWorker*produceTime*efficiency>=grow.produceTime)
 			return neededWorkerRatio*(60f/produceTime);
-		float ppm = Math.min(60f/(neededHarvestToProduce*produceTime*efficiency),((tileCount / (float)neededHarvestToProduce)*(60f/grow.produceTime)));
+		float ppm = Math.min(60f/(perWorker * produceTime * efficiency),((tileCount / (float)neededHarvestToProduce)*(60f/grow.produceTime)));
 		return ppm / output[0].count;
 	}
 }

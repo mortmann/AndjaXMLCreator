@@ -25,7 +25,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -62,7 +61,10 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="2">
+            <Structure>brickroad</Structure>
+            <Structure>marbelroad</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -100,7 +102,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -137,7 +138,9 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>marbelroad</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -181,7 +184,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>25</upkeepCost>
@@ -236,7 +238,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -293,7 +294,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>
@@ -350,7 +350,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>60</upkeepCost>
@@ -417,7 +416,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>20</upkeepCost>
@@ -474,7 +472,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>80</upkeepCost>
@@ -531,7 +528,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>65</upkeepCost>
@@ -591,7 +587,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>25</upkeepCost>
@@ -648,7 +643,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>
@@ -704,7 +698,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>45</upkeepCost>
@@ -765,7 +758,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -825,7 +817,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>110</upkeepCost>
@@ -881,7 +872,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>25</upkeepCost>
@@ -937,7 +927,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>110</upkeepCost>
@@ -991,7 +980,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>50</upkeepCost>
@@ -1048,7 +1036,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1105,7 +1092,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>
@@ -1165,7 +1151,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>50</upkeepCost>
@@ -1222,7 +1207,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -1260,7 +1244,7 @@
                <count>1</count>
             </Item>
          </output>
-         <growable>floorfield</growable>
+         <growable>flowerfield</growable>
          <neededHarvestToProduce>2</neededHarvestToProduce>
       </farm>
       <farm ID="flowerplantation">
@@ -1284,7 +1268,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>60</upkeepCost>
@@ -1317,7 +1300,7 @@
                <count>1</count>
             </Item>
          </output>
-         <growable>floorfield</growable>
+         <growable>flowerfield</growable>
          <neededHarvestToProduce>4</neededHarvestToProduce>
       </farm>
       <farm ID="furhuntershut">
@@ -1341,7 +1324,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -1395,7 +1377,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>125</upkeepCost>
@@ -1458,7 +1439,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>200</upkeepCost>
@@ -1518,7 +1498,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>210</upkeepCost>
@@ -1584,7 +1563,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1600,7 +1578,7 @@
          <produceTime>1.0</produceTime>
          <maxOutputStorage>1</maxOutputStorage>
          <efficiency>1.0</efficiency>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>0</ageStages>
       </growable>
       <growable ID="tree">
@@ -1628,7 +1606,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1640,9 +1617,9 @@
          <buildingItems length="0"/>
          <spriteBaseName>tree</spriteBaseName>
          <climateSpriteModifier>
-            <entry climate="Cold">conifer</entry>
-            <entry climate="Middle">oak</entry>
             <entry climate="Warm">palm</entry>
+            <entry climate="Cold">conifer</entry>
+            <entry climate="Middle">oak;conifer</entry>
          </climateSpriteModifier>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
@@ -1684,7 +1661,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1733,7 +1709,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1755,7 +1730,7 @@
             </Item>
          </output>
          <fertility>sugarcane</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="potatoefield">
@@ -1783,7 +1758,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1832,7 +1806,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1854,7 +1827,7 @@
             </Item>
          </output>
          <fertility>hemp</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="wheatfield">
@@ -1882,7 +1855,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1905,7 +1877,7 @@
             </Item>
          </output>
          <fertility>wheat</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>5</ageStages>
       </growable>
       <growable ID="tobaccofield">
@@ -1929,7 +1901,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -1951,7 +1922,7 @@
             </Item>
          </output>
          <fertility>tobacco</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="hopvines">
@@ -1979,7 +1950,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2001,7 +1971,7 @@
             </Item>
          </output>
          <fertility>hop</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="spicefield">
@@ -2025,7 +1995,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2047,7 +2016,7 @@
             </Item>
          </output>
          <fertility>spices</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="coffeefield">
@@ -2071,7 +2040,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2119,7 +2087,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2144,7 +2111,7 @@
          <isFloor>false</isFloor>
          <ageStages>2</ageStages>
       </growable>
-      <growable ID="floorfield">
+      <growable ID="flowerfield">
          <Name>
             <entry lang="Deutsch">Blumenfeld</entry>
             <entry lang="English">Flower Field</entry>
@@ -2165,7 +2132,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2174,7 +2140,7 @@
          <structureTyp>Free</structureTyp>
          <extraUITyp>None</extraUITyp>
          <extraBuildUITyp>None</extraBuildUITyp>
-         <spriteBaseName>floorfield</spriteBaseName>
+         <spriteBaseName>flowerfield</spriteBaseName>
          <contactRange>0.0</contactRange>
          <forMarketplace>false</forMarketplace>
          <maxNumberOfWorker>0</maxNumberOfWorker>
@@ -2205,7 +2171,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2227,7 +2192,7 @@
             </Item>
          </output>
          <fertility>silk</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="grapevine">
@@ -2251,7 +2216,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2273,7 +2237,7 @@
             </Item>
          </output>
          <fertility>wine</fertility>
-         <isFloor>false</isFloor>
+         <isFloor>true</isFloor>
          <ageStages>2</ageStages>
       </growable>
       <growable ID="cocoafield">
@@ -2297,7 +2261,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>true</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2349,7 +2312,9 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>mediummarketbuilding</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>10</upkeepCost>
@@ -2397,7 +2362,9 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>bigmarketbuilding</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>25</upkeepCost>
@@ -2448,7 +2415,9 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>verybigmarketbuilding</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>80</upkeepCost>
@@ -2501,7 +2470,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -2568,7 +2536,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>90</upkeepCost>
@@ -2623,7 +2590,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>55</upkeepCost>
@@ -2678,7 +2644,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>80</upkeepCost>
@@ -2737,7 +2702,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>60</upkeepCost>
@@ -2791,7 +2755,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>95</upkeepCost>
@@ -2845,7 +2808,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -2903,7 +2865,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -2961,7 +2922,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>90</upkeepCost>
@@ -3019,7 +2979,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>200</upkeepCost>
@@ -3076,7 +3035,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>200</upkeepCost>
@@ -3143,7 +3101,6 @@
          <tileHeight>5</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>15</upkeepCost>
@@ -3179,7 +3136,7 @@
          <isWalkable>false</isWalkable>
          <hasHitbox>true</hasHitbox>
          <maxHealth>150.0</maxHealth>
-         <structureRange>9</structureRange>
+         <structureRange>15</structureRange>
          <populationLevel>0</populationLevel>
          <populationCount>320</populationCount>
          <structureLevel>0</structureLevel>
@@ -3187,7 +3144,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>120</upkeepCost>
@@ -3231,7 +3187,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>225</upkeepCost>
@@ -3275,7 +3230,6 @@
          <tileHeight>5</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
          <upkeepCost>30</upkeepCost>
@@ -3318,7 +3272,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
          <upkeepCost>40</upkeepCost>
@@ -3365,7 +3318,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -3405,7 +3357,6 @@
          <tileHeight>5</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>120</upkeepCost>
@@ -3454,7 +3405,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>140</upkeepCost>
@@ -3504,7 +3454,6 @@
          <tileHeight>6</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
          <upkeepCost>45</upkeepCost>
@@ -3548,7 +3497,6 @@
          <tileHeight>6</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
          <upkeepCost>70</upkeepCost>
@@ -3594,7 +3542,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>250</upkeepCost>
@@ -3640,7 +3587,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -3689,7 +3635,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -3741,7 +3686,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>175</upkeepCost>
@@ -3790,7 +3734,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>250</upkeepCost>
@@ -3850,7 +3793,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -3906,7 +3848,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>50</upkeepCost>
@@ -3973,7 +3914,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>40</upkeepCost>
@@ -4034,7 +3974,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>25</upkeepCost>
@@ -4095,7 +4034,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -4159,7 +4097,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>50</upkeepCost>
@@ -4223,7 +4160,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -4290,7 +4226,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>45</upkeepCost>
@@ -4354,7 +4289,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>
@@ -4418,7 +4352,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -4478,7 +4411,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>
@@ -4542,7 +4474,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>80</upkeepCost>
@@ -4603,7 +4534,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -4667,7 +4597,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -4731,7 +4660,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -4792,7 +4720,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>35</upkeepCost>
@@ -4853,7 +4780,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>30</upkeepCost>
@@ -4914,7 +4840,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>160</upkeepCost>
@@ -4977,7 +4902,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -5041,7 +4965,6 @@
          <tileHeight>5</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -5108,7 +5031,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>
@@ -5172,7 +5094,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>90</upkeepCost>
@@ -5242,7 +5163,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>125</upkeepCost>
@@ -5306,7 +5226,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>130</upkeepCost>
@@ -5370,7 +5289,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>140</upkeepCost>
@@ -5434,7 +5352,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>130</upkeepCost>
@@ -5501,7 +5418,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -5568,7 +5484,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>195</upkeepCost>
@@ -5638,7 +5553,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -5699,7 +5613,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>160</upkeepCost>
@@ -5769,7 +5682,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>160</upkeepCost>
@@ -5833,7 +5745,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>155</upkeepCost>
@@ -5907,7 +5818,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -5968,7 +5878,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>150</upkeepCost>
@@ -6038,7 +5947,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>120</upkeepCost>
@@ -6108,7 +6016,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>170</upkeepCost>
@@ -6184,7 +6091,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>220</upkeepCost>
@@ -6254,7 +6160,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>220</upkeepCost>
@@ -6324,7 +6229,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>180</upkeepCost>
@@ -6391,7 +6295,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>275</upkeepCost>
@@ -6458,7 +6361,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>220</upkeepCost>
@@ -6525,7 +6427,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>230</upkeepCost>
@@ -6598,7 +6499,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>260</upkeepCost>
@@ -6665,7 +6565,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>280</upkeepCost>
@@ -6747,7 +6646,9 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>warehouse2</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>10</upkeepCost>
@@ -6802,7 +6703,9 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>warehouse3</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>30</upkeepCost>
@@ -6860,7 +6763,9 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>warehouse4</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>50</upkeepCost>
@@ -6921,7 +6826,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>true</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>120</upkeepCost>
@@ -6985,7 +6889,9 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>citizenhouse</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -7029,7 +6935,9 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>patricianhouse</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -7047,7 +6955,7 @@
             </Item>
          </buildingItems>
          <spriteBaseName>citizenhouse</spriteBaseName>
-         <maxLivingSpaces>0</maxLivingSpaces>
+         <maxLivingSpaces>16</maxLivingSpaces>
          <increaseTime>2.0</increaseTime>
          <decreaseTime>4.0</decreaseTime>
       </home>
@@ -7076,7 +6984,9 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
+         <canBeUpgradedTo length="1">
+            <Structure>noblemanhouse</Structure>
+         </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -7097,7 +7007,7 @@
             </Item>
          </buildingItems>
          <spriteBaseName>patricianhouse</spriteBaseName>
-         <maxLivingSpaces>0</maxLivingSpaces>
+         <maxLivingSpaces>28</maxLivingSpaces>
          <increaseTime>3.0</increaseTime>
          <decreaseTime>6.0</decreaseTime>
       </home>
@@ -7126,7 +7036,6 @@
          <tileHeight>2</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -7150,7 +7059,7 @@
             </Item>
          </buildingItems>
          <spriteBaseName>noblemanhouse</spriteBaseName>
-         <maxLivingSpaces>0</maxLivingSpaces>
+         <maxLivingSpaces>42</maxLivingSpaces>
          <increaseTime>4.0</increaseTime>
          <decreaseTime>8.0</decreaseTime>
       </home>
@@ -7186,7 +7095,6 @@
          </buildTileTypes>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>50</upkeepCost>
@@ -7242,7 +7150,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>250</upkeepCost>
@@ -7297,7 +7204,6 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>25</upkeepCost>
@@ -7345,7 +7251,6 @@
          <tileHeight>4</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>100</upkeepCost>
@@ -7372,7 +7277,7 @@
             <Effect>fire</Effect>
          </effectsOnTargets>
          <maxNumberOfWorker>1</maxNumberOfWorker>
-         <workSpeed>0.01</workSpeed>
+         <workSpeed>0.06</workSpeed>
       </servicestructure>
       <servicestructure ID="hospital">
          <Name>
@@ -7395,7 +7300,6 @@
          <tileHeight>3</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
-         <canBeUpgraded>false</canBeUpgraded>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>75</upkeepCost>

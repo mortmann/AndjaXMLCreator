@@ -40,13 +40,10 @@ public class PopulationLevelThingsTab extends Tab {
 		mainGrid.prefWidthProperty().bind(scroll.widthProperty().subtract(10)); 
 		scroll.setContent(mainGrid);
 		setContent(scroll);
-//		mainGrid.setGridLinesVisible(true);
 
-		int i = 0;
 		for (String id : GUI.Instance.idToPopulationLevel.keySet()) {
 			PopulationLevel level = GUI.Instance.idToPopulationLevel.get(id);
 			mainGrid.getChildren().add(Utility.wrapPaneInTitledPane(level.GetName(), CreatePane(level), true));
-			i++;
 		}	
 		for (Structure s : GUI.Instance.idToStructures.values()) {
 			AddButton(s, GUI.Instance.idToStructures, idToPane.get(s.populationLevel +"structures"));

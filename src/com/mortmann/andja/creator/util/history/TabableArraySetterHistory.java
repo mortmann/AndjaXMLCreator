@@ -62,6 +62,26 @@ public class TabableArraySetterHistory<T extends Tabable> extends GridPane imple
 					e.printStackTrace();
 				}
 			}
+			if(fi.FilterMethod().isBlank() == false) {
+				try {
+					java.lang.reflect.Method method = tabable.getClass().getMethod(fi.FilterMethod(), Object.class);
+					tabables.removeIf(x -> {
+						try {
+							System.out.println();
+							return (boolean) method.invoke(tabable, x);
+						} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+							e.printStackTrace();
+						}
+						return false;
+					});
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		obsMapTabable.addListener(new MapChangeListener<String,Tabable>(){

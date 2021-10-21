@@ -14,7 +14,6 @@ public class Warehouse extends Market {
 		buildTyp = BuildTypes.Single;
 		hasHitbox = true;
 		canTakeDamage = true;
-		canBeUpgraded=true;
 		structureRange = 18;
 	}
 	

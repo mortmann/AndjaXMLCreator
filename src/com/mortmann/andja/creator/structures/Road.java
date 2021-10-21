@@ -14,7 +14,6 @@ public class Road extends Structure {
 		tileHeight = 1;
 		buildTyp = BuildTypes.Path;
 		structureTyp = StructureTyp.Pathfinding;
-		canBeUpgraded = true;
 	}
 
 	@Override

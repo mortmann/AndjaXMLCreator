@@ -17,7 +17,6 @@ public class Market extends OutputStructure {
 		structureTyp = StructureTyp.Blocking;
 		structureRange = 18;
 		canTakeDamage = true;
-		canBeUpgraded=true;
 	}
 
 	@Override

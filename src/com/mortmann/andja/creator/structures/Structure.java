@@ -50,7 +50,6 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	
 	@FieldInfo(required=true,subType=PopulationLevel.class)@Element public int populationLevel = -1;
 	@FieldInfo(required=true)@Element public int populationCount = -1;
-	@FieldInfo(IsEffectable=false) @Element(required=false) public int structureLevel = 0;
 
 	@FieldInfo(required=true) @Element public int tileWidth;
 	@FieldInfo(required=true) @Element public int tileHeight;
@@ -58,7 +57,11 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 	
 	@Element(required=false) public boolean canRotate = true;
 	@Element(required=false) public boolean canBeBuildOver = false;
-	@Element(required=false) public boolean canBeUpgraded = false;
+	
+	@FieldInfo(required=false,compareType=Structure[].class, FilterMethod = "SameTyp") 
+	@ElementArray(entry="structure",required=false) 
+	public String[] canBeUpgradedTo;
+	
 	@Element(required=false) public boolean canTakeDamage = false;
 
 	@Element(required=false) public boolean canStartBurning = false;
@@ -240,4 +243,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 			}
 		};
 	}
+    public boolean SameTyp(Object obj) {
+    	return obj.getClass() != getClass();
+    }
 }
