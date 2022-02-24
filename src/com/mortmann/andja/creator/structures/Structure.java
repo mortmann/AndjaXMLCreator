@@ -36,7 +36,7 @@ public abstract class Structure implements Tabable, Comparable<Tabable>  {
 
 	@FieldInfo(order=1,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Name;
 	@FieldInfo(required=true,subType=String.class,longtext=true)@ElementMap(key = "lang",attribute=true) public HashMap<String,String> Description;
-	@FieldInfo(required=false,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> HoverOver;
+	@FieldInfo(required=false,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Tooltip;
 	@FieldInfo(subType=String.class) @ElementMap(key = "lang",required=false) public HashMap<String,String> Short;
 	
 	@Element(required=false) public boolean canBeBuild = true;

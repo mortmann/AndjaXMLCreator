@@ -7,7 +7,7 @@
          </Name>
          <Description>
             <entry lang="Deutsch">Einfacher Weg um Gebäude mit einander zuverbinden.</entry>
-            <entry lang="English">Simple road to connect Structures.</entry>
+            <entry lang="English">Simple road to connect structures.</entry>
          </Description>
          <HoverOver>
             <entry lang="Deutsch">Feldweg</entry>
@@ -25,6 +25,11 @@
          <tileHeight>1</tileHeight>
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
+         <canBeUpgradedTo length="3">
+            <structure>brickroad</structure>
+            <structure>stoneroad</structure>
+            <structure>marbelroad</structure>
+         </canBeUpgradedTo>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
          <upkeepCost>0</upkeepCost>
@@ -62,8 +67,8 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="2">
-            <Structure>brickroad</Structure>
-            <Structure>marbelroad</Structure>
+            <structure>brickroad</structure>
+            <structure>marbelroad</structure>
          </canBeUpgradedTo>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -139,7 +144,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>marbelroad</Structure>
+            <structure>marbelroad</structure>
          </canBeUpgradedTo>
          <canTakeDamage>false</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -2313,7 +2318,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>mediummarketbuilding</Structure>
+            <structure>mediummarketbuilding</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -2363,7 +2368,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>bigmarketbuilding</Structure>
+            <structure>bigmarketbuilding</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -2416,7 +2421,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>verybigmarketbuilding</Structure>
+            <structure>verybigmarketbuilding</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -6647,7 +6652,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>warehouse2</Structure>
+            <structure>warehouse2</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -6704,7 +6709,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>warehouse3</Structure>
+            <structure>warehouse3</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -6764,7 +6769,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>warehouse4</Structure>
+            <structure>warehouse4</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -6890,7 +6895,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>citizenhouse</Structure>
+            <structure>citizenhouse</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>true</canStartBurning>
@@ -6936,7 +6941,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>patricianhouse</Structure>
+            <structure>patricianhouse</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>
@@ -6985,7 +6990,7 @@
          <canRotate>true</canRotate>
          <canBeBuildOver>false</canBeBuildOver>
          <canBeUpgradedTo length="1">
-            <Structure>noblemanhouse</Structure>
+            <structure>noblemanhouse</structure>
          </canBeUpgradedTo>
          <canTakeDamage>true</canTakeDamage>
          <canStartBurning>false</canStartBurning>

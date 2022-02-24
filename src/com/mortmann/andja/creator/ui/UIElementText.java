@@ -18,7 +18,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 public class UIElementText {
-	enum StringType { Text, HoverOver, Value}
+	enum StringType { Text, Tooltip, Value}
 	TranslationData data;
 	
 	private GridPane gridpane;
@@ -37,7 +37,7 @@ public class UIElementText {
 			&& (data.onlyToolTip == null || data.onlyToolTip == false)) {
 			gridpane.add(GetStringSetter(StringType.Text , -1), 0, 1);
 		}
-		gridpane.add(GetStringSetter(StringType.HoverOver, -1), 0, 2);
+		gridpane.add(GetStringSetter(StringType.Tooltip, -1), 0, 2);
 		if(data.valueCount != null && data.valueCount>0) {
 			gridpane.add(GetStringArraySetter(), 0, 3);
 		}
@@ -106,7 +106,7 @@ public class UIElementText {
 		last = textField;
 		textField.setMaxHeight(65);
 		switch (strType) {
-			case HoverOver:
+			case Tooltip:
 				if(data.toolTipTranslation!=null) {
 					textField.setStartText(data.toolTipTranslation);
 				}
@@ -128,7 +128,7 @@ public class UIElementText {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				switch (strType) {
-					case HoverOver:
+					case Tooltip:
 						data.toolTipTranslation = textField.getText();	
 						break;
 					case Text:					
@@ -145,8 +145,8 @@ public class UIElementText {
 			}
 		});
 		switch (strType) {
-			case HoverOver:
-				grid.add(new Label("HoverOver"),0, 0);	
+			case Tooltip:
+				grid.add(new Label("Tooltip"),0, 0);	
 				break;
 			case Text:					
 				grid.add(new Label("Text"), 0, 0);	
