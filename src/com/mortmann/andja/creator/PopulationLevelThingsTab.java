@@ -126,7 +126,7 @@ public class PopulationLevelThingsTab extends Tab {
 		map.addListener(new MapChangeListener<String, Tabable>() {
 			@Override
 			public void onChanged(Change<? extends String, ? extends Tabable> change) {
-				if(change.wasRemoved())
+				if(change.wasRemoved() && change.getValueRemoved().equals(s))
 					RemoveButton(b, flowPane);
 			}
 
