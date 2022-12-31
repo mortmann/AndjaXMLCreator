@@ -32,11 +32,8 @@
       <structures length="1">
          <id>school</id>
       </structures>
-      <structures2 length="1">
-         <string>school</string>
-      </structures2>
       <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>1750</startPopulationCount>
       <group>education</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -111,11 +108,8 @@
       <structures length="1">
          <id>theater</id>
       </structures>
-      <structures2 length="1">
-         <string>theater</string>
-      </structures2>
       <startLevel>2</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>2200</startPopulationCount>
       <group>entertainment</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -171,11 +165,8 @@
       <structures length="1">
          <id>cityguardpost</id>
       </structures>
-      <structures2 length="1">
-         <string>cityguardpost</string>
-      </structures2>
       <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>1000</startPopulationCount>
       <group>security</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -193,9 +184,6 @@
       <structures length="1">
          <id>bank</id>
       </structures>
-      <structures2 length="1">
-         <string>bank</string>
-      </structures2>
       <startLevel>3</startLevel>
       <startPopulationCount>1700</startPopulationCount>
       <group>community</group>
@@ -215,11 +203,8 @@
       <structures length="1">
          <id>bathhouse</id>
       </structures>
-      <structures2 length="1">
-         <string>bathhouse</string>
-      </structures2>
       <startLevel>2</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>1500</startPopulationCount>
       <group>entertainment</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -238,7 +223,7 @@
          <count>0</count>
       </item>
       <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>1000</startPopulationCount>
       <group>luxury</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -294,9 +279,6 @@
       <structures length="1">
          <id>barbershop</id>
       </structures>
-      <structures2 length="1">
-         <string>barbershop</string>
-      </structures2>
       <startLevel>3</startLevel>
       <startPopulationCount>2400</startPopulationCount>
       <group>community</group>
@@ -318,13 +300,8 @@
          <id>church</id>
          <id>cathedral</id>
       </structures>
-      <structures2 length="3">
-         <string>chapel</string>
-         <string>church</string>
-         <string>cathedral</string>
-      </structures2>
-      <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startLevel>0</startLevel>
+      <startPopulationCount>320</startPopulationCount>
       <group>belief</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -342,8 +319,8 @@
       <item ID="liquor">
          <count>0</count>
       </item>
-      <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startLevel>0</startLevel>
+      <startPopulationCount>200</startPopulationCount>
       <group>beverages</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -495,12 +472,8 @@
          <id>bathhouse</id>
          <id>washhouse</id>
       </structures>
-      <structures2 length="2">
-         <string>bathhouse</string>
-         <string>washhouse</string>
-      </structures2>
-      <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startLevel>2</startLevel>
+      <startPopulationCount>1500</startPopulationCount>
       <group>luxury</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -538,7 +511,7 @@
          <count>0</count>
       </item>
       <startLevel>0</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>320</startPopulationCount>
       <group>clothing</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -556,11 +529,8 @@
       <structures length="1">
          <id>university</id>
       </structures>
-      <structures2 length="1">
-         <string>university</string>
-      </structures2>
       <startLevel>3</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>500</startPopulationCount>
       <group>education</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -578,7 +548,7 @@
       <item ID="beer">
          <count>0</count>
       </item>
-      <startLevel>1</startLevel>
+      <startLevel>2</startLevel>
       <startPopulationCount>1500</startPopulationCount>
       <group>beverages</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
@@ -654,9 +624,6 @@
       <structures length="1">
          <id>marketplace</id>
       </structures>
-      <structures2 length="1">
-         <string>marketplace</string>
-      </structures2>
       <startLevel>0</startLevel>
       <startPopulationCount>0</startPopulationCount>
       <group>community</group>
@@ -714,11 +681,8 @@
       <structures length="1">
          <id>debtorsprison</id>
       </structures>
-      <structures2 length="1">
-         <string>debtorsprison</string>
-      </structures2>
       <startLevel>2</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startPopulationCount>1350</startPopulationCount>
       <group>security</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>
@@ -736,11 +700,8 @@
       <structures length="1">
          <id>arena</id>
       </structures>
-      <structures2 length="1">
-         <string>arena</string>
-      </structures2>
-      <startLevel>1</startLevel>
-      <startPopulationCount>0</startPopulationCount>
+      <startLevel>2</startLevel>
+      <startPopulationCount>1500</startPopulationCount>
       <group>entertainment</group>
       <hasToReachPerRoad>false</hasToReachPerRoad>
    </Need>

@@ -336,7 +336,7 @@ public class GenerationInfo extends Tab implements GameSettings {
 
 		try {
 			if (field.get(m) != null) {
-				box.getSelectionModel().select((Enum) field.get(m));
+				box.SetValueIgnoreChange((Enum) field.get(m));
 			}
 		} catch (Exception e1) {
 		}

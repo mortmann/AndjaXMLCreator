@@ -322,7 +322,7 @@ public class GUI {
 //		}
 //		ArrayList<ItemXML> items = new ArrayList<>(idToItem.values());
 //		for(ItemXML item : items) {
-//			if(item.ID.contains(" ") || item.ID.contains("´") || item.ID.contains("'") || item.ID.contains("-") ) {
+//			if(item.ID.contains(" ") || item.ID.contains("ï¿½") || item.ID.contains("'") || item.ID.contains("-") ) {
 //				String newID = item.ID;
 //				String id = item.ID;
 //				newID = newID.replaceAll("[\\p\\s{Punct}&&[^_]]+", "");
@@ -629,7 +629,7 @@ public class GUI {
 		    Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Failure!");
 			alert.setHeaderText("Export failed:");
-			alert.setContentText(e.getCause().getLocalizedMessage());
+			alert.setContentText(e.getLocalizedMessage());
 			alert.showAndWait();
 		    return;
 		} 
@@ -758,7 +758,7 @@ public class GUI {
 				missingstring += missingstring.isEmpty()? "" : ", ";
 				missingstring += f.getName();
 			}
-			a.setContentText("Can´t save data! Fill all required data out!\n 	Following Fields are not filled out:\n"  + missingstring +"!");
+			a.setContentText("Canï¿½t save data! Fill all required data out!\n 	Following Fields are not filled out:\n"  + missingstring +"!");
 			a.show();
 			//its missing smth return error
 			return;

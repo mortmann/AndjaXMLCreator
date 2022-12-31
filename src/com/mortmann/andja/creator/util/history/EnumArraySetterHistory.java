@@ -26,9 +26,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 
 	public EnumArraySetterHistory(String name, Field field, Object tabable, Class<E> class1) {
 		ObservableList<Enum> names = FXCollections.observableArrayList();
-		for (E e : EnumSet.allOf(class1)) {
-			  names.add(e);
-		}
+		names.addAll(EnumSet.allOf(class1));
 		this.field = field;
 		this.tabable = tabable;
 		listpane = new  GridPane();
@@ -51,7 +49,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 
 		try {
 			oldArray = (ArrayList<E>) field.get(tabable);
-		} catch (Exception e1) {
+		} catch (Exception ignored) {
 		}
 		if(oldArray ==null){
 			oldArray = new ArrayList<E>();
@@ -64,12 +62,11 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 		if(field.getAnnotation(FieldInfo.class)!=null){
 			if(field.getAnnotation(FieldInfo.class).required()){
 			    ObservableList<String> styleClass = box.getStyleClass();
-			    
-			    styleClass.add("combobox-error");
-				box.valueProperty().addListener((arg0, oldValue, newValue) -> {		
-		        	if(styleClass.contains("combobox-error")) {
-		        		styleClass.remove("combobox-error");
-	    	    	}
+			    if(oldArray.isEmpty()) {
+					styleClass.add("combobox-error");
+				}
+				box.valueProperty().addListener((arg0, oldValue, newValue) -> {
+					styleClass.remove("combobox-error");
 				});
 
 			}
@@ -116,11 +113,8 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 			} 
 		}
 
-		// Name of Item
-		Label l = new Label(e.toString());
-		//Amount field
-		// Remove Button
-		Button b = new Button("X");
+		Label nameOfItem = new Label(e.toString());
+		Button removeButton = new Button("X");
 		
 		try {
 			ArrayList<E> tempList = new ArrayList<E>(old);
@@ -129,7 +123,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 			}
 			OnChange(new ArrayList<E>(old), tempList);
 			// set the press button action
-			b.setOnAction(s -> {
+			removeButton.setOnAction(s -> {
 				try {
 			        ArrayList<E> list = null;
 					try {
@@ -139,7 +133,7 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 					ArrayList<E> tempList2 = new ArrayList<E>(list);
 					list.remove(e);
 					//remove the label and button
-					listpane.getChildren().removeAll(l, b);
+					listpane.getChildren().removeAll(nameOfItem, removeButton);
 					ObservableList<Node> children = FXCollections.observableArrayList(listpane.getChildren());
 					listpane.getChildren().clear();
 					for (int i = 0; i < children.size(); i+=2) {
@@ -162,11 +156,11 @@ public class EnumArraySetterHistory<E extends Enum<E>> extends GridPane implemen
 			e1.printStackTrace();
 		}
 		if(setupPos < 0) {
-			listpane.add(l, 0, old.size());
-			listpane.add(b, 2, old.size());
+			listpane.add(nameOfItem, 0, old.size());
+			listpane.add(removeButton, 2, old.size());
 		} else {
-			listpane.add(l, 0, setupPos);
-			listpane.add(b, 2, setupPos);
+			listpane.add(nameOfItem, 0, setupPos);
+			listpane.add(removeButton, 2, setupPos);
 		}
 	}
 	
