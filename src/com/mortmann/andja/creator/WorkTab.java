@@ -1453,7 +1453,7 @@ public class WorkTab extends Tab {
 					}
 					id = id.replaceAll("[\\p{Punct}\\s&&[^_]]+", "");
 					((TextFieldHistory) text).textProperty().set(id);
-					if (GUI.Instance.doesIDexistForTabable(id, t)) {
+					if (GUI.Instance.doesIDexistForDifferentTabable(id, t)) {
 						if (!styleClass.contains("text-field-warning")) {
 							styleClass.add("text-field-warning");
 						}

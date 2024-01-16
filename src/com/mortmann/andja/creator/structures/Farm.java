@@ -46,8 +46,8 @@ public class Farm extends OutputStructure {
 	public float CalculatePPM() {
 		float tileCount = InRangeTiles();
 		Growable grow = (Growable)GUI.Instance.idToStructures.get(growable);
-        float neededWorkerRatio = maxNumberOfWorker / neededHarvestToProduce; 
-        float perWorker = neededHarvestToProduce / maxNumberOfWorker; 
+        float neededWorkerRatio = (float) maxNumberOfWorker / neededHarvestToProduce; 
+        float perWorker = (float) neededHarvestToProduce / maxNumberOfWorker; 
 		if(grow==null||produceTime * efficiency <= 0|| grow.produceTime<=0 || output==null || output.length==0)
 			return 0;
 		if(maxNumberOfWorker*produceTime*efficiency>=grow.produceTime)

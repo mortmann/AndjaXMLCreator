@@ -25,7 +25,10 @@ import com.mortmann.andja.creator.util.FieldInfo;
 import com.mortmann.andja.creator.util.OrderEr;
 import com.mortmann.andja.creator.util.Range;
 import com.mortmann.andja.creator.util.Size;
+import com.mortmann.andja.creator.util.Tabable;
 import com.mortmann.andja.creator.util.history.ChangeHistory;
+import com.mortmann.andja.creator.util.history.ChangeListenerHistory;
+import com.mortmann.andja.creator.util.history.CheckBoxHistory;
 import com.mortmann.andja.creator.util.history.ComboBoxHistory;
 import com.mortmann.andja.creator.util.history.EnumArraySetterHistory;
 
@@ -257,6 +260,9 @@ public class GenerationInfo extends Tab implements GameSettings {
             if(compare == Range.class) {
             	Range.CreateSetter(field.getName(), field, resource, false);
             }
+            if (compare == Boolean.TYPE) {
+            	pane.add(CreateBooleanSetter(fld[i].getName(), fld[i], resource), 0, i);
+			} 
             if (compare == ArrayList.class) {
 				if (info == null) {
 					System.out.println(
@@ -285,6 +291,28 @@ public class GenerationInfo extends Tab implements GameSettings {
         }
 
         return btp;
+	}
+	
+	public GridPane CreateBooleanSetter(String name, Field field, Object m) {
+		GridPane grid = new GridPane();
+		CheckBoxHistory box = new CheckBoxHistory(name);
+		try {
+			box.setSelectedOverride((boolean) field.get(m));
+		} catch (Exception e1) {
+		}
+		box.AddChangeListener(new ChangeListenerHistory() {
+			@Override
+			public void changed(Object arg0, Object arg1, boolean newChange) {
+				try {
+					field.setBoolean(m, box.isSelected());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}, true);
+		grid.add(box, 0, 0);
+
+		return grid;
 	}
 	
 	private void RemoveMineResource(Mine mine) {

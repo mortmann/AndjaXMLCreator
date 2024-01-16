@@ -1,7 +1,10 @@
 package com.mortmann.andja.creator;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import com.mortmann.andja.creator.other.Need;
 import com.mortmann.andja.creator.other.PopulationLevel;
@@ -45,7 +48,9 @@ public class PopulationLevelThingsTab extends Tab {
 			PopulationLevel level = GUI.Instance.idToPopulationLevel.get(id);
 			mainGrid.getChildren().add(Utility.wrapPaneInTitledPane(level.GetName(), CreatePane(level), true));
 		}	
-		for (Structure s : GUI.Instance.idToStructures.values()) {
+		List<Structure> sortedStructures = new ArrayList<>(GUI.Instance.idToStructures.values());
+		Collections.sort(sortedStructures);
+		for (Structure s : sortedStructures) {
 			AddButton(s, GUI.Instance.idToStructures, idToPane.get(s.populationLevel +"structures"));
 		}
 		GUI.Instance.idToStructures.addListener(new MapChangeListener<String, Structure>() {

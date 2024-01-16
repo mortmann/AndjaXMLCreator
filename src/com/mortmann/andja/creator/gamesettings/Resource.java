@@ -32,6 +32,10 @@ public class Resource {
 	@FieldInfo(order = 3, required = true, subType = Range.class, fixed = true)
 	@ElementMap(key = "islandSize", attribute = true, required = false)
 	public HashMap<Size, Range> distributionMap;
+	@FieldInfo(order = 1)
+	@Element(required = false)
+	public boolean unlimited;
+	
 	public Resource(String ID) {
 		this.ID = ID;
 		distributionMap = new HashMap<>();

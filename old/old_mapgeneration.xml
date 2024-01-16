@@ -68,16 +68,16 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>1</lower>
-                  <upper>1</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
                   <lower>2</lower>
                   <upper>3</upper>
+               </range>
+            </entry>
+            <entry islandSize="VerySmall">
+               <range>
+                  <lower>1</lower>
+                  <upper>1</upper>
                </range>
             </entry>
             <entry islandSize="Medium">
@@ -86,13 +86,7 @@
                   <upper>3</upper>
                </range>
             </entry>
-            <entry islandSize="Small">
-               <range>
-                  <lower>1</lower>
-                  <upper>2</upper>
-               </range>
-            </entry>
-            <entry islandSize="VerySmall">
+            <entry islandSize="Other">
                <range>
                   <lower>1</lower>
                   <upper>1</upper>
@@ -102,6 +96,12 @@
                <range>
                   <lower>3</lower>
                   <upper>4</upper>
+               </range>
+            </entry>
+            <entry islandSize="Small">
+               <range>
+                  <lower>1</lower>
+                  <upper>2</upper>
                </range>
             </entry>
          </distributionMap>
@@ -112,28 +112,10 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>1</lower>
-                  <upper>1</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
                   <lower>3</lower>
                   <upper>6</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>2</lower>
-                  <upper>4</upper>
-               </range>
-            </entry>
-            <entry islandSize="Small">
-               <range>
-                  <lower>1</lower>
-                  <upper>3</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
@@ -142,10 +124,28 @@
                   <upper>2</upper>
                </range>
             </entry>
+            <entry islandSize="Medium">
+               <range>
+                  <lower>2</lower>
+                  <upper>4</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
+               <range>
+                  <lower>1</lower>
+                  <upper>1</upper>
+               </range>
+            </entry>
             <entry islandSize="VeryLarge">
                <range>
                   <lower>4</lower>
                   <upper>6</upper>
+               </range>
+            </entry>
+            <entry islandSize="Small">
+               <range>
+                  <lower>1</lower>
+                  <upper>3</upper>
                </range>
             </entry>
          </distributionMap>
@@ -160,16 +160,16 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>1</lower>
-                  <upper>1</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
                   <lower>1</lower>
                   <upper>3</upper>
+               </range>
+            </entry>
+            <entry islandSize="VerySmall">
+               <range>
+                  <lower>1</lower>
+                  <upper>1</upper>
                </range>
             </entry>
             <entry islandSize="Medium">
@@ -178,13 +178,7 @@
                   <upper>2</upper>
                </range>
             </entry>
-            <entry islandSize="Small">
-               <range>
-                  <lower>1</lower>
-                  <upper>1</upper>
-               </range>
-            </entry>
-            <entry islandSize="VerySmall">
+            <entry islandSize="Other">
                <range>
                   <lower>1</lower>
                   <upper>1</upper>
@@ -196,6 +190,12 @@
                   <upper>3</upper>
                </range>
             </entry>
+            <entry islandSize="Small">
+               <range>
+                  <lower>1</lower>
+                  <upper>1</upper>
+               </range>
+            </entry>
          </distributionMap>
       </resource>
       <resource ID="roughdiamonds">
@@ -204,19 +204,7 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
                <range>
                   <lower>0</lower>
                   <upper>0</upper>
@@ -228,13 +216,25 @@
                   <upper>0</upper>
                </range>
             </entry>
-            <entry islandSize="Small">
+            <entry islandSize="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
                <range>
                   <lower>0</lower>
                   <upper>0</upper>
                </range>
             </entry>
             <entry islandSize="VeryLarge">
+               <range>
+                  <lower>0</lower>
+                  <upper>0</upper>
+               </range>
+            </entry>
+            <entry islandSize="Small">
                <range>
                   <lower>0</lower>
                   <upper>0</upper>
@@ -245,22 +245,10 @@
       <resource ID="clay">
          <percentageOfIslands>0.2</percentageOfIslands>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <lower>1</lower>
+                  <upper>3</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
@@ -269,16 +257,28 @@
                   <upper>0</upper>
                </range>
             </entry>
-            <entry islandSize="Small">
+            <entry islandSize="Medium">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>2</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>4</upper>
                </range>
             </entry>
             <entry islandSize="VeryLarge">
                <range>
+                  <lower>2</lower>
+                  <upper>4</upper>
+               </range>
+            </entry>
+            <entry islandSize="Small">
+               <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
          </distributionMap>
@@ -289,40 +289,40 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <lower>1</lower>
+                  <upper>3</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
+               </range>
+            </entry>
+            <entry islandSize="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>2</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>4</upper>
+               </range>
+            </entry>
+            <entry islandSize="VeryLarge">
+               <range>
+                  <lower>1</lower>
+                  <upper>5</upper>
                </range>
             </entry>
             <entry islandSize="Small">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="VeryLarge">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
          </distributionMap>
@@ -333,31 +333,25 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <lower>1</lower>
+                  <upper>4</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
-            <entry islandSize="Small">
+            <entry islandSize="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>2</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
                <range>
                   <lower>0</lower>
                   <upper>0</upper>
@@ -365,8 +359,14 @@
             </entry>
             <entry islandSize="VeryLarge">
                <range>
+                  <lower>1</lower>
+                  <upper>6</upper>
+               </range>
+            </entry>
+            <entry islandSize="Small">
+               <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
          </distributionMap>
@@ -374,40 +374,40 @@
       <resource ID="quartzsand">
          <percentageOfIslands>0.2</percentageOfIslands>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <lower>1</lower>
+                  <upper>3</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
+               </range>
+            </entry>
+            <entry islandSize="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>2</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>3</upper>
+               </range>
+            </entry>
+            <entry islandSize="VeryLarge">
+               <range>
+                  <lower>1</lower>
+                  <upper>3</upper>
                </range>
             </entry>
             <entry islandSize="Small">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="VeryLarge">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
          </distributionMap>
@@ -418,31 +418,25 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <lower>1</lower>
+                  <upper>2</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
-            <entry islandSize="Small">
+            <entry islandSize="Medium">
+               <range>
+                  <lower>0</lower>
+                  <upper>3</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
                <range>
                   <lower>0</lower>
                   <upper>0</upper>
@@ -450,8 +444,14 @@
             </entry>
             <entry islandSize="VeryLarge">
                <range>
+                  <lower>2</lower>
+                  <upper>3</upper>
+               </range>
+            </entry>
+            <entry islandSize="Small">
+               <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
                </range>
             </entry>
          </distributionMap>
@@ -462,40 +462,40 @@
             <Type>Mountain</Type>
          </requiredTile>
          <distributionMap>
-            <entry islandSize="Other">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
             <entry islandSize="Large">
                <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="Medium">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <lower>1</lower>
+                  <upper>4</upper>
                </range>
             </entry>
             <entry islandSize="VerySmall">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>1</upper>
+               </range>
+            </entry>
+            <entry islandSize="Medium">
+               <range>
+                  <lower>1</lower>
+                  <upper>2</upper>
+               </range>
+            </entry>
+            <entry islandSize="Other">
+               <range>
+                  <lower>0</lower>
+                  <upper>4</upper>
+               </range>
+            </entry>
+            <entry islandSize="VeryLarge">
+               <range>
+                  <lower>2</lower>
+                  <upper>5</upper>
                </range>
             </entry>
             <entry islandSize="Small">
                <range>
                   <lower>0</lower>
-                  <upper>0</upper>
-               </range>
-            </entry>
-            <entry islandSize="VeryLarge">
-               <range>
-                  <lower>0</lower>
-                  <upper>0</upper>
+                  <upper>2</upper>
                </range>
             </entry>
          </distributionMap>

@@ -24,7 +24,7 @@ public class Effect implements Tabable, Comparable<Tabable> {
 	public enum EffectTypes { Integer, Float, Special }
 	public enum EffectModifier { Additive, Multiplicative, Update, Special }
 	public enum EffectUpdateChanges { None, Health }
-	public enum EffectClassification { Negativ, Neutral, Positiv }
+	public enum EffectClassification { Negative, Neutral, Positive }
 	
 	@FieldInfo(order=0,required=true,subType=String.class)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Name;
 	@FieldInfo(subType=String.class,required=true,longtext=true)@ElementMap(key = "lang",attribute=true,required=false) public HashMap<String,String> Description;
@@ -79,11 +79,11 @@ public class Effect implements Tabable, Comparable<Tabable> {
 	@Override
 	public String GetButtonColor() {
 		switch(classification) {
-		case Negativ:
+		case Negative:
 			return "#E12B38";
 		case Neutral:
 			return null;
-		case Positiv:
+		case Positive:
 			return "#3EB650";
 		default:
 			return null;

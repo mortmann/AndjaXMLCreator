@@ -359,17 +359,7 @@ public class GUI {
 			return;
 		}
 		if(newAdded == false) {
-			Serializer serializer = new Persister(new AnnotationStrategy());
-			StringWriter writer = new StringWriter();
-			try {
-				serializer.write(tabable, writer);
-				Tabable newTabable = tabable.getClass().getDeclaredConstructor().newInstance();
-				newTabable = serializer.read(newTabable, writer.toString());
-				originalToTemporary.put(tabable, newTabable);
-				tabable = newTabable;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			tabable = copyTabableAndMapReferenceToOriginal(tabable);
 		}
 		
 		WorkTab workTab = new WorkTab(tabable, newAdded);
@@ -413,6 +403,20 @@ public class GUI {
 			});
 			workTabs.getTabs().add(addTab);
 		}
+	}
+	private Tabable copyTabableAndMapReferenceToOriginal(Tabable tabable) {
+		Serializer serializer = new Persister(new AnnotationStrategy());
+		StringWriter writer = new StringWriter();
+		try {
+			serializer.write(tabable, writer);
+			Tabable newTabable = tabable.getClass().getDeclaredConstructor().newInstance();
+			newTabable = serializer.read(newTabable, writer.toString());
+			originalToTemporary.put(tabable, newTabable);
+			tabable = newTabable;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tabable;
 	}
 	
 	
@@ -783,7 +787,7 @@ public class GUI {
 			}
 			SaveData(); //changed stuff -- not gonna reload tabs
 		}
-		boolean exist = doesIDexistForTabable(currTabable.GetID(),currTabable);
+		boolean exist = doesIDexistForDifferentTabable(currTabable.GetID(),currTabable);
 		if(exist){
 			Alert a = new Alert(AlertType.CONFIRMATION);
 			a.setTitle("ID already exists!");
@@ -821,64 +825,68 @@ public class GUI {
 			return;
 		}
 		boolean saved=false;
+		Tabable newOriginal = copyTabableAndMapReferenceToOriginal(currTabable);
 		if(currTabable instanceof Structure){
-			idToStructures.put(((Structure)currTabable).GetID(),((Structure)currTabable));
+			idToStructures.put(((Structure)currTabable).GetID(),((Structure)newOriginal));
 			saved = SaveStructures();
 		}
 		else if(currTabable instanceof Item){
-			idToItem.put(((ItemXML)currTabable).GetID(), ((ItemXML)currTabable));
+			idToItem.put(((ItemXML)currTabable).GetID(), ((ItemXML)newOriginal));
 			saved = SaveItems();
 		}
 		else if(currTabable instanceof Fertility){
-			idToFertility.put(((Fertility)currTabable).GetID(), ((Fertility)currTabable));
+			idToFertility.put(((Fertility)currTabable).GetID(), ((Fertility)newOriginal));
 			saved = SaveFertilities();
 		}
 		else if(currTabable instanceof Unit){
-			idToUnit.put(((Unit)currTabable).GetID(), ((Unit)currTabable));
+			idToUnit.put(((Unit)currTabable).GetID(), ((Unit)newOriginal));
 			saved = SaveUnits();
 		}
 		else if(currTabable instanceof DamageType){
-			idToDamageType.put(((DamageType)currTabable).GetID(), ((DamageType)currTabable));
+			idToDamageType.put(((DamageType)currTabable).GetID(), ((DamageType)newOriginal));
 			saved = SaveCombat();
 		}
 		else if(currTabable instanceof ArmorType){
-			idToArmorType.put(((ArmorType)currTabable).GetID(), ((ArmorType)currTabable));
+			idToArmorType.put(((ArmorType)currTabable).GetID(), ((ArmorType)newOriginal));
 			saved = SaveCombat();
 		}
 		else if(currTabable instanceof Need){
-			idToNeed.put(((Need)currTabable).GetID(), ((Need)currTabable));
+			idToNeed.put(((Need)currTabable).GetID(), ((Need)newOriginal));
 			saved = SaveNeeds();
 		}
 		else if(currTabable instanceof NeedGroup){
-			idToNeedGroup.put(((NeedGroup)currTabable).GetID(), ((NeedGroup)currTabable));
+			idToNeedGroup.put(((NeedGroup)currTabable).GetID(), ((NeedGroup)newOriginal));
 			saved = SaveNeeds();
 		}
 		else if(currTabable instanceof PopulationLevel){
-			idToPopulationLevel.put(""+((PopulationLevel)currTabable).LEVEL, ((PopulationLevel)currTabable));
+			idToPopulationLevel.put(""+((PopulationLevel)currTabable).LEVEL, ((PopulationLevel)newOriginal));
 			saved = SaveOthers();
 		}
 		else if(currTabable instanceof Effect) {
-			idToEffect.put(((Effect)currTabable).GetID(), ((Effect)currTabable));
+			idToEffect.put(((Effect)currTabable).GetID(), ((Effect)newOriginal));
 			saved = SaveEvents();
 		}
 		else if(currTabable instanceof GameEvent) {
-			idToGameEvent.put(((GameEvent)currTabable).GetID(), ((GameEvent)currTabable));
+			idToGameEvent.put(((GameEvent)currTabable).GetID(), ((GameEvent)newOriginal));
 			saved = SaveEvents();
 		}
 		else if(currTabable instanceof Worker) {
-			idToWorker.put(((Worker)currTabable).GetID(), ((Worker)currTabable));
+			idToWorker.put(((Worker)currTabable).GetID(), ((Worker)newOriginal));
 			saved = SaveUnits();
 		}
 		else if(currTabable instanceof SpawnStructure) {
-			idToSpawnStructure.put(((SpawnStructure)currTabable).GetID(), ((SpawnStructure)currTabable));
+			idToSpawnStructure.put(((SpawnStructure)currTabable).GetID(), ((SpawnStructure)newOriginal));
 			generationInfoTab.setSpawnStructures(idToSpawnStructure.values());
 			generationInfoTab.Save();
 		}
 		else {
 			System.out.println("Missing save for " + currTabable.GetName());
 		}
-		if(saved)
+		if(saved) {
 			ChangeHistory.ObjectSaved(currTabable);
+			originalToTemporary.remove(getOriginalTabableForID(currTabable.GetID(), currTabable));
+			originalToTemporary.put(newOriginal, currTabable);
+		}
 		if(ChangeHistory.IsSaved(currTabable) && saved){
 			curr.setText(curr.getText().replaceAll("\\*", ""));
 		} 
@@ -949,34 +957,30 @@ public class GUI {
 		return workTabs.getSelectionModel().getSelectedItem();
 	}
 	
-	public boolean doesIDexistForTabable(String valueSafe, Tabable tab) {
-		Class c = tab.getClass();
-		if(Structure.class.isAssignableFrom(c)){
-			c = Structure.class;
-		}
-		if(Unit.class.isAssignableFrom(c)){
-			c = Unit.class;
-		}
-		if(classToClassObservableMap.containsKey(c) == false) {
-			System.out.println("WARNING YOU FORGOT TO ADD CLASS TO classToClassObservableMap!");
-			return false;
-		}
-		Tabable exist = (Tabable) classToClassObservableMap.get(c).get(valueSafe);
-		return exist!=null && originalToTemporary.get(exist)!=tab;
+	public boolean doesIDexistForDifferentTabable(String valueSafe, Tabable tab) {
+		return originalToTemporary.entrySet().stream().anyMatch(o -> 
+				o.getKey().getClass() == tab.getClass() 
+				&& o.getKey().GetID().contentEquals(valueSafe)
+				&& o.getValue().equals(tab) == false);
 	}
-	
+
 	public void RemoveTab(Tab tab, Object object) {
 		tabToTabable.remove(tab);
 		tabToID.remove(tab);
 		if(object instanceof Tabable) {
 			tabableToTab.remove((Tabable)object);
+			originalToTemporary.remove(getOriginalTabableForID(tab.getId(), (Tabable)object));
 		}
 		ChangeHistory.RemoveObject(object, true);
 		if(workTabs.getTabs().size()<1&&workTabs.getTabs().contains(emptyTab) == false){
 			AddEmptyTab();
 		}
 	}
-
+	
+	private Tabable getOriginalTabableForID(String valueSafe, Tabable tab) {
+		return originalToTemporary.keySet().stream().filter(o -> o.getClass() == tab.getClass() && o.GetID().contentEquals(valueSafe)).findFirst().get();
+	}
+	
 	public void UpdateCurrentTab() {
 		Tab tab = workTabs.getSelectionModel().getSelectedItem();
 		if(tab instanceof UITab)
@@ -1051,7 +1055,7 @@ public class GUI {
 	}
 
 	public boolean doesIDexistForTabable(int value, Tabable t) {
-		return doesIDexistForTabable(value+"", t);
+		return doesIDexistForDifferentTabable(value+"", t);
 	}
 	
 	public Scene getScene() {
