@@ -28,9 +28,7 @@ public class ComboBoxHistory<T> extends ComboBox<T> implements Changeable {
 		super(specialtargetrangeclasses);
 		Setup();
 	}
-
 	private void Setup() {
-		ignoreChange = true;
 		getSelectionModel().selectedItemProperty().addListener(new ChangeListener<T>() {
 	        public void changed(ObservableValue<? extends T> ov,
 	        		T old_val, T new_val) {
@@ -44,11 +42,11 @@ public class ComboBoxHistory<T> extends ComboBox<T> implements Changeable {
 	            		keysTyped = "";
 	            	}
 	                keysTyped += event.getCode().getName();
-	                Optional<String> os = getItems().stream().map(symbol -> symbol.toString())
+	                Optional<String> os = getItems().stream().map(Object::toString)
 	                        .filter(symbol -> symbol.startsWith(keysTyped))
 	                        .findFirst();
 	                if (os.isPresent()) {
-						int ind = getItems().stream().map(symbol -> symbol.toString()).collect(Collectors.toList()).indexOf(os.get());
+						int ind = getItems().stream().map(Object::toString).toList().indexOf(os.get());
 	                    @SuppressWarnings({ "unchecked", "rawtypes" })
 						ListView<String> lv = (ListView) ((ComboBoxListViewSkin) getSkin()).getPopupContent();
 	                    lv.getFocusModel().focus(ind);

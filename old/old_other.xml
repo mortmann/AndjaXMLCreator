@@ -36,5 +36,17 @@
          <iconSpriteName>patrician</iconSpriteName>
          <taxPerPerson>8</taxPerPerson>
       </PopulationLevel>
+	  <PopulationLevel LEVEL="3">
+         <Name>
+            <entry lang="Deutsch">Adliger</entry>
+            <entry lang="English">Nobleman</entry>
+         </Name>
+         <Description>
+            <entry lang="Deutsch">Höchste Klasse der Einwohner.</entry>
+            <entry lang="English">Highest ranking class.</entry>
+         </Description>
+         <iconSpriteName>nobleman</iconSpriteName>
+         <taxPerPerson>18</taxPerPerson>
+      </PopulationLevel>
    </PopulationLevels>
 </Other>

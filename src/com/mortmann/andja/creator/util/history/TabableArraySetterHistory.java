@@ -128,13 +128,14 @@ public class TabableArraySetterHistory<T extends Tabable> extends GridPane imple
 				OnArrayClassSelect(listpane, field, tabable, obsMapTabable.get(id) ,true);
 			}
 		}
-		
+
 		ComboBoxHistory<Tabable> box = new ComboBoxHistory<Tabable>(tabables);
 		if(oldArray[0] != ""){
 			String filter =oldArray[0];
 			FilteredList<Tabable> filterd = tabables.filtered(x-> x.GetID().equals(filter));
-			if(filterd.size()>0)
-				box.getSelectionModel().select(tabables.indexOf(filterd.get(0)));
+			if(filterd.size()>0) {
+				box.SetValueIgnoreChange(tabables.indexOf(filterd.get(0)));
+			}
 		}
 		if(field.getAnnotation(FieldInfo.class)!=null){
 			if(field.getAnnotation(FieldInfo.class).required()){

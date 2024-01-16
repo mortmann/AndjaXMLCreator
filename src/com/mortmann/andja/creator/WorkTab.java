@@ -391,7 +391,7 @@ public class WorkTab extends Tab {
 		grid.getColumnConstraints().addAll(col1, col2);
 		try {
 			if (obsMapTabable.containsKey(field.get(myTabable) + "")) {
-				box.getSelectionModel().select(obsMapTabable.get(field.get(myTabable) + ""));
+				box.SetValueIgnoreChange(obsMapTabable.get(field.get(myTabable) + ""));
 				styleClass.remove("combobox-error");
 			}
 		} catch (Exception e1) {
@@ -425,25 +425,25 @@ public class WorkTab extends Tab {
 			nameToClass.put(c.getSimpleName(), c);
 		}
 		ComboBoxHistory<String> box = new ComboBoxHistory<String>(names);
+		ComboBoxHistory<String> variablebox = new ComboBoxHistory<String>();
+		ObservableList<String> styleClass = box.getStyleClass();
+		ObservableList<String> styleClassVariable = variablebox.getStyleClass();
 
 		if (field.getAnnotation(FieldInfo.class) != null) {
 			if (field.getAnnotation(FieldInfo.class).required()) {
-				ObservableList<String> styleClass = box.getStyleClass();
+				styleClassVariable.add("combobox-error");
 				styleClass.add("combobox-error");
-				box.AddChangeListener((arg0, oldValue, newValue) -> {
-					Object o = null;
-					try {
-						o = (field.get(tab));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					if (o == null) {
+				variablebox.AddChangeListener((oldValue, newValue, changed) -> {
+					System.out.println(oldValue + " " + newValue);
+					if (newValue == null) {
 						if (!styleClass.contains("combobox-error")) {
 							styleClass.add("combobox-error");
+							styleClassVariable.add("combobox-error");
 						}
 					} else {
 						if (styleClass.contains("combobox-error")) {
 							styleClass.remove("combobox-error");
+							styleClassVariable.remove("combobox-error");
 						}
 					}
 				}, true);
@@ -461,7 +461,6 @@ public class WorkTab extends Tab {
 
 		grid.getColumnConstraints().addAll(col1, col2);
 
-		ComboBoxHistory<String> variablebox = new ComboBoxHistory<String>();
 		box.setOnAction(x -> {
 			ObservableList<String> varnames = FXCollections.observableArrayList();
 			for (Field f : nameToClass.get(box.getValue()).getFields()) {
@@ -473,14 +472,6 @@ public class WorkTab extends Tab {
 				varnames.add(f.getName());
 			}
 			variablebox.setItems(varnames);
-			try {
-				if (box.getValue() == null) {
-					return;
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		});
 		variablebox.AddChangeListener(new ChangeListenerHistory() {
 			@Override
@@ -503,6 +494,8 @@ public class WorkTab extends Tab {
 						if (f.getName().equals((String) field.get(tab))) {
 							box.SetValueIgnoreChange(c.getSimpleName());
 							variablebox.SetValueIgnoreChange((String) field.get(tab));
+							styleClass.remove("combobox-error");
+							styleClassVariable.remove("combobox-error");
 						}
 					}
 				}
@@ -541,9 +534,9 @@ public class WorkTab extends Tab {
 
 		try {
 			if (field.get(m) != null) {
-				box.getSelectionModel().select((int) field.get(m));
+				box.SetValueIgnoreChange((int) field.get(m));
 			}
-		} catch (Exception e1) {
+		} catch (Exception ignored) {
 		}
 
 		box.setOnAction(x -> {
@@ -598,7 +591,7 @@ public class WorkTab extends Tab {
 			if (field.get(tab) != null) {
 				// if error i changed from GUI.Instance.idToItem.get(field.get(tab)) to just
 				// field.get(tab)
-				box.getSelectionModel().select((Item) field.get(tab));
+				box.SetValueIgnoreChange((Item) field.get(tab));
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
@@ -788,24 +781,15 @@ public class WorkTab extends Tab {
 			ObservableMap<String, T> obsMapTabable) {
 		GridPane grid = new GridPane();
 		ObservableList<Tabable> strs = FXCollections.observableArrayList(obsMapTabable.values());
-		strs.sort((Comparator<? super Tabable>) new Comparator<T>() {
-			@Override
-			public int compare(T o1, T o2) {
-				return o1.GetID().compareTo(o2.GetID());
-			}
-		});
-		obsMapTabable.addListener(new MapChangeListener<String, T>() {
-			@Override
-			public void onChanged(javafx.collections.MapChangeListener.Change<? extends String, ? extends T> change) {
-				
-				if (change.getValueAdded() != null) {
-					if(change.getValueAdded().getClass().equals(str))
-						strs.add(change.getValueAdded());
-				}
-				if (change.getValueRemoved() != null)
-					strs.remove(change.getValueRemoved());
-			}
+		strs.sort(Comparator.comparing(Tabable::GetID));
+		obsMapTabable.addListener((MapChangeListener<String, T>) change -> {
 
+			if (change.getValueAdded() != null) {
+				if(change.getValueAdded().getClass().equals(str))
+					strs.add(change.getValueAdded());
+			}
+			if (change.getValueRemoved() != null)
+				strs.remove(change.getValueRemoved());
 		});
 		strs.removeIf(x -> str.isAssignableFrom(x.getClass()) == false);
 		ComboBoxHistory<Tabable> box = new ComboBoxHistory<Tabable>(strs);
@@ -830,28 +814,28 @@ public class WorkTab extends Tab {
 
 			}
 		}
-		box.setCellFactory(new Callback<ListView<Tabable>, ListCell<Tabable>>() {
+		box.setCellFactory(new Callback<>() {
 			@Override
 			public ListCell<Tabable> call(ListView<Tabable> view) {
-				return new ListCell<Tabable>(){
+				return new ListCell<>() {
 
-                    @Override
-                    public void updateSelected(boolean selected) {
-                        super.updateSelected(selected);
-                    }
+					@Override
+					public void updateSelected(boolean selected) {
+						super.updateSelected(selected);
+					}
 
-                    @Override
-                    protected void updateItem(Tabable item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if(empty){
-                            return;
-                        }
-                        setText(item.toString());
-                        setStyle("-fx-text-fill: black; -fx-background-color: " +getItem().GetButtonColor()+";");
-                    }
+					@Override
+					protected void updateItem(Tabable item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							return;
+						}
+						setText(item.toString());
+						setStyle("-fx-text-fill: black; -fx-background-color: " + getItem().GetButtonColor() + ";");
+					}
 
-                };					
-            }
+				};
+			}
 
 		});
 
@@ -872,7 +856,7 @@ public class WorkTab extends Tab {
 		grid.getColumnConstraints().addAll(col1, col2);
 		try {
 			if (field.get(m) != null && obsMapTabable.containsKey(field.get(m))) {
-				box.getSelectionModel().select(obsMapTabable.get(field.get(m)));
+				box.SetValueIgnoreChange(obsMapTabable.get(field.get(m)));
 				styleClass.remove("combobox-error");
 			}
 		} catch (Exception e1) {
@@ -1248,7 +1232,7 @@ public class WorkTab extends Tab {
 
 		try {
 			if (field.get(m) != null) {
-				box.getSelectionModel().select((Enum) field.get(m));
+				box.SetValueIgnoreChange(field.get(m));
 			}
 		} catch (Exception e1) {
 		}
@@ -1341,7 +1325,7 @@ public class WorkTab extends Tab {
 				grid.add(box, 1 + x, 1 + y);
 				try {
 					if (field.get(m) != null) {
-						box.getSelectionModel().select(((E[][]) field.get(m))[dx][dy]);
+						box.SetValueIgnoreChange(((E[][]) field.get(m))[dx][dy]);
 					}
 				} catch (Exception e1) {
 				}

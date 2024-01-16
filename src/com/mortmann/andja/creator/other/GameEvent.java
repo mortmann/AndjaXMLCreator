@@ -30,10 +30,12 @@ import javafx.collections.ObservableList;
 @Root(strict=false,name="GameEvent")
 public class GameEvent implements Comparable<Tabable>, Tabable {
     public enum EventType { Weather, City, Structure, Quest, Disaster, Other }
+	public enum ShadowType { CompleteClear, Clear, Few, Medium, High, VeryHigh, Full }
+	public enum Speed { Slow, Medium, Fast, LudicrousSpeed, MopsGeschwindigkeit /*wir haben einen marderschaden*/ }
 
 	public enum Target {
 	    World, Player, AllUnit, Ship, LandUnit, Island, City, 
-	    AllStructure, DamagableStructure, BurnableStructure,
+	    AllStructure, DamageableStructure, BurnableStructure,
 	    RoadStructure, NeedStructure, MilitaryStructure, HomeStructure,
 	    ServiceStructure, GrowableStructure, OutputStructure, MarketStructure, 
 	    WarehouseStructure, MineStructure, FarmStructure, ProductionStructure
@@ -72,7 +74,11 @@ public class GameEvent implements Comparable<Tabable>, Tabable {
 	@FieldInfo(required=false,compareType=Effect[].class) 
 	@ElementArray(entry="Effect",required=false) 
 	public String[] effects;
-	
+
+	@Element(required = false) public ShadowType cloudCoverage;
+	@Element(required = false) public Speed cloudSpeed;
+	@Element(required = false) public Speed oceanSpeed;
+
 	@Override
 	public String GetName() {
 		if(Name==null||Name.isEmpty()){
