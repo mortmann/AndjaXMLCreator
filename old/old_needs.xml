@@ -480,8 +480,8 @@
    <Need ID="food">
       <UsageAmounts>
          <entry Level="0">0.006</entry>
-         <entry Level="1">0.0025</entry>
-         <entry Level="2">0.0018</entry>
+         <entry Level="1">0.003</entry>
+         <entry Level="2">0.002</entry>
          <entry Level="3">0.0016</entry>
       </UsageAmounts>
       <Name>
