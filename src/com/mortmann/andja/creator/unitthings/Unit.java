@@ -38,7 +38,7 @@ public class Unit implements Tabable, Comparable<Tabable> {
 
 	@FieldInfo(required = true, IsEffectable=true) @Element public int inventoryPlaces;
 	@FieldInfo(required = true, IsEffectable=true) @Element public int inventorySize;
-	@FieldInfo(required=true, IsEffectable=true) @Element public float maximumHealth;
+	@FieldInfo(required=true, IsEffectable=true) @Element public float maxHealth;
 	@FieldInfo(required=true, IsEffectable=true) @Element float aggroTimer=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float attackRange=1f;
 	@FieldInfo(required=true, IsEffectable=true) @Element public float damage=10;
